@@ -1,0 +1,24 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "testRunner": "xunit",
+
+  "dependencies": {
+    "Moq": "4.6.25-alpha",
+    "xunit": "2.2.0-beta2-build3300",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "StyleCop.Analyzers": {
+      "type": "build",
+      "version": "1.0.0"
+    }
+  },
+
+  "frameworks": {
+    "net461": {
+    }
+  },
+
+  "buildOptions": {
+    "additionalArguments": [ "/ruleset:../../../MinimumRecommendedRulesWithStyleCop.ruleset" ]
+  }
+}
