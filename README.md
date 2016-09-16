@@ -1,4 +1,4 @@
-![ASP.NET MVC Boilerplate Banner](https://raw.githubusercontent.com/ASP.NET-MVC-Boilerplate/Framework/master/Images/Banner.png)
+![ASP.NET MVC Boilerplate Banner](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Framework/master/Images/Banner.png)
 
 ## NuGet Packages
 
