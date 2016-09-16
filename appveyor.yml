@@ -1,27 +1,44 @@
+# AppVeyor documentation https://www.appveyor.com/docs
+
 version: '{build}'
+
 pull_requests:
+  # Do not increment build number for pull requests
   do_not_increment_build_number: true
+
 nuget:
+  # Do not publish for pull requests
   disable_publish_on_pr: true
+
 build_script:
 - ps: .\build.ps1
+
 test: off
+
 artifacts:
+# Store NuGet packages
 - path: .\Artifacts\**\*.nupkg
   name: NuGet
+
 deploy:
+# Publish MyGet packages
 - provider: NuGet
   server: https://www.myget.org/F/aspnet-mvc-boilerplate/api/v2
   api_key:
     secure: aunGGWt32irQiOTX2wIO6e2Y5Ga0girA3xSUsmQv6E9d6ohHdbK5HJpXpmxW9QM3
+  # Deploy symbol packages to the MyGet symbol server
   skip_symbols: false
   symbol_server: https://www.myget.org/F/aspnet-mvc-boilerplate/symbols/api/v2/package
   on:
+    # Only publish from the master branch
     branch: master
+# Publish NuGet packages
 - provider: NuGet
   name: production
   api_key:
     secure: 73eFUWSfho6pxCy1VRP1H0AYh/SFiyEREV+/ATcoj0I+sSH9dec/WXs6H2Jy5vlS
   on:
+    # Only publish from the master branch
     branch: master
+    # Only publish if the trigger was a Git tag
     appveyor_repo_tag: true
