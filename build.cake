@@ -56,6 +56,12 @@ Task("Test")
             {
                 var name = project.GetFilenameWithoutExtension();
                 var dirPath = project.GetDirectory().FullPath;
+
+                foreach (var file in GetFiles(dirPath))
+                {
+                    Information(file).FullPath;
+                }
+
                 var xunit = GetFiles(dirPath + "/bin/" + configuration + "/net451/**/dotnet-test-xunit.exe").First().FullPath;
                 Information("dotnet-test-xunit.exe File Path: " + xunit);
                 var testfile = GetFiles(dirPath + "/bin/" + configuration + "/net451/**/" + name + ".dll").First().FullPath;
