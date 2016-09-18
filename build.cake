@@ -62,9 +62,9 @@ Task("Test")
                     Information(file).FullPath;
                 }
 
-                var xunit = GetFiles(dirPath + "/bin/" + configuration + "/net451/**/dotnet-test-xunit.exe").First().FullPath;
+                var xunit = GetFiles(dirPath + "/bin/" + configuration + "/**/dotnet-test-xunit.exe").First().FullPath;
                 Information("dotnet-test-xunit.exe File Path: " + xunit);
-                var testfile = GetFiles(dirPath + "/bin/" + configuration + "/net451/**/" + name + ".dll").First().FullPath;
+                var testfile = GetFiles(dirPath + "/bin/" + configuration + "/**/" + name + ".dll").First().FullPath;
                 Information("Assembly File Path: " + xunit);
 
                 using (var process = StartAndReturnProcess("mono", new ProcessSettings{ Arguments = xunit + " " + testfile }))
