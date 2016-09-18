@@ -59,7 +59,7 @@ Task("Test")
 
                 foreach (var file in GetFiles(dirPath))
                 {
-                    Information(file).FullPath;
+                    Information(file.FullPath);
                 }
 
                 var xunit = GetFiles(dirPath + "/bin/" + configuration + "/**/dotnet-test-xunit.exe").First().FullPath;
