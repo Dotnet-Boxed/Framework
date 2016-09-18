@@ -39,16 +39,36 @@ Task("Test")
         var projects = GetFiles("./**/*.Test.xproj");
         foreach(var project in projects)
         {
-            DotNetCoreTest(
-                project.GetDirectory().FullPath,
-                new DotNetCoreTestSettings()
+            if(IsRunningOnWindows())
+            {
+                DotNetCoreTest(
+                    project.GetDirectory().FullPath,
+                    new DotNetCoreTestSettings()
+                    {
+                        ArgumentCustomization = args => args
+                            .Append("-xml")
+                            .Append(artifactsDirectory.Path.CombineWithFilePath(project.GetFilenameWithoutExtension()).FullPath + ".xml"),
+                        Configuration = configuration,
+                        NoBuild = true
+                    });
+            }
+            else
+            {
+                var name = project.GetFilenameWithoutExtension();
+                var dirPath = project.GetDirectory().FullPath;
+                var config = parameters.Configuration;
+                var xunit = GetFiles(dirPath + "/bin/" + config + "/net451/*/dotnet-test-xunit.exe").First().FullPath;
+                var testfile = GetFiles(dirPath + "/bin/" + config + "/net451/*/" + name + ".dll").First().FullPath;
+
+                using(var process = StartAndReturnProcess("mono", new ProcessSettings{ Arguments = xunit + " " + testfile }))
                 {
-                    ArgumentCustomization = args => args
-                        .Append("-xml")
-                        .Append(artifactsDirectory.Path.CombineWithFilePath(project.GetFilenameWithoutExtension()).FullPath + ".xml"),
-                    Configuration = configuration,
-                    NoBuild = true
-                });
+                    process.WaitForExit();
+                    if (process.GetExitCode() != 0)
+                    {
+                        throw new Exception("Mono tests failed!");
+                    }
+                }
+            }
         }
     });
 
