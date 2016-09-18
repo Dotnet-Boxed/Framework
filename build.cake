@@ -36,7 +36,7 @@ Task("Test")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        var projects = GetFiles("./**/*.Test.xproj");
+        var projects = GetFiles("./Tests/**/*.xproj");
         foreach(var project in projects)
         {
             if(IsRunningOnWindows())
@@ -57,9 +57,11 @@ Task("Test")
                 var name = project.GetFilenameWithoutExtension();
                 var dirPath = project.GetDirectory().FullPath;
                 var xunit = GetFiles(dirPath + "/bin/" + configuration + "/net451/*/dotnet-test-xunit.exe").First().FullPath;
+                Information("dotnet-test-xunit.exe File Path: " + xunit);
                 var testfile = GetFiles(dirPath + "/bin/" + configuration + "/net451/*/" + name + ".dll").First().FullPath;
+                Information("Assembly File Path: " + xunit);
 
-                using(var process = StartAndReturnProcess("mono", new ProcessSettings{ Arguments = xunit + " " + testfile }))
+                using (var process = StartAndReturnProcess("mono", new ProcessSettings{ Arguments = xunit + " " + testfile }))
                 {
                     process.WaitForExit();
                     if (process.GetExitCode() != 0)
