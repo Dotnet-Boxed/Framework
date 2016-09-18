@@ -1,5 +1,8 @@
 ![ASP.NET MVC Boilerplate Banner](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Framework/master/Images/Banner.png)
 
+[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/aknwu9sil3dv3im0?svg=true)](https://ci.appveyor.com/project/RehanSaeed/framework)
+[![Travis CI Build Status](https://img.shields.io/travis/ASP-NET-MVC-Boilerplate/Framework.svg?maxAge=3600&label=travis)](https://travis-ci.org/ASP-NET-MVC-Boilerplate/Framework)
+
 ## NuGet Packages
 
 | Name | NuGet | MyGet |
