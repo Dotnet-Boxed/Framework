@@ -39,8 +39,8 @@ Task("Test")
         var projects = GetFiles("./Tests/**/*.xproj");
         foreach(var project in projects)
         {
-            if(IsRunningOnWindows())
-            {
+            // if(IsRunningOnWindows())
+            // {
                 DotNetCoreTest(
                     project.GetDirectory().FullPath,
                     new DotNetCoreTestSettings()
@@ -51,31 +51,31 @@ Task("Test")
                         Configuration = configuration,
                         NoBuild = true
                     });
-            }
-            else
-            {
-                var name = project.GetFilenameWithoutExtension();
-                var dirPath = project.GetDirectory().FullPath;
+            // }
+            // else
+            // {
+            //     var name = project.GetFilenameWithoutExtension();
+            //     var dirPath = project.GetDirectory().FullPath;
 
-                foreach (var file in GetFiles(dirPath))
-                {
-                    Information(file.FullPath);
-                }
+            //     foreach (var file in GetFiles(dirPath))
+            //     {
+            //         Information(file.FullPath);
+            //     }
 
-                var xunit = GetFiles(dirPath + "/bin/" + configuration + "/**/dotnet-test-xunit.exe").First().FullPath;
-                Information("dotnet-test-xunit.exe File Path: " + xunit);
-                var testfile = GetFiles(dirPath + "/bin/" + configuration + "/**/" + name + ".dll").First().FullPath;
-                Information("Assembly File Path: " + xunit);
+            //     var xunit = GetFiles(dirPath + "/bin/" + configuration + "/**/dotnet-test-xunit.exe").First().FullPath;
+            //     Information("dotnet-test-xunit.exe File Path: " + xunit);
+            //     var testfile = GetFiles(dirPath + "/bin/" + configuration + "/**/" + name + ".dll").First().FullPath;
+            //     Information("Assembly File Path: " + xunit);
 
-                using (var process = StartAndReturnProcess("mono", new ProcessSettings{ Arguments = xunit + " " + testfile }))
-                {
-                    process.WaitForExit();
-                    if (process.GetExitCode() != 0)
-                    {
-                        throw new Exception("Mono tests failed!");
-                    }
-                }
-            }
+            //     using (var process = StartAndReturnProcess("mono", new ProcessSettings{ Arguments = xunit + " " + testfile }))
+            //     {
+            //         process.WaitForExit();
+            //         if (process.GetExitCode() != 0)
+            //         {
+            //             throw new Exception("Mono tests failed!");
+            //         }
+            //     }
+            // }
         }
     });
 
