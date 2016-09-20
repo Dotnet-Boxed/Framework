@@ -111,18 +111,7 @@ Task("Pack")
         }
     });
 
-Task("Upload-AppVeyor-Artifacts")
-    .IsDependentOn("Pack")
-    .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
-    .Does(() =>
-    {
-        foreach(var file in GetFiles(artifactsDirectory.Path + "/*"))
-        {
-            AppVeyor.UploadArtifact(file);
-        }
-    });
-
 Task("Default")
-    .IsDependentOn("Upload-AppVeyor-Artifacts");
+    .IsDependentOn("Pack");
 
 RunTarget(target);
