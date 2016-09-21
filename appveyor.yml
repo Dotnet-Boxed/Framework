@@ -19,6 +19,8 @@ artifacts:
 # Store NuGet packages
 - path: .\Artifacts\**\*.nupkg
   name: NuGet
+# Store xUnit Test Results
+- path: .\Artifacts\**\*.xml
 
 deploy:
 # Publish MyGet packages
