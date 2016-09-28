@@ -23,7 +23,7 @@
         {
             if (condition)
             {
-                loggerFactory = action(loggerFactory);
+                return action(loggerFactory);
             }
 
             return loggerFactory;
@@ -48,14 +48,10 @@
         {
             if (condition)
             {
-                loggerFactory = ifAction(loggerFactory);
-            }
-            else
-            {
-                loggerFactory = elseAction(loggerFactory);
+                return ifAction(loggerFactory);
             }
 
-            return loggerFactory;
+            return elseAction(loggerFactory);
         }
     }
 }
