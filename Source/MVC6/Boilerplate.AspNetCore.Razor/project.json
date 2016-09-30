@@ -10,11 +10,11 @@
     "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
     "tags": [ "ASP.NET", "ASP.NET Core", "MVC", "MVC 6", "Boilerplate", "Muhammad Rehan Saeed", "Framework", "Razor" ],
     "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
-    "projectUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate",
-    "licenseUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/LICENSE",
+    "projectUrl": "https://github.com/ASP-NET-MVC-Boilerplate/Framework",
+    "licenseUrl": "https://github.com/ASP-NET-MVC-Boilerplate/Framework/blob/master/LICENSE",
     "repository": {
       "type": "git",
-      "url": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate.git"
+      "url": "https://github.com/ASP-NET-MVC-Boilerplate/Framework.git"
     },
     "requireLicenseAcceptance": true
   },
