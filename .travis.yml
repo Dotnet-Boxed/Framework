@@ -21,14 +21,10 @@ addons:
 # .NET CLI require OSX 10.10
 osx_image: xcode7.1  
 
-# https://docs.travis-ci.com/user/languages/csharp/
-matrix:
-  include:
-    # Ensure that .NET Core is installed
-    - dotnet: 1.0.0-preview2-003121
-      mono: none
-    # Ensure Mono is installed
-    - mono: latest
+# Ensure that .NET Core is installed
+dotnet: 1.0.0-preview2-003121
+# Ensure Mono is installed
+mono: latest
 
 env:  
     # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
