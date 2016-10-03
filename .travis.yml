@@ -30,6 +30,8 @@ mono:
 # Install the /NET CLI
 env:  
   - CLI_VERSION=latest
+    # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
+  - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
 install:  
   - export DOTNET_INSTALL_DIR="$PWD/.dotnetcli"
   - curl -sSL https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version "$CLI_VERSION" --install-dir "$DOTNET_INSTALL_DIR"
