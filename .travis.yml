@@ -30,11 +30,6 @@ env:
     # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
   - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
 
-# Cache the following directories between builds to speed them up
-cache:
-  directories:
-    - tools
-
 # You must run the following command for Travis to be able to have permissions to execute the shell script below. 
 # git update-index --chmod=+x build.sh
 script:  
