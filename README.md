@@ -2,8 +2,10 @@
 
 ## Continuous Integration
 
-[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/aknwu9sil3dv3im0?svg=true)](https://ci.appveyor.com/project/RehanSaeed/framework)
-[![Travis CI Build Status](https://img.shields.io/travis/ASP-NET-MVC-Boilerplate/Framework.svg?maxAge=3600&label=travis)](https://travis-ci.org/ASP-NET-MVC-Boilerplate/Framework)
+| Name      | Operating System | Status |
+| :---      | :---             | :---   |
+| AppVeyor  | Windows          | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/aknwu9sil3dv3im0?svg=true)](https://ci.appveyor.com/project/RehanSaeed/framework) |
+| Travis CI | Linux & Mac      | [![Travis CI Build Status](https://img.shields.io/travis/ASP-NET-MVC-Boilerplate/Framework.svg?maxAge=3600&label=travis)](https://travis-ci.org/ASP-NET-MVC-Boilerplate/Framework) |
 
 ## NuGet Packages
 
