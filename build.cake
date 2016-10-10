@@ -15,7 +15,11 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
     {
-        DotNetCoreRestore();
+        DotNetCoreRestore(
+            new DotNetCoreRestoreSettings()
+            {
+                ArgumentCustomization = args => args.Append("--infer-runtimes")
+            });
     });
 
  Task("Build")
