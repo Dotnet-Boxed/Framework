@@ -1,5 +1,3 @@
-#tool nuget:?package=dotnet-test-xunit&prerelease
-
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
@@ -15,11 +13,7 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
     {
-        DotNetCoreRestore(
-            new DotNetCoreRestoreSettings()
-            {
-                ArgumentCustomization = args => args.Append("--infer-runtimes")
-            });
+        DotNetCoreRestore();
     });
 
  Task("Build")
