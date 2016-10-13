@@ -1,5 +1,9 @@
 ![ASP.NET MVC Boilerplate Banner](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Framework/master/Images/Banner.png)
 
+ [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?maxAge=2592000)](https://gitter.im/ASP-NET-MVC-Boilerplate/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+ 
+ASP.NET MVC Extensions and Helper NuGet packages. If you are looking for the ASP.NET MVC Boilerplate project templates, you can find them [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates).
+  
 ## Continuous Integration
 
 | Name      | Operating System | Status |
