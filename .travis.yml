@@ -34,4 +34,4 @@ env:
 # git update-index --chmod=+x build.sh
 script:
   # Skip running tests due to tooling bug https://github.com/dotnet/cli/issues/3073
-  - ./build.sh -target=Build
+  - ./build.sh --target=Build
