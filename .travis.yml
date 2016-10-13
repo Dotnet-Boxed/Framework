@@ -33,4 +33,5 @@ env:
 # You must run the following command for Travis to be able to have permissions to execute the shell script below.
 # git update-index --chmod=+x build.sh
 script:
-  - ./build.sh
+  # Skip running tests due to tooling bug https://github.com/dotnet/cli/issues/3073
+  - ./build.sh -Target Build
