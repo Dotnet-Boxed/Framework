@@ -1,5 +1,10 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var buildNumber =
+    HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
+    AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
+    TravisCI.IsRunningOnTravisCI ? TravisCI.Environment.Build.BuildNumber :
+    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) : 0;
 
 var artifactsDirectory = Directory("./Artifacts");
 
@@ -56,21 +61,7 @@ Task("Pack")
     .IsDependentOn("Test")
     .Does(() =>
     {
-        int buildNumber;
-        if (AppVeyor.IsRunningOnAppVeyor)
-        {
-            buildNumber = AppVeyor.Environment.Build.Number;
-        }
-        else if (TravisCI.IsRunningOnTravisCI)
-        {
-            buildNumber = TravisCI.Environment.Build.BuildNumber;
-        }
-        else
-        {
-            buildNumber = 1;
-        }
         var revision = buildNumber.ToString("D4");
-
         foreach (var project in GetFiles("./Source/**/*.xproj"))
         {
             DotNetCorePack(
