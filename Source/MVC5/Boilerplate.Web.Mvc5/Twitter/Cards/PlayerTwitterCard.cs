@@ -4,21 +4,25 @@
     using System.Text;
 
     /// <summary>
-    /// Video clips and audio streams have a special place on the Twitter platform thanks to the Player Card. By implementing a few HTML meta tags to
-    /// your website and following the Twitter Rules of the Road, you can deliver your rich media to users across the globe.
-    /// Twitter must approve the use of the player card, find out more below.
+    /// Video clips and audio streams have a special place on the Twitter platform thanks to the Player Card. By
+    /// implementing a few HTML meta tags to your website and following the Twitter Rules of the Road, you can deliver
+    /// your rich media to users across the globe. Twitter must approve the use of the player card, find out more below.
     /// See https://dev.twitter.com/cards/types/player
     /// </summary>
     public class PlayerTwitterCard : TwitterCard
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerTwitterCard" /> class.
+        /// Initializes a new instance of the <see cref="PlayerTwitterCard"/> class.
         /// </summary>
-        /// <param name="username">The Twitter username associated with the page e.g. @RehanSaeedUK. This is a required property.</param>
-        /// <param name="image">The image to be displayed in place of the player on platforms that don’t support iframes or inline players.
-        /// You should make this image the same dimensions as your player. Images with fewer than 68,600 pixels
-        /// (a 262x262 square image, or a 350x196 16:9 image) will cause the player card not to render.
-        /// Image must be less than 1MB in size.</param>
+        /// <param name="username">
+        /// The Twitter username associated with the page e.g. @RehanSaeedUK. This is a required property.
+        /// </param>
+        /// <param name="image">
+        /// The image to be displayed in place of the player on platforms that don’t support iframes or inline players.
+        /// You should make this image the same dimensions as your player. Images with fewer than 68,600 pixels (a
+        /// 262x262 square image, or a 350x196 16:9 image) will cause the player card not to render. Image must be less
+        /// than 1MB in size.
+        /// </param>
         /// <param name="player">The video player.</param>
         /// <exception cref="System.ArgumentNullException">username is <c>null</c>.</exception>
         public PlayerTwitterCard(string username, TwitterImage image, TwitterPlayer player)
@@ -40,30 +44,37 @@
 
         /// <summary>
         /// Gets or sets the description that concisely summarizes the content of the page, as appropriate for
-        /// presentation within a Tweet. Do not re-use the title text as the description, or use this field
-        /// to describe the general services provided by the website. Description text will be truncated at
-        /// the word to 200 characters. If you are using Facebook's Open Graph og:description, do not use this
-        /// unless you want a different description.
+        /// presentation within a Tweet. Do not re-use the title text as the description, or use this field to describe
+        /// the general services provided by the website. Description text will be truncated at the word to 200
+        /// characters. If you are using Facebook's Open Graph og:description, do not use this unless you want a
+        /// different description.
         /// </summary>
+        /// <value>The description that concisely summarizes the content of the page.</value>
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets the image to be displayed in place of the player on platforms that don’t support iframes or inline players.
-        /// You should make this image the same dimensions as your player. Images with fewer than 68,600 pixels
-        /// (a 262x262 square image, or a 350x196 16:9 image) will cause the player card not to render.
-        /// Image must be less than 1MB in size.
+        /// Gets the image to be displayed in place of the player on platforms that don’t support iframes or inline
+        /// players. You should make this image the same dimensions as your player. Images with fewer than 68,600 pixels
+        /// (a 262x262 square image, or a 350x196 16:9 image) will cause the player card not to render. Image must be
+        /// less than 1MB in size.
         /// </summary>
+        /// <value>
+        /// The image to be displayed in place of the player on platforms that don’t support iframes or inline players.
+        /// </value>
         public TwitterImage Image { get; }
 
         /// <summary>
-        /// Gets the video player. If the iframe is wider than 435px, the iframe player will be resized to fit a max width of 435px, maintaining the original aspect ratio.
+        /// Gets the video player. If the iframe is wider than 435px, the iframe player will be resized to fit a max
+        /// width of 435px, maintaining the original aspect ratio.
         /// </summary>
+        /// <value>The video player.</value>
         public TwitterPlayer Player { get; }
 
         /// <summary>
-        /// Gets or sets the title of the summary. Title should be concise and will be truncated at 70 characters.
-        /// If you are using Facebook's Open Graph og:title, do not use this unless you want a different title.
+        /// Gets or sets the title of the summary. Title should be concise and will be truncated at 70 characters. If you
+        /// are using Facebook's Open Graph og:title, do not use this unless you want a different title.
         /// </summary>
+        /// <value>The title of the summary. Title should be concise and will be truncated at 70 characters.</value>
         public string Title { get; set; }
 
         /// <summary>
@@ -72,7 +83,8 @@
         public override TwitterCardType Type => TwitterCardType.Player;
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing
+        /// the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)

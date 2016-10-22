@@ -5,13 +5,11 @@
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
     /// <summary>
-    /// With Twitter Cards, you can attach rich photos, videos and media experience to Tweets that drive traffic to your website.
-    /// Users who Tweet links to your content will have a "Card" added to the Tweet that's visible to all of their followers.
-    /// See https://dev.twitter.com/cards/overview.
-    /// Sign up for Twitter Card analytics to see who is sharing your site pages on Twitter.
-    /// See https://analytics.twitter.com/about
-    /// Validate your Twitter cards.
-    /// See https://twitter.com/login?redirect_after_login=https%3A%2F%2Fcards-dev.twitter.com%2Fvalidator
+    /// With Twitter Cards, you can attach rich photos, videos and media experience to Tweets that drive traffic to your
+    /// website. Users who Tweet links to your content will have a "Card" added to the Tweet that's visible to all of
+    /// their followers. See https://dev.twitter.com/cards/overview. Sign up for Twitter Card analytics to see who is
+    /// sharing your site pages on Twitter. See https://analytics.twitter.com/about Validate your Twitter cards. See
+    /// https://twitter.com/login?redirect_after_login=https%3A%2F%2Fcards-dev.twitter.com%2Fvalidator
     /// </summary>
     public abstract class TwitterCard : TagHelper
     {
@@ -23,11 +21,13 @@
         /// <summary>
         /// Gets the type of the Twitter card.
         /// </summary>
+        /// <value>The type.</value>
         public abstract TwitterCardType Type { get; }
 
         /// <summary>
         /// Gets or sets the Twitter username associated with the page e.g. @RehanSaeedUK. This is a required property.
         /// </summary>
+        /// <value>The Twitter username associated with the page e.g. @RehanSaeedUK. This is a required property.</value>
         [HtmlAttributeName(UsernameAttributeName)]
         public string Username { get; set; }
 
@@ -44,10 +44,11 @@
         }
 
         /// <summary>
-        /// Returns a HTML-encoded <see cref="string" /> that represents this instance containing the Twitter card meta tags.
+        /// Returns a HTML-encoded <see cref="string"/> that represents this instance containing the Twitter card meta
+        /// tags.
         /// </summary>
         /// <returns>
-        /// A HTML-encoded <see cref="string" /> that represents this instance containing the Twitter card meta tags.
+        /// A HTML-encoded <see cref="string"/> that represents this instance containing the Twitter card meta tags.
         /// </returns>
         public override string ToString()
         {
@@ -57,7 +58,8 @@
         }
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing
+        /// the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public virtual void ToString(StringBuilder stringBuilder)
