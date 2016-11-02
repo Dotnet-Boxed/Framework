@@ -4,6 +4,7 @@
   "testRunner": "xunit",
 
   "dependencies": {
+    "Boilerplate.AspNetCore": "*",
     "Moq": "4.6.25-alpha",
     "xunit": "2.2.0-beta3-build3402",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",

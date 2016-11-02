@@ -13,6 +13,9 @@
         /// <summary>HTML; Defined in RFC 2854.</summary>
         public const string Html = "text/html";
 
+        /// <summary>Form URL Encoded.</summary>
+        public const string FormUrlEncoded = "application/x-www-form-urlencoded";
+
         /// <summary>GIF image; Defined in RFC 2045 and RFC 2046.</summary>
         public const string Gif = "image/gif";
 
@@ -25,6 +28,9 @@
         /// <summary>JavaScript Object Notation JSON; Defined in RFC 4627.</summary>
         public const string Json = "application/json";
 
+        /// <summary>Multi-part form daata; Defined in RFC 2388.</summary>
+        public const string MultipartFormData = "multipart/form-data";
+
         /// <summary>Portable Network Graphics; Registered,[8] Defined in RFC 2083.</summary>
         public const string Png = "image/png";
 
@@ -33,5 +39,8 @@
 
         /// <summary>Extensible Markup Language; Defined in RFC 3023</summary>
         public const string Xml = "application/xml";
+
+        /// <summary>Compressed ZIP.</summary>
+        public const string Zip = "application/zip";
     }
 }
