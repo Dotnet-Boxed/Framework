@@ -17,12 +17,12 @@
   "frameworks": {
     "netcoreapp1.0": {
       "dependencies": {
-       "Microsoft.NETCore.App": {
-         "type": "platform",
-         "version": "1.0.1"
-       }
-     },
-     "imports": [
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.1"
+        }
+      },
+      "imports": [
         "dnxcore50"
       ]
     },
@@ -34,7 +34,6 @@
   },
 
   "buildOptions": {
-    "additionalArguments": [ "/ruleset:../../../MinimumRecommendedRulesWithStyleCop.ruleset" ],
-    "copyToOutput": "dotnet-test-xunit" // Workaround for https://github.com/dotnet/cli/issues/3073
+    "additionalArguments": [ "/ruleset:../../../MinimumRecommendedRulesWithStyleCop.ruleset" ]
   }
 }

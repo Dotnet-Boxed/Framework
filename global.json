@@ -1,5 +1,5 @@
 ﻿{
-  "projects": [ "Source", "Tests" ],
+  "projects": [ "Source", "Tests", "Source/MVC6" ],
   "sdk": {
     "version": "1.0.0-preview2-003131",
     "runtime": "clr",
