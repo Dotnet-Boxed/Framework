@@ -138,7 +138,7 @@ public static class FriendlyUrlHelper
         {
             return "a";
         }
-        else if ("èéêëę".Contains(s))
+        else if ("èéêěëę".Contains(s))
         {
             return "e";
         }
@@ -178,17 +178,29 @@ public static class FriendlyUrlHelper
         {
             return "g";
         }
-        else if (character == 'ř')
+        else if ("ŕř".Contains(s))
         {
             return "r";
         }
-        else if (character == 'ł')
+        else if ("ĺľł".Contains(s))
         {
             return "l";
         }
-        else if (character == 'đ')
+        else if ("úů".Contains(s))
+        {
+            return "u";
+        }
+        else if ("đď".Contains(s))
         {
             return "d";
+        }
+        else if (character == 'ť')
+        {
+            return "t";
+        }
+        else if (character == 'ž')
+        {
+            return "z";
         }
         else if (character == 'ß')
         {
