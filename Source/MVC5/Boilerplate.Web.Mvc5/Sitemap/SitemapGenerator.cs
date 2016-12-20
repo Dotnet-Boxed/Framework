@@ -184,7 +184,7 @@
             {
                 this.LogWarning(new SitemapException(string.Format(
                     CultureInfo.CurrentCulture,
-                    "Sitemap index file exceeds the maximum number of allowed sitemaps of 50,000. Count:<{1}>",
+                    "Sitemap index file exceeds the maximum number of allowed sitemaps of 50,000. Count:<{0}>",
                     sitemapCount)));
             }
         }
