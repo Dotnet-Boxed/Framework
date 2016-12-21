@@ -74,4 +74,7 @@ Global
 		{A1009B8D-6262-4427-A4FA-54D75F164CC7} = {6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}
 		{0CDB5E52-B7A1-4CB9-BAD1-F4E68A391B93} = {A1009B8D-6262-4427-A4FA-54D75F164CC7}
 	EndGlobalSection
+	GlobalSection(CodealikeProperties) = postSolution
+		SolutionGuid = af6e8942-9be3-4543-8c91-0990a78fe7a5
+	EndGlobalSection
 EndGlobal
