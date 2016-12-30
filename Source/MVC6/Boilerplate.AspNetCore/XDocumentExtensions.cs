@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore
+﻿namespace Boilerplate
 {
     using System.IO;
     using System.Text;
