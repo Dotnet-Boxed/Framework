@@ -1,14 +1,14 @@
 {
-  "version": "2.2.0",
-  "title": "ASP.NET MVC 6 Boilerplate Framework Tag Helpers",
-  "description": "Provides boilerplate framework tag helper code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
+  "version": "1.0.0",
+  "title": "Boilerplate Framework",
+  "description": "Provides boilerplate framework code for a .NET project.",
   "copyright": "Copyright © Muhammad Rehan Saeed. All rights Reserved",
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
 
   "packOptions": {
-    "releaseNotes": "Added VisibilityTagHelper.",
+    "releaseNotes": "Initial version.",
     "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
-    "tags": [ "ASP.NET", "ASP.NET Core", "MVC", "MVC 6", "Boilerplate", "Muhammad Rehan Saeed", "Framework", "TagHelper", "Tag Helper", "HTML" ],
+    "tags": [ "Boilerplate", "Muhammad Rehan Saeed", "Framework" ],
     "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
     "projectUrl": "https://github.com/ASP-NET-MVC-Boilerplate/Framework",
     "licenseUrl": "https://github.com/ASP-NET-MVC-Boilerplate/Framework/blob/master/LICENSE",
@@ -27,9 +27,6 @@
   },
 
   "dependencies": {
-    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.1.0",
-    "Microsoft.AspNetCore.Razor.Runtime": "1.1.0",
-    "Microsoft.Extensions.Caching.Abstractions": "1.1.0",
     "StyleCop.Analyzers": {
       "type": "build",
       "version": "1.0.0"
@@ -37,7 +34,14 @@
   },
 
   "frameworks": {
-    "netstandard1.6": {
+    "netstandard1.3": {
+      "dependencies": {
+        "System.Linq": "4.3.0",
+        "System.ObjectModel": "4.3.0",
+        "System.Runtime": "4.3.0",
+        "System.Runtime.InteropServices": "4.3.0",
+        "System.Threading.Tasks": "4.3.0"
+      }
     },
     "net461": {
     }
