@@ -3,7 +3,7 @@
     /// <summary>
     /// The type of Twitter card.
     /// </summary>
-    public enum TwitterCardType
+    public enum CardType
     {
         /// <summary>
         /// The App Card is a great way to represent mobile applications on Twitter and to drive installs. The app card

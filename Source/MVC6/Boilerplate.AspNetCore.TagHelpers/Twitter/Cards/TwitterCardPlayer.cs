@@ -12,7 +12,7 @@
     /// </summary>
     [HtmlTargetElement(
         "twitter-card-player",
-        Attributes = TwitterSiteAttributeUsername + "," + TwitterSiteIdAttributName + "," + ImageAttributeName + "," + PlayerAttributeName,
+        Attributes = SiteUsernameAttributeName + "," + SiteIdAttributName + "," + ImageAttributeName + "," + PlayerAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardPlayer : TwitterCard
     {
@@ -58,7 +58,7 @@
         /// <summary>
         /// Gets the type of the Twitter card.
         /// </summary>
-        public override TwitterCardType Type => TwitterCardType.Player;
+        public override CardType Type => CardType.Player;
 
         /// <summary>
         /// Appends a HTML-encoded string representing this instance to the
@@ -69,7 +69,7 @@
         {
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMetaNameContentIfNotNull("twitter:site:Id", this.TwitterSiteId);
+            stringBuilder.AppendMetaNameContentIfNotNull("twitter:site:Id", this.SiteId);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:title", this.Title);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:description", this.Description);
             stringBuilder.AppendMetaNameContent("twitter:image", this.Image.ImageUrl);
@@ -88,9 +88,9 @@
         {
             base.Validate();
 
-            if (string.IsNullOrEmpty(this.TwitterSiteUsername))
+            if (string.IsNullOrEmpty(this.SiteUsername))
             {
-                throw new ArgumentNullException(nameof(this.TwitterSiteUsername));
+                throw new ArgumentNullException(nameof(this.SiteUsername));
             }
 
             if (this.Image == null)
@@ -111,7 +111,7 @@
 
             if (!this.Player.PlayerUrl.ToLower().Contains("https:"))
             {
-                throw new ArgumentNullException(nameof(this.Player.PlayerUrl), "This must be a HTTPS URL which does not generate active mixed content warnings in a web browser.");
+                throw new ArgumentNullException(nameof(this.Player.PlayerUrl), $"The " + nameof(this.Player.PlayerUrl) + " must be a HTTPS URL which does not generate active mixed content warnings in a web browser.");
             }
 
             if (this.Player.Width <= 0)

@@ -13,7 +13,7 @@
         /// <summary>
         /// Twitter Id for the content creator. Currently: "191059018" (Id for : @RehanSaeedUK)
         /// </summary>
-        public static readonly string CreatorTwitterId = "191059018";
+        public static readonly string CreatorId = "191059018";
 
         /// <summary>
         /// Twitter @username for the content creator. Currently: "@RehanSaeedUK"
@@ -56,18 +56,18 @@
         public static readonly int PlayerWidthValue = 300;
 
         /// <summary>
-        /// Title. Currently: "This is my title for the Twitter Card";
-        /// </summary>
-        public static readonly string TitleValue = "This is my title for the Twitter Card";
-
-        /// <summary>
         /// Twitter Id for the site. Currently: "2396051970" (Id for : @aspboilerplate)
         /// </summary>
-        public static readonly string TwitterSiteIdValue = "2396051970";
+        public static readonly string SiteIdValue = "2396051970";
 
         /// <summary>
         /// Twitter @username for the site. Currently: "@aspboilerplate"
         /// </summary>
-        public static readonly string TwitterSiteUsernameValue = "@aspboilerplate";
+        public static readonly string SiteUsernameValue = "@aspboilerplate";
+
+        /// <summary>
+        /// Title. Currently: "This is my title for the Twitter Card";
+        /// </summary>
+        public static readonly string TitleValue = "This is my title for the Twitter Card";
     }
 }

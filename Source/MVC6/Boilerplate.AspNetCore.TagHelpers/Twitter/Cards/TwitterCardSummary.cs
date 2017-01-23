@@ -9,7 +9,7 @@
     /// articles, to products and restaurants. It is designed to give the reader a preview of the
     /// content before clicking through to your website. See https://dev.twitter.com/cards/types/summary.
     /// </summary>
-    [HtmlTargetElement("twitter-card-summary", Attributes = TwitterSiteAttributeUsername + "," + CreatorTwitterIdAttributeName, TagStructure = TagStructure.WithoutEndTag)]
+    [HtmlTargetElement("twitter-card-summary", Attributes = SiteUsernameAttributeName + "," + CreatorIdAttributeName, TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardSummary : TwitterCard
     {
         private const string DescriptionAttributeName = "description";
@@ -52,22 +52,22 @@
         /// <summary>
         /// Gets the type of the Twitter card.
         /// </summary>
-        public override TwitterCardType Type => TwitterCardType.Summary;
+        public override CardType Type => CardType.Summary;
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref
-        /// name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the
+        /// <paramref name="stringBuilder"/> containing the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMetaNameContentIfNotNull("twitter:site:id", this.TwitterSiteId);
+            stringBuilder.AppendMetaNameContentIfNotNull("twitter:site:id", this.SiteId);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:title", this.Title);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:description", this.Description);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:creator", this.CreatorUsername);
-            stringBuilder.AppendMetaNameContentIfNotNull("twitter:creator:id", this.CreatorTwitterId);
+            stringBuilder.AppendMetaNameContentIfNotNull("twitter:creator:id", this.CreatorId);
 
             if (this.Image != null)
             {
@@ -102,9 +102,9 @@
                 throw new ArgumentNullException(nameof(this.Description));
             }
 
-            if (string.IsNullOrEmpty(this.TwitterSiteId) && string.IsNullOrEmpty(this.TwitterSiteUsername))
+            if (string.IsNullOrEmpty(this.SiteId) && string.IsNullOrEmpty(this.SiteUsername))
             {
-                throw new ArgumentNullException(nameof(this.TwitterSiteUsername), "Either twitter:site or twitter:site:id is required.");
+                throw new ArgumentNullException(nameof(this.SiteUsername), "Either twitter:site or twitter:site:id is required.");
             }
         }
     }

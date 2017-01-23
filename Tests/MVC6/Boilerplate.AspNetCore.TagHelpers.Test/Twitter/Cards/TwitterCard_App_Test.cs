@@ -24,7 +24,7 @@
 
             TwitterCardApp myTagHelper = new TwitterCardApp()
             {
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = "307234931",
                 IPad = "307234931",
                 GooglePlay = string.Empty
@@ -70,7 +70,7 @@
 
             TwitterCardApp myTagHelper = new TwitterCardApp()
             {
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = "307234931",
                 IPad = string.Empty,
                 GooglePlay = "com.android.app"
@@ -108,15 +108,15 @@
         /// <summary>
         /// Renders the meta tags with no value for twitter site username. (exception thrown)
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_NoValueForTwitterSiteUsername_ExceptionThrown")]
-        public void RenderMetaTags_NoValueForTwitterSiteUsername_ExceptionThrown()
+        [Fact(DisplayName = "RenderMetaTags_NoValueForSiteUsername_ExceptionThrown")]
+        public void RenderMetaTags_NoValueForSiteUsername_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
             Exception throwenException = null;
 
             TwitterCardApp myTagHelper = new TwitterCardApp()
             {
-                TwitterSiteUsername = string.Empty,
+                SiteUsername = string.Empty,
                 IPhone = "307234931",
                 IPad = "307234931",
                 GooglePlay = "com.android.app"
@@ -148,7 +148,7 @@
                 throwenException = e;
             }
             Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("TwitterSiteUsername", ((System.ArgumentException)throwenException).ParamName.ToString());
+            Assert.Equal("SiteUsername", ((System.ArgumentException)throwenException).ParamName.ToString());
         }
 
         /// <summary>
@@ -159,7 +159,7 @@
         {
             TwitterCardApp myTagHelper = new TwitterCardApp()
             {
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = "307234931",
                 IPad = "307234931",
                 GooglePlay = "com.android.app"
@@ -198,7 +198,7 @@
 
             TwitterCardApp myTagHelper = new TwitterCardApp()
             {
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = string.Empty,
                 IPad = "307234931",
                 GooglePlay = "com.android.app"

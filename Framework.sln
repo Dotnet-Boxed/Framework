@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
@@ -82,6 +81,6 @@ Global
 		{DF19E131-3E30-40F6-A5B2-1E0EDB75DC00} = {A1009B8D-6262-4427-A4FA-54D75F164CC7}
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
-		SolutionGuid = 5eaa2ef7-0748-4873-b2c4-d50f7762f89b
+		SolutionGuid = 3534085c-2311-4c66-9feb-797abb0052ce
 	EndGlobalSection
 EndGlobal

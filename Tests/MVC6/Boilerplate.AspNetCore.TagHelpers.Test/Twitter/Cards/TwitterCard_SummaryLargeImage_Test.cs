@@ -27,7 +27,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = string.Empty,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteIdValue,
+                SiteUsername = TwitterCardAnswerKey.SiteIdValue,
                 Image = null
             };
 
@@ -70,7 +70,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = null
             };
 
@@ -105,7 +105,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue)
             };
 
@@ -144,7 +144,7 @@
             {
                 Title = string.Empty,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteIdValue,
+                SiteUsername = TwitterCardAnswerKey.SiteIdValue,
                 Image = null
             };
 
@@ -192,7 +192,7 @@
                 {
                     Title = TwitterCardAnswerKey.TitleValue,
                     Description = TwitterCardAnswerKey.DescriptionValue,
-                    TwitterSiteUsername = string.Empty,
+                    SiteUsername = string.Empty,
                     Image = null
                 };
 
@@ -226,7 +226,6 @@
 
         /// <summary>
         /// Renders the meta tags with no value for twitter site username using twitter site
-        /// identifier rendered.
         /// </summary>
         [Fact(DisplayName = "RenderMetaTags_NoValueForTwitterSiteUsernameUsingTwitterSiteId_Rendered")]
         public void RenderMetaTags_NoValueForTwitterSiteUsernameUsingTwitterSiteId_Rendered()
@@ -235,8 +234,8 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = string.Empty,
-                TwitterSiteId = TwitterCardAnswerKey.TwitterSiteIdValue,
+                SiteUsername = string.Empty,
+                SiteId = TwitterCardAnswerKey.SiteIdValue,
                 Image = null
             };
 
@@ -258,7 +257,7 @@
             );
 
             myTagHelper.Process(context, output);
-            Assert.Contains("name=\"twitter:site:id\" content=\"" + TwitterCardAnswerKey.TwitterSiteIdValue + "\"", output.Content.GetContent());
+            Assert.Contains("name=\"twitter:site:id\" content=\"" + TwitterCardAnswerKey.SiteIdValue + "\"", output.Content.GetContent());
         }
 
         /// <summary>
@@ -271,7 +270,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = null
             };
 
@@ -307,9 +306,9 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 CreatorUsername = TwitterCardAnswerKey.CreatorUsernameValue,
-                CreatorTwitterId = TwitterCardAnswerKey.CreatorTwitterId
+                CreatorId = TwitterCardAnswerKey.CreatorId
             };
 
             var context = new TagHelperContext(
@@ -330,7 +329,7 @@
             );
 
             myTagHelper.Process(context, output);
-            Assert.Contains("name=\"twitter:creator:id\" content=\"" + TwitterCardAnswerKey.CreatorTwitterId + "\"", output.Content.GetContent());
+            Assert.Contains("name=\"twitter:creator:id\" content=\"" + TwitterCardAnswerKey.CreatorId + "\"", output.Content.GetContent());
             Assert.Contains("name=\"twitter:creator\" content=\"" + TwitterCardAnswerKey.CreatorUsernameValue + "\"", output.Content.GetContent());
         }
 
@@ -344,7 +343,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = null
             };
 
@@ -379,7 +378,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
             };
 
@@ -416,7 +415,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = null
             };
 

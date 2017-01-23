@@ -27,7 +27,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = string.Empty,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteIdValue,
+                SiteUsername = TwitterCardAnswerKey.SiteIdValue,
                 Image = null
             };
 
@@ -69,7 +69,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = null
             };
 
@@ -102,7 +102,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue)
             };
 
@@ -127,55 +127,10 @@
         }
 
         /// <summary>
-        /// Renders the meta tags with no value for title. (exception thrown)
-        /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_NoValueForTitle_ExceptionThrown")]
-        public void RenderMetaTags_NoValueForTitle_ExceptionThrown()
-        {
-            var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
-
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
-            {
-                Title = string.Empty,
-                Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteIdValue,
-                Image = null
-            };
-
-            try
-            {
-                var context = new TagHelperContext(
-                     new TagHelperAttributeList(),
-                     new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N"));
-
-                var output = new TagHelperOutput(
-                    "meta",
-                    new TagHelperAttributeList(),
-                        (cache, encoder) =>
-                        {
-                            var tagHelperContent = new DefaultTagHelperContent();
-                            tagHelperContent.SetContent(string.Empty);
-                            return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        });
-
-                myTagHelper.Process(context, output);
-            }
-            catch (Exception e)
-            {
-                throwenException = e;
-            }
-
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("Title", ((System.ArgumentException)throwenException).ParamName.ToString());
-        }
-
-        /// <summary>
         /// Renders the meta tags with no value for twitter site username. (exception thrown)
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_NoValueForTwitterSiteUsername_ExceptionThrown")]
-        public void RenderMetaTags_NoValueForTwitterSiteUsername_ExceptionThrown()
+        [Fact(DisplayName = "RenderMetaTags_NoValueForSiteUsername_ExceptionThrown")]
+        public void RenderMetaTags_NoValueForSiteUsername_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
             Exception throwenException = null;
@@ -184,7 +139,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = string.Empty,
+                SiteUsername = string.Empty,
                 Image = null
             };
 
@@ -219,15 +174,15 @@
         /// <summary>
         /// Renders the meta tags with no value for twitter site username using twitter site identifier.
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_NoValueForTwitterSiteUsernameUsingTwitterSiteId_Rendered")]
-        public void RenderMetaTags_NoValueForTwitterSiteUsernameUsingTwitterSiteId_Rendered()
+        [Fact(DisplayName = "RenderMetaTags_NoValueForSiteUsernameUsingSiteId_Rendered")]
+        public void RenderMetaTags_NoValueForSiteUsernameUsingSiteId_Rendered()
         {
             TwitterCardSummary myTagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = string.Empty,
-                TwitterSiteId = TwitterCardAnswerKey.TwitterSiteIdValue,
+                SiteUsername = string.Empty,
+                SiteId = TwitterCardAnswerKey.SiteIdValue,
                 Image = null
             };
 
@@ -247,20 +202,65 @@
                     });
 
             myTagHelper.Process(context, output);
-            Assert.Contains("name=\"twitter:site:id\" content=\"" + TwitterCardAnswerKey.TwitterSiteIdValue + "\"", output.Content.GetContent());
+            Assert.Contains("name=\"twitter:site:id\" content=\"" + TwitterCardAnswerKey.SiteIdValue + "\"", output.Content.GetContent());
+        }
+
+        /// <summary>
+        /// Renders the meta tags with no value for title. (exception thrown)
+        /// </summary>
+        [Fact(DisplayName = "RenderMetaTags_NoValueForTitle_ExceptionThrown")]
+        public void RenderMetaTags_NoValueForTitle_ExceptionThrown()
+        {
+            var expected = typeof(System.ArgumentNullException);
+            Exception throwenException = null;
+
+            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            {
+                Title = string.Empty,
+                Description = TwitterCardAnswerKey.DescriptionValue,
+                SiteUsername = TwitterCardAnswerKey.SiteIdValue,
+                Image = null
+            };
+
+            try
+            {
+                var context = new TagHelperContext(
+                     new TagHelperAttributeList(),
+                     new Dictionary<object, object>(),
+                     Guid.NewGuid().ToString("N"));
+
+                var output = new TagHelperOutput(
+                    "meta",
+                    new TagHelperAttributeList(),
+                        (cache, encoder) =>
+                        {
+                            var tagHelperContent = new DefaultTagHelperContent();
+                            tagHelperContent.SetContent(string.Empty);
+                            return Task.FromResult<TagHelperContent>(tagHelperContent);
+                        });
+
+                myTagHelper.Process(context, output);
+            }
+            catch (Exception e)
+            {
+                throwenException = e;
+            }
+
+            Assert.Equal(expected, throwenException.GetType());
+            Assert.Equal("Title", ((System.ArgumentException)throwenException).ParamName.ToString());
         }
 
         /// <summary>
         /// Renders the meta tags with the correct twitter card type tag.
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_RenderedCorrectTwitterCardTypeTag_Match")]
-        public void RenderMetaTags_RenderedCorrectTwitterCardTypeTag_Match()
+        [Fact(DisplayName = "RenderMetaTags_RenderedCorrectCardTypeTag_Match")]
+        public void RenderMetaTags_RenderedCorrectCardTypeTag_Match()
         {
             TwitterCardSummary myTagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = null
             };
 
@@ -285,16 +285,16 @@
         /// <summary>
         /// Renders the optional meta tags; twitter identifier, creator username.
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_RenderedOptionalTagCreatorTwitterIdCreatorUsername_Rendered")]
-        public void RenderMetaTags_RenderedOptionalTagCreatorTwitterIdCreatorUsername_Rendered()
+        [Fact(DisplayName = "RenderMetaTags_RenderedOptionalTagCreatorIdCreatorUsername_Rendered")]
+        public void RenderMetaTags_RenderedOptionalTagCreatorIdCreatorUsername_Rendered()
         {
             TwitterCardSummary myTagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 CreatorUsername = TwitterCardAnswerKey.CreatorUsernameValue,
-                CreatorTwitterId = TwitterCardAnswerKey.CreatorTwitterId
+                CreatorId = TwitterCardAnswerKey.CreatorId
             };
 
             var context = new TagHelperContext(
@@ -312,7 +312,7 @@
                     });
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:creator\" content=\"" + TwitterCardAnswerKey.CreatorUsernameValue + "\"", output.Content.GetContent());
-            Assert.Contains("name=\"twitter:creator:id\" content=\"" + TwitterCardAnswerKey.CreatorTwitterId + "\"", output.Content.GetContent());
+            Assert.Contains("name=\"twitter:creator:id\" content=\"" + TwitterCardAnswerKey.CreatorId + "\"", output.Content.GetContent());
         }
 
         /// <summary>
@@ -325,7 +325,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = null
             };
 
@@ -356,7 +356,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
             };
 
@@ -390,7 +390,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
             };
 

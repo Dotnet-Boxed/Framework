@@ -1,31 +1,31 @@
 ﻿namespace Boilerplate.AspNetCore.TagHelpers.Twitter
 {
     /// <summary>
-    /// <see cref="TwitterCardType"/> extension methods.
+    /// <see cref="CardType"/> extension methods.
     /// </summary>
     internal static class TwitterCardTypeExtensions
     {
         /// <summary>
-        /// Returns the Twitter specific <see cref="string"/> representation of the <see cref="TwitterCardType"/>.
+        /// Returns the Twitter specific <see cref="string"/> representation of the <see cref="CardType"/>.
         /// </summary>
         /// <param name="twitterCardType">Type of the twitter card.</param>
         /// <returns>
-        /// The Twitter specific <see cref="string"/> representation of the <see cref="TwitterCardType"/>.
+        /// The Twitter specific <see cref="string"/> representation of the <see cref="CardType"/>.
         /// </returns>
-        public static string ToTwitterString(this TwitterCardType twitterCardType)
+        public static string ToTwitterString(this CardType twitterCardType)
         {
             switch (twitterCardType)
             {
-                case TwitterCardType.App:
+                case CardType.App:
                     return "app";
 
-                case TwitterCardType.Player:
+                case CardType.Player:
                     return "player";
 
-                case TwitterCardType.Summary:
+                case CardType.Summary:
                     return "summary";
 
-                case TwitterCardType.SummaryLargeImage:
+                case CardType.SummaryLargeImage:
                     return "summary_large_image";
 
                 default:

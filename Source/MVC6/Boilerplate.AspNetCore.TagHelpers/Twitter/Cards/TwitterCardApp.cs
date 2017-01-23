@@ -11,7 +11,7 @@
     /// on the twitter.com website, as well as iOS and Android mobile clients. It is not yet
     /// available on mobile web. See https://dev.twitter.com/cards/types/app.
     /// </summary>
-    [HtmlTargetElement("twitter-card-app", Attributes = TwitterSiteAttributeUsername, TagStructure = TagStructure.WithoutEndTag)]
+    [HtmlTargetElement("twitter-card-app", Attributes = SiteUsernameAttributeName, TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardApp : TwitterCard
     {
         private const string CountryAttributeName = "country";
@@ -81,11 +81,11 @@
         /// <summary>
         /// Gets the type of the Twitter card.
         /// </summary>
-        public override TwitterCardType Type => TwitterCardType.App;
+        public override CardType Type => CardType.App;
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref
-        /// name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the
+        /// <paramref name="stringBuilder"/> containing the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
@@ -109,9 +109,9 @@
         {
             base.Validate();
 
-            if (string.IsNullOrEmpty(this.TwitterSiteUsername))
+            if (string.IsNullOrEmpty(this.SiteUsername))
             {
-                throw new ArgumentNullException(nameof(this.TwitterSiteUsername));
+                throw new ArgumentNullException(nameof(this.SiteUsername));
             }
 
             if (string.IsNullOrEmpty(this.IPhone))

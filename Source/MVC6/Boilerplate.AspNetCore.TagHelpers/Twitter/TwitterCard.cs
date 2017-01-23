@@ -17,7 +17,7 @@
         /// <summary>
         /// The Twitter user ID of content creator.
         /// </summary>
-        protected const string CreatorTwitterIdAttributeName = "creator-id";
+        protected const string CreatorIdAttributeName = "creator-id";
 
         /// <summary>
         /// The Twitter @username of content creator e.g. @RehanSaeedUK.
@@ -25,22 +25,22 @@
         protected const string CreatorUsernameAttributeName = "creator";
 
         /// <summary>
+        /// The Twitter Id associated with this site.
+        /// </summary>
+        protected const string SiteIdAttributName = "site-id";
+
+        /// <summary>
         /// The Twitter @username associated with the page e.g. @Microsoft. This is a required
         /// property. Required for Twitter Card analytics.
         /// </summary>
-        protected const string TwitterSiteAttributeUsername = "site";
-
-        /// <summary>
-        /// The Twitter Id associated with this site.
-        /// </summary>
-        protected const string TwitterSiteIdAttributName = "site-id";
+        protected const string SiteUsernameAttributeName = "site";
 
         /// <summary>
         /// Gets or sets the Twitter user ID of content creator.
         /// </summary>
         /// <value>The Twitter user ID of content creator.</value>
-        [HtmlAttributeName(CreatorTwitterIdAttributeName)]
-        public string CreatorTwitterId { get; set; }
+        [HtmlAttributeName(CreatorIdAttributeName)]
+        public string CreatorId { get; set; }
 
         /// <summary>
         /// Gets or sets the Twitter @username of content creator e.g. @RehanSaeedUK.
@@ -52,8 +52,8 @@
         /// Gets or sets the Site's Twitter site Id. Either twitter:site or twitter:site:id is required.
         /// </summary>
         /// <value>The twitter Id for the site.</value>
-        [HtmlAttributeName(TwitterSiteIdAttributName)]
-        public string TwitterSiteId { get; set; }
+        [HtmlAttributeName(SiteIdAttributName)]
+        public string SiteId { get; set; }
 
         /// <summary>
         /// Gets or sets the twitter site username. e.g. @Microsoft.
@@ -61,17 +61,17 @@
         /// <value>
         /// The Site's Twitter @username the card should be attributed to. Required for Twitter Card analytics.
         /// </value>
-        [HtmlAttributeName(TwitterSiteAttributeUsername)]
-        public string TwitterSiteUsername { get; set; }
+        [HtmlAttributeName(SiteUsernameAttributeName)]
+        public string SiteUsername { get; set; }
 
         /// <summary>
         /// Gets the type of the Twitter card.
         /// </summary>
-        public abstract TwitterCardType Type { get; }
+        public abstract CardType Type { get; }
 
         /// <summary>
-        /// Synchronously executes the <see cref="TagHelper"/> with the given <paramref
-        /// name="context"/> and <paramref name="output"/>.
+        /// Synchronously executes the <see cref="TagHelper"/> with the given
+        /// <paramref name="context"/> and <paramref name="output"/>.
         /// </summary>
         /// <param name="context">Contains information associated with the current HTML tag.</param>
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
@@ -97,8 +97,8 @@
         }
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref
-        /// name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the
+        /// <paramref name="stringBuilder"/> containing the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public virtual void ToString(StringBuilder stringBuilder)
@@ -107,9 +107,9 @@
 
             stringBuilder.AppendMetaNameContent("twitter:card", this.Type.ToTwitterString());
 
-            if (!string.IsNullOrEmpty(this.TwitterSiteUsername))
+            if (!string.IsNullOrEmpty(this.SiteUsername))
             {
-                stringBuilder.AppendMetaNameContent("twitter:site", this.TwitterSiteUsername);
+                stringBuilder.AppendMetaNameContent("twitter:site", this.SiteUsername);
             }
         }
 

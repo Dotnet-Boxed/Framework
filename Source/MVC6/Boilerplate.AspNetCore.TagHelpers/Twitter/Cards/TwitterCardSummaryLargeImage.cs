@@ -9,28 +9,28 @@
     /// brings the user to your website. On twitter.com and the mobile clients, the image appears
     /// below the tweet text. See https://dev.twitter.com/cards/types/summary-large-image.
     /// </summary>
-    [HtmlTargetElement("twitter-card-summary-large-image", Attributes = TwitterSiteAttributeUsername + "," + CreatorUsernameAttributeName, TagStructure = TagStructure.WithoutEndTag)]
+    [HtmlTargetElement("twitter-card-summary-large-image", Attributes = SiteUsernameAttributeName + "," + CreatorUsernameAttributeName, TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardSummaryLargeImage : TwitterCardSummary
     {
         /// <summary>
         /// Gets the type of the Twitter card.
         /// </summary>
-        public override TwitterCardType Type => TwitterCardType.SummaryLargeImage;
+        public override CardType Type => CardType.SummaryLargeImage;
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref
-        /// name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the
+        /// <paramref name="stringBuilder"/> containing the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMetaNameContentIfNotNull("twitter:site:Id", this.TwitterSiteId);
+            stringBuilder.AppendMetaNameContentIfNotNull("twitter:site:Id", this.SiteId);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:title", this.Title);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:description", this.Description);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:creator", this.CreatorUsername);
-            stringBuilder.AppendMetaNameContentIfNotNull("twitter:creator:id", this.CreatorTwitterId);
+            stringBuilder.AppendMetaNameContentIfNotNull("twitter:creator:id", this.CreatorId);
 
             if (this.Image != null)
             {

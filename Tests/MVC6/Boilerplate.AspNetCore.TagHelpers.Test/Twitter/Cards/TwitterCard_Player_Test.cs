@@ -26,7 +26,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = null,
                 Player = new TwitterPlayer(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
             };
@@ -73,7 +73,7 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
                 Player = null
             };
@@ -108,6 +108,61 @@
         }
 
         /// <summary>
+        /// Renders the meta tags with no value for twitter site username. (exception thrown)
+        /// </summary>
+        [Fact(DisplayName = "RenderMetaTags_NoValueForSiteUsername_ExceptionThrown")]
+        public void RenderMetaTags_NoValueForSiteUsername_ExceptionThrown()
+        {
+            var expected = typeof(ArgumentNullException);
+            Exception throwenException = null;
+
+            TwitterCardPlayer myTagHelper = new TwitterCardPlayer()
+            {
+                Title = TwitterCardAnswerKey.TitleValue,
+                Description = TwitterCardAnswerKey.DescriptionValue,
+                SiteUsername = string.Empty,
+                Image = new TwitterImage(
+                    TwitterCardAnswerKey.ImageUrlValue,
+                    TwitterCardAnswerKey.ImageWidthValue,
+                    TwitterCardAnswerKey.ImageHeightValue
+                ),
+                Player = new TwitterPlayer(
+                    TwitterCardAnswerKey.ImageUrlValue,
+                    TwitterCardAnswerKey.ImageWidthValue,
+                    TwitterCardAnswerKey.ImageHeightValue
+                )
+            };
+
+            try
+            {
+                var context = new TagHelperContext(
+                     new TagHelperAttributeList(),
+                     new Dictionary<object, object>(),
+                     Guid.NewGuid().ToString("N")
+                );
+
+                var output = new TagHelperOutput(
+                    "meta",
+                    new TagHelperAttributeList(),
+                        (cache, encoder) =>
+                        {
+                            var tagHelperContent = new DefaultTagHelperContent();
+                            tagHelperContent.SetContent(string.Empty);
+                            return Task.FromResult<TagHelperContent>(tagHelperContent);
+                        }
+                );
+
+                myTagHelper.Process(context, output);
+            }
+            catch (Exception e)
+            {
+                throwenException = e;
+            }
+            Assert.Equal(expected, throwenException.GetType());
+            Assert.Equal("SiteUsername", ((ArgumentException)throwenException).ParamName.ToString());
+        }
+
+        /// <summary>
         /// Renders the meta tags with no value for title. (exception thrown)
         /// </summary>
         [Fact(DisplayName = "RenderMetaTags_NoValueForTitle_ExceptionThrown")]
@@ -120,7 +175,7 @@
             {
                 Title = string.Empty,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
                 Player = new TwitterPlayer(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
             };
@@ -155,53 +210,6 @@
         }
 
         /// <summary>
-        /// Renders the meta tags with no value for twitter site username. (exception thrown)
-        /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_NoValueForTwitterSiteUsername_ExceptionThrown")]
-        public void RenderMetaTags_NoValueForTwitterSiteUsername_ExceptionThrown()
-        {
-            var expected = typeof(ArgumentNullException);
-            Exception throwenException = null;
-
-            TwitterCardPlayer myTagHelper = new TwitterCardPlayer()
-            {
-                Title = TwitterCardAnswerKey.TitleValue,
-                Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = string.Empty,
-                Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
-                Player = new TwitterPlayer(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
-            };
-
-            try
-            {
-                var context = new TagHelperContext(
-                     new TagHelperAttributeList(),
-                     new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
-
-                var output = new TagHelperOutput(
-                    "meta",
-                    new TagHelperAttributeList(),
-                        (cache, encoder) =>
-                        {
-                            var tagHelperContent = new DefaultTagHelperContent();
-                            tagHelperContent.SetContent(string.Empty);
-                            return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
-
-                myTagHelper.Process(context, output);
-            }
-            catch (Exception e)
-            {
-                throwenException = e;
-            }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("TwitterSiteUsername", ((ArgumentException)throwenException).ParamName.ToString());
-        }
-
-        /// <summary>
         /// Renders the meta tags with the correct twitter card type tag.
         /// </summary>
         [Fact(DisplayName = "RenderMetaTags_RenderedCorrectTwitterCardTypeTag_Match")]
@@ -211,9 +219,17 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
-                Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
-                Player = new TwitterPlayer(TwitterCardAnswerKey.PlayerUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
+                Image = new TwitterImage(
+                    TwitterCardAnswerKey.ImageUrlValue,
+                    TwitterCardAnswerKey.ImageWidthValue,
+                    TwitterCardAnswerKey.ImageHeightValue
+                ),
+                Player = new TwitterPlayer(
+                    TwitterCardAnswerKey.PlayerUrlValue,
+                    TwitterCardAnswerKey.ImageWidthValue,
+                    TwitterCardAnswerKey.ImageHeightValue
+                )
             };
 
             var context = new TagHelperContext(
@@ -247,9 +263,17 @@
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
-                TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
-                Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
-                Player = new TwitterPlayer(TwitterCardAnswerKey.PlayerUrlValue, TwitterCardAnswerKey.PlayerWidthValue, TwitterCardAnswerKey.PlayerHeightValue)
+                SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
+                Image = new TwitterImage(
+                    TwitterCardAnswerKey.ImageUrlValue,
+                    TwitterCardAnswerKey.ImageWidthValue,
+                    TwitterCardAnswerKey.ImageHeightValue
+                ),
+                Player = new TwitterPlayer(
+                    TwitterCardAnswerKey.PlayerUrlValue,
+                    TwitterCardAnswerKey.PlayerWidthValue,
+                    TwitterCardAnswerKey.PlayerHeightValue
+                )
             };
 
             var context = new TagHelperContext(
@@ -289,9 +313,17 @@
                 {
                     Title = TwitterCardAnswerKey.TitleValue,
                     Description = TwitterCardAnswerKey.DescriptionValue,
-                    TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
-                    Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
-                    Player = new TwitterPlayer(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.PlayerWidthValue, TwitterCardAnswerKey.PlayerHeightValue)
+                    SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
+                    Image = new TwitterImage(
+                        TwitterCardAnswerKey.ImageUrlValue,
+                        TwitterCardAnswerKey.ImageWidthValue,
+                        TwitterCardAnswerKey.ImageHeightValue
+                    ),
+                    Player = new TwitterPlayer(
+                        TwitterCardAnswerKey.ImageUrlValue,
+                        TwitterCardAnswerKey.PlayerWidthValue,
+                        TwitterCardAnswerKey.PlayerHeightValue
+                    )
                 };
 
                 var context = new TagHelperContext(
@@ -337,9 +369,13 @@
                 {
                     Title = TwitterCardAnswerKey.TitleValue,
                     Description = TwitterCardAnswerKey.DescriptionValue,
-                    TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
+                    SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                     Image = null,
-                    Player = new TwitterPlayer(TwitterCardAnswerKey.PlayerUrlValue, TwitterCardAnswerKey.PlayerWidthValue, 0)
+                    Player = new TwitterPlayer(
+                        TwitterCardAnswerKey.PlayerUrlValue,
+                        TwitterCardAnswerKey.PlayerWidthValue,
+                        0
+                    )
                 };
 
                 var context = new TagHelperContext(
@@ -384,9 +420,17 @@
                 {
                     Title = TwitterCardAnswerKey.TitleValue,
                     Description = TwitterCardAnswerKey.DescriptionValue,
-                    TwitterSiteUsername = TwitterCardAnswerKey.TwitterSiteUsernameValue,
-                    Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
-                    Player = new TwitterPlayer(TwitterCardAnswerKey.PlayerUrlValue, 0, TwitterCardAnswerKey.PlayerHeightValue)
+                    SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
+                    Image = new TwitterImage(
+                        TwitterCardAnswerKey.ImageUrlValue,
+                        TwitterCardAnswerKey.ImageWidthValue,
+                        TwitterCardAnswerKey.ImageHeightValue
+                    ),
+                    Player = new TwitterPlayer(
+                        TwitterCardAnswerKey.PlayerUrlValue,
+                        0,
+                        TwitterCardAnswerKey.PlayerHeightValue
+                    )
                 };
 
                 var context = new TagHelperContext(
