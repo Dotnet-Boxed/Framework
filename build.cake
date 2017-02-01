@@ -1,5 +1,7 @@
-var target = Argument("target", "Default");
-var configuration = Argument("configuration", "Release");
+var target = Argument("Target", "Default");
+var configuration =
+    HasArgument("Configuration") ? Argument("Configuration") :
+    EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") : "Release";
 var buildNumber =
     HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
     AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
@@ -25,8 +27,7 @@ Task("Restore")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        var projects = GetFiles("./**/*.xproj");
-        foreach(var project in projects)
+        foreach(var project in GetFiles("./**/*.xproj"))
         {
             DotNetCoreBuild(
                 project.GetDirectory().FullPath,
@@ -41,8 +42,7 @@ Task("Test")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        var projects = GetFiles("./Tests/**/*.xproj");
-        foreach(var project in projects)
+        foreach(var project in GetFiles("./Tests/**/*.xproj"))
         {
             DotNetCoreTest(
                 project.GetDirectory().FullPath,
