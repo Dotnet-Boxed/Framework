@@ -1,12 +1,12 @@
 {
-  "version": "2.0.2",
+  "version": "2.1.0",
   "title": "ASP.NET MVC 6 Boilerplate Framework",
   "description": "Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
   "copyright": "Copyright © Muhammad Rehan Saeed. All rights Reserved",
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
 
   "packOptions": {
-    "releaseNotes": "Fixed SitemapGenerator erroring when a sitemap is oversized and added Czech and Slovak character support to FriendlyUrlHelper.",
+    "releaseNotes": "Updated to ASP.NET Core 1.1.1.",
     "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
     "tags": [ "ASP.NET", "ASP.NET Core", "MVC", "MVC 6", "Boilerplate", "Muhammad Rehan Saeed", "Framework" ],
     "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
@@ -28,8 +28,8 @@
 
   "dependencies": {
     "Boilerplate": "*",
-    "Microsoft.AspNetCore.Mvc.Abstractions": "1.1.0",
-    "Microsoft.AspNetCore.Mvc.Core": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.Abstractions": "1.1.1",
+    "Microsoft.AspNetCore.Mvc.Core": "1.1.1",
     "Microsoft.Extensions.Caching.Abstractions": "1.1.0",
     "Microsoft.Extensions.Configuration.Binder": "1.1.0",
     "Newtonsoft.Json": "9.0.1",
