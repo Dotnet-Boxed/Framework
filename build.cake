@@ -1,6 +1,6 @@
 var target = Argument("Target", "Default");
 var configuration =
-    HasArgument("Configuration") ? Argument("Configuration") :
+    HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") : "Release";
 var buildNumber =
     HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
