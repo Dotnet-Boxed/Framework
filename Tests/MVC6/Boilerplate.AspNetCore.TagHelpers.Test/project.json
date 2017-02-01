@@ -1,11 +1,16 @@
 {
   "version": "1.0.0-*",
-
   "testRunner": "xunit",
-
+  "buildOptions": {
+    "debugType": "portable",
+    "preserveCompilationContext": true,
+    "additionalArguments": [ "/ruleset:../../../MinimumRecommendedRulesWithStyleCop.ruleset" ],
+    "xmlDoc": false
+  },
   "dependencies": {
     "Boilerplate.AspNetCore.TagHelpers": "*",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Microsoft.AspNetCore.Razor": "1.1.0",
     "Microsoft.DotNet.InternalAbstractions": "1.0.500-preview2-1-003177",
     "Moq": "4.6.38-alpha",
     "StyleCop.Analyzers": {
@@ -14,7 +19,6 @@
     },
     "xunit": "2.2.0-beta4-build3444"
   },
-
   "frameworks": {
     "netcoreapp1.1": {
       "dependencies": {
@@ -31,9 +35,5 @@
       "dependencies": {
       }
     }
-  },
-
-  "buildOptions": {
-    "additionalArguments": [ "/ruleset:../../../MinimumRecommendedRulesWithStyleCop.ruleset" ]
   }
 }
