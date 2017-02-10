@@ -69,7 +69,7 @@ Task("Pack")
     .Does(() =>
     {
         string versionSuffix = null;
-		if (!string.IsNullOrEmpty(releaseStage))
+		if (!string.IsNullOrEmpty(preReleaseSuffix))
 		{
 			versionSuffix = preReleaseSuffix + "-" + buildNumber.ToString("D4");
 		}
