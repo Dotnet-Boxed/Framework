@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.0-*",
   "title": "Boilerplate Framework",
   "description": "Provides boilerplate framework code for a .NET project.",
   "copyright": "Copyright © Muhammad Rehan Saeed. All rights Reserved",

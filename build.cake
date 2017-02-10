@@ -3,6 +3,11 @@ var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
 	"Release";
+var preReleaseSuffix =
+    HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
+	(AppVeyor.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
+    EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
+	"beta";
 var buildNumber =
     HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
     AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
@@ -63,7 +68,12 @@ Task("Pack")
     .IsDependentOn("Test")
     .Does(() =>
     {
-        var revision = buildNumber.ToString("D4");
+        string versionSuffix = null;
+		if (!string.IsNullOrEmpty(releaseStage))
+		{
+			versionSuffix = preReleaseSuffix + "-" + buildNumber.ToString("D4");
+		}
+
         foreach (var project in GetFiles("./Source/**/*.xproj"))
         {
             DotNetCorePack(
@@ -72,7 +82,7 @@ Task("Pack")
                 {
                     Configuration = configuration,
                     OutputDirectory = artifactsDirectory,
-                    VersionSuffix = revision
+                    VersionSuffix = versionSuffix
                 });
         }
     });

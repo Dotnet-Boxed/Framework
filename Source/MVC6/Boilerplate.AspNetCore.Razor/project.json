@@ -1,5 +1,5 @@
 {
-  "version": "2.1.0",
+  "version": "2.1.0-*",
   "title": "ASP.NET MVC 6 Boilerplate Framework Razor",
   "description": "Provides boilerplate framework Razor code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
   "copyright": "Copyright © Muhammad Rehan Saeed. All rights Reserved",
