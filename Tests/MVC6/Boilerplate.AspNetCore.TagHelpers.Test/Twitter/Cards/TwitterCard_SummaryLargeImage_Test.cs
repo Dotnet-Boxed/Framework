@@ -21,7 +21,7 @@
         public void RenderMetaTags_NoValueForDescription_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardSummaryLargeImage myTagHelper = new TwitterCardSummaryLargeImage()
             {
@@ -36,8 +36,7 @@
                 var context = new TagHelperContext(
                      new TagHelperAttributeList(),
                      new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                     Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -47,17 +46,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("Description", ((ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("Description", ((ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -77,8 +76,7 @@
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -88,8 +86,7 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
             Assert.DoesNotContain("twitter:image", output.Content.GetContent());
@@ -112,8 +109,7 @@
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -123,8 +119,7 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
             Assert.DoesNotContain("twitter:image:height", output.Content.GetContent());
@@ -138,7 +133,7 @@
         public void RenderMetaTags_NoValueForTitle_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardSummaryLargeImage myTagHelper = new TwitterCardSummaryLargeImage()
             {
@@ -153,8 +148,7 @@
                 var context = new TagHelperContext(
                      new TagHelperAttributeList(),
                      new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                     Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -164,17 +158,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("Title", ((ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("Title", ((ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -184,7 +178,7 @@
         public void RenderMetaTags_NoValueForTwitterSiteUsername_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             try
             {
@@ -199,8 +193,7 @@
                 var context = new TagHelperContext(
                     new TagHelperAttributeList(),
                     new Dictionary<object, object>(),
-                    Guid.NewGuid().ToString("N")
-                );
+                    Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -210,18 +203,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
 
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Contains("Either twitter:site or twitter:site:id is required.", throwenException.Message.ToString());
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Contains("Either twitter:site or twitter:site:id is required.", thrownException.Message.ToString());
         }
 
         /// <summary>
@@ -242,8 +234,7 @@
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -253,8 +244,7 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:site:id\" content=\"" + TwitterCardAnswerKey.SiteIdValue + "\"", output.Content.GetContent());
@@ -277,8 +267,7 @@
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "div",
@@ -288,8 +277,7 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:card\" content=\"summary_large_image\"", output.Content.GetContent());
@@ -314,8 +302,7 @@
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -325,8 +312,7 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:creator:id\" content=\"" + TwitterCardAnswerKey.CreatorId + "\"", output.Content.GetContent());
@@ -350,8 +336,7 @@
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -361,8 +346,7 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:description\" content=\"" + TwitterCardAnswerKey.DescriptionValue + "\"", output.Content.GetContent());
@@ -385,8 +369,7 @@
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -396,8 +379,7 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:image\" content=\"" + TwitterCardAnswerKey.ImageUrlValue + "\"", output.Content.GetContent());
@@ -422,8 +404,7 @@
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -433,8 +414,7 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:title\" content=\"" + TwitterCardAnswerKey.TitleValue + "\"", output.Content.GetContent());

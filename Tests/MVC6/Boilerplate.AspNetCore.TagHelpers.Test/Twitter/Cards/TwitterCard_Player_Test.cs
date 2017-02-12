@@ -20,7 +20,7 @@
         public void RenderMetaTags_NoValueForImage_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardPlayer myTagHelper = new TwitterCardPlayer()
             {
@@ -34,10 +34,9 @@
             try
             {
                 var context = new TagHelperContext(
-                     new TagHelperAttributeList(),
-                     new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                    new TagHelperAttributeList(),
+                    new Dictionary<object, object>(),
+                    Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -47,17 +46,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("Image", ((ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("Image", ((ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -67,7 +66,7 @@
         public void RenderMetaTags_NoValueForPlayer_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardPlayer myTagHelper = new TwitterCardPlayer()
             {
@@ -83,8 +82,7 @@
                 var context = new TagHelperContext(
                      new TagHelperAttributeList(),
                      new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                     Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -94,17 +92,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("Player", ((ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("Player", ((ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -114,7 +112,7 @@
         public void RenderMetaTags_NoValueForSiteUsername_ExceptionThrown()
         {
             var expected = typeof(ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardPlayer myTagHelper = new TwitterCardPlayer()
             {
@@ -124,13 +122,11 @@
                 Image = new TwitterImage(
                     TwitterCardAnswerKey.ImageUrlValue,
                     TwitterCardAnswerKey.ImageWidthValue,
-                    TwitterCardAnswerKey.ImageHeightValue
-                ),
+                    TwitterCardAnswerKey.ImageHeightValue),
                 Player = new TwitterPlayer(
                     TwitterCardAnswerKey.ImageUrlValue,
                     TwitterCardAnswerKey.ImageWidthValue,
-                    TwitterCardAnswerKey.ImageHeightValue
-                )
+                    TwitterCardAnswerKey.ImageHeightValue)
             };
 
             try
@@ -138,8 +134,7 @@
                 var context = new TagHelperContext(
                      new TagHelperAttributeList(),
                      new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                     Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -149,17 +144,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("SiteUsername", ((ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("SiteUsername", ((ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -169,7 +164,7 @@
         public void RenderMetaTags_NoValueForTitle_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardPlayer myTagHelper = new TwitterCardPlayer()
             {
@@ -185,8 +180,7 @@
                 var context = new TagHelperContext(
                      new TagHelperAttributeList(),
                      new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                     Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -196,17 +190,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("Title", ((ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("Title", ((ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -223,20 +217,17 @@
                 Image = new TwitterImage(
                     TwitterCardAnswerKey.ImageUrlValue,
                     TwitterCardAnswerKey.ImageWidthValue,
-                    TwitterCardAnswerKey.ImageHeightValue
-                ),
+                    TwitterCardAnswerKey.ImageHeightValue),
                 Player = new TwitterPlayer(
                     TwitterCardAnswerKey.PlayerUrlValue,
                     TwitterCardAnswerKey.ImageWidthValue,
-                    TwitterCardAnswerKey.ImageHeightValue
-                )
+                    TwitterCardAnswerKey.ImageHeightValue)
             };
 
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -246,8 +237,7 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:card\" content=\"player\"", output.Content.GetContent());
@@ -267,20 +257,17 @@
                 Image = new TwitterImage(
                     TwitterCardAnswerKey.ImageUrlValue,
                     TwitterCardAnswerKey.ImageWidthValue,
-                    TwitterCardAnswerKey.ImageHeightValue
-                ),
+                    TwitterCardAnswerKey.ImageHeightValue),
                 Player = new TwitterPlayer(
                     TwitterCardAnswerKey.PlayerUrlValue,
                     TwitterCardAnswerKey.PlayerWidthValue,
-                    TwitterCardAnswerKey.PlayerHeightValue
-                )
+                    TwitterCardAnswerKey.PlayerHeightValue)
             };
 
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -290,11 +277,10 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
-            Assert.Contains(("HTTPS:").ToLower(), output.Content.GetContent().ToLower());
+            Assert.Contains("HTTPS:".ToLower(), output.Content.GetContent().ToLower());
             Assert.Contains("name=\"twitter:player\"", output.Content.GetContent());
         }
 
@@ -305,7 +291,7 @@
         public void RenderMetaTags_RenderedTagPlayerWithoutHTTPS_ExceptionThrown()
         {
             var expected = typeof(ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             try
             {
@@ -317,20 +303,17 @@
                     Image = new TwitterImage(
                         TwitterCardAnswerKey.ImageUrlValue,
                         TwitterCardAnswerKey.ImageWidthValue,
-                        TwitterCardAnswerKey.ImageHeightValue
-                    ),
+                        TwitterCardAnswerKey.ImageHeightValue),
                     Player = new TwitterPlayer(
                         TwitterCardAnswerKey.ImageUrlValue,
                         TwitterCardAnswerKey.PlayerWidthValue,
-                        TwitterCardAnswerKey.PlayerHeightValue
-                    )
+                        TwitterCardAnswerKey.PlayerHeightValue)
                 };
 
                 var context = new TagHelperContext(
                     new TagHelperAttributeList(),
                     new Dictionary<object, object>(),
-                    Guid.NewGuid().ToString("N")
-                );
+                    Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -340,18 +323,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
 
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("PlayerUrl", ((ArgumentException)throwenException).ParamName.ToString());
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("PlayerUrl", ((ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -361,7 +343,7 @@
         public void RenderMetaTags_ZeroValueForPlayerHeight_ExceptionThrown()
         {
             var expected = typeof(ArgumentOutOfRangeException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             try
             {
@@ -374,15 +356,13 @@
                     Player = new TwitterPlayer(
                         TwitterCardAnswerKey.PlayerUrlValue,
                         TwitterCardAnswerKey.PlayerWidthValue,
-                        0
-                    )
+                        0)
                 };
 
                 var context = new TagHelperContext(
                      new TagHelperAttributeList(),
                      new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                     Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -392,17 +372,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("height", ((ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("height", ((ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -412,7 +392,7 @@
         public void RenderMetaTags_ZeroValueForPlayerWidth_ExceptionThrown()
         {
             var expected = typeof(ArgumentOutOfRangeException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             try
             {
@@ -424,20 +404,17 @@
                     Image = new TwitterImage(
                         TwitterCardAnswerKey.ImageUrlValue,
                         TwitterCardAnswerKey.ImageWidthValue,
-                        TwitterCardAnswerKey.ImageHeightValue
-                    ),
+                        TwitterCardAnswerKey.ImageHeightValue),
                     Player = new TwitterPlayer(
                         TwitterCardAnswerKey.PlayerUrlValue,
                         0,
-                        TwitterCardAnswerKey.PlayerHeightValue
-                    )
+                        TwitterCardAnswerKey.PlayerHeightValue)
                 };
 
                 var context = new TagHelperContext(
                      new TagHelperAttributeList(),
                      new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                     Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -447,17 +424,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("width", ((ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("width", ((ArgumentException)thrownException).ParamName.ToString());
         }
     }
 }

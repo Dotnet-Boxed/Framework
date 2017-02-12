@@ -20,7 +20,7 @@
         public void RenderMetaTags_NoValueForGooglePlay_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardApp myTagHelper = new TwitterCardApp()
             {
@@ -33,10 +33,9 @@
             try
             {
                 var context = new TagHelperContext(
-                     new TagHelperAttributeList(),
-                     new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                    new TagHelperAttributeList(),
+                    new Dictionary<object, object>(),
+                    Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -46,17 +45,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("GooglePlay", ((System.ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("GooglePlay", ((System.ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -66,7 +65,7 @@
         public void RenderMetaTags_NoValueForIPad_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardApp myTagHelper = new TwitterCardApp()
             {
@@ -79,10 +78,9 @@
             try
             {
                 var context = new TagHelperContext(
-                     new TagHelperAttributeList(),
-                     new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                    new TagHelperAttributeList(),
+                    new Dictionary<object, object>(),
+                    Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -92,17 +90,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("IPad", ((System.ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("IPad", ((System.ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -112,7 +110,7 @@
         public void RenderMetaTags_NoValueForSiteUsername_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardApp myTagHelper = new TwitterCardApp()
             {
@@ -127,8 +125,7 @@
                 var context = new TagHelperContext(
                      new TagHelperAttributeList(),
                      new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                     Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -138,17 +135,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("SiteUsername", ((System.ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("SiteUsername", ((System.ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -168,8 +165,7 @@
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N")
-            );
+                Guid.NewGuid().ToString("N"));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -179,8 +175,7 @@
                         var tagHelperContent = new DefaultTagHelperContent();
                         tagHelperContent.SetContent(string.Empty);
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    }
-            );
+                    });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:card\" content=\"app\"", output.Content.GetContent());
@@ -194,7 +189,7 @@
         public void TwitterCard_App_Validation_Fails_Missing_IPhone()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardApp myTagHelper = new TwitterCardApp()
             {
@@ -207,10 +202,9 @@
             try
             {
                 var context = new TagHelperContext(
-                     new TagHelperAttributeList(),
-                     new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N")
-                );
+                    new TagHelperAttributeList(),
+                    new Dictionary<object, object>(),
+                    Guid.NewGuid().ToString("N"));
 
                 var output = new TagHelperOutput(
                     "meta",
@@ -220,17 +214,17 @@
                             var tagHelperContent = new DefaultTagHelperContent();
                             tagHelperContent.SetContent(string.Empty);
                             return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        }
-                );
+                        });
 
                 myTagHelper.Process(context, output);
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("IPhone", ((System.ArgumentException)throwenException).ParamName.ToString());
+
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("IPhone", ((System.ArgumentException)thrownException).ParamName.ToString());
         }
     }
 }

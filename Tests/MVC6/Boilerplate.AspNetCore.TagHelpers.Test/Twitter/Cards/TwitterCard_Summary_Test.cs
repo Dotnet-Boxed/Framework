@@ -21,7 +21,7 @@
         public void RenderMetaTags_NoValueForDescription_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardSummary myTagHelper = new TwitterCardSummary()
             {
@@ -52,11 +52,11 @@
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
 
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("Description", ((System.ArgumentException)throwenException).ParamName.ToString());
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("Description", ((System.ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
@@ -133,7 +133,7 @@
         public void RenderMetaTags_NoValueForSiteUsername_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardSummary myTagHelper = new TwitterCardSummary()
             {
@@ -164,11 +164,11 @@
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
 
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Contains("Either twitter:site or twitter:site:id is required.", throwenException.Message.ToString());
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Contains("Either twitter:site or twitter:site:id is required.", thrownException.Message.ToString());
         }
 
         /// <summary>
@@ -212,7 +212,7 @@
         public void RenderMetaTags_NoValueForTitle_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
-            Exception throwenException = null;
+            Exception thrownException = null;
 
             TwitterCardSummary myTagHelper = new TwitterCardSummary()
             {
@@ -243,11 +243,11 @@
             }
             catch (Exception e)
             {
-                throwenException = e;
+                thrownException = e;
             }
 
-            Assert.Equal(expected, throwenException.GetType());
-            Assert.Equal("Title", ((System.ArgumentException)throwenException).ParamName.ToString());
+            Assert.Equal(expected, thrownException.GetType());
+            Assert.Equal("Title", ((System.ArgumentException)thrownException).ParamName.ToString());
         }
 
         /// <summary>
