@@ -1,10 +1,10 @@
-﻿namespace Framework.AspNetCore.Swagger.Test.OperationFilters
+﻿namespace Boilerplate.AspNetCore.Swagger.Test.OperationFilters
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Framework.AspNetCore.Filters;
-    using Framework.AspNetCore.Swagger.OperationFilters;
+    using Boilerplate.AspNetCore.Filters;
+    using Boilerplate.AspNetCore.Swagger.OperationFilters;
     using Microsoft.AspNetCore.Mvc.Abstractions;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.AspNetCore.Mvc.Filters;

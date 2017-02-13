@@ -1,4 +1,4 @@
-﻿namespace Framework.AspNetCore.Swagger
+﻿namespace Boilerplate.AspNetCore.Swagger
 {
     using System;
     using System.IO;

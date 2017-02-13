@@ -1,6 +1,6 @@
-﻿namespace Framework.Test
+﻿namespace Boilerplate.Test
 {
-    using Framework;
+    using Boilerplate;
 
     public class Translator : ITranslator<TranslateFrom, TranslateTo>
     {

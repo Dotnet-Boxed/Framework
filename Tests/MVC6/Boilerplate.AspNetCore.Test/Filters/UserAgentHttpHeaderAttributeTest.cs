@@ -1,6 +1,6 @@
-﻿namespace Framework.AspNetCore.Test.Filters
+﻿namespace Boilerplate.AspNetCore.Test.Filters
 {
-    using Framework.AspNetCore.Filters;
+    using Boilerplate.AspNetCore.Filters;
     using Microsoft.Extensions.Primitives;
     using Xunit;
 

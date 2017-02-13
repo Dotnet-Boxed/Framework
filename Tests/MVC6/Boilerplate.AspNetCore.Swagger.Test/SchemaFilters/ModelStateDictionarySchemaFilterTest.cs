@@ -1,6 +1,6 @@
-﻿namespace Framework.AspNetCore.Swagger.Test.SchemaFilters
+﻿namespace Boilerplate.AspNetCore.Swagger.Test.SchemaFilters
 {
-    using Framework.AspNetCore.Swagger.SchemaFilters;
+    using Boilerplate.AspNetCore.Swagger.SchemaFilters;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Newtonsoft.Json.Serialization;

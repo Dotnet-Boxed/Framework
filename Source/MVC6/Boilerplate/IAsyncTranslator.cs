@@ -1,4 +1,4 @@
-﻿namespace Framework
+﻿namespace Boilerplate
 {
     using System.Threading.Tasks;
 

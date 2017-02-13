@@ -1,4 +1,4 @@
-﻿namespace Framework
+﻿namespace Boilerplate
 {
     using System;
     using System.Collections.Generic;

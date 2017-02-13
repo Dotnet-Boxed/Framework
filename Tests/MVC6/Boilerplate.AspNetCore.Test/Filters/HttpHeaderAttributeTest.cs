@@ -1,9 +1,9 @@
-﻿namespace Framework.AspNetCore.Test.Filters
+﻿namespace Boilerplate.AspNetCore.Test.Filters
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Framework.AspNetCore.Filters;
+    using Boilerplate.AspNetCore.Filters;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Abstractions;

@@ -1,4 +1,4 @@
-﻿namespace Framework.AspNetCore.Swagger.SchemaFilters
+﻿namespace Boilerplate.AspNetCore.Swagger.SchemaFilters
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;

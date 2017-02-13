@@ -1,4 +1,4 @@
-﻿namespace Framework.AspNetCore.Filters
+﻿namespace Boilerplate.AspNetCore.Filters
 {
     using System;
     using System.Linq;
@@ -7,7 +7,7 @@
     /// <summary>
     /// Require the X-Request-ID HTTP header to be specified in a request optionally forward it in the response.
     /// </summary>
-    /// <seealso cref="Framework.AspNetCore.Filters.HttpHeaderAttribute" />
+    /// <seealso cref="HttpHeaderAttribute" />
     public class RequestIdHttpHeaderAttribute : HttpHeaderAttribute
     {
         private const string RequestIdHttpHeaderName = "X-Request-ID";

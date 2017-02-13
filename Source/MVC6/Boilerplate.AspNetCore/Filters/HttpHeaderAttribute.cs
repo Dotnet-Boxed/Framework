@@ -1,4 +1,4 @@
-﻿namespace Framework.AspNetCore.Filters
+﻿namespace Boilerplate.AspNetCore.Filters
 {
     using System;
     using System.Linq;

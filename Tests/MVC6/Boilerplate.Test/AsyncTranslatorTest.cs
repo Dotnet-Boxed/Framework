@@ -1,4 +1,4 @@
-﻿namespace Framework.Test.ComponentModel
+﻿namespace Boilerplate.Test.ComponentModel
 {
     using System;
     using System.Collections.Generic;

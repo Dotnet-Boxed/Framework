@@ -1,9 +1,9 @@
-﻿namespace Framework.AspNetCore.Swagger.OperationFilters
+﻿namespace Boilerplate.AspNetCore.Swagger.OperationFilters
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Framework.AspNetCore.Filters;
+    using Boilerplate.AspNetCore.Filters;
     using Swashbuckle.Swagger.Model;
     using Swashbuckle.SwaggerGen.Generator;
 

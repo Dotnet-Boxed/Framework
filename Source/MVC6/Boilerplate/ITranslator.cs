@@ -1,4 +1,4 @@
-﻿namespace Framework
+﻿namespace Boilerplate
 {
     /// <summary>
     /// Translates an object of type <typeparamref name="TSource"/> to <typeparamref name="TDestination"/>.

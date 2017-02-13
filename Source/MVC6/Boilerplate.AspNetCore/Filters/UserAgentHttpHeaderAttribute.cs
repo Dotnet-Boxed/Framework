@@ -1,4 +1,4 @@
-﻿namespace Framework.AspNetCore.Filters
+﻿namespace Boilerplate.AspNetCore.Filters
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -8,7 +8,7 @@
     /// <summary>
     /// Require the User-Agent HTTP header to be specified in a request.
     /// </summary>
-    /// <seealso cref="Framework.AspNetCore.Filters.HttpHeaderAttribute" />
+    /// <seealso cref="HttpHeaderAttribute" />
     public class UserAgentHttpHeaderAttribute : HttpHeaderAttribute
     {
         private const string UserAgentHttpHeaderName = "User-Agent";

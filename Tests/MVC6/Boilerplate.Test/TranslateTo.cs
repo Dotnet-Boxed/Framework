@@ -1,4 +1,4 @@
-﻿namespace Framework.Test
+﻿namespace Boilerplate.Test
 {
     public class TranslateTo
     {
