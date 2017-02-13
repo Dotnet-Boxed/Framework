@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
-    using Framework;
+    using Boilerplate;
     using Xunit;
 
     public class AsyncTranslatorTest
