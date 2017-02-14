@@ -2,13 +2,13 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
-    using Swashbuckle.Swagger.Model;
-    using Swashbuckle.SwaggerGen.Generator;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
     /// Shows an example of a <see cref="ModelStateDictionary"/> containing errors.
     /// </summary>
-    /// <seealso cref="Swashbuckle.SwaggerGen.Generator.ISchemaFilter" />
+    /// <seealso cref="ISchemaFilter" />
     public class ModelStateDictionarySchemaFilter : ISchemaFilter
     {
         /// <summary>

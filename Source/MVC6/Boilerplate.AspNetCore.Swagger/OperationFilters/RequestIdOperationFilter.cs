@@ -4,15 +4,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using Boilerplate.AspNetCore.Filters;
-    using Swashbuckle.Swagger.Model;
-    using Swashbuckle.SwaggerGen.Generator;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
     /// Adds a Swashbuckle <see cref="NonBodyParameter"/> if the action method has a
     /// <see cref="RequestIdHttpHeaderAttribute"/> filter applied to it. It adds a full description of the X-Request-ID
     /// HTTP header and adds a default value.
     /// </summary>
-    /// <seealso cref="Swashbuckle.SwaggerGen.Generator.IOperationFilter" />
+    /// <seealso cref="IOperationFilter" />
     public class RequestIdOperationFilter : IOperationFilter
     {
         /// <summary>

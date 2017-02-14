@@ -1,15 +1,15 @@
 ﻿namespace Boilerplate.AspNetCore.Swagger.SchemaFilters
 {
     using Microsoft.AspNetCore.JsonPatch;
-    using Swashbuckle.Swagger.Model;
-    using Swashbuckle.SwaggerGen.Generator;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
     using Operation = Microsoft.AspNetCore.JsonPatch.Operations.Operation;
 
     /// <summary>
     /// Shows an example of a <see cref="JsonPatchDocument"/> containing all the different patch operations you can do
     /// and a link to http://jsonpatch.com for convenience.
     /// </summary>
-    /// <seealso cref="Swashbuckle.SwaggerGen.Generator.ISchemaFilter" />
+    /// <seealso cref="ISchemaFilter" />
     public class JsonPatchDocumentSchemaFilter : ISchemaFilter
     {
         /// <summary>

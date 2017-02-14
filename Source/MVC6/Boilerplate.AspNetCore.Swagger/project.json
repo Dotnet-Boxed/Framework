@@ -6,7 +6,7 @@
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
 
   "packOptions": {
-    "releaseNotes": "Initial version.",
+    "releaseNotes": "Upgrade to Swashbuckle.AspNetCore.",
     "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
     "tags": [ "ASP.NET", "ASP.NET Core", "MVC", "MVC 6", "Boilerplate", "Muhammad Rehan Saeed", "Framework", "Swagger", "Swashbuckle", "Ahoy" ],
     "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
