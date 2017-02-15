@@ -8,8 +8,8 @@
     using Microsoft.AspNetCore.Mvc.Abstractions;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.AspNetCore.Mvc.Filters;
-    using Swashbuckle.Swagger.Model;
-    using Swashbuckle.SwaggerGen.Generator;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
     using Xunit;
 
     public class RequestIdOperationFilterTest

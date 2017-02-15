@@ -3,8 +3,8 @@
     using Boilerplate.AspNetCore.Swagger.SchemaFilters;
     using Microsoft.AspNetCore.JsonPatch;
     using Newtonsoft.Json.Serialization;
-    using Swashbuckle.Swagger.Model;
-    using Swashbuckle.SwaggerGen.Generator;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
     using Xunit;
     using Operation = Microsoft.AspNetCore.JsonPatch.Operations.Operation;
 

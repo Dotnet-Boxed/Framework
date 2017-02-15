@@ -3,7 +3,7 @@
     using System;
     using System.IO;
     using System.Reflection;
-    using Swashbuckle.SwaggerGen.Application;
+    using Swashbuckle.AspNetCore.SwaggerGen;
     using Xunit;
 
     public class SwaggerGenOptionsExtensionsTest
