@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>2.0.0</VersionPrefix>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
     <Product>ASP.NET Core MVC 6 Boilerplate Framework Swagger</Product>
     <Description>Provides boilerplate framework code for an ASP.NET MVC project implementing Swagger using Swashbuckle. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.</Description>
@@ -23,7 +23,7 @@
     <RepositoryUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>ASP.NET;ASP.NET Core;MVC;MVC 6;Boilerplate;Muhammad Rehan Saeed;Framework;Swagger;Swashbuckle;Ahoy</PackageTags>
-    <PackageReleaseNotes>Upgrade to Swashbuckle.AspNetCore.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added IOperationFilter's to support OAuth.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Label="Project References">
