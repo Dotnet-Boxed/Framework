@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Build">
+    <TargetFrameworks>netstandard1.6;net461</TargetFrameworks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <CodeAnalysisRuleSet>../../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../../Key.snk</AssemblyOriginatorKeyFile>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <VersionPrefix>2.0.0</VersionPrefix>
+    <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
+    <Product>ASP.NET Core MVC 6 Boilerplate Framework Swagger</Product>
+    <Description>Provides boilerplate framework code for an ASP.NET MVC project implementing Swagger using Swashbuckle. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.</Description>
+    <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>ASP.NET;ASP.NET Core;MVC;MVC 6;Boilerplate;Muhammad Rehan Saeed;Framework;Swagger;Swashbuckle;Ahoy</PackageTags>
+    <PackageReleaseNotes>Upgrade to Swashbuckle.AspNetCore.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup Label="Project References">
+    <ProjectReference Include="..\Boilerplate.AspNetCore\Boilerplate.AspNetCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0-rc1" />
+  </ItemGroup>
+
+</Project>
