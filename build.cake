@@ -36,7 +36,7 @@ Task("Restore")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        foreach(var project in GetFiles("./**/*.xproj"))
+        foreach(var project in GetFiles("./**/*.csproj"))
         {
             DotNetCoreBuild(
                 project.GetDirectory().FullPath,
@@ -51,15 +51,15 @@ Task("Test")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        foreach(var project in GetFiles("./Tests/**/*.xproj"))
+        foreach(var project in GetFiles("./Tests/**/*.csproj"))
         {
             DotNetCoreTest(
-                project.GetDirectory().FullPath,
+                project.ToString(),
                 new DotNetCoreTestSettings()
                 {
-                    ArgumentCustomization = args => args
-                        .Append("-xml")
-                        .Append(artifactsDirectory.Path.CombineWithFilePath(project.GetFilenameWithoutExtension()).FullPath + ".xml"),
+                    //ArgumentCustomization = args => args
+                    //    .Append("-xml")
+                    //    .Append(artifactsDirectory.Path.CombineWithFilePath(project.GetFilenameWithoutExtension()).FullPath + ".xml"),
                     Configuration = configuration,
                     NoBuild = true
                 });
@@ -76,7 +76,7 @@ Task("Pack")
             versionSuffix = preReleaseSuffix + "-" + buildNumber.ToString("D4");
         }
 
-        foreach (var project in GetFiles("./Source/**/*.xproj"))
+        foreach (var project in GetFiles("./Source/**/*.csproj"))
         {
             DotNetCorePack(
                 project.GetDirectory().FullPath,
