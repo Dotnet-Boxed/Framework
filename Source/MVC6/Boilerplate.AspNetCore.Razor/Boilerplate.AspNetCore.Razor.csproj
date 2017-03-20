@@ -5,9 +5,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <CodeAnalysisRuleSet>../../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../../Key.snk</AssemblyOriginatorKeyFile>
-    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
@@ -24,6 +21,12 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>ASP.NET;ASP.NET Core;MVC;MVC 6;Boilerplate;Muhammad Rehan Saeed;Framework;Razor</PackageTags>
     <PackageReleaseNotes>Updated to ASP.NET Core 1.1.2.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Signing">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../../Key.snk</AssemblyOriginatorKeyFile>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
