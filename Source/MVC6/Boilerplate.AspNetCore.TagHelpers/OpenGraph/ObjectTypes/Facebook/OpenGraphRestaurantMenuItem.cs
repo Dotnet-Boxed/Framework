@@ -53,7 +53,7 @@
 
             if (this.Variations != null)
             {
-                foreach (OpenGraphMenuItemVariation variation in this.Variations)
+                foreach (var variation in this.Variations)
                 {
                     stringBuilder.AppendMetaPropertyContent("restaurant:variation:name", variation.Name);
                     stringBuilder.AppendMetaPropertyContent("restaurant:variation:price:amount", variation.Price.Amount);

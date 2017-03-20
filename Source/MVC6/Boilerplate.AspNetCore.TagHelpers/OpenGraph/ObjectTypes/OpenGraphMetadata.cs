@@ -99,10 +99,7 @@
         /// <summary>
         /// Gets the audio files which should represent your object within the graph. Use the Media property to add an audio file.
         /// </summary>
-        public IEnumerable<OpenGraphAudio> Audio
-        {
-            get { return this.Media == null ? null : this.Media.OfType<OpenGraphAudio>(); }
-        }
+        public IEnumerable<OpenGraphAudio> Audio => this.Media?.OfType<OpenGraphAudio>();
 
         /// <summary>
         /// Gets or sets a one to two sentence description of your object. Only set this value if it is different from the <![CDATA[<meta name="description" content="blah blah">]]> meta tag. Right now Facebook only displays the first 300 characters of a description.
@@ -141,10 +138,7 @@
         /// <summary>
         /// Gets the images which should represent your object within the graph. Use the Media property to add an image.
         /// </summary>
-        public IEnumerable<OpenGraphImage> Images
-        {
-            get { return this.Media == null ? null : this.Media.OfType<OpenGraphImage>(); }
-        }
+        public IEnumerable<OpenGraphImage> Images => this.Media?.OfType<OpenGraphImage>();
 
         /// <summary>
         /// Gets or sets the locale these tags are marked up in. Of the format language_TERRITORY. Default is en_US.
@@ -204,10 +198,7 @@
         /// <summary>
         /// Gets the videos which should represent your object within the graph. Use the Media property to add a video file.
         /// </summary>
-        public IEnumerable<OpenGraphVideo> Videos
-        {
-            get { return this.Media == null ? null : this.Media.OfType<OpenGraphVideo>(); }
-        }
+        public IEnumerable<OpenGraphVideo> Videos => this.Media?.OfType<OpenGraphVideo>();
 
         /// <summary>
         /// Gets or sets the view context. Workaround for context.Items not working across _Layout.cshtml and
@@ -270,7 +261,7 @@
         /// </returns>
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
             this.ToString(stringBuilder);
             return stringBuilder.ToString();
         }
@@ -302,7 +293,7 @@
             this.MainImage.ToString(stringBuilder);
             if (this.Media != null)
             {
-                foreach (OpenGraphMedia media in this.Media)
+                foreach (var media in this.Media)
                 {
                     media.ToString(stringBuilder);
                 }
@@ -322,7 +313,7 @@
 
                 if (this.AlternateLocales != null)
                 {
-                    foreach (string locale in this.AlternateLocales)
+                    foreach (var locale in this.AlternateLocales)
                     {
                         stringBuilder.AppendMetaPropertyContent("og:locale:alternate", locale);
                     }
@@ -331,7 +322,7 @@
 
             if (this.SeeAlso != null)
             {
-                foreach (string seeAlso in this.SeeAlso)
+                foreach (var seeAlso in this.SeeAlso)
                 {
                     stringBuilder.AppendMetaPropertyContent("og:see_also", seeAlso);
                 }
@@ -339,7 +330,7 @@
 
             if (this.FacebookAdministrators != null)
             {
-                foreach (string facebookAdministrator in this.FacebookAdministrators)
+                foreach (var facebookAdministrator in this.FacebookAdministrators)
                 {
                     stringBuilder.AppendMetaPropertyContentIfNotNull("fb:admins", facebookAdministrator);
                 }

@@ -205,7 +205,7 @@
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:material", this.Material);
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:pattern", this.Pattern);
 
-            foreach (OpenGraphCurrency price in this.Prices)
+            foreach (var price in this.Prices)
             {
                 stringBuilder.AppendMetaPropertyContent("product:price:amount", price.Amount);
                 stringBuilder.AppendMetaPropertyContent("product:price:currency", price.Currency);
@@ -229,7 +229,7 @@
 
             if (this.ShippingCost != null)
             {
-                foreach (OpenGraphCurrency shippingCost in this.ShippingCost)
+                foreach (var shippingCost in this.ShippingCost)
                 {
                     stringBuilder.AppendMetaPropertyContent("product:shipping_cost:amount", shippingCost.Amount);
                     stringBuilder.AppendMetaPropertyContent("product:shipping_cost:currency", shippingCost.Currency);

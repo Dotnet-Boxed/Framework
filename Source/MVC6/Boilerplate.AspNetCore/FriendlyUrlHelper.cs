@@ -67,7 +67,7 @@ public static class FriendlyUrlHelper
         var stringBuilder = new StringBuilder(length);
         char c;
 
-        for (int i = 0; i < length; ++i)
+        for (var i = 0; i < length; ++i)
         {
             c = title[i];
             if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
@@ -92,7 +92,7 @@ public static class FriendlyUrlHelper
             }
             else if (c >= 128)
             {
-                int previousLength = stringBuilder.Length;
+                var previousLength = stringBuilder.Length;
 
                 if (remapToAscii)
                 {
@@ -133,7 +133,7 @@ public static class FriendlyUrlHelper
     /// <returns>The remapped character</returns>
     private static string RemapInternationalCharToAscii(char character)
     {
-        string s = character.ToString().ToLowerInvariant();
+        var s = character.ToString().ToLowerInvariant();
         if ("àåáâäãåąā".Contains(s))
         {
             return "a";

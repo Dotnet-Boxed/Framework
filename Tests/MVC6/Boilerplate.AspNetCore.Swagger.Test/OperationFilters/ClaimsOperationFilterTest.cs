@@ -14,14 +14,14 @@
     using Swashbuckle.AspNetCore.SwaggerGen;
     using Xunit;
 
-    public class OAuth2ClaimsOperationFilterTest
+    public class ClaimsOperationFilterTest
     {
         private readonly ApiDescription apiDescription;
         private readonly Operation operation;
-        private readonly OAuth2ClaimsOperationFilter operationFilter;
+        private readonly ClaimsOperationFilter operationFilter;
         private readonly OperationFilterContext operationFilterContext;
 
-        public OAuth2ClaimsOperationFilterTest()
+        public ClaimsOperationFilterTest()
         {
             this.apiDescription = new ApiDescription()
             {
@@ -34,7 +34,7 @@
             {
                 Responses = new Dictionary<string, Response>()
             };
-            this.operationFilter = new OAuth2ClaimsOperationFilter();
+            this.operationFilter = new ClaimsOperationFilter();
             this.operationFilterContext = new OperationFilterContext(
                 this.apiDescription,
                 new Mock<ISchemaRegistry>().Object);

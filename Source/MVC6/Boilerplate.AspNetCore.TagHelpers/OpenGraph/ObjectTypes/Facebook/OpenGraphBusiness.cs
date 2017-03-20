@@ -70,7 +70,7 @@
 
             if (this.OpeningHours != null)
             {
-                foreach (OpenGraphHours hours in this.OpeningHours)
+                foreach (var hours in this.OpeningHours)
                 {
                     stringBuilder.AppendMetaPropertyContent("business:hours:day", hours.Day.ToLowercaseString());
                     stringBuilder.AppendMetaPropertyContent("business:hours:start", hours.Start.ToString(TimeOfDayFormat));

@@ -280,7 +280,7 @@
 
             if (this.OriginalPrices != null)
             {
-                foreach (OpenGraphCurrency originalPrice in this.OriginalPrices)
+                foreach (var originalPrice in this.OriginalPrices)
                 {
                     stringBuilder.AppendMetaPropertyContent("product:original_price:amount", originalPrice.Amount);
                     stringBuilder.AppendMetaPropertyContent("product:original_price:currency", originalPrice.Currency);
@@ -292,7 +292,7 @@
 
             if (this.PretaxPrices != null)
             {
-                foreach (OpenGraphCurrency pretaxPrice in this.PretaxPrices)
+                foreach (var pretaxPrice in this.PretaxPrices)
                 {
                     stringBuilder.AppendMetaPropertyContent("product:pretax_price:amount", pretaxPrice.Amount);
                     stringBuilder.AppendMetaPropertyContent("product:pretax_price:currency", pretaxPrice.Currency);
@@ -301,7 +301,7 @@
 
             if (this.Prices != null)
             {
-                foreach (OpenGraphCurrency price in this.Prices)
+                foreach (var price in this.Prices)
                 {
                     stringBuilder.AppendMetaPropertyContent("product:price:amount", price.Amount);
                     stringBuilder.AppendMetaPropertyContent("product:price:currency", price.Currency);
@@ -329,7 +329,7 @@
 
             if (this.ShippingCost != null)
             {
-                foreach (OpenGraphCurrency shippingCost in this.ShippingCost)
+                foreach (var shippingCost in this.ShippingCost)
                 {
                     stringBuilder.AppendMetaPropertyContent("product:shipping_cost:amount", shippingCost.Amount);
                     stringBuilder.AppendMetaPropertyContent("product:shipping_cost:currency", shippingCost.Currency);

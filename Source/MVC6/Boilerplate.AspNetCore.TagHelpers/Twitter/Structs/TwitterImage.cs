@@ -11,15 +11,8 @@
         /// Initializes a new instance of the <see cref="TwitterImage"/> class.
         /// </summary>
         /// <param name="imageUrl">The image URL. The Image must be less than 1MB in size.</param>
-        public TwitterImage(string imageUrl)
-        {
-            if (imageUrl == null)
-            {
-                throw new ArgumentNullException(nameof(imageUrl));
-            }
-
-            this.ImageUrl = imageUrl;
-        }
+        public TwitterImage(string imageUrl) =>
+            this.ImageUrl = imageUrl ?? throw new ArgumentNullException(nameof(imageUrl));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TwitterImage"/> class.

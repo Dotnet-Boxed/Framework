@@ -102,10 +102,8 @@
         public static async Task<Collection<TDestination>> TranslateCollection<TSource, TDestination>(
             this IAsyncTranslator<TSource, TDestination> translator,
             IEnumerable<TSource> source)
-            where TDestination : new()
-        {
-            return await TranslateCollection<Collection<TDestination>, TSource, TDestination>(translator, source);
-        }
+            where TDestination : new() =>
+            await TranslateCollection<Collection<TDestination>, TSource, TDestination>(translator, source);
 
         /// <summary>
         /// Translates the collection of <typeparamref name="TSource"/> into a list of
@@ -121,10 +119,8 @@
         public static async Task<List<TDestination>> TranslateList<TSource, TDestination>(
             this IAsyncTranslator<TSource, TDestination> translator,
             IEnumerable<TSource> source)
-            where TDestination : new()
-        {
-            return await TranslateCollection<List<TDestination>, TSource, TDestination>(translator, source);
-        }
+            where TDestination : new() =>
+            await TranslateCollection<List<TDestination>, TSource, TDestination>(translator, source);
 
         /// <summary>
         /// Translates the collection of <typeparamref name="TSource"/> into an observable collection of
@@ -140,10 +136,8 @@
         public static async Task<ObservableCollection<TDestination>> TranslateObservableCollection<TSource, TDestination>(
             this IAsyncTranslator<TSource, TDestination> translator,
             IEnumerable<TSource> source)
-            where TDestination : new()
-        {
-            return await TranslateCollection<ObservableCollection<TDestination>, TSource, TDestination>(translator, source);
-        }
+            where TDestination : new() =>
+            await TranslateCollection<ObservableCollection<TDestination>, TSource, TDestination>(translator, source);
 
         /// <summary>
         /// Translates the collection of <typeparamref name="TSource"/> into an array of
@@ -174,7 +168,7 @@
             var array = new TDestination[source.Count()];
             var tasks = new Task[source.Count()];
 
-            int i = 0;
+            var i = 0;
             foreach (var item in source)
             {
                 var destination = new TDestination();

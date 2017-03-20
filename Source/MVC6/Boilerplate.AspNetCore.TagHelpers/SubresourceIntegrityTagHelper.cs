@@ -104,14 +104,11 @@
         /// </summary>
         /// <param name="url">The URL to the resource.</param>
         /// <returns>A key value for the URL.</returns>
-        protected virtual string GetSriKey(string url)
-        {
-            return "SRI:" + url;
-        }
+        protected virtual string GetSriKey(string url) => "SRI:" + url;
 
         private static IEnumerable<Enum> GetFlags(Enum enumeration)
         {
-            foreach (Enum value in Enum.GetValues(enumeration.GetType()))
+            foreach (var value in (IEnumerable<Enum>)Enum.GetValues(enumeration.GetType()))
             {
                 if (enumeration.HasFlag(value))
                 {
@@ -173,8 +170,8 @@
 
         private static string GetSpaceDelimetedSri(byte[] bytes, SubresourceIntegrityHashAlgorithm hashAlgorithms)
         {
-            List<string> items = new List<string>(3);
-            foreach (SubresourceIntegrityHashAlgorithm hashAlgorithm in GetFlags(hashAlgorithms))
+            var items = new List<string>(3);
+            foreach (var hashAlgorithm in (IEnumerable<SubresourceIntegrityHashAlgorithm>)GetFlags(hashAlgorithms))
             {
                 items.Add(GetSri(bytes, hashAlgorithm));
             }
@@ -199,7 +196,7 @@
             string contentPath,
             SubresourceIntegrityHashAlgorithm hashAlgorithms)
         {
-            string filePath = Path.Combine(
+            var filePath = Path.Combine(
                 this.hostingEnvironment.WebRootPath,
                 this.urlHelper.Content(contentPath).TrimStart('/'));
             var bytes = File.ReadAllBytes(filePath);

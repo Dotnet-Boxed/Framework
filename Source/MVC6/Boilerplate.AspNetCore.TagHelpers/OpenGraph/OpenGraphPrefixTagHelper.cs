@@ -60,7 +60,7 @@
                 // https://github.com/aspnet/Mvc/issues/3233 and https://github.com/aspnet/Razor/issues/564
                 if (this.ViewContext.ViewData.ContainsKey(nameof(OpenGraphPrefixTagHelper)))
                 {
-                    string namespaces = (string)this.ViewContext.ViewData[nameof(OpenGraphPrefixTagHelper)];
+                    var namespaces = (string)this.ViewContext.ViewData[nameof(OpenGraphPrefixTagHelper)];
                     output.Attributes.Add(PrefixAttributeName, namespaces);
                 }
 

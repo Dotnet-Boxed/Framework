@@ -12,7 +12,7 @@
         {
             var policyRequirements = new List<IAuthorizationRequirement>();
 
-            for (int i = filterDescriptors.Count - 1; i >= 0; --i)
+            for (var i = filterDescriptors.Count - 1; i >= 0; --i)
             {
                 var filterDescriptor = filterDescriptors[i];
                 if (filterDescriptor.Filter is AllowAnonymousFilter)
@@ -20,8 +20,7 @@
                     break;
                 }
 
-                var authorizeFilter = filterDescriptor.Filter as AuthorizeFilter;
-                if (authorizeFilter != null)
+                if (filterDescriptor.Filter is AuthorizeFilter authorizeFilter)
                 {
                     policyRequirements.AddRange(authorizeFilter.Policy.Requirements);
                 }

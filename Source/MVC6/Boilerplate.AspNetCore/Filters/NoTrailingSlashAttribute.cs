@@ -45,9 +45,7 @@
         /// Handles HTTP requests that have a trailing slash but are not meant to.
         /// </summary>
         /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
-        protected virtual void HandleTrailingSlashRequest(ResourceExecutingContext context)
-        {
+        protected virtual void HandleTrailingSlashRequest(ResourceExecutingContext context) =>
             context.Result = new NotFoundResult();
-        }
     }
 }

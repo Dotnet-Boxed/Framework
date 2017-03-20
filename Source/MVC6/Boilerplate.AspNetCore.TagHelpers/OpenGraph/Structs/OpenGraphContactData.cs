@@ -17,30 +17,10 @@
         /// <exception cref="System.ArgumentNullException">streetAddress or locality or postalCode or country is <c>null.</c>.</exception>
         public OpenGraphContactData(string streetAddress, string locality, string postalCode, string country)
         {
-            if (streetAddress == null)
-            {
-                throw new ArgumentNullException(nameof(streetAddress));
-            }
-
-            if (locality == null)
-            {
-                throw new ArgumentNullException(nameof(locality));
-            }
-
-            if (postalCode == null)
-            {
-                throw new ArgumentNullException(nameof(postalCode));
-            }
-
-            if (country == null)
-            {
-                throw new ArgumentNullException(nameof(country));
-            }
-
-            this.Country = country;
-            this.Locality = locality;
-            this.PostalCode = postalCode;
-            this.StreetAddress = streetAddress;
+            this.Country = country ?? throw new ArgumentNullException(nameof(country));
+            this.Locality = locality ?? throw new ArgumentNullException(nameof(locality));
+            this.PostalCode = postalCode ?? throw new ArgumentNullException(nameof(postalCode));
+            this.StreetAddress = streetAddress ?? throw new ArgumentNullException(nameof(streetAddress));
         }
 
         /// <summary>

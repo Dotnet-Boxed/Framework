@@ -40,7 +40,7 @@
         /// <returns>A collection of XML sitemap documents.</returns>
         protected virtual List<string> GetSitemapDocuments(IReadOnlyCollection<SitemapNode> sitemapNodes)
         {
-            int sitemapCount = (int)Math.Ceiling(sitemapNodes.Count / (double)MaximumSitemapNodeCount);
+            var sitemapCount = (int)Math.Ceiling(sitemapNodes.Count / (double)MaximumSitemapNodeCount);
             this.CheckSitemapCount(sitemapCount);
             var sitemaps = Enumerable
                 .Range(0, sitemapCount)
@@ -51,17 +51,17 @@
                             sitemapNodes.Skip(x * MaximumSitemapNodeCount).Take(MaximumSitemapNodeCount));
                     });
 
-            List<string> sitemapDocuments = new List<string>(sitemapCount);
+            var sitemapDocuments = new List<string>(sitemapCount);
 
             if (sitemapCount > 1)
             {
-                string xml = this.GetSitemapIndexDocument(sitemaps);
+                var xml = this.GetSitemapIndexDocument(sitemaps);
                 sitemapDocuments.Add(xml);
             }
 
-            foreach (KeyValuePair<int, IEnumerable<SitemapNode>> sitemap in sitemaps)
+            foreach (var sitemap in sitemaps)
             {
-                string xml = this.GetSitemapDocument(sitemap.Value);
+                var xml = this.GetSitemapDocument(sitemap.Value);
                 sitemapDocuments.Add(xml);
             }
 
@@ -95,7 +95,7 @@
             var xmlns = XNamespace.Get(SitemapsNamespace);
             var root = new XElement(xmlns + "sitemapindex");
 
-            foreach (KeyValuePair<int, IEnumerable<SitemapNode>> sitemap in sitemaps)
+            foreach (var sitemap in sitemaps)
             {
                 // Get the latest LastModified DateTime from the sitemap nodes or null if there is none.
                 var lastModified = sitemap.Value
@@ -133,7 +133,7 @@
             var xmlns = XNamespace.Get(SitemapsNamespace);
             var root = new XElement(xmlns + "urlset");
 
-            foreach (SitemapNode sitemapNode in sitemapNodes)
+            foreach (var sitemapNode in sitemapNodes)
             {
                 var lastModifiedElement = sitemapNode.LastModified.HasValue ?
                     new XElement(

@@ -15,19 +15,15 @@
         /// Initializes a new instance of the <see cref="HttpException" /> class.
         /// </summary>
         /// <param name="httpStatusCode">The HTTP status code.</param>
-        public HttpException(int httpStatusCode)
-        {
+        public HttpException(int httpStatusCode) =>
             this.httpStatusCode = httpStatusCode;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
         /// </summary>
         /// <param name="httpStatusCode">The HTTP status code.</param>
-        public HttpException(HttpStatusCode httpStatusCode)
-        {
+        public HttpException(HttpStatusCode httpStatusCode) =>
             this.httpStatusCode = (int)httpStatusCode;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
@@ -35,10 +31,8 @@
         /// <param name="httpStatusCode">The HTTP status code.</param>
         /// <param name="message">The exception message.</param>
         public HttpException(int httpStatusCode, string message)
-            : base(message)
-        {
+            : base(message) =>
             this.httpStatusCode = httpStatusCode;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
@@ -46,10 +40,8 @@
         /// <param name="httpStatusCode">The HTTP status code.</param>
         /// <param name="message">The exception message.</param>
         public HttpException(HttpStatusCode httpStatusCode, string message)
-            : base(message)
-        {
+            : base(message) =>
             this.httpStatusCode = (int)httpStatusCode;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
@@ -58,10 +50,8 @@
         /// <param name="message">The exception message.</param>
         /// <param name="inner">The inner exception.</param>
         public HttpException(int httpStatusCode, string message, Exception inner)
-            : base(message, inner)
-        {
+            : base(message, inner) =>
             this.httpStatusCode = httpStatusCode;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
@@ -70,10 +60,8 @@
         /// <param name="message">The exception message.</param>
         /// <param name="inner">The inner exception.</param>
         public HttpException(HttpStatusCode httpStatusCode, string message, Exception inner)
-            : base(message, inner)
-        {
+            : base(message, inner) =>
             this.httpStatusCode = (int)httpStatusCode;
-        }
 
         /// <summary>
         /// Gets the HTTP status code.

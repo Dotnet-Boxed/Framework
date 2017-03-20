@@ -19,7 +19,7 @@
         /// </returns>
         public static string ToString(this XDocument document, Encoding encoding)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
 
             using (StringWriter stringWriter = new StringWriterWithEncoding(stringBuilder, encoding))
             {

@@ -94,10 +94,8 @@
         public static Collection<TDestination> TranslateCollection<TSource, TDestination>(
             this ITranslator<TSource, TDestination> translator,
             IEnumerable<TSource> source)
-            where TDestination : new()
-        {
-            return TranslateCollection<Collection<TDestination>, TSource, TDestination>(translator, source);
-        }
+            where TDestination : new() =>
+            TranslateCollection<Collection<TDestination>, TSource, TDestination>(translator, source);
 
         /// <summary>
         /// Translates the collection of <typeparamref name="TSource"/> into a list of
@@ -113,10 +111,8 @@
         public static List<TDestination> TranslateList<TSource, TDestination>(
             this ITranslator<TSource, TDestination> translator,
             IEnumerable<TSource> source)
-            where TDestination : new()
-        {
-            return TranslateCollection<List<TDestination>, TSource, TDestination>(translator, source);
-        }
+            where TDestination : new() =>
+            TranslateCollection<List<TDestination>, TSource, TDestination>(translator, source);
 
         /// <summary>
         /// Translates the collection of <typeparamref name="TSource"/> into an observable collection of
@@ -132,10 +128,8 @@
         public static ObservableCollection<TDestination> TranslateObservableCollection<TSource, TDestination>(
             this ITranslator<TSource, TDestination> translator,
             IEnumerable<TSource> source)
-            where TDestination : new()
-        {
-            return TranslateCollection<ObservableCollection<TDestination>, TSource, TDestination>(translator, source);
-        }
+            where TDestination : new() =>
+            TranslateCollection<ObservableCollection<TDestination>, TSource, TDestination>(translator, source);
 
         /// <summary>
         /// Translates the collection of <typeparamref name="TSource"/> into an array of
@@ -165,7 +159,7 @@
 
             var array = new TDestination[source.Count()];
 
-            int i = 0;
+            var i = 0;
             foreach (var item in source)
             {
                 var destination = new TDestination();

@@ -91,7 +91,7 @@
         /// </returns>
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
             this.ToString(stringBuilder);
             return stringBuilder.ToString();
         }

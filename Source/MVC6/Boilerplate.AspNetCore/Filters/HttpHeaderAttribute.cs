@@ -95,10 +95,7 @@
         /// </summary>
         /// <param name="headerValues">The header values.</param>
         /// <returns><c>true</c> if the specified HTTP header values are valid; otherwise, <c>false</c>.</returns>
-        public virtual bool IsValid(StringValues headerValues)
-        {
-            return true;
-        }
+        public virtual bool IsValid(StringValues headerValues) => true;
 
         private static void LogInformation(ActionExecutingContext context, string message)
         {

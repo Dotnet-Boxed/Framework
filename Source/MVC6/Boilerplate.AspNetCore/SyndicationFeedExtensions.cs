@@ -21,21 +21,17 @@ namespace Boilerplate.AspNetCore
         /// <param name="feed">The syndication feed.</param>
         /// <param name="namespacePrefix">The namespace prefix.</param>
         /// <param name="xmlNamespace">The XML namespace.</param>
-        public static void AddNamespace(this SyndicationFeed feed, string namespacePrefix, string xmlNamespace)
-        {
+        public static void AddNamespace(this SyndicationFeed feed, string namespacePrefix, string xmlNamespace) =>
             feed.AttributeExtensions.Add(
                 new XmlQualifiedName(namespacePrefix, XNamespace.Xmlns.ToString()),
                 xmlNamespace);
-        }
 
         /// <summary>
         /// Adds the yahoo media namespace to the specified feed.
         /// </summary>
         /// <param name="feed">The syndication feed.</param>
-        public static void AddYahooMediaNamespace(this SyndicationFeed feed)
-        {
+        public static void AddYahooMediaNamespace(this SyndicationFeed feed) =>
             AddNamespace(feed, YahooMediaNamespacePrefix, YahooMediaNamespace);
-        }
 
         /// <summary>
         /// Gets the icon URL for the feed.
@@ -44,7 +40,7 @@ namespace Boilerplate.AspNetCore
         /// <returns>The icon URL.</returns>
         public static string GetIcon(this SyndicationFeed feed)
         {
-            SyndicationElementExtension iconExtension = feed.ElementExtensions.FirstOrDefault(
+            var iconExtension = feed.ElementExtensions.FirstOrDefault(
                 x => string.Equals(x.OuterName, "icon", StringComparison.OrdinalIgnoreCase));
             return iconExtension.GetObject<string>();
         }
@@ -54,10 +50,8 @@ namespace Boilerplate.AspNetCore
         /// </summary>
         /// <param name="feed">The syndication feed.</param>
         /// <param name="iconUrl">The icon URL.</param>
-        public static void SetIcon(this SyndicationFeed feed, string iconUrl)
-        {
+        public static void SetIcon(this SyndicationFeed feed, string iconUrl) =>
             feed.ElementExtensions.Add(new SyndicationElementExtension("icon", null, iconUrl));
-        }
 
         /// <summary>
         /// Sets the Yahoo Media thumbnail for the feed entry.

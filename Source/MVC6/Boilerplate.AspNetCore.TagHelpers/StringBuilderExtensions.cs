@@ -94,7 +94,7 @@
             string property,
             IEnumerable<T> content)
         {
-            foreach (T item in content)
+            foreach (var item in content)
             {
                 stringBuilder.AppendMetaPropertyContent(property, item);
             }

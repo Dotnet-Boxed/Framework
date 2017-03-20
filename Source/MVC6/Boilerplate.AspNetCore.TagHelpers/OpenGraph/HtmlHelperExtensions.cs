@@ -14,10 +14,8 @@
         /// <param name="htmlHelper">The HTML helper.</param>
         /// <param name="openGraphMetadata">The open graph metadata.</param>
         /// <returns>The meta tags.</returns>
-        public static HtmlString OpenGraph(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
-        {
-            return new HtmlString(openGraphMetadata.ToString());
-        }
+        public static HtmlString OpenGraph(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata) =>
+            new HtmlString(openGraphMetadata.ToString());
 
         /// <summary>
         /// Creates a <see cref="string"/> representing the Open Graph, Facebook and object namespaces. The namespaces are added to the HTML head element.
@@ -25,9 +23,7 @@
         /// <param name="htmlHelper">The HTML helper.</param>
         /// <param name="openGraphMetadata">The open graph metadata.</param>
         /// <returns>The Open Graph namespaces.</returns>
-        public static HtmlString OpenGraphNamespace(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
-        {
-            return new HtmlString("prefix=\"" + openGraphMetadata.GetNamespaces() + "\"");
-        }
+        public static HtmlString OpenGraphNamespace(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata) =>
+            new HtmlString("prefix=\"" + openGraphMetadata.GetNamespaces() + "\"");
     }
 }

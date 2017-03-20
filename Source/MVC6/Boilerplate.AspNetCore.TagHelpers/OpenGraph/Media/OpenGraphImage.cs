@@ -30,10 +30,8 @@
         /// a file extension, otherwise it is recommended.</param>
         /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="imageUrl"/> is <c>null</c>.</exception>
         public OpenGraphImage(string imageUrl, string type)
-            : this(imageUrl)
-        {
+            : this(imageUrl) =>
             this.Type = type;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphImage"/> class.

@@ -12,15 +12,8 @@
         /// </summary>
         /// <param name="actorUrl">The URL to the page about the actor. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="actorUrl"/> is <c>null</c>.</exception>
-        public OpenGraphActor(string actorUrl)
-        {
-            if (actorUrl == null)
-            {
-                throw new ArgumentNullException(nameof(actorUrl));
-            }
-
-            this.ActorUrl = actorUrl;
-        }
+        public OpenGraphActor(string actorUrl) =>
+            this.ActorUrl = actorUrl ?? throw new ArgumentNullException(nameof(actorUrl));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphActor"/> class.
@@ -29,10 +22,8 @@
         /// <param name="role">The role the actor played.</param>
         /// <exception cref="ArgumentNullException"><paramref name="actorUrl"/> is <c>null</c>.</exception>
         public OpenGraphActor(string actorUrl, string role)
-            : this(actorUrl)
-        {
+            : this(actorUrl) =>
             this.Role = role;
-        }
 
         /// <summary>
         /// Gets the URL to the page about the actor. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.

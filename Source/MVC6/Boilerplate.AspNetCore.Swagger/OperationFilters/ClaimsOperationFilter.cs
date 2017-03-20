@@ -7,10 +7,10 @@
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
-    /// Adds OAuth2 claims from any authorization policy's <see cref="ClaimsAuthorizationRequirement"/>'s.
+    /// Adds claims from any authorization policy's <see cref="ClaimsAuthorizationRequirement"/>'s.
     /// </summary>
     /// <seealso cref="IOperationFilter" />
-    public class OAuth2ClaimsOperationFilter : IOperationFilter
+    public class ClaimsOperationFilter : IOperationFilter
     {
         /// <summary>
         /// Applies the specified operation.
@@ -26,12 +26,13 @@
                 .Select(x => x.ClaimType);
             if (claimTypes.Any())
             {
-                operation.Security = new List<IDictionary<string, IEnumerable<string>>>();
-                operation.Security.Add(
+                operation.Security = new List<IDictionary<string, IEnumerable<string>>>()
+                {
                     new Dictionary<string, IEnumerable<string>>()
                     {
-                            { "oauth2", claimTypes }
-                    });
+                        { "oauth2", claimTypes }
+                    }
+                };
             }
         }
     }

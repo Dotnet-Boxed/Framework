@@ -16,13 +16,8 @@
         /// <exception cref="System.ArgumentNullException">values</exception>
         public OpenGraphSplit(bool isMiles, IEnumerable<OpenGraphQuantity> values)
         {
-            if (values == null)
-            {
-                throw new ArgumentNullException(nameof(values));
-            }
-
             this.IsMiles = isMiles;
-            this.Values = values;
+            this.Values = values ?? throw new ArgumentNullException(nameof(values));
         }
 
         /// <summary>

@@ -121,7 +121,7 @@
 
             if (this.Metrics != null)
             {
-                foreach (OpenGraphFitnessActivityDataPoint metric in this.Metrics)
+                foreach (var metric in this.Metrics)
                 {
                     stringBuilder.AppendMetaPropertyContentIfNotNull("fitness:metrics:calories", metric.Calories);
 
@@ -176,10 +176,10 @@
 
             if (this.Splits != null)
             {
-                foreach (OpenGraphSplit split in this.Splits)
+                foreach (var split in this.Splits)
                 {
                     stringBuilder.AppendMetaPropertyContent("fitness:splits:unit", split.IsMiles ? "mi" : "km");
-                    foreach (OpenGraphQuantity value in split.Values)
+                    foreach (var value in split.Values)
                     {
                         stringBuilder.AppendMetaPropertyContent("fitness:splits:values:value", value.Value);
                         stringBuilder.AppendMetaPropertyContent("fitness:splits:values:units", value.Units);

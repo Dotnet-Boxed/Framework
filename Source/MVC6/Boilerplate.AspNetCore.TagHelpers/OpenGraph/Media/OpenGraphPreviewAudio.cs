@@ -25,10 +25,8 @@
         /// a file extension, otherwise it is recommended.</param>
         /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="mediaUrl"/> is <c>null</c>.</exception>
         public OpenGraphPreviewAudio(string mediaUrl, string type)
-            : this(mediaUrl)
-        {
+            : this(mediaUrl) =>
             this.Type = type;
-        }
 
         /// <summary>
         /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.

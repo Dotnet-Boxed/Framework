@@ -37,8 +37,7 @@
                     .Select(
                         x =>
                         {
-                            ProductInfoHeaderValue productInfo;
-                            var parsed = ProductInfoHeaderValue.TryParse(x, out productInfo);
+                            var parsed = ProductInfoHeaderValue.TryParse(x, out ProductInfoHeaderValue productInfo);
                             return new
                             {
                                 Parsed = parsed,
@@ -60,7 +59,7 @@
         {
             var inComment = false;
             var startIndex = 0;
-            for (int i = 0; i < value.Length; ++i)
+            for (var i = 0; i < value.Length; ++i)
             {
                 var c = value[i];
 

@@ -15,13 +15,8 @@
         /// <exception cref="System.ArgumentNullException">currency is <c>null</c>.</exception>
         public OpenGraphCurrency(double amount, string currency)
         {
-            if (currency == null)
-            {
-                throw new ArgumentNullException(nameof(currency));
-            }
-
             this.Amount = amount;
-            this.Currency = currency;
+            this.Currency = currency ?? throw new ArgumentNullException(nameof(currency));
         }
 
         /// <summary>

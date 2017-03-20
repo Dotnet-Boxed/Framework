@@ -75,7 +75,7 @@
 
             if (this.Categories != null)
             {
-                foreach (string category in this.Categories)
+                foreach (var category in this.Categories)
                 {
                     stringBuilder.AppendMetaPropertyContent("restaurant:category", category);
                 }
@@ -96,7 +96,7 @@
 
             if (this.MenuUrls != null)
             {
-                foreach (string menuUrl in this.MenuUrls)
+                foreach (var menuUrl in this.MenuUrls)
                 {
                     stringBuilder.AppendMetaPropertyContent("restaurant:menu", menuUrl);
                 }

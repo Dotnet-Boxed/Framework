@@ -31,9 +31,8 @@
             }
         }
 
-        private static Operation[] GetExample()
-        {
-            return new Operation[]
+        private static Operation[] GetExample() =>
+            new Operation[]
             {
                 new Operation()
                 {
@@ -83,6 +82,5 @@
                     value = "Replace Last Array Item"
                 }
             };
-        }
     }
 }

@@ -54,10 +54,7 @@
         /// <value>
         /// <c>true</c> if appending trailing slashes; otherwise, strip trailing slashes.
         /// </value>
-        public bool AppendTrailingSlash
-        {
-            get { return this.appendTrailingSlash; }
-        }
+        public bool AppendTrailingSlash => this.appendTrailingSlash;
 
         /// <summary>
         /// Gets a value indicating whether to lower-case all URL's.
@@ -65,10 +62,7 @@
         /// <value>
         /// <c>true</c> if lower-casing URL's; otherwise, <c>false</c>.
         /// </value>
-        public bool LowercaseUrls
-        {
-            get { return this.lowercaseUrls; }
-        }
+        public bool LowercaseUrls => this.lowercaseUrls;
 
         /// <summary>
         /// Executes the resource filter. Called before execution of the remainder of the pipeline. Determines whether
@@ -80,8 +74,7 @@
         {
             if (string.Equals(context.HttpContext.Request.Method, "GET", StringComparison.Ordinal))
             {
-                string canonicalUrl;
-                if (!this.TryGetCanonicalUrl(context, out canonicalUrl))
+                if (!this.TryGetCanonicalUrl(context, out string canonicalUrl))
                 {
                     this.HandleNonCanonicalRequest(context, canonicalUrl);
                 }
@@ -104,7 +97,7 @@
         /// <returns><c>true</c> if the URL is canonical, otherwise <c>false</c>.</returns>
         protected virtual bool TryGetCanonicalUrl(ResourceExecutingContext context, out string canonicalUrl)
         {
-            bool isCanonical = true;
+            var isCanonical = true;
 
             var request = context.HttpContext.Request;
 
@@ -112,7 +105,7 @@
             // if there is a trailing slash or not. Both will be treated as the same by search engines.
             if (request.Path.HasValue && (request.Path.Value.Length > 1))
             {
-                bool hasTrailingSlash = request.Path.Value[request.Path.Value.Length - 1] == SlashCharacter;
+                var hasTrailingSlash = request.Path.Value[request.Path.Value.Length - 1] == SlashCharacter;
 
                 if (this.appendTrailingSlash)
                 {
@@ -135,7 +128,7 @@
 
                 if (this.lowercaseUrls && !this.HasAttribute<NoTrailingSlashAttribute>(context))
                 {
-                    foreach (char character in request.Path.Value)
+                    foreach (var character in request.Path.Value)
                     {
                         if (char.IsUpper(character))
                         {
@@ -147,7 +140,7 @@
 
                     if (request.QueryString.HasValue && !this.HasAttribute<NoLowercaseQueryStringAttribute>(context))
                     {
-                        foreach (char character in request.QueryString.Value)
+                        foreach (var character in request.QueryString.Value)
                         {
                             if (char.IsUpper(character))
                             {
@@ -177,10 +170,8 @@
         /// </summary>
         /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
         /// <param name="canonicalUrl">The canonical URL.</param>
-        protected virtual void HandleNonCanonicalRequest(ResourceExecutingContext context, string canonicalUrl)
-        {
+        protected virtual void HandleNonCanonicalRequest(ResourceExecutingContext context, string canonicalUrl) =>
             context.Result = new RedirectResult(canonicalUrl, true);
-        }
 
         /// <summary>
         /// Determines whether the specified action or its controller has the attribute with the specified type
@@ -191,7 +182,7 @@
         /// <returns><c>true</c> if a <typeparamref name="T"/> attribute is specified, otherwise <c>false</c>.</returns>
         protected virtual bool HasAttribute<T>(ResourceExecutingContext context)
         {
-            foreach (IFilterMetadata filterMetadata in context.Filters)
+            foreach (var filterMetadata in context.Filters)
             {
                 if (filterMetadata is T)
                 {

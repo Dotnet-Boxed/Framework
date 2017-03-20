@@ -53,7 +53,7 @@
 
             if (this.SectionUrls != null)
             {
-                foreach (string sectionUrl in this.SectionUrls)
+                foreach (var sectionUrl in this.SectionUrls)
                 {
                     stringBuilder.AppendMetaPropertyContent("restaurant:section", sectionUrl);
                 }

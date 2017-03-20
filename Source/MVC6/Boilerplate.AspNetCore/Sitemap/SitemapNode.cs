@@ -14,15 +14,8 @@
         /// Initializes a new instance of the <see cref="SitemapNode"/> class.
         /// </summary>
         /// <param name="url">The URL of the page.</param>
-        public SitemapNode(string url)
-        {
-            if (url == null)
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
-
-            this.url = url;
-        }
+        public SitemapNode(string url) =>
+            this.url = url ?? throw new ArgumentNullException(nameof(url));
 
         /// <summary>
         /// Gets or sets how frequently the page is likely to change. This value provides general information to search
@@ -63,10 +56,7 @@
         /// <value>The priority.</value>
         public double? Priority
         {
-            get
-            {
-                return this.priority;
-            }
+            get => this.priority;
 
             set
             {
@@ -91,9 +81,6 @@
         /// <value>
         /// The URL of the page.
         /// </value>
-        public string Url
-        {
-            get { return this.url; }
-        }
+        public string Url => this.url;
     }
 }

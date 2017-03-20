@@ -21,10 +21,7 @@ namespace Boilerplate.AspNetCore
         /// Initializes a new instance of the <see cref="AtomActionResult"/> class.
         /// </summary>
         /// <param name="syndicationFeed">The Atom 1.0 <see cref="SyndicationFeed" />.</param>
-        public AtomActionResult(SyndicationFeed syndicationFeed)
-        {
-            this.syndicationFeed = syndicationFeed;
-        }
+        public AtomActionResult(SyndicationFeed syndicationFeed) => this.syndicationFeed = syndicationFeed;
 
         /// <summary>
         /// Executes the call to the ActionResult method and returns the created feed to the output response.
@@ -34,9 +31,11 @@ namespace Boilerplate.AspNetCore
         public override void ExecuteResult(ActionContext context)
         {
             context.HttpContext.Response.ContentType = ContentType.Atom;
-            Atom10FeedFormatter feedFormatter = new Atom10FeedFormatter(this.syndicationFeed);
-            XmlWriterSettings xmlWriterSettings = new XmlWriterSettings();
-            xmlWriterSettings.Encoding = Encoding.UTF8;
+            var feedFormatter = new Atom10FeedFormatter(this.syndicationFeed);
+            var xmlWriterSettings = new XmlWriterSettings()
+            {
+                Encoding = Encoding.UTF8
+            };
 
             var hostingEnvironment = context
                 .HttpContext
@@ -51,7 +50,7 @@ namespace Boilerplate.AspNetCore
                 xmlWriterSettings.Indent = true;
             }
 
-            using (XmlWriter xmlWriter = XmlWriter.Create(context.HttpContext.Response.Body, xmlWriterSettings))
+            using (var xmlWriter = XmlWriter.Create(context.HttpContext.Response.Body, xmlWriterSettings))
             {
                 feedFormatter.WriteTo(xmlWriter);
             }

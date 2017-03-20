@@ -52,10 +52,8 @@
         /// Initializes a new instance of the <see cref="StringWriterWithEncoding"/> class.
         /// </summary>
         /// <param name="encoding">The encoding.</param>
-        public StringWriterWithEncoding(Encoding encoding)
-        {
-            this.encoding = encoding;
-        }
+        public StringWriterWithEncoding(Encoding encoding) =>
+            this.encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringWriterWithEncoding"/> class.
@@ -63,10 +61,8 @@
         /// <param name="formatProvider">The format provider.</param>
         /// <param name="encoding">The encoding.</param>
         public StringWriterWithEncoding(IFormatProvider formatProvider, Encoding encoding)
-            : base(formatProvider)
-        {
-            this.encoding = encoding;
-        }
+            : base(formatProvider) =>
+            this.encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringWriterWithEncoding"/> class.
@@ -74,10 +70,8 @@
         /// <param name="stringBuilder">The string builder to write to.</param>
         /// <param name="encoding">The encoding.</param>
         public StringWriterWithEncoding(StringBuilder stringBuilder, Encoding encoding)
-            : base(stringBuilder)
-        {
-            this.encoding = encoding;
-        }
+            : base(stringBuilder) =>
+            this.encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringWriterWithEncoding"/> class.
@@ -86,17 +80,12 @@
         /// <param name="formatProvider">The format provider.</param>
         /// <param name="encoding">The encoding.</param>
         public StringWriterWithEncoding(StringBuilder stringBuilder, IFormatProvider formatProvider, Encoding encoding)
-            : base(stringBuilder, formatProvider)
-        {
-            this.encoding = encoding;
-        }
+            : base(stringBuilder, formatProvider) =>
+            this.encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
 
         /// <summary>
         /// Gets the <see cref="T:System.Text.Encoding" /> in which the output is written.
         /// </summary>
-        public override Encoding Encoding
-        {
-            get { return this.encoding == null ? base.Encoding : this.encoding; }
-        }
+        public override Encoding Encoding => this.encoding ?? base.Encoding;
     }
 }

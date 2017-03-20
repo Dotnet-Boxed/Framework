@@ -12,11 +12,6 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="NoCacheAttribute"/> class.
         /// </summary>
-        public NoCacheAttribute()
-        {
-            // Duration = 0 by default.
-            // VaryByParam = "*" by default.
-            this.NoStore = true;
-        }
+        public NoCacheAttribute() => this.NoStore = true; // Duration = 0 and VaryByParam = "*" by default.
     }
 }

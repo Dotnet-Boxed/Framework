@@ -25,11 +25,7 @@
         /// </summary>
         /// <param name="headerValues">The header values.</param>
         /// <returns><c>true</c> if the X-Request-ID HTTP header values are valid; otherwise, <c>false</c>.</returns>
-        public override bool IsValid(StringValues headerValues)
-        {
-            Guid guid;
-            return !StringValues.IsNullOrEmpty(headerValues) &&
-                headerValues.All(x => Guid.TryParse(x, out guid));
-        }
+        public override bool IsValid(StringValues headerValues) =>
+            !StringValues.IsNullOrEmpty(headerValues) && headerValues.All(x => Guid.TryParse(x, out Guid guid));
     }
 }

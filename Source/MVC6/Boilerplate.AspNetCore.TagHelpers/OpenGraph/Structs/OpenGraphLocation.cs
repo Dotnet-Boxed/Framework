@@ -23,10 +23,8 @@
         /// <param name="longitude">The longitude of the location.</param>
         /// <param name="altitude">The altitude of the location.</param>
         public OpenGraphLocation(double latitude, double longitude, double altitude)
-            : this(latitude, longitude)
-        {
+            : this(latitude, longitude) =>
             this.Altitude = altitude;
-        }
 
         /// <summary>
         /// Gets the altitude of the location.

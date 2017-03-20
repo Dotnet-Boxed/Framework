@@ -10,10 +10,7 @@
     {
         private readonly RequestDelegate next;
 
-        public HttpExceptionMiddleware(RequestDelegate next)
-        {
-            this.next = next;
-        }
+        public HttpExceptionMiddleware(RequestDelegate next) => this.next = next;
 
         public async Task Invoke(HttpContext context)
         {

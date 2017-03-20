@@ -15,12 +15,7 @@
         /// <exception cref="System.ArgumentNullException">units</exception>
         public OpenGraphQuantity(double value, string units)
         {
-            if (units == null)
-            {
-                throw new ArgumentNullException(nameof(units));
-            }
-
-            this.Units = units;
+            this.Units = units ?? throw new ArgumentNullException(nameof(units));
             this.Value = value;
         }
 

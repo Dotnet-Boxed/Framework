@@ -1,4 +1,4 @@
-namespace Boilerplate.AspNetCore.Caching
+﻿namespace Boilerplate.AspNetCore.Caching
 {
     using System;
     using System.IO;
@@ -38,7 +38,7 @@ namespace Boilerplate.AspNetCore.Caching
                 return null;
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            using (var memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
                 return binaryReader.ReadBoolean();
@@ -71,7 +71,7 @@ namespace Boilerplate.AspNetCore.Caching
                 return null;
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            using (var memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
                 return binaryReader.ReadChar();
@@ -104,7 +104,7 @@ namespace Boilerplate.AspNetCore.Caching
                 return null;
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            using (var memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
                 return binaryReader.ReadDecimal();
@@ -137,7 +137,7 @@ namespace Boilerplate.AspNetCore.Caching
                 return null;
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            using (var memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
                 return binaryReader.ReadDouble();
@@ -170,7 +170,7 @@ namespace Boilerplate.AspNetCore.Caching
                 return null;
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            using (var memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
                 return binaryReader.ReadInt16();
@@ -203,7 +203,7 @@ namespace Boilerplate.AspNetCore.Caching
                 return null;
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            using (var memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
                 return binaryReader.ReadInt32();
@@ -236,7 +236,7 @@ namespace Boilerplate.AspNetCore.Caching
                 return null;
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            using (var memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
                 return binaryReader.ReadInt64();
@@ -269,7 +269,7 @@ namespace Boilerplate.AspNetCore.Caching
                 return null;
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            using (var memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
                 return binaryReader.ReadSingle();
@@ -379,9 +379,9 @@ namespace Boilerplate.AspNetCore.Caching
             }
 
             byte[] bytes;
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
-                BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+                var binaryWriter = new BinaryWriter(memoryStream);
                 binaryWriter.Write(value);
                 bytes = memoryStream.ToArray();
             }
@@ -420,9 +420,9 @@ namespace Boilerplate.AspNetCore.Caching
             }
 
             byte[] bytes;
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
-                BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+                var binaryWriter = new BinaryWriter(memoryStream);
                 binaryWriter.Write(value);
                 bytes = memoryStream.ToArray();
             }
@@ -461,9 +461,9 @@ namespace Boilerplate.AspNetCore.Caching
             }
 
             byte[] bytes;
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
-                BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+                var binaryWriter = new BinaryWriter(memoryStream);
                 binaryWriter.Write(value);
                 bytes = memoryStream.ToArray();
             }
@@ -502,9 +502,9 @@ namespace Boilerplate.AspNetCore.Caching
             }
 
             byte[] bytes;
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
-                BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+                var binaryWriter = new BinaryWriter(memoryStream);
                 binaryWriter.Write(value);
                 bytes = memoryStream.ToArray();
             }
@@ -543,9 +543,9 @@ namespace Boilerplate.AspNetCore.Caching
             }
 
             byte[] bytes;
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
-                BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+                var binaryWriter = new BinaryWriter(memoryStream);
                 binaryWriter.Write(value);
                 bytes = memoryStream.ToArray();
             }
@@ -584,9 +584,9 @@ namespace Boilerplate.AspNetCore.Caching
             }
 
             byte[] bytes;
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
-                BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+                var binaryWriter = new BinaryWriter(memoryStream);
                 binaryWriter.Write(value);
                 bytes = memoryStream.ToArray();
             }
@@ -625,9 +625,9 @@ namespace Boilerplate.AspNetCore.Caching
             }
 
             byte[] bytes;
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
-                BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+                var binaryWriter = new BinaryWriter(memoryStream);
                 binaryWriter.Write(value);
                 bytes = memoryStream.ToArray();
             }
@@ -666,9 +666,9 @@ namespace Boilerplate.AspNetCore.Caching
             }
 
             byte[] bytes;
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
-                BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+                var binaryWriter = new BinaryWriter(memoryStream);
                 binaryWriter.Write(value);
                 bytes = memoryStream.ToArray();
             }
@@ -689,10 +689,8 @@ namespace Boilerplate.AspNetCore.Caching
             this IDistributedCache cache,
             string key,
             string value,
-            DistributedCacheEntryOptions options = null)
-        {
-            return SetAsync(cache, key, value, null, options);
-        }
+            DistributedCacheEntryOptions options = null) =>
+            SetAsync(cache, key, value, null, options);
 
         /// <summary>
         /// Sets the <see cref="string"/> value with the specified key in the cache asynchronously.
@@ -731,7 +729,7 @@ namespace Boilerplate.AspNetCore.Caching
                 options = new DistributedCacheEntryOptions();
             }
 
-            byte[] bytes = encoding.GetBytes(value);
+            var bytes = encoding.GetBytes(value);
             return cache.SetAsync(key, bytes, options);
         }
 
@@ -751,10 +749,8 @@ namespace Boilerplate.AspNetCore.Caching
             string key,
             T value,
             DistributedCacheEntryOptions options = null)
-            where T : class
-        {
-            return SetAsJsonAsync<T>(cache, key, value, null, options);
-        }
+            where T : class =>
+            SetAsJsonAsync<T>(cache, key, value, null, options);
 
         /// <summary>
         /// Sets the value of type <typeparamref name="T"/> with the specified key in the cache asynchronously by

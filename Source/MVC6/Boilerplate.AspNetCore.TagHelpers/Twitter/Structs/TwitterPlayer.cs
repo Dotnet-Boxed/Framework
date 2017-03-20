@@ -23,10 +23,7 @@
         /// </exception>
         public TwitterPlayer(string playerUrl, int width, int height)
         {
-            if (playerUrl == null)
-            {
-                throw new ArgumentNullException(nameof(playerUrl));
-            }
+            this.PlayerUrl = playerUrl ?? throw new ArgumentNullException(nameof(playerUrl));
 
             if (width <= 0)
             {
@@ -39,7 +36,6 @@
             }
 
             this.Height = height;
-            this.PlayerUrl = playerUrl;
             this.Width = width;
         }
 

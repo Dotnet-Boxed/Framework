@@ -9,10 +9,7 @@
 
         private readonly RequestDelegate next;
 
-        public NoServerHttpHeaderMiddleware(RequestDelegate next)
-        {
-            this.next = next;
-        }
+        public NoServerHttpHeaderMiddleware(RequestDelegate next) => this.next = next;
 
         public Task Invoke(HttpContext context)
         {

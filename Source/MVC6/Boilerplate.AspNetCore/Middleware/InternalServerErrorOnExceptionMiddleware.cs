@@ -9,10 +9,7 @@
     {
         private readonly RequestDelegate next;
 
-        public InternalServerErrorOnExceptionMiddleware(RequestDelegate next)
-        {
-            this.next = next;
-        }
+        public InternalServerErrorOnExceptionMiddleware(RequestDelegate next) => this.next = next;
 
         public async Task Invoke(HttpContext context)
         {

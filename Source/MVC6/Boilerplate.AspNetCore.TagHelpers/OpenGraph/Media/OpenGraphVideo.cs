@@ -25,10 +25,8 @@
         /// a file extension, otherwise it is recommended.</param>
         /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="videoUrl"/> is <c>null</c>.</exception>
         public OpenGraphVideo(string videoUrl, string type)
-            : this(videoUrl)
-        {
+            : this(videoUrl) =>
             this.Type = type;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphVideo"/> class.

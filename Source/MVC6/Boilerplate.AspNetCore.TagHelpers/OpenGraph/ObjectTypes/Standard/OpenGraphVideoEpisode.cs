@@ -88,7 +88,7 @@
 
             if (this.Actors != null)
             {
-                foreach (OpenGraphActor actor in this.Actors)
+                foreach (var actor in this.Actors)
                 {
                     stringBuilder.AppendMetaPropertyContentIfNotNull("video:actor", actor.ActorUrl);
                     stringBuilder.AppendMetaPropertyContentIfNotNull("video:actor:role", actor.Role);

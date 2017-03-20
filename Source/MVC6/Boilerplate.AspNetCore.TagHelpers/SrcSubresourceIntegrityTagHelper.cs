@@ -30,14 +30,11 @@
         [HtmlAttributeName(SubresourceIntegritySrcAttributeName)]
         public override string Source
         {
-            get { return base.Source; }
-            set { base.Source = value; }
+            get;
+            set;
         }
 
         /// <inheritdoc />
-        protected override string UrlAttributeName
-        {
-            get { return SrcAttributeName; }
-        }
+        protected override string UrlAttributeName => SrcAttributeName;
     }
 }
