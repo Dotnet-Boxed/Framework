@@ -10,14 +10,14 @@
   <PropertyGroup Label="Package">
     <VersionPrefix>2.1.1</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
-    <Product>ASP.NET Core MVC 6 Boilerplate Framework Razor</Product>
-    <Description>Provides boilerplate framework Razor code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.</Description>
+    <Product>ASP.NET Core Boilerplate Framework Razor</Product>
+    <Description>Provides boilerplate framework Razor code for an ASP.NET Core project. ASP.NET Core Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default ASP.NET Core template provided by Microsoft. You can download the ASP.NET Core Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.</Description>
     <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework.git</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/ASP-NET-Core-Boilerplate/Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ASP-NET-Core-Boilerplate/Framework</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/RehanSaeed/ASP.NET-Core-Boilerplate/master/Images/Icon.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/ASP-NET-Core-Boilerplate/Framework.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>ASP.NET;ASP.NET Core;MVC;MVC 6;Boilerplate;Muhammad Rehan Saeed;Framework;Razor</PackageTags>
     <PackageReleaseNotes>Updated to ASP.NET Core 1.1.2.</PackageReleaseNotes>
