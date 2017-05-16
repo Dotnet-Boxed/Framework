@@ -14,10 +14,10 @@
     <Description>Provides boilerplate framework code for a .NET project.</Description>
     <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework.git</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/ASP-NET-Core-Boilerplate/Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ASP-NET-Core-Boilerplate/Framework</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/RehanSaeed/ASP.NET-Core-Boilerplate/master/Images/Icon.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/ASP-NET-Core-Boilerplate/Framework.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Boilerplate;Muhammad Rehan Saeed;Framework</PackageTags>
     <PackageReleaseNotes>Initial version.</PackageReleaseNotes>
