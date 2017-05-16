@@ -77,6 +77,17 @@
             Assert.Empty(this.operation.Responses);
         }
 
+        [Fact]
+        public void Apply_AlreadyHasForbiddenResponse_DoesNothing()
+        {
+            var response = new Response();
+            this.operation.Responses.Add("403", response);
+            this.operationFilter.Apply(this.operation, this.operationFilterContext);
+
+            Assert.Equal(1, this.operation.Responses.Count);
+            Assert.Same(response, this.operation.Responses["403"]);
+        }
+
         private void Apply_HasRequirement_Adds403Response(IAuthorizationRequirement authorizationRequirement)
         {
             var requirements = new List<IAuthorizationRequirement>() { authorizationRequirement };
