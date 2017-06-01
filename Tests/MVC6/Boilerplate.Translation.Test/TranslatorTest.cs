@@ -1,9 +1,8 @@
-﻿namespace Boilerplate.Test
+﻿namespace Boilerplate.Translation.Test
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Boilerplate;
     using Xunit;
 
     public class TranslatorTest

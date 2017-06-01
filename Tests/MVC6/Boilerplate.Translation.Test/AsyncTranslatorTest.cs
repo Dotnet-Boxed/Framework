@@ -1,10 +1,9 @@
-﻿namespace Boilerplate.Test.ComponentModel
+﻿namespace Boilerplate.Translation.Test
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
-    using Boilerplate;
     using Xunit;
 
     public class AsyncTranslatorTest

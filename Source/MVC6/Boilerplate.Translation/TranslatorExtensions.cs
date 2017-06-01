@@ -1,4 +1,4 @@
-﻿namespace Boilerplate
+﻿namespace Boilerplate.Translation
 {
     using System;
     using System.Collections.Generic;

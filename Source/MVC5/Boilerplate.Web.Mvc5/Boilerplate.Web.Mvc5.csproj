@@ -31,7 +31,7 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.0.0" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup Label="References">

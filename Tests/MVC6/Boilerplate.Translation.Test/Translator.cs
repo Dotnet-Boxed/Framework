@@ -1,7 +1,5 @@
-﻿namespace Boilerplate.Test
+﻿namespace Boilerplate.Translation.Test
 {
-    using Boilerplate;
-
     public class Translator : ITranslator<TranslateFrom, TranslateTo>
     {
         public void Translate(TranslateFrom from, TranslateTo to)
