@@ -62,8 +62,9 @@
         {
             var translator = new AsyncTranslator();
 
-            var to = await translator.TranslateCollection<List<TranslateTo>, TranslateFrom, TranslateTo>(
-                new TranslateFrom[0]);
+            var to = await translator.TranslateCollection(
+                new TranslateFrom[0],
+                new List<TranslateTo>());
 
             Assert.IsType<List<TranslateTo>>(to);
             Assert.Equal(0, to.Count);
@@ -74,12 +75,13 @@
         {
             var translator = new AsyncTranslator();
 
-            var to = await translator.TranslateCollection<List<TranslateTo>, TranslateFrom, TranslateTo>(
+            var to = await translator.TranslateCollection(
                 new TranslateFrom[]
                 {
                     new TranslateFrom() { Property = 1 },
                     new TranslateFrom() { Property = 2 }
-                });
+                },
+                new List<TranslateTo>());
 
             Assert.IsType<List<TranslateTo>>(to);
             Assert.Equal(2, to.Count);

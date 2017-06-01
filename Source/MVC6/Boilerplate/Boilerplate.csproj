@@ -30,6 +30,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
+    <PackageReference Include="ClrHeapAllocationAnalyzer" PrivateAssets="All" Version="1.0.0.8" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.0.0" />
   </ItemGroup>
 
