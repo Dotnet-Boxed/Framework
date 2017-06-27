@@ -27,7 +27,8 @@
         {
             var filterDescriptors = context.ApiDescription.ActionDescriptor.FilterDescriptors;
             var authorizationRequirements = filterDescriptors.GetPolicyRequirements();
-            if (authorizationRequirements.OfType<DenyAnonymousAuthorizationRequirement>().Any())
+            if (!operation.Responses.ContainsKey(UnauthorizedStatusCode) &&
+                authorizationRequirements.OfType<DenyAnonymousAuthorizationRequirement>().Any())
             {
                 operation.Responses.Add(UnauthorizedStatusCode, UnauthorizedResponse);
             }

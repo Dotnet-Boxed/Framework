@@ -29,7 +29,8 @@
         {
             var filterDescriptors = context.ApiDescription.ActionDescriptor.FilterDescriptors;
             var authorizationRequirements = filterDescriptors.GetPolicyRequirements();
-            if (HasAuthorizationRequirement(authorizationRequirements))
+            if (!operation.Responses.ContainsKey(ForbiddenStatusCode) &&
+                HasAuthorizationRequirement(authorizationRequirements))
             {
                 operation.Responses.Add(ForbiddenStatusCode, ForbiddenResponse);
             }

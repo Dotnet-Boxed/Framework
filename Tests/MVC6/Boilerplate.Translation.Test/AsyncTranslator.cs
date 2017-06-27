@@ -1,7 +1,6 @@
-﻿namespace Boilerplate.Test
+﻿namespace Boilerplate.Translation.Test
 {
     using System.Threading.Tasks;
-    using Boilerplate;
 
     public class AsyncTranslator : IAsyncTranslator<TranslateFrom, TranslateTo>
     {
