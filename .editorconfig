@@ -112,23 +112,23 @@ csharp_preserve_single_line_blocks = true:warning
 csharp_preserve_single_line_statements = false:warning
 # Naming Rules (Undocumented)
 # Constant Fields Should Be PascalCase
-dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = warning
-dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols  = constant_fields
-dotnet_naming_rule.constant_fields_should_be_pascal_case.style    = pascal_case_style
-dotnet_naming_symbols.constant_fields.applicable_kinds   = field
-dotnet_naming_symbols.constant_fields.required_modifiers = const
-dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+#dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = warning
+#dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols  = constant_fields
+#dotnet_naming_rule.constant_fields_should_be_pascal_case.style    = pascal_case_style
+#dotnet_naming_symbols.constant_fields.applicable_kinds   = field
+#dotnet_naming_symbols.constant_fields.required_modifiers = const
+#dotnet_naming_style.pascal_case_style.capitalization = pascal_case
 # Public Members Must Be Capitalized
-dotnet_naming_rule.public_members_must_be_capitalized.severity = warning
-dotnet_naming_rule.public_members_must_be_capitalized.symbols  = public_symbols
-dotnet_naming_rule.public_members_must_be_capitalized.style    = first_word_upper_case_style
-dotnet_naming_symbols.public_symbols.applicable_kinds   = property,method,field,event,delegate
-dotnet_naming_symbols.public_symbols.required_modifiers = public,internal,protected,protected_internal
-dotnet_naming_style.first_word_upper_case_style.capitalization = first_word_upper
+#dotnet_naming_rule.public_members_must_be_capitalized.severity = warning
+#dotnet_naming_rule.public_members_must_be_capitalized.symbols  = public_symbols
+#dotnet_naming_rule.public_members_must_be_capitalized.style    = first_word_upper_case_style
+#dotnet_naming_symbols.public_symbols.applicable_kinds   = property,method,field,event,delegate
+#dotnet_naming_symbols.public_symbols.required_modifiers = public,internal,protected,protected_internal
+#dotnet_naming_style.first_word_upper_case_style.capitalization = first_word_upper
 # Private, Protected and Internal Fields Should Be camelCase
-dotnet_naming_rule.camel_case_for_private_internal_fields.severity = warning
-dotnet_naming_rule.camel_case_for_private_internal_fields.symbols  = private_internal_fields
-dotnet_naming_rule.camel_case_for_private_internal_fields.style    = camel_case_underscore_style
-dotnet_naming_symbols.private_internal_fields.applicable_kinds = field
-dotnet_naming_symbols.private_internal_fields.applicable_accessibilities = private, protected, internal
-dotnet_naming_style.camel_case_underscore_style.capitalization = camel_case
+#dotnet_naming_rule.camel_case_for_private_internal_fields.severity = warning
+#dotnet_naming_rule.camel_case_for_private_internal_fields.symbols  = private_internal_fields
+#dotnet_naming_rule.camel_case_for_private_internal_fields.style    = camel_case_underscore_style
+#dotnet_naming_symbols.private_internal_fields.applicable_kinds = field
+#dotnet_naming_symbols.private_internal_fields.applicable_accessibilities = private, protected, internal
+#dotnet_naming_style.camel_case_underscore_style.capitalization = camel_case
