@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC5", "MVC5", "{C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}"
 EndProject
@@ -14,7 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		appveyor.yml = appveyor.yml
 		build.cake = build.cake
 		MinimumRecommendedRulesWithStyleCop.ruleset = MinimumRecommendedRulesWithStyleCop.ruleset
-		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}"
@@ -40,6 +39,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Translation", "Source\MVC6\Boilerplate.Translation\Boilerplate.Translation.csproj", "{B115BD4F-C4EB-4BC4-AF4F-B0F767631403}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Translation.Test", "Tests\MVC6\Boilerplate.Translation.Test\Boilerplate.Translation.Test.csproj", "{4228920C-D395-40D3-8F1B-171E750AC486}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{DC7FDD72-F9C9-42E9-90CC-468BDD9A5CC2}"
+	ProjectSection(SolutionItems) = preProject
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
