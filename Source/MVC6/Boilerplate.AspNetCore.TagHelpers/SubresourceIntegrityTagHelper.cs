@@ -80,11 +80,6 @@
         {
             var url = output.Attributes[this.UrlAttributeName].Value.ToString();
 
-            if (url.StartsWith("//"))
-            {
-                url = "https:" + url;
-            }
-
             if (!string.IsNullOrWhiteSpace(url) && !string.IsNullOrWhiteSpace(this.Source))
             {
                 var sri = await this.GetCachedSri(url).ConfigureAwait(false);
@@ -106,9 +101,16 @@
         /// <returns>A key value for the URL.</returns>
         protected virtual string GetSriKey(string url) => "SRI:" + url;
 
-        private static IEnumerable<Enum> GetFlags(Enum enumeration)
+        /// <summary>
+        /// Reads all bytes from the file with the specified path.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <returns>The files bytes.</returns>
+        protected virtual byte[] ReadAllBytes(string filePath) => File.ReadAllBytes(filePath);
+
+        private static IEnumerable<SubresourceIntegrityHashAlgorithm> GetFlags(Enum enumeration)
         {
-            foreach (var value in (IEnumerable<Enum>)Enum.GetValues(enumeration.GetType()))
+            foreach (var value in (IEnumerable<SubresourceIntegrityHashAlgorithm>)Enum.GetValues(enumeration.GetType()))
             {
                 if (enumeration.HasFlag(value))
                 {
@@ -151,16 +153,25 @@
             }
         }
 
-        private static string GetSri(byte[] bytes, SubresourceIntegrityHashAlgorithm hashAlgorithm)
+        private static void AppendSri(
+            StringBuilder stringBuilder,
+            byte[] bytes,
+            SubresourceIntegrityHashAlgorithm hashAlgorithm)
         {
             switch (hashAlgorithm)
             {
                 case SubresourceIntegrityHashAlgorithm.SHA256:
-                    return "sha256-" + GetHash<SHA256>(bytes);
+                    stringBuilder.Append("sha256-");
+                    stringBuilder.Append(GetHash<SHA256>(bytes));
+                    break;
                 case SubresourceIntegrityHashAlgorithm.SHA384:
-                    return "sha384-" + GetHash<SHA384>(bytes);
+                    stringBuilder.Append("sha384-");
+                    stringBuilder.Append(GetHash<SHA384>(bytes));
+                    break;
                 case SubresourceIntegrityHashAlgorithm.SHA512:
-                    return "sha512-" + GetHash<SHA512>(bytes);
+                    stringBuilder.Append("sha512-");
+                    stringBuilder.Append(GetHash<SHA512>(bytes));
+                    break;
                 default:
                     throw new ArgumentException(
                         $"Hash algorithm not recognized. HashAlgorithm<{hashAlgorithm}>.",
@@ -170,26 +181,30 @@
 
         private static string GetSpaceDelimetedSri(byte[] bytes, SubresourceIntegrityHashAlgorithm hashAlgorithms)
         {
-            var items = new List<string>(3);
-            foreach (var hashAlgorithm in (IEnumerable<SubresourceIntegrityHashAlgorithm>)GetFlags(hashAlgorithms))
+            var stringBuilder = new StringBuilder();
+            foreach (var hashAlgorithm in GetFlags(hashAlgorithms))
             {
-                items.Add(GetSri(bytes, hashAlgorithm));
+                if (stringBuilder.Length > 0)
+                {
+                    stringBuilder.Append(" ");
+                }
+
+                AppendSri(stringBuilder, bytes, hashAlgorithm);
             }
 
-            return string.Join(" ", items);
+            return stringBuilder.ToString();
         }
 
-        private async Task<string> GetCachedSri(string url)
+        private Task<string> GetCachedSri(string url)
         {
             var key = this.GetSriKey(url);
-            var value = await this.distributedCache.GetAsync(key).ConfigureAwait(false);
-            return value == null ? null : Encoding.UTF8.GetString(value);
+            return this.distributedCache.GetStringAsync(key);
         }
 
         private Task SetCachedSri(string url, string value)
         {
             var key = this.GetSriKey(url);
-            return this.distributedCache.SetAsync(key, Encoding.UTF8.GetBytes(value));
+            return this.distributedCache.SetStringAsync(key, value);
         }
 
         private string GetSubresourceIntegrityFromContentFile(
@@ -199,7 +214,7 @@
             var filePath = Path.Combine(
                 this.hostingEnvironment.WebRootPath,
                 this.urlHelper.Content(contentPath).TrimStart('/'));
-            var bytes = File.ReadAllBytes(filePath);
+            var bytes = this.ReadAllBytes(filePath);
             return GetSpaceDelimetedSri(bytes, hashAlgorithms);
         }
     }
