@@ -1,4 +1,4 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 var target = Argument("Target", "Default");
@@ -92,7 +92,7 @@ Task("Test")
                 .AppendSwitch("-configuration", configuration)
                 .AppendSwitchQuoted("-xml", outputFilePath.AppendExtension(".xml").ToString())
                 .AppendSwitchQuoted("-html", outputFilePath.AppendExtension(".html").ToString());
-                
+
             if (!IsRunningOnWindows())
             {
                 var frameworks = GetCoreFrameworks(project.ToString());
