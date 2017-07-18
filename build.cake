@@ -86,15 +86,13 @@ Task("Test")
     {
         foreach(var project in GetFiles("./Tests/**/*.csproj"))
         {
-            var settings = new DotNetCoreTestSettings()
-            {
-                //ArgumentCustomization = args => args
-                //    .Append("-xml")
-                //    .Append(artifactsDirectory.Path.CombineWithFilePath(project.GetFilenameWithoutExtension()).FullPath + ".xml"),
-                Configuration = configuration,
-                NoBuild = true
-            };
-
+            var outputFilePath = MakeAbsolute(artifactsDirectory.Path)
+                .CombineWithFilePath(project.GetFilenameWithoutExtension());
+            var arguments = new ProcessArgumentBuilder()
+                .AppendSwitch("-configuration", configuration)
+                .AppendSwitchQuoted("-xml", outputFilePath.AppendExtension(".xml").ToString())
+                .AppendSwitchQuoted("-html", outputFilePath.AppendExtension(".html").ToString());
+                
             if (!IsRunningOnWindows())
             {
                 var frameworks = GetCoreFrameworks(project.ToString());
@@ -106,13 +104,11 @@ Task("Test")
                 else
                 {
                     Information("Skipping .NET Framework, building " + frameworks.First());
-                    settings.Framework = frameworks.First();
+                    arguments.AppendSwitch("-framework", frameworks.First());
                 }
             }
 
-            DotNetCoreTest(
-                project.ToString(),
-                settings);
+            DotNetCoreTool(project, "xunit", arguments);
         }
     });
 
