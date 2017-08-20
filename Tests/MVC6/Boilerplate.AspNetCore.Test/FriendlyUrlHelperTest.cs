@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.Test
+namespace Boilerplate.AspNetCore.Test
 {
     using Xunit;
 
@@ -18,7 +18,6 @@
         // Special characters with no preceding valid character.
         [InlineData(" ", "")]
         [InlineData(",", "")]
-        [InlineData(" ", "")]
         [InlineData(".", "")]
         [InlineData("/", "")]
         [InlineData("\\", "")]
@@ -29,7 +28,6 @@
         // Special characters with preceding valid character followed by space.
         [InlineData("a  b", "a-b")]
         [InlineData("a ,b", "a-b")]
-        [InlineData("a  b", "a-b")]
         [InlineData("a .b", "a-b")]
         [InlineData("a /b", "a-b")]
         [InlineData("a \\b", "a-b")]
@@ -40,7 +38,6 @@
         // Special characters with preceding valid character.
         [InlineData("a b", "a-b")]
         [InlineData("a,b", "a-b")]
-        [InlineData("a b", "a-b")]
         [InlineData("a.b", "a-b")]
         [InlineData("a/b", "a-b")]
         [InlineData("a\\b", "a-b")]

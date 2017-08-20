@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Translation.Test
+namespace Boilerplate.Translation.Test
 {
     using System;
     using System.Collections.Generic;
@@ -35,7 +35,7 @@
                 new TranslateFrom[0]);
 
             Assert.IsType<TranslateTo[]>(to);
-            Assert.Equal(0, to.Length);
+            Assert.Empty(to);
         }
 
         [Fact]
@@ -66,7 +66,7 @@
                 new List<TranslateTo>());
 
             Assert.IsType<List<TranslateTo>>(to);
-            Assert.Equal(0, to.Count);
+            Assert.Empty(to);
         }
 
         [Fact]
@@ -97,7 +97,7 @@
                 new TranslateFrom[0]);
 
             Assert.IsType<Collection<TranslateTo>>(to);
-            Assert.Equal(0, to.Count);
+            Assert.Empty(to);
         }
 
         [Fact]
@@ -127,7 +127,7 @@
                 new TranslateFrom[0]);
 
             Assert.IsType<List<TranslateTo>>(to);
-            Assert.Equal(0, to.Count);
+            Assert.Empty(to);
         }
 
         [Fact]

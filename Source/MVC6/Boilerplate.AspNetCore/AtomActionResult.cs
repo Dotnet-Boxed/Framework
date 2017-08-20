@@ -1,4 +1,3 @@
-﻿#if NET461
 namespace Boilerplate.AspNetCore
 {
     using System.ServiceModel.Syndication;
@@ -57,4 +56,3 @@ namespace Boilerplate.AspNetCore
         }
     }
 }
-#endif

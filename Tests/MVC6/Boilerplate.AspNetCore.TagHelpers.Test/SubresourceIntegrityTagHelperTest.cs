@@ -1,8 +1,9 @@
-﻿namespace Boilerplate.AspNetCore.TagHelpers.Test
+namespace Boilerplate.AspNetCore.TagHelpers.Test
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Html;
@@ -41,7 +42,7 @@
             var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
             var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException());
             this.distributedCacheMock
-                .Setup(x => x.GetAsync("SRI:/foo.js"))
+                .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
                 .ReturnsAsync(Encoding.UTF8.GetBytes("SRI Value"));
 
             await this.tagHelper.ProcessAsync(context, output);
@@ -65,7 +66,7 @@
             var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
             var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException());
             this.distributedCacheMock
-                .Setup(x => x.GetAsync("SRI:/foo.js"))
+                .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
                 .ReturnsAsync((byte[])null);
             this.hostingEnvironmentMock.SetupGet(x => x.WebRootPath).Returns(@"C:\Foo\wwwroot");
             this.urlHelperMock.Setup(x => x.Content("/foo.js")).Returns(@"C:\Foo\wwwroot\foo.js");
@@ -73,7 +74,8 @@
                 .Setup(x => x.SetAsync(
                     "SRI:/foo.js",
                     It.Is<byte[]>(y => string.Equals(Encoding.UTF8.GetString(y), expectedSri, StringComparison.Ordinal)),
-                    It.IsAny<DistributedCacheEntryOptions>()))
+                    It.IsAny<DistributedCacheEntryOptions>(),
+                    CancellationToken.None))
                 .Returns(Task.CompletedTask);
 
             await this.tagHelper.ProcessAsync(context, output);
@@ -103,7 +105,7 @@
             var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
             var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException());
             this.distributedCacheMock
-                .Setup(x => x.GetAsync("SRI:/foo.js"))
+                .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
                 .ReturnsAsync((byte[])null);
             this.hostingEnvironmentMock.SetupGet(x => x.WebRootPath).Returns(@"C:\Foo\wwwroot");
             this.urlHelperMock.Setup(x => x.Content("/foo.js")).Returns(@"C:\Foo\wwwroot\foo.js");
@@ -111,7 +113,8 @@
                 .Setup(x => x.SetAsync(
                     "SRI:/foo.js",
                     It.Is<byte[]>(y => string.Equals(Encoding.UTF8.GetString(y), expectedSri, StringComparison.Ordinal)),
-                    It.IsAny<DistributedCacheEntryOptions>()))
+                    It.IsAny<DistributedCacheEntryOptions>(),
+                    CancellationToken.None))
                 .Returns(Task.CompletedTask);
 
             await this.tagHelper.ProcessAsync(context, output);
