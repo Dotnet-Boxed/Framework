@@ -40,4 +40,8 @@
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.0.2" />
   </ItemGroup>
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' " Label=".NET 4.6.1 Package References">
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+
 </Project>
