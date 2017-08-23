@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore
+namespace Boilerplate.AspNetCore
 {
     /// <summary>
     /// A list of internet media types, which are a standard identifier used on the Internet to indicate the type of
@@ -22,9 +22,6 @@
         /// <summary>JPEG JFIF image; Defined in RFC 2045 and RFC 2046.</summary>
         public const string Jpg = "image/jpeg";
 
-        /// <summary>Binary JavaScript Object Notation BSON.</summary>
-        public const string Bson = "application/bson";
-
         /// <summary>JavaScript Object Notation JSON; Defined in RFC 4627.</summary>
         public const string Json = "application/json";
 
@@ -33,6 +30,9 @@
 
         /// <summary>Portable Network Graphics; Registered,[8] Defined in RFC 2083.</summary>
         public const string Png = "image/png";
+
+        /// <summary>Rich Site Summary; Defined by Harvard Law.</summary>
+        public const string Rss = "application/rss+xml";
 
         /// <summary>Textual data; Defined in RFC 2046 and RFC 3676.</summary>
         public const string Text = "text/plain";
