@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.Swagger.Test.OperationFilters
+namespace Boilerplate.AspNetCore.Swagger.Test.OperationFilters
 {
     using System.Collections.Generic;
     using System.Linq;
