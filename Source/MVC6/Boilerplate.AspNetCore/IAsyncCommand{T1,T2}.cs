@@ -1,5 +1,6 @@
-﻿namespace Boilerplate.AspNetCore
+namespace Boilerplate.AspNetCore
 {
+    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
 
@@ -15,9 +16,8 @@
         /// </summary>
         /// <param name="parameter1">The first parameter.</param>
         /// <param name="parameter2">The second parameter.</param>
-        /// <returns>
-        /// The result of the command.
-        /// </returns>
-        Task<IActionResult> ExecuteAsync(T1 parameter1, T2 parameter2);
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>The result of the command.</returns>
+        Task<IActionResult> ExecuteAsync(T1 parameter1, T2 parameter2, CancellationToken cancellationToken = default);
     }
 }
