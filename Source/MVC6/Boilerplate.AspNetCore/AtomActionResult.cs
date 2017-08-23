@@ -1,5 +1,7 @@
+#if NET461
 namespace Boilerplate.AspNetCore
 {
+    using System;
     using System.ServiceModel.Syndication;
     using System.Text;
     using System.Xml;
@@ -12,6 +14,7 @@ namespace Boilerplate.AspNetCore
     /// Represents a class that is used to render an Atom 1.0 feed by using an <see cref="SyndicationFeed"/> instance
     /// representing the feed.
     /// </summary>
+    [Obsolete("This will soon be obsolete and replaced by Microsoft.SyndicationFeed")]
     public sealed class AtomActionResult : ActionResult
     {
         private readonly SyndicationFeed syndicationFeed;
@@ -56,3 +59,4 @@ namespace Boilerplate.AspNetCore
         }
     }
 }
+#endif

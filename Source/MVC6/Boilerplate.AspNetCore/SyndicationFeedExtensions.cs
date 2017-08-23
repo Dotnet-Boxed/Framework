@@ -1,3 +1,4 @@
+#if NET461
 namespace Boilerplate.AspNetCore
 {
     using System;
@@ -9,6 +10,7 @@ namespace Boilerplate.AspNetCore
     /// <summary>
     /// <see cref="SyndicationFeed"/> extension methods.
     /// </summary>
+    [Obsolete("This will soon be obsolete and replaced by Microsoft.SyndicationFeed")]
     public static class SyndicationFeedExtensions
     {
         private const string YahooMediaNamespacePrefix = "media";
@@ -71,3 +73,4 @@ namespace Boilerplate.AspNetCore
         }
     }
 }
+#endif
