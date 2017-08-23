@@ -2,6 +2,7 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <LangVersion>Latest</LangVersion>
     <CodeAnalysisRuleSet>../../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 

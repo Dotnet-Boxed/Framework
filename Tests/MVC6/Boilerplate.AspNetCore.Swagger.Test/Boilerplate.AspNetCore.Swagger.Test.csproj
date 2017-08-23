@@ -2,10 +2,8 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <LangVersion>Latest</LangVersion>
     <CodeAnalysisRuleSet>../../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../../Key.snk</AssemblyOriginatorKeyFile>
-    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
   </PropertyGroup>
 
   <ItemGroup Label="Project References">
@@ -13,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="Moq" Version="4.7.99" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.0.2" />
