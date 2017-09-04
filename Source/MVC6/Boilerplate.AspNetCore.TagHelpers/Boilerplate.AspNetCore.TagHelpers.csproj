@@ -2,6 +2,7 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <CodeAnalysisRuleSet>../../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>

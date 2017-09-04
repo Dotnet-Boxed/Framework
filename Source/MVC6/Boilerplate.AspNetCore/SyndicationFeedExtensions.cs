@@ -1,3 +1,4 @@
+#if NET461
 namespace Boilerplate.AspNetCore
 {
     using System;
@@ -71,3 +72,4 @@ namespace Boilerplate.AspNetCore
         }
     }
 }
+#endif
