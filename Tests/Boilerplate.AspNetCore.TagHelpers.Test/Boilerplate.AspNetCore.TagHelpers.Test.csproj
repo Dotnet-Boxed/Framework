@@ -1,21 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup Label="Build" Condition=" '$(OS)' != 'Windows_NT' ">
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup Label="Build" Condition=" '$(OS)' == 'Windows_NT' ">
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-  </PropertyGroup>
   <PropertyGroup Label="Build">
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <LangVersion>latest</LangVersion>
-    <CodeAnalysisRuleSet>../../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup Label="Project References">
-    <ProjectReference Include="..\..\..\Source\MVC6\Boilerplate.Mapping\Boilerplate.Mapping.csproj" />
+    <ProjectReference Include="..\..\Source\Boilerplate.AspNetCore.TagHelpers\Boilerplate.AspNetCore.TagHelpers.csproj" />
   </ItemGroup>
 
   <ItemGroup Label="Package References">
+    <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="Moq" Version="4.7.99" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.0.2" />
