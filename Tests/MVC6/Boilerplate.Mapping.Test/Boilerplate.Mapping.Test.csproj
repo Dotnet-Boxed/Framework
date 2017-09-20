@@ -12,12 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup Label="Project References">
-    <ProjectReference Include="..\..\..\Source\MVC6\Boilerplate.AspNetCore.Swagger\Boilerplate.AspNetCore.Swagger.csproj" />
+    <ProjectReference Include="..\..\..\Source\MVC6\Boilerplate.Mapping\Boilerplate.Mapping.csproj" />
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="Moq" Version="4.7.99" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.0.2" />
