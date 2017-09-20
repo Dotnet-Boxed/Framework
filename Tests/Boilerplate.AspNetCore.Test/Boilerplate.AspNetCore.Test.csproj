@@ -1,18 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup Label="Build" Condition=" '$(OS)' != 'Windows_NT' ">
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup Label="Build" Condition=" '$(OS)' == 'Windows_NT' ">
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-  </PropertyGroup>
   <PropertyGroup Label="Build">
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <LangVersion>latest</LangVersion>
-    <CodeAnalysisRuleSet>../../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup Label="Project References">
-    <ProjectReference Include="..\..\..\Source\MVC6\Boilerplate.AspNetCore\Boilerplate.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\Source\Boilerplate.AspNetCore\Boilerplate.AspNetCore.csproj" />
   </ItemGroup>
 
   <ItemGroup Label="Package References">

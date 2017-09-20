@@ -1,16 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup Label="Build" Condition=" '$(OS)' != 'Windows_NT' ">
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup Label="Build" Condition=" '$(OS)' == 'Windows_NT' ">
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-  </PropertyGroup>
   <PropertyGroup Label="Build">
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <CodeAnalysisRuleSet>../../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
@@ -31,7 +26,7 @@
 
   <PropertyGroup Label="Signing">
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../../Key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>../../Key.snk</AssemblyOriginatorKeyFile>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
   </PropertyGroup>
 
@@ -40,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <!--<PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.0.0" />-->
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
   </ItemGroup>
