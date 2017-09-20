@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Translation
+namespace Boilerplate.Mapping
 {
     using System;
     using System.Collections.Generic;
@@ -6,22 +6,22 @@
     using System.Linq;
 
     /// <summary>
-    /// <see cref="ITranslator{TSource, TDestination}"/> extension methods.
+    /// <see cref="IMapper{TSource, TDestination}"/> extension methods.
     /// </summary>
-    public static class TranslatorExtensions
+    public static class MapperExtensions
     {
         /// <summary>
-        /// Translates the specified source object to a new object with a type of <typeparamref name="TDestination"/>.
+        /// Maps the specified source object to a new object with a type of <typeparamref name="TDestination"/>.
         /// </summary>dotnet test
         /// <typeparam name="TSource">The type of the source object.</typeparam>
         /// <typeparam name="TDestination">The type of the destination object.</typeparam>
         /// <param name="translator">The translator.</param>
         /// <param name="source">The source object.</param>
-        /// <returns>The translated object of type <typeparamref name="TDestination"/>.</returns>
+        /// <returns>The mapped object of type <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator" /> or <paramref name="source" /> is
         /// <c>null</c>.</exception>
-        public static TDestination Translate<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static TDestination Map<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             TSource source)
             where TDestination : new()
         {
@@ -36,12 +36,12 @@
             }
 
             var destination = new TDestination();
-            translator.Translate(source, destination);
+            translator.Map(source, destination);
             return destination;
         }
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource"/> into an array of
+        /// Maps the collection of <typeparamref name="TSource"/> into an array of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSourceCollection">The type of the source collection.</typeparam>
@@ -53,8 +53,8 @@
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="sourceCollection"/> is
         /// <c>null</c>.</exception>
-        public static TDestination[] TranslateArray<TSourceCollection, TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static TDestination[] MapArray<TSourceCollection, TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             TSourceCollection sourceCollection,
             TDestination[] destinationCollection)
             where TSourceCollection : IEnumerable<TSource>
@@ -74,7 +74,7 @@
             foreach (var item in sourceCollection)
             {
                 var destination = new TDestination();
-                translator.Translate(item, destination);
+                translator.Map(item, destination);
                 destinationCollection[i] = destination;
 
                 ++i;
@@ -84,7 +84,7 @@
         }
 
         /// <summary>
-        /// Translates the array of <typeparamref name="TSource"/> into an array of
+        /// Maps the array of <typeparamref name="TSource"/> into an array of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -94,14 +94,14 @@
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static TDestination[] TranslateArray<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static TDestination[] MapArray<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             TSource[] source)
             where TDestination : new() =>
-            TranslateArray(translator, source, new TDestination[source.Length]);
+            MapArray(translator, source, new TDestination[source.Length]);
 
         /// <summary>
-        /// Translates the list of <typeparamref name="TSource"/> into an array of
+        /// Maps the list of <typeparamref name="TSource"/> into an array of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -111,14 +111,14 @@
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static TDestination[] TranslateArray<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static TDestination[] MapArray<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             List<TSource> source)
             where TDestination : new() =>
-            TranslateArray(translator, source, new TDestination[source.Count]);
+            MapArray(translator, source, new TDestination[source.Count]);
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource"/> into an array of
+        /// Maps the collection of <typeparamref name="TSource"/> into an array of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -128,14 +128,14 @@
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static TDestination[] TranslateArray<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static TDestination[] MapArray<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             Collection<TSource> source)
             where TDestination : new() =>
-            TranslateArray(translator, source, new TDestination[source.Count]);
+            MapArray(translator, source, new TDestination[source.Count]);
 
         /// <summary>
-        /// Translates the enumerable of <typeparamref name="TSource"/> into an array of
+        /// Maps the enumerable of <typeparamref name="TSource"/> into an array of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -145,14 +145,14 @@
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static TDestination[] TranslateArray<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static TDestination[] MapArray<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
             where TDestination : new() =>
-            TranslateArray(translator, source, new TDestination[source.Count()]);
+            MapArray(translator, source, new TDestination[source.Count()]);
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource" /> into a collection of type
+        /// Maps the collection of <typeparamref name="TSource" /> into a collection of type
         /// <typeparamref name="TDestinationCollection" /> containing objects of type <typeparamref name="TDestination" />.
         /// </summary>
         /// <typeparam name="TSourceCollection">The type of the source collection.</typeparam>
@@ -167,8 +167,8 @@
         /// </returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator" /> or <paramref name="sourceCollection" /> is
         /// <c>null</c>.</exception>
-        public static TDestinationCollection TranslateCollection<TSourceCollection, TSource, TDestinationCollection, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static TDestinationCollection MapCollection<TSourceCollection, TSource, TDestinationCollection, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             TSourceCollection sourceCollection,
             TDestinationCollection destinationCollection)
             where TSourceCollection : IEnumerable<TSource>
@@ -188,7 +188,7 @@
             foreach (var item in sourceCollection)
             {
                 var destination = new TDestination();
-                translator.Translate(item, destination);
+                translator.Map(item, destination);
                 destinationCollection.Add(destination);
             }
 
@@ -196,7 +196,7 @@
         }
 
         /// <summary>
-        /// Translates the list of <typeparamref name="TSource"/> into a collection of
+        /// Maps the list of <typeparamref name="TSource"/> into a collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -206,14 +206,14 @@
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Collection<TDestination> TranslateCollection<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static Collection<TDestination> MapCollection<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             List<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new Collection<TDestination>());
+            MapCollection(translator, source, new Collection<TDestination>());
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource"/> into a collection of
+        /// Maps the collection of <typeparamref name="TSource"/> into a collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -223,14 +223,14 @@
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Collection<TDestination> TranslateCollection<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static Collection<TDestination> MapCollection<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             Collection<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new Collection<TDestination>());
+            MapCollection(translator, source, new Collection<TDestination>());
 
         /// <summary>
-        /// Translates the array of <typeparamref name="TSource"/> into a collection of
+        /// Maps the array of <typeparamref name="TSource"/> into a collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -240,14 +240,14 @@
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Collection<TDestination> TranslateCollection<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static Collection<TDestination> MapCollection<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             TSource[] source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new Collection<TDestination>());
+            MapCollection(translator, source, new Collection<TDestination>());
 
         /// <summary>
-        /// Translates the enumerable of <typeparamref name="TSource"/> into a collection of
+        /// Maps the enumerable of <typeparamref name="TSource"/> into a collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -257,14 +257,14 @@
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Collection<TDestination> TranslateCollection<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static Collection<TDestination> MapCollection<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new Collection<TDestination>());
+            MapCollection(translator, source, new Collection<TDestination>());
 
         /// <summary>
-        /// Translates the list of <typeparamref name="TSource"/> into a list of
+        /// Maps the list of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -274,14 +274,14 @@
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static List<TDestination> TranslateList<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static List<TDestination> MapList<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             List<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new List<TDestination>(source.Count));
+            MapCollection(translator, source, new List<TDestination>(source.Count));
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource"/> into a list of
+        /// Maps the collection of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -291,14 +291,14 @@
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static List<TDestination> TranslateList<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static List<TDestination> MapList<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             Collection<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new List<TDestination>(source.Count));
+            MapCollection(translator, source, new List<TDestination>(source.Count));
 
         /// <summary>
-        /// Translates the array of <typeparamref name="TSource"/> into a list of
+        /// Maps the array of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -308,14 +308,14 @@
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static List<TDestination> TranslateList<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static List<TDestination> MapList<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             TSource[] source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new List<TDestination>(source.Length));
+            MapCollection(translator, source, new List<TDestination>(source.Length));
 
         /// <summary>
-        /// Translates the enumerable of <typeparamref name="TSource"/> into a list of
+        /// Maps the enumerable of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -325,14 +325,14 @@
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static List<TDestination> TranslateList<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static List<TDestination> MapList<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new List<TDestination>(source.Count()));
+            MapCollection(translator, source, new List<TDestination>(source.Count()));
 
         /// <summary>
-        /// Translates the list of <typeparamref name="TSource"/> into an observable collection of
+        /// Maps the list of <typeparamref name="TSource"/> into an observable collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -342,14 +342,14 @@
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static ObservableCollection<TDestination> TranslateObservableCollection<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             List<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new ObservableCollection<TDestination>());
+            MapCollection(translator, source, new ObservableCollection<TDestination>());
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource"/> into an observable collection of
+        /// Maps the collection of <typeparamref name="TSource"/> into an observable collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -359,14 +359,14 @@
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static ObservableCollection<TDestination> TranslateObservableCollection<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             Collection<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new ObservableCollection<TDestination>());
+            MapCollection(translator, source, new ObservableCollection<TDestination>());
 
         /// <summary>
-        /// Translates the array of <typeparamref name="TSource"/> into an observable collection of
+        /// Maps the array of <typeparamref name="TSource"/> into an observable collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -376,14 +376,14 @@
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static ObservableCollection<TDestination> TranslateObservableCollection<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             TSource[] source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new ObservableCollection<TDestination>());
+            MapCollection(translator, source, new ObservableCollection<TDestination>());
 
         /// <summary>
-        /// Translates the enumerable of <typeparamref name="TSource"/> into an observable collection of
+        /// Maps the enumerable of <typeparamref name="TSource"/> into an observable collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -393,10 +393,10 @@
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static ObservableCollection<TDestination> TranslateObservableCollection<TSource, TDestination>(
-            this ITranslator<TSource, TDestination> translator,
+        public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
+            this IMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new ObservableCollection<TDestination>());
+            MapCollection(translator, source, new ObservableCollection<TDestination>());
     }
 }

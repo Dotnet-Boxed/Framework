@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Translation
+namespace Boilerplate.Mapping
 {
     using System;
     using System.Collections.Generic;
@@ -7,22 +7,22 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// <see cref="IAsyncTranslator{TSource, TDestination}"/> extension methods.
+    /// <see cref="IAsyncMapper{TSource, TDestination}"/> extension methods.
     /// </summary>
-    public static class AsyncTranslatorExtensions
+    public static class AsyncMapperExtensions
     {
         /// <summary>
-        /// Translates the specified source object to a new object with a type of <typeparamref name="TDestination"/>.
+        /// Maps the specified source object to a new object with a type of <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source object.</typeparam>
         /// <typeparam name="TDestination">The type of the destination object.</typeparam>
         /// <param name="translator">The translator.</param>
         /// <param name="source">The source object.</param>
-        /// <returns>The translated object of type <typeparamref name="TDestination"/>.</returns>
+        /// <returns>The mapped object of type <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator" /> or <paramref name="source" /> is
         /// <c>null</c>.</exception>
-        public static async Task<TDestination> Translate<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static async Task<TDestination> Map<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             TSource source)
             where TDestination : new()
         {
@@ -37,12 +37,12 @@
             }
 
             var destination = new TDestination();
-            await translator.Translate(source, destination);
+            await translator.Map(source, destination);
             return destination;
         }
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource"/> into an array of
+        /// Maps the collection of <typeparamref name="TSource"/> into an array of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSourceCollection">The type of the source collection.</typeparam>
@@ -55,8 +55,8 @@
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="sourceCollection"/> is
         /// <c>null</c>.</exception>
-        public static async Task<TDestination[]> TranslateArray<TSourceCollection, TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static async Task<TDestination[]> MapArray<TSourceCollection, TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             TSourceCollection sourceCollection,
             TDestination[] destinationCollection,
             int? sourceCount = null)
@@ -79,7 +79,7 @@
             {
                 var destination = new TDestination();
                 destinationCollection[i] = destination;
-                tasks[i] = translator.Translate(item, destination);
+                tasks[i] = translator.Map(item, destination);
 
                 ++i;
             }
@@ -90,7 +90,7 @@
         }
 
         /// <summary>
-        /// Translates the array of <typeparamref name="TSource"/> into an array of
+        /// Maps the array of <typeparamref name="TSource"/> into an array of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -100,14 +100,14 @@
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<TDestination[]> TranslateArray<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<TDestination[]> MapArray<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             TSource[] source)
             where TDestination : new() =>
-            TranslateArray(translator, source, new TDestination[source.Length], source.Length);
+            MapArray(translator, source, new TDestination[source.Length], source.Length);
 
         /// <summary>
-        /// Translates the list of <typeparamref name="TSource"/> into an array of
+        /// Maps the list of <typeparamref name="TSource"/> into an array of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -117,14 +117,14 @@
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<TDestination[]> TranslateArray<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<TDestination[]> MapArray<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             List<TSource> source)
             where TDestination : new() =>
-            TranslateArray(translator, source, new TDestination[source.Count], source.Count);
+            MapArray(translator, source, new TDestination[source.Count], source.Count);
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource"/> into an array of
+        /// Maps the collection of <typeparamref name="TSource"/> into an array of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -134,14 +134,14 @@
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<TDestination[]> TranslateArray<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<TDestination[]> MapArray<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             Collection<TSource> source)
             where TDestination : new() =>
-            TranslateArray(translator, source, new TDestination[source.Count], source.Count);
+            MapArray(translator, source, new TDestination[source.Count], source.Count);
 
         /// <summary>
-        /// Translates the enumerable of <typeparamref name="TSource"/> into an array of
+        /// Maps the enumerable of <typeparamref name="TSource"/> into an array of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -151,17 +151,17 @@
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<TDestination[]> TranslateArray<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<TDestination[]> MapArray<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
             var sourceCount = source.Count();
-            return TranslateArray(translator, source, new TDestination[sourceCount], sourceCount);
+            return MapArray(translator, source, new TDestination[sourceCount], sourceCount);
         }
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource" /> into a collection of type
+        /// Maps the collection of <typeparamref name="TSource" /> into a collection of type
         /// <typeparamref name="TDestinationCollection" /> containing objects of type <typeparamref name="TDestination" />.
         /// </summary>
         /// <typeparam name="TSourceCollection">The type of the source collection.</typeparam>
@@ -177,8 +177,8 @@
         /// </returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator" /> or <paramref name="sourceCollection" /> is
         /// <c>null</c>.</exception>
-        public static async Task<TDestinationCollection> TranslateCollection<TSourceCollection, TSource, TDestinationCollection, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static async Task<TDestinationCollection> MapCollection<TSourceCollection, TSource, TDestinationCollection, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             TSourceCollection sourceCollection,
             TDestinationCollection destinationCollection,
             int? sourceCount = null)
@@ -201,7 +201,7 @@
             {
                 var destination = new TDestination();
                 destinationCollection.Add(destination);
-                tasks.Add(translator.Translate(item, destination));
+                tasks.Add(translator.Map(item, destination));
             }
 
             await Task.WhenAll(tasks);
@@ -210,7 +210,7 @@
         }
 
         /// <summary>
-        /// Translates the list of <typeparamref name="TSource"/> into a collection of
+        /// Maps the list of <typeparamref name="TSource"/> into a collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -220,14 +220,14 @@
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<Collection<TDestination>> TranslateCollection<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             List<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new Collection<TDestination>(), source.Count);
+            MapCollection(translator, source, new Collection<TDestination>(), source.Count);
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource"/> into a collection of
+        /// Maps the collection of <typeparamref name="TSource"/> into a collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -237,14 +237,14 @@
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<Collection<TDestination>> TranslateCollection<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             Collection<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new Collection<TDestination>(), source.Count);
+            MapCollection(translator, source, new Collection<TDestination>(), source.Count);
 
         /// <summary>
-        /// Translates the array of <typeparamref name="TSource"/> into a collection of
+        /// Maps the array of <typeparamref name="TSource"/> into a collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -254,14 +254,14 @@
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<Collection<TDestination>> TranslateCollection<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             TSource[] source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new Collection<TDestination>(), source.Length);
+            MapCollection(translator, source, new Collection<TDestination>(), source.Length);
 
         /// <summary>
-        /// Translates the enumerable of <typeparamref name="TSource"/> into a collection of
+        /// Maps the enumerable of <typeparamref name="TSource"/> into a collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -271,14 +271,14 @@
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<Collection<TDestination>> TranslateCollection<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new Collection<TDestination>());
+            MapCollection(translator, source, new Collection<TDestination>());
 
         /// <summary>
-        /// Translates the list of <typeparamref name="TSource"/> into a list of
+        /// Maps the list of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -288,14 +288,14 @@
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<List<TDestination>> TranslateList<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<List<TDestination>> MapList<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             List<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new List<TDestination>(source.Count), source.Count);
+            MapCollection(translator, source, new List<TDestination>(source.Count), source.Count);
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource"/> into a list of
+        /// Maps the collection of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -305,14 +305,14 @@
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<List<TDestination>> TranslateList<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<List<TDestination>> MapList<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             Collection<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new List<TDestination>(source.Count), source.Count);
+            MapCollection(translator, source, new List<TDestination>(source.Count), source.Count);
 
         /// <summary>
-        /// Translates the array of <typeparamref name="TSource"/> into a list of
+        /// Maps the array of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -322,14 +322,14 @@
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<List<TDestination>> TranslateList<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<List<TDestination>> MapList<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             TSource[] source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new List<TDestination>(source.Length), source.Length);
+            MapCollection(translator, source, new List<TDestination>(source.Length), source.Length);
 
         /// <summary>
-        /// Translates the enumerable of <typeparamref name="TSource"/> into a list of
+        /// Maps the enumerable of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -339,17 +339,17 @@
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<List<TDestination>> TranslateList<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<List<TDestination>> MapList<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
             var sourceCount = source.Count();
-            return TranslateCollection(translator, source, new List<TDestination>(sourceCount), sourceCount);
+            return MapCollection(translator, source, new List<TDestination>(sourceCount), sourceCount);
         }
 
         /// <summary>
-        /// Translates the list of <typeparamref name="TSource"/> into an observable collection of
+        /// Maps the list of <typeparamref name="TSource"/> into an observable collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -359,14 +359,14 @@
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<ObservableCollection<TDestination>> TranslateObservableCollection<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             List<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new ObservableCollection<TDestination>(), source.Count);
+            MapCollection(translator, source, new ObservableCollection<TDestination>(), source.Count);
 
         /// <summary>
-        /// Translates the collection of <typeparamref name="TSource"/> into an observable collection of
+        /// Maps the collection of <typeparamref name="TSource"/> into an observable collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -376,14 +376,14 @@
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<ObservableCollection<TDestination>> TranslateObservableCollection<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             Collection<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new ObservableCollection<TDestination>(), source.Count);
+            MapCollection(translator, source, new ObservableCollection<TDestination>(), source.Count);
 
         /// <summary>
-        /// Translates the array of <typeparamref name="TSource"/> into an observable collection of
+        /// Maps the array of <typeparamref name="TSource"/> into an observable collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -393,14 +393,14 @@
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<ObservableCollection<TDestination>> TranslateObservableCollection<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             TSource[] source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new ObservableCollection<TDestination>(), source.Length);
+            MapCollection(translator, source, new ObservableCollection<TDestination>(), source.Length);
 
         /// <summary>
-        /// Translates the enumerable of <typeparamref name="TSource"/> into an observable collection of
+        /// Maps the enumerable of <typeparamref name="TSource"/> into an observable collection of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
@@ -410,10 +410,10 @@
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<ObservableCollection<TDestination>> TranslateObservableCollection<TSource, TDestination>(
-            this IAsyncTranslator<TSource, TDestination> translator,
+        public static Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
             where TDestination : new() =>
-            TranslateCollection(translator, source, new ObservableCollection<TDestination>());
+            MapCollection(translator, source, new ObservableCollection<TDestination>());
     }
 }
