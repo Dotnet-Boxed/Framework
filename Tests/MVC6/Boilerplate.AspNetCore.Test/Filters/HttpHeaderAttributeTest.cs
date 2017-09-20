@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.Test.Filters
+namespace Boilerplate.AspNetCore.Test.Filters
 {
     using System;
     using System.Collections.Generic;
@@ -69,7 +69,7 @@
             this.filter.OnActionExecuting(this.actionExecutingContext);
 
             Assert.True(responseHeaders.ContainsKey(HttpHeaderName));
-            Assert.Equal(1, responseHeaders[HttpHeaderName].Count);
+            Assert.Single(responseHeaders[HttpHeaderName]);
             Assert.Equal("Hello", responseHeaders[HttpHeaderName].First());
         }
 
