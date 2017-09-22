@@ -2,6 +2,7 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
     <CodeAnalysisRuleSet>../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
