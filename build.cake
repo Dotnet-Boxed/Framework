@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 var target = Argument("Target", "Default");
@@ -19,6 +19,11 @@ var buildNumber =
     0;
 
 var artifactsDirectory = Directory("./Artifacts");
+string versionSuffix = null;
+if (!string.IsNullOrEmpty(preReleaseSuffix))
+{
+    versionSuffix = preReleaseSuffix + "-" + buildNumber.ToString("D4");
+}
 
 IList<string> GetCoreFrameworks(string csprojFilePath)
 {
@@ -56,7 +61,8 @@ Task("Restore")
             Information(project.ToString());
             var settings = new DotNetCoreBuildSettings()
             {
-                Configuration = configuration
+                Configuration = configuration,
+                VersionSuffix = versionSuffix
             };
 
             if (!IsRunningOnWindows())
@@ -116,23 +122,14 @@ Task("Pack")
     .IsDependentOn("Test")
     .Does(() =>
     {
-        string versionSuffix = null;
-        if (!string.IsNullOrEmpty(preReleaseSuffix))
-        {
-            versionSuffix = preReleaseSuffix + "-" + buildNumber.ToString("D4");
-        }
-
-        foreach (var project in GetFiles("./Source/**/*.csproj"))
-        {
-            DotNetCorePack(
-                project.GetDirectory().FullPath,
-                new DotNetCorePackSettings()
-                {
-                    Configuration = configuration,
-                    OutputDirectory = artifactsDirectory,
-                    VersionSuffix = versionSuffix
-                });
-        }
+        DotNetCorePack(
+            ".",
+            new DotNetCorePackSettings()
+            {
+                Configuration = configuration,
+                OutputDirectory = artifactsDirectory,
+                VersionSuffix = versionSuffix
+            });
     });
 
 Task("Default")
