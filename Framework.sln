@@ -1,11 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC5", "MVC5", "{C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC6", "MVC6", "{E97C7A33-28AC-4AD6-8DC7-46886058969F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F316174B-045B-4DC0-9097-8CE746A8BBB0}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -20,25 +16,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{D37BD4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC6", "MVC6", "{A1009B8D-6262-4427-A4FA-54D75F164CC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Web.Mvc5", "Source\Boilerplate.Web.Mvc5\Boilerplate.Web.Mvc5.csproj", "{B0C024C9-531C-425E-9A58-22E46D90C0C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Web.Mvc5", "Source\MVC5\Boilerplate.Web.Mvc5\Boilerplate.Web.Mvc5.csproj", "{B0C024C9-531C-425E-9A58-22E46D90C0C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore", "Source\Boilerplate.AspNetCore\Boilerplate.AspNetCore.csproj", "{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore", "Source\MVC6\Boilerplate.AspNetCore\Boilerplate.AspNetCore.csproj", "{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.TagHelpers", "Source\Boilerplate.AspNetCore.TagHelpers\Boilerplate.AspNetCore.TagHelpers.csproj", "{EE9EDF54-81FE-455B-BC4B-D435B08E25A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.TagHelpers", "Source\MVC6\Boilerplate.AspNetCore.TagHelpers\Boilerplate.AspNetCore.TagHelpers.csproj", "{EE9EDF54-81FE-455B-BC4B-D435B08E25A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.Test", "Tests\Boilerplate.AspNetCore.Test\Boilerplate.AspNetCore.Test.csproj", "{0CDB5E52-B7A1-4CB9-BAD1-F4E68A391B93}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.Test", "Tests\MVC6\Boilerplate.AspNetCore.Test\Boilerplate.AspNetCore.Test.csproj", "{0CDB5E52-B7A1-4CB9-BAD1-F4E68A391B93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.TagHelpers.Test", "Tests\Boilerplate.AspNetCore.TagHelpers.Test\Boilerplate.AspNetCore.TagHelpers.Test.csproj", "{DF19E131-3E30-40F6-A5B2-1E0EDB75DC00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.TagHelpers.Test", "Tests\MVC6\Boilerplate.AspNetCore.TagHelpers.Test\Boilerplate.AspNetCore.TagHelpers.Test.csproj", "{DF19E131-3E30-40F6-A5B2-1E0EDB75DC00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.Swagger", "Source\Boilerplate.AspNetCore.Swagger\Boilerplate.AspNetCore.Swagger.csproj", "{503A5A5C-6AA2-4890-B7C0-0E53F0E63CF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.Swagger", "Source\MVC6\Boilerplate.AspNetCore.Swagger\Boilerplate.AspNetCore.Swagger.csproj", "{503A5A5C-6AA2-4890-B7C0-0E53F0E63CF7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.Swagger.Test", "Tests\MVC6\Boilerplate.AspNetCore.Swagger.Test\Boilerplate.AspNetCore.Swagger.Test.csproj", "{FB1DACF8-4475-4266-B303-682A186E912C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Translation", "Source\MVC6\Boilerplate.Translation\Boilerplate.Translation.csproj", "{B115BD4F-C4EB-4BC4-AF4F-B0F767631403}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Translation.Test", "Tests\MVC6\Boilerplate.Translation.Test\Boilerplate.Translation.Test.csproj", "{4228920C-D395-40D3-8F1B-171E750AC486}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.Swagger.Test", "Tests\Boilerplate.AspNetCore.Swagger.Test\Boilerplate.AspNetCore.Swagger.Test.csproj", "{FB1DACF8-4475-4266-B303-682A186E912C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{DC7FDD72-F9C9-42E9-90CC-468BDD9A5CC2}"
 	ProjectSection(SolutionItems) = preProject
@@ -46,6 +36,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Mapping", "Source\Boilerplate.Mapping\Boilerplate.Mapping.csproj", "{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Mapping.Test", "Tests\Boilerplate.Mapping.Test\Boilerplate.Mapping.Test.csproj", "{B03DDD55-8A3B-4B28-AE9F-9197F098664D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,30 +75,30 @@ Global
 		{FB1DACF8-4475-4266-B303-682A186E912C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB1DACF8-4475-4266-B303-682A186E912C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB1DACF8-4475-4266-B303-682A186E912C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B115BD4F-C4EB-4BC4-AF4F-B0F767631403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B115BD4F-C4EB-4BC4-AF4F-B0F767631403}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B115BD4F-C4EB-4BC4-AF4F-B0F767631403}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B115BD4F-C4EB-4BC4-AF4F-B0F767631403}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4228920C-D395-40D3-8F1B-171E750AC486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4228920C-D395-40D3-8F1B-171E750AC486}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4228920C-D395-40D3-8F1B-171E750AC486}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4228920C-D395-40D3-8F1B-171E750AC486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B03DDD55-8A3B-4B28-AE9F-9197F098664D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B03DDD55-8A3B-4B28-AE9F-9197F098664D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B03DDD55-8A3B-4B28-AE9F-9197F098664D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B03DDD55-8A3B-4B28-AE9F-9197F098664D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C21DC15C-CF5E-4D6E-9585-4C7C446AD18F} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
-		{E97C7A33-28AC-4AD6-8DC7-46886058969F} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
-		{A1009B8D-6262-4427-A4FA-54D75F164CC7} = {6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}
-		{B0C024C9-531C-425E-9A58-22E46D90C0C6} = {C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}
-		{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5} = {E97C7A33-28AC-4AD6-8DC7-46886058969F}
-		{EE9EDF54-81FE-455B-BC4B-D435B08E25A8} = {E97C7A33-28AC-4AD6-8DC7-46886058969F}
-		{0CDB5E52-B7A1-4CB9-BAD1-F4E68A391B93} = {A1009B8D-6262-4427-A4FA-54D75F164CC7}
-		{DF19E131-3E30-40F6-A5B2-1E0EDB75DC00} = {A1009B8D-6262-4427-A4FA-54D75F164CC7}
-		{503A5A5C-6AA2-4890-B7C0-0E53F0E63CF7} = {E97C7A33-28AC-4AD6-8DC7-46886058969F}
-		{FB1DACF8-4475-4266-B303-682A186E912C} = {A1009B8D-6262-4427-A4FA-54D75F164CC7}
-		{B115BD4F-C4EB-4BC4-AF4F-B0F767631403} = {E97C7A33-28AC-4AD6-8DC7-46886058969F}
-		{4228920C-D395-40D3-8F1B-171E750AC486} = {A1009B8D-6262-4427-A4FA-54D75F164CC7}
+		{B0C024C9-531C-425E-9A58-22E46D90C0C6} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
+		{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
+		{EE9EDF54-81FE-455B-BC4B-D435B08E25A8} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
+		{0CDB5E52-B7A1-4CB9-BAD1-F4E68A391B93} = {6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}
+		{DF19E131-3E30-40F6-A5B2-1E0EDB75DC00} = {6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}
+		{503A5A5C-6AA2-4890-B7C0-0E53F0E63CF7} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
+		{FB1DACF8-4475-4266-B303-682A186E912C} = {6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}
+		{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
+		{B03DDD55-8A3B-4B28-AE9F-9197F098664D} = {6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3BCEA536-0EA4-4EC0-B121-7B83926F8514}
 	EndGlobalSection
 EndGlobal
