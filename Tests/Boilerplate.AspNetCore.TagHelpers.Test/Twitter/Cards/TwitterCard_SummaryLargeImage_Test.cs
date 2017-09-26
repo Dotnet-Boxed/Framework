@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.TagHelpers.Test.Twitter.Cards
+namespace Boilerplate.AspNetCore.TagHelpers.Test.Twitter.Cards
 {
     using System;
     using System.Collections.Generic;
@@ -41,12 +41,12 @@
                 var output = new TagHelperOutput(
                     "meta",
                     new TagHelperAttributeList(),
-                        (cache, encoder) =>
-                        {
-                            var tagHelperContent = new DefaultTagHelperContent();
-                            tagHelperContent.SetContent(string.Empty);
-                            return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        });
+                    (cache, encoder) =>
+                    {
+                        var tagHelperContent = new DefaultTagHelperContent();
+                        tagHelperContent.SetContent(string.Empty);
+                        return Task.FromResult<TagHelperContent>(tagHelperContent);
+                    });
 
                 myTagHelper.Process(context, output);
             }
@@ -81,12 +81,12 @@
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
             myTagHelper.Process(context, output);
             Assert.DoesNotContain("twitter:image", output.Content.GetContent());
@@ -114,12 +114,12 @@
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
             myTagHelper.Process(context, output);
             Assert.DoesNotContain("twitter:image:height", output.Content.GetContent());
@@ -153,12 +153,12 @@
                 var output = new TagHelperOutput(
                     "meta",
                     new TagHelperAttributeList(),
-                        (cache, encoder) =>
-                        {
-                            var tagHelperContent = new DefaultTagHelperContent();
-                            tagHelperContent.SetContent(string.Empty);
-                            return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        });
+                    (cache, encoder) =>
+                    {
+                        var tagHelperContent = new DefaultTagHelperContent();
+                        tagHelperContent.SetContent(string.Empty);
+                        return Task.FromResult<TagHelperContent>(tagHelperContent);
+                    });
 
                 myTagHelper.Process(context, output);
             }
@@ -198,12 +198,12 @@
                 var output = new TagHelperOutput(
                     "meta",
                     new TagHelperAttributeList(),
-                        (cache, encoder) =>
-                        {
-                            var tagHelperContent = new DefaultTagHelperContent();
-                            tagHelperContent.SetContent(string.Empty);
-                            return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        });
+                    (cache, encoder) =>
+                    {
+                        var tagHelperContent = new DefaultTagHelperContent();
+                        tagHelperContent.SetContent(string.Empty);
+                        return Task.FromResult<TagHelperContent>(tagHelperContent);
+                    });
 
                 myTagHelper.Process(context, output);
             }
@@ -239,12 +239,12 @@
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:site:id\" content=\"" + TwitterCardAnswerKey.SiteIdValue + "\"", output.Content.GetContent());
@@ -272,12 +272,12 @@
             var output = new TagHelperOutput(
                 "div",
                 new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:card\" content=\"summary_large_image\"", output.Content.GetContent());
@@ -307,12 +307,12 @@
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:creator:id\" content=\"" + TwitterCardAnswerKey.CreatorId + "\"", output.Content.GetContent());
@@ -341,12 +341,12 @@
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:description\" content=\"" + TwitterCardAnswerKey.DescriptionValue + "\"", output.Content.GetContent());
@@ -374,12 +374,12 @@
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:image\" content=\"" + TwitterCardAnswerKey.ImageUrlValue + "\"", output.Content.GetContent());
@@ -409,12 +409,12 @@
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:title\" content=\"" + TwitterCardAnswerKey.TitleValue + "\"", output.Content.GetContent());
