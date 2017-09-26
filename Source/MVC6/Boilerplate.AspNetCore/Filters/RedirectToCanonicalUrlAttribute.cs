@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.Filters
+namespace Boilerplate.AspNetCore.Filters
 {
     using System;
     using Microsoft.AspNetCore.Http;
@@ -72,7 +72,7 @@
         /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
-            if (string.Equals(context.HttpContext.Request.Method, "GET", StringComparison.Ordinal))
+            if (HttpMethods.IsGet(context.HttpContext.Request.Method))
             {
                 if (!this.TryGetCanonicalUrl(context, out string canonicalUrl))
                 {
