@@ -100,10 +100,11 @@ namespace Boilerplate.AspNetCore.Filters
             var isCanonical = true;
 
             var request = context.HttpContext.Request;
+            var hasPath = request.Path.HasValue && (request.Path.Value.Length > 1);
 
             // If we are not dealing with the home page. Note, the home page is a special case and it doesn't matter
             // if there is a trailing slash or not. Both will be treated as the same by search engines.
-            if (request.Path.HasValue && (request.Path.Value.Length > 1))
+            if (hasPath)
             {
                 var hasTrailingSlash = request.Path.Value[request.Path.Value.Length - 1] == SlashCharacter;
 
@@ -125,7 +126,10 @@ namespace Boilerplate.AspNetCore.Filters
                         isCanonical = false;
                     }
                 }
+            }
 
+            if (hasPath || request.QueryString.HasValue)
+            {
                 if (this.lowercaseUrls && !this.HasAttribute<NoTrailingSlashAttribute>(context))
                 {
                     foreach (var character in request.Path.Value)
