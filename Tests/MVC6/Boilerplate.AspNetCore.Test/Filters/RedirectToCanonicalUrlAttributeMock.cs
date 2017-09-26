@@ -1,4 +1,4 @@
-namespace Boilerplate.AspNetCore.Test
+namespace Boilerplate.AspNetCore.Test.Filters
 {
     using System.Diagnostics;
     using Boilerplate.AspNetCore.Filters;
