@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.TagHelpers.Test.Twitter.Cards
+namespace Boilerplate.AspNetCore.TagHelpers.Test.Twitter.Cards
 {
     using System;
     using System.Collections.Generic;
@@ -40,12 +40,12 @@
                 var output = new TagHelperOutput(
                     "meta",
                     new TagHelperAttributeList(),
-                        (cache, encoder) =>
-                        {
-                            var tagHelperContent = new DefaultTagHelperContent();
-                            tagHelperContent.SetContent(string.Empty);
-                            return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        });
+                    (cache, encoder) =>
+                    {
+                        var tagHelperContent = new DefaultTagHelperContent();
+                        tagHelperContent.SetContent(string.Empty);
+                        return Task.FromResult<TagHelperContent>(tagHelperContent);
+                    });
 
                 myTagHelper.Process(context, output);
             }
@@ -85,12 +85,12 @@
                 var output = new TagHelperOutput(
                     "meta",
                     new TagHelperAttributeList(),
-                        (cache, encoder) =>
-                        {
-                            var tagHelperContent = new DefaultTagHelperContent();
-                            tagHelperContent.SetContent(string.Empty);
-                            return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        });
+                    (cache, encoder) =>
+                    {
+                        var tagHelperContent = new DefaultTagHelperContent();
+                        tagHelperContent.SetContent(string.Empty);
+                        return Task.FromResult<TagHelperContent>(tagHelperContent);
+                    });
 
                 myTagHelper.Process(context, output);
             }
@@ -130,12 +130,12 @@
                 var output = new TagHelperOutput(
                     "meta",
                     new TagHelperAttributeList(),
-                        (cache, encoder) =>
-                        {
-                            var tagHelperContent = new DefaultTagHelperContent();
-                            tagHelperContent.SetContent(string.Empty);
-                            return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        });
+                    (cache, encoder) =>
+                    {
+                        var tagHelperContent = new DefaultTagHelperContent();
+                        tagHelperContent.SetContent(string.Empty);
+                        return Task.FromResult<TagHelperContent>(tagHelperContent);
+                    });
 
                 myTagHelper.Process(context, output);
             }
@@ -170,12 +170,12 @@
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
             myTagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:card\" content=\"app\"", output.Content.GetContent());
@@ -209,12 +209,12 @@
                 var output = new TagHelperOutput(
                     "meta",
                     new TagHelperAttributeList(),
-                        (cache, encoder) =>
-                        {
-                            var tagHelperContent = new DefaultTagHelperContent();
-                            tagHelperContent.SetContent(string.Empty);
-                            return Task.FromResult<TagHelperContent>(tagHelperContent);
-                        });
+                    (cache, encoder) =>
+                    {
+                        var tagHelperContent = new DefaultTagHelperContent();
+                        tagHelperContent.SetContent(string.Empty);
+                        return Task.FromResult<TagHelperContent>(tagHelperContent);
+                    });
 
                 myTagHelper.Process(context, output);
             }
