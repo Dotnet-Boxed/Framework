@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F316174B-045B-4DC0-9097-8CE746A8BBB0}"
 	ProjectSection(SolutionItems) = preProject
@@ -40,6 +40,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Mapping", "Source\Boilerplate.Mapping\Boilerplate.Mapping.csproj", "{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Mapping.Test", "Tests\Boilerplate.Mapping.Test\Boilerplate.Mapping.Test.csproj", "{B03DDD55-8A3B-4B28-AE9F-9197F098664D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{D941A0C1-E1B6-45CF-AB7A-E1C724385404}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Mapping.Benchmark", "Benchmarks\Boilerplate.Mapping.Benchmark\Boilerplate.Mapping.Benchmark.csproj", "{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +87,10 @@ Global
 		{B03DDD55-8A3B-4B28-AE9F-9197F098664D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B03DDD55-8A3B-4B28-AE9F-9197F098664D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B03DDD55-8A3B-4B28-AE9F-9197F098664D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +105,7 @@ Global
 		{FB1DACF8-4475-4266-B303-682A186E912C} = {6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}
 		{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
 		{B03DDD55-8A3B-4B28-AE9F-9197F098664D} = {6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}
+		{D4893F37-7C6F-4E16-B587-F48B4C5F73DC} = {D941A0C1-E1B6-45CF-AB7A-E1C724385404}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3BCEA536-0EA4-4EC0-B121-7B83926F8514}
