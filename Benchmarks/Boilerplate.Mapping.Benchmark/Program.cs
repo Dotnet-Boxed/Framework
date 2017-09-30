@@ -8,8 +8,8 @@ namespace Boilerplate.Mapping.Benchmark
         public static void Main(string[] args)
         {
             // BenchmarkRunner.Run<MapObjectBenchmark>();
-            BenchmarkRunner.Run<MapArrayBenchmark>();
-            // BenchmarkRunner.Run<MapListBenchmark>();
+            // BenchmarkRunner.Run<MapArrayBenchmark>();
+            BenchmarkRunner.Run<MapListBenchmark>();
             Console.Read();
         }
     }
