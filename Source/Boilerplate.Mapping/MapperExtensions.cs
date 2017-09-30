@@ -277,8 +277,28 @@ namespace Boilerplate.Mapping
         public static List<TDestination> MapList<TSource, TDestination>(
             this IMapper<TSource, TDestination> translator,
             List<TSource> source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new List<TDestination>(source.Count));
+            where TDestination : new()
+        // Was using line below but that seems slower than doing a straight foreach.
+        // => MapCollection(translator, source, new List<TDestination>(source.Count));
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var destinationCollection = new List<TDestination>(source.Count);
+            foreach (var sourceItem in source)
+            {
+                destinationCollection.Add(translator.Map(sourceItem));
+            }
+
+            return destinationCollection;
+        }
 
         /// <summary>
         /// Maps the collection of <typeparamref name="TSource"/> into a list of
