@@ -13,7 +13,7 @@ namespace Boilerplate.Mapping
     {
         /// <summary>
         /// Maps the specified source object to a new object with a type of <typeparamref name="TDestination"/>.
-        /// </summary>
+        /// </summary>dotnet test
         /// <typeparam name="TSource">The type of the source object.</typeparam>
         /// <typeparam name="TDestination">The type of the destination object.</typeparam>
         /// <param name="translator">The translator.</param>
@@ -36,7 +36,7 @@ namespace Boilerplate.Mapping
                 throw new ArgumentNullException(nameof(source));
             }
 
-            var destination = new TDestination();
+            var destination = Factory<TDestination>.CreateInstance();
             await translator.Map(source, destination);
             return destination;
         }
@@ -49,16 +49,16 @@ namespace Boilerplate.Mapping
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="translator">The translator.</param>
-        /// <param name="sourceCollection">The source collection.</param>
-        /// <param name="destinationCollection">The destination collection.</param>
+        /// <param name="source">The source collection.</param>
+        /// <param name="destination">The destination collection.</param>
         /// <param name="sourceCount">The number of items in the source collection.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="sourceCollection"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination[]> MapArray<TSourceCollection, TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
-            TSourceCollection sourceCollection,
-            TDestination[] destinationCollection,
+            TSourceCollection source,
+            TDestination[] destination,
             int? sourceCount = null)
             where TSourceCollection : IEnumerable<TSource>
             where TDestination : new()
@@ -68,25 +68,114 @@ namespace Boilerplate.Mapping
                 throw new ArgumentNullException(nameof(translator));
             }
 
-            if (sourceCollection == null)
+            if (source == null)
             {
-                throw new ArgumentNullException(nameof(sourceCollection));
+                throw new ArgumentNullException(nameof(source));
             }
 
-            var tasks = new Task[sourceCount ?? sourceCollection.Count()];
-            var i = 0;
-            foreach (var item in sourceCollection)
+            if (destination == null)
             {
-                var destination = new TDestination();
-                destinationCollection[i] = destination;
-                tasks[i] = translator.Map(item, destination);
+                throw new ArgumentNullException(nameof(destination));
+            }
+
+            var tasks = new Task[sourceCount ?? source.Count()];
+            var i = 0;
+            foreach (var sourceItem in source)
+            {
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination[i] = destinationItem;
+                tasks[i] = translator.Map(sourceItem, destinationItem);
 
                 ++i;
             }
 
             await Task.WhenAll(tasks);
 
-            return destinationCollection;
+            return destination;
+        }
+
+        /// <summary>
+        /// Maps the list of <typeparamref name="TSource"/> into an array of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="translator">The translator.</param>
+        /// <param name="source">The source objects.</param>
+        /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async Task<TDestination[]> MapArray<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
+            List<TSource> source)
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task[sourceCount];
+            var destination = new TDestination[sourceCount];
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination[i] = destinationItem;
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
+
+        /// <summary>
+        /// Maps the collection of <typeparamref name="TSource"/> into an array of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="translator">The translator.</param>
+        /// <param name="source">The source objects.</param>
+        /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async Task<TDestination[]> MapArray<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> translator,
+            Collection<TSource> source)
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task[sourceCount];
+            var destination = new TDestination[sourceCount];
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination[i] = destinationItem;
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
         }
 
         /// <summary>
@@ -100,45 +189,36 @@ namespace Boilerplate.Mapping
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<TDestination[]> MapArray<TSource, TDestination>(
+        public static async Task<TDestination[]> MapArray<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             TSource[] source)
-            where TDestination : new() =>
-            MapArray(translator, source, new TDestination[source.Length], source.Length);
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
 
-        /// <summary>
-        /// Maps the list of <typeparamref name="TSource"/> into an array of
-        /// <typeparamref name="TDestination"/>.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the source objects.</typeparam>
-        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
-        /// <param name="source">The source objects.</param>
-        /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
-        /// <c>null</c>.</exception>
-        public static Task<TDestination[]> MapArray<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
-            List<TSource> source)
-            where TDestination : new() =>
-            MapArray(translator, source, new TDestination[source.Count], source.Count);
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
 
-        /// <summary>
-        /// Maps the collection of <typeparamref name="TSource"/> into an array of
-        /// <typeparamref name="TDestination"/>.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the source objects.</typeparam>
-        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
-        /// <param name="source">The source objects.</param>
-        /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
-        /// <c>null</c>.</exception>
-        public static Task<TDestination[]> MapArray<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
-            Collection<TSource> source)
-            where TDestination : new() =>
-            MapArray(translator, source, new TDestination[source.Count], source.Count);
+            var sourceCount = source.Length;
+            var tasks = new Task[sourceCount];
+            var destination = new TDestination[sourceCount];
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination[i] = destinationItem;
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the enumerable of <typeparamref name="TSource"/> into an array of
@@ -151,13 +231,36 @@ namespace Boilerplate.Mapping
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<TDestination[]> MapArray<TSource, TDestination>(
+        public static async Task<TDestination[]> MapArray<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
             var sourceCount = source.Count();
-            return MapArray(translator, source, new TDestination[sourceCount], sourceCount);
+            var tasks = new Task[sourceCount];
+            var destination = new TDestination[sourceCount];
+            var i = 0;
+            foreach (var sourceItem in source)
+            {
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination[i] = destinationItem;
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+                ++i;
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
         }
 
         /// <summary>
@@ -169,19 +272,17 @@ namespace Boilerplate.Mapping
         /// <typeparam name="TDestinationCollection">The type of the destination collection.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="translator">The translator.</param>
-        /// <param name="sourceCollection">The source collection.</param>
-        /// <param name="destinationCollection">The destination collection.</param>
-        /// <param name="sourceCount">The number of items in the source collection.</param>
+        /// <param name="source">The source collection.</param>
+        /// <param name="destination">The destination collection.</param>
         /// <returns>A collection of type <typeparamref name="TDestinationCollection"/> containing objects of type
         /// <typeparamref name="TDestination" />.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator" /> or <paramref name="sourceCollection" /> is
+        /// <exception cref="ArgumentNullException">The <paramref name="translator" /> or <paramref name="source" /> is
         /// <c>null</c>.</exception>
         public static async Task<TDestinationCollection> MapCollection<TSourceCollection, TSource, TDestinationCollection, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
-            TSourceCollection sourceCollection,
-            TDestinationCollection destinationCollection,
-            int? sourceCount = null)
+            TSourceCollection source,
+            TDestinationCollection destination)
             where TSourceCollection : IEnumerable<TSource>
             where TDestinationCollection : ICollection<TDestination>
             where TDestination : new()
@@ -191,22 +292,30 @@ namespace Boilerplate.Mapping
                 throw new ArgumentNullException(nameof(translator));
             }
 
-            if (sourceCollection == null)
+            if (source == null)
             {
-                throw new ArgumentNullException(nameof(sourceCollection));
+                throw new ArgumentNullException(nameof(source));
             }
 
-            var tasks = new List<Task>(sourceCount ?? sourceCollection.Count());
-            foreach (var item in sourceCollection)
+            if (destination == null)
             {
-                var destination = new TDestination();
-                destinationCollection.Add(destination);
-                tasks.Add(translator.Map(item, destination));
+                throw new ArgumentNullException(nameof(destination));
+            }
+
+            var sourceCount = source.Count();
+            var tasks = new Task[sourceCount];
+            var i = 0;
+            foreach (var sourceItem in source)
+            {
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Add(destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+                ++i;
             }
 
             await Task.WhenAll(tasks);
 
-            return destinationCollection;
+            return destination;
         }
 
         /// <summary>
@@ -220,11 +329,36 @@ namespace Boilerplate.Mapping
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
+        public static async Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             List<TSource> source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new Collection<TDestination>(), source.Count);
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task[sourceCount];
+            var destination = new Collection<TDestination>();
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the collection of <typeparamref name="TSource"/> into a collection of
@@ -237,11 +371,36 @@ namespace Boilerplate.Mapping
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
+        public static async Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             Collection<TSource> source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new Collection<TDestination>(), source.Count);
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task[sourceCount];
+            var destination = new Collection<TDestination>();
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the array of <typeparamref name="TSource"/> into a collection of
@@ -254,11 +413,36 @@ namespace Boilerplate.Mapping
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
+        public static async Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             TSource[] source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new Collection<TDestination>(), source.Length);
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Length;
+            var tasks = new Task[sourceCount];
+            var destination = new Collection<TDestination>();
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the enumerable of <typeparamref name="TSource"/> into a collection of
@@ -271,11 +455,37 @@ namespace Boilerplate.Mapping
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
+        public static async Task<Collection<TDestination>> MapCollection<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new Collection<TDestination>());
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count();
+            var tasks = new Task[sourceCount];
+            var destination = new Collection<TDestination>();
+            var i = 0;
+            foreach (var sourceItem in source)
+            {
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+                ++i;
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the list of <typeparamref name="TSource"/> into a list of
@@ -288,11 +498,36 @@ namespace Boilerplate.Mapping
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<List<TDestination>> MapList<TSource, TDestination>(
+        public static async Task<List<TDestination>> MapList<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             List<TSource> source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new List<TDestination>(source.Count), source.Count);
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task[sourceCount];
+            var destination = new List<TDestination>(sourceCount);
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the collection of <typeparamref name="TSource"/> into a list of
@@ -305,11 +540,36 @@ namespace Boilerplate.Mapping
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<List<TDestination>> MapList<TSource, TDestination>(
+        public static async Task<List<TDestination>> MapList<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             Collection<TSource> source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new List<TDestination>(source.Count), source.Count);
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task[sourceCount];
+            var destination = new List<TDestination>(sourceCount);
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the array of <typeparamref name="TSource"/> into a list of
@@ -322,11 +582,36 @@ namespace Boilerplate.Mapping
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<List<TDestination>> MapList<TSource, TDestination>(
+        public static async Task<List<TDestination>> MapList<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             TSource[] source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new List<TDestination>(source.Length), source.Length);
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Length;
+            var tasks = new Task[sourceCount];
+            var destination = new List<TDestination>(sourceCount);
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the enumerable of <typeparamref name="TSource"/> into a list of
@@ -339,13 +624,36 @@ namespace Boilerplate.Mapping
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<List<TDestination>> MapList<TSource, TDestination>(
+        public static async Task<List<TDestination>> MapList<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
             var sourceCount = source.Count();
-            return MapCollection(translator, source, new List<TDestination>(sourceCount), sourceCount);
+            var tasks = new Task[sourceCount];
+            var destination = new List<TDestination>(sourceCount);
+            var i = 0;
+            foreach (var sourceItem in source)
+            {
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+                ++i;
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
         }
 
         /// <summary>
@@ -359,11 +667,36 @@ namespace Boilerplate.Mapping
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
+        public static async Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             List<TSource> source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new ObservableCollection<TDestination>(), source.Count);
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task[sourceCount];
+            var destination = new ObservableCollection<TDestination>();
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the collection of <typeparamref name="TSource"/> into an observable collection of
@@ -376,11 +709,36 @@ namespace Boilerplate.Mapping
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
+        public static async Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             Collection<TSource> source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new ObservableCollection<TDestination>(), source.Count);
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task[sourceCount];
+            var destination = new ObservableCollection<TDestination>();
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the array of <typeparamref name="TSource"/> into an observable collection of
@@ -393,11 +751,36 @@ namespace Boilerplate.Mapping
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
+        public static async Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             TSource[] source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new ObservableCollection<TDestination>(), source.Length);
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Length;
+            var tasks = new Task[sourceCount];
+            var destination = new ObservableCollection<TDestination>();
+            for (int i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
 
         /// <summary>
         /// Maps the enumerable of <typeparamref name="TSource"/> into an observable collection of
@@ -410,10 +793,36 @@ namespace Boilerplate.Mapping
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
+        public static async Task<ObservableCollection<TDestination>> MapObservableCollection<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> translator,
             IEnumerable<TSource> source)
-            where TDestination : new() =>
-            MapCollection(translator, source, new ObservableCollection<TDestination>());
+            where TDestination : new()
+        {
+            if (translator == null)
+            {
+                throw new ArgumentNullException(nameof(translator));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count();
+            var tasks = new Task[sourceCount];
+            var destination = new ObservableCollection<TDestination>();
+            var i = 0;
+            foreach (var sourceItem in source)
+            {
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Insert(i, destinationItem);
+                tasks[i] = translator.Map(sourceItem, destinationItem);
+                ++i;
+            }
+
+            await Task.WhenAll(tasks);
+
+            return destination;
+        }
     }
 }
