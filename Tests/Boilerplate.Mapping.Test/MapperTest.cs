@@ -16,7 +16,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public void Map_ToNewObject_Mapd()
+        public void Map_ToNewObject_Mapped()
         {
             var mapper = new Mapper();
 
@@ -26,7 +26,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public void MapArray_Empty_Mapd()
+        public void MapArray_Empty_Mapped()
         {
             var mapper = new Mapper();
 
@@ -38,7 +38,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public void MapArray_ToNewObject_Mapd()
+        public void MapArray_ToNewObject_Mapped()
         {
             var mapper = new Mapper();
 
@@ -56,7 +56,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public void MapTypedCollection_Empty_Mapd()
+        public void MapTypedCollection_Empty_Mapped()
         {
             var mapper = new Mapper();
 
@@ -69,7 +69,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public void MapTypedCollection_ToNewObject_Mapd()
+        public void MapTypedCollection_ToNewObject_Mapped()
         {
             var mapper = new Mapper();
 
@@ -88,7 +88,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public void MapCollection_Empty_Mapd()
+        public void MapCollection_Empty_Mapped()
         {
             var mapper = new Mapper();
 
@@ -100,7 +100,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public void MapCollection_ToNewObject_Mapd()
+        public void MapCollection_ToNewObject_Mapped()
         {
             var mapper = new Mapper();
 
@@ -118,7 +118,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public void MapList_Empty_Mapd()
+        public void MapList_Empty_Mapped()
         {
             var mapper = new Mapper();
 
@@ -130,7 +130,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public void MapList_ToNewObject_Mapd()
+        public void MapList_ToNewObject_Mapped()
         {
             var mapper = new Mapper();
 
@@ -142,6 +142,36 @@ namespace Boilerplate.Mapping.Test
                 });
 
             Assert.IsType<List<MapTo>>(to);
+            Assert.Equal(2, to.Count);
+            Assert.Equal(1, to[0].Property);
+            Assert.Equal(2, to[1].Property);
+        }
+
+        [Fact]
+        public void MapObservableCollection_Empty_Mapped()
+        {
+            var mapper = new Mapper();
+
+            var to = mapper.MapObservableCollection(
+                new MapFrom[0]);
+
+            Assert.IsType<ObservableCollection<MapTo>>(to);
+            Assert.Empty(to);
+        }
+
+        [Fact]
+        public void MapObservableCollection_ToNewObject_Mapped()
+        {
+            var mapper = new Mapper();
+
+            var to = mapper.MapObservableCollection(
+                new MapFrom[]
+                {
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 }
+                });
+
+            Assert.IsType<ObservableCollection<MapTo>>(to);
             Assert.Equal(2, to.Count);
             Assert.Equal(1, to[0].Property);
             Assert.Equal(2, to[1].Property);

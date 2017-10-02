@@ -17,7 +17,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public async Task Map_ToNewObject_Mapd()
+        public async Task Map_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
@@ -27,7 +27,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public async Task MapArray_Empty_Mapd()
+        public async Task MapArray_Empty_Mapped()
         {
             var mapper = new AsyncMapper();
 
@@ -39,7 +39,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public async Task MapArray_ToNewObject_Mapd()
+        public async Task MapArray_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
@@ -57,7 +57,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public async Task MapTypedCollection_Empty_Mapd()
+        public async Task MapTypedCollection_Empty_Mapped()
         {
             var mapper = new AsyncMapper();
 
@@ -70,7 +70,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public async Task MapTypedCollection_ToNewObject_Mapd()
+        public async Task MapTypedCollection_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
@@ -89,7 +89,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public async Task MapCollection_Empty_Mapd()
+        public async Task MapCollection_Empty_Mapped()
         {
             var mapper = new AsyncMapper();
 
@@ -101,7 +101,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public async Task MapCollection_ToNewObject_Mapd()
+        public async Task MapCollection_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
@@ -119,7 +119,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public async Task MapList_Empty_Mapd()
+        public async Task MapList_Empty_Mapped()
         {
             var mapper = new AsyncMapper();
 
@@ -131,7 +131,7 @@ namespace Boilerplate.Mapping.Test
         }
 
         [Fact]
-        public async Task MapList_ToNewObject_Mapd()
+        public async Task MapList_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
@@ -143,6 +143,36 @@ namespace Boilerplate.Mapping.Test
                 });
 
             Assert.IsType<List<MapTo>>(to);
+            Assert.Equal(2, to.Count);
+            Assert.Equal(1, to[0].Property);
+            Assert.Equal(2, to[1].Property);
+        }
+
+        [Fact]
+        public async Task MapObservableCollection_Empty_Mapped()
+        {
+            var mapper = new AsyncMapper();
+
+            var to = await mapper.MapObservableCollection(
+                new MapFrom[0]);
+
+            Assert.IsType<ObservableCollection<MapTo>>(to);
+            Assert.Empty(to);
+        }
+
+        [Fact]
+        public async Task MapObservableCollection_ToNewObject_Mapped()
+        {
+            var mapper = new AsyncMapper();
+
+            var to = await mapper.MapObservableCollection(
+                new MapFrom[]
+                {
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 }
+                });
+
+            Assert.IsType<ObservableCollection<MapTo>>(to);
             Assert.Equal(2, to.Count);
             Assert.Equal(1, to[0].Property);
             Assert.Equal(2, to[1].Property);
