@@ -1,5 +1,7 @@
-namespace Boilerplate.Mapping.Benchmark
+namespace Boilerplate.Mapping.Benchmark.Mapping
 {
+    using Boilerplate.Mapping.Benchmark.Models;
+
     public class BoilerplateMapper : IMapper<MapFrom, MapTo>
     {
         public void Map(MapFrom source, MapTo destination)

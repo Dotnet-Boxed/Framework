@@ -6,6 +6,8 @@ namespace Boilerplate.Mapping.Benchmark
     using BenchmarkDotNet.Attributes.Columns;
     using BenchmarkDotNet.Attributes.Exporters;
     using BenchmarkDotNet.Attributes.Jobs;
+    using Boilerplate.Mapping.Benchmark.Mapping;
+    using Boilerplate.Mapping.Benchmark.Models;
 
     // [KeepBenchmarkFiles]
     [ClrJob]
@@ -25,14 +27,7 @@ namespace Boilerplate.Mapping.Benchmark
 
         public MapArrayBenchmark()
         {
-            var configuration = new MapperConfiguration(
-                x => x.CreateMap<MapFrom, MapTo>()
-                    .ForMember(y => y.BooleanTo, y => y.MapFrom(z => z.BooleanFrom))
-                    .ForMember(y => y.DateTimeOffsetTo, y => y.MapFrom(z => z.DateTimeOffsetFrom))
-                    .ForMember(y => y.IntegerTo, y => y.MapFrom(z => z.IntegerFrom))
-                    .ForMember(y => y.LongTo, y => y.MapFrom(z => z.LongFrom))
-                    .ForMember(y => y.StringTo, y => y.MapFrom(z => z.StringFrom)));
-            this.automapper = configuration.CreateMapper();
+            this.automapper = AutomapperConfiguration.CreateMapper();
             this.boilerplateMapper = new BoilerplateMapper();
             this.random = new Random();
         }
