@@ -1,4 +1,4 @@
-namespace Boilerplate.Mapping.Benchmark
+namespace Boilerplate.Mapping.Benchmark.Models
 {
     using System;
 
