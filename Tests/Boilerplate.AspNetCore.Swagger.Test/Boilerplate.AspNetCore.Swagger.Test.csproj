@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Tools">
-    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta5-build3769" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
