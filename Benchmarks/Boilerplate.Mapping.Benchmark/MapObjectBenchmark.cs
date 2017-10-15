@@ -16,6 +16,7 @@ namespace Boilerplate.Mapping.Benchmark
     [MaxColumn]
     [HtmlExporter]
     [CsvExporter]
+    [CsvMeasurementsExporter]
     [RPlotExporter]
     [MemoryDiagnoser]
     public class MapObjectBenchmark
