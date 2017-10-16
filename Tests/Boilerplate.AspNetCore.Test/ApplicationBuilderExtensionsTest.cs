@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.Test
+namespace Boilerplate.AspNetCore.Test
 {
     using System;
     using System.Threading.Tasks;
@@ -73,10 +73,8 @@
             Assert.NotEqual(elseActionCalled, condition);
         }
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             Mock.VerifyAll(
                 this.serviceProviderMock);
-        }
     }
 }
