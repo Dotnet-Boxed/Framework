@@ -1,6 +1,5 @@
 namespace Boilerplate.Mapping.Benchmark
 {
-    using System;
     using BenchmarkDotNet.Running;
 
     public class Program
@@ -10,7 +9,6 @@ namespace Boilerplate.Mapping.Benchmark
             BenchmarkRunner.Run<MapObjectBenchmark>();
             BenchmarkRunner.Run<MapArrayBenchmark>();
             BenchmarkRunner.Run<MapListBenchmark>();
-            Console.Read();
         }
     }
 }

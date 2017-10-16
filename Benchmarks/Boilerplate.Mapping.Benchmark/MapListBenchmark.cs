@@ -16,7 +16,6 @@ namespace Boilerplate.Mapping.Benchmark
     [MinColumn]
     [MaxColumn]
     [HtmlExporter]
-    [CsvExporter]
     [CsvMeasurementsExporter]
     [RPlotExporter]
     [MemoryDiagnoser]
