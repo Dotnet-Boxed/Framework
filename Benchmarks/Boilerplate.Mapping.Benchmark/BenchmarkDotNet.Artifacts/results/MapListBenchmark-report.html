@@ -15,10 +15,10 @@
 <pre><code>
 BenchmarkDotNet=v0.10.9, OS=Windows 10 Redstone 2 (10.0.15063)
 Processor=Intel Core i7-6700HQ CPU 2.60GHz (Skylake), ProcessorCount=8
-Frequency=2531250 Hz, Resolution=395.0617 ns, Timer=TSC
+Frequency=2531248 Hz, Resolution=395.0620 ns, Timer=TSC
 .NET Core SDK=2.0.0
   [Host] : .NET Core 2.0.0 (Framework 4.6.00001.0), 64bit RyuJIT  [AttachedDebugger]
-  Clr    : .NET Framework 4.7 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.2110.0
+  Clr    : .NET Framework 4.7 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.2115.0
   Core   : .NET Core 2.0.0 (Framework 4.6.00001.0), 64bit RyuJIT
 </code></pre>
 <pre><code></code></pre>
@@ -26,12 +26,12 @@ Frequency=2531250 Hz, Resolution=395.0617 ns, Timer=TSC
 <table>
 <thead><tr><th>     Method</th><th>Job</th><th>Runtime</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Min</th><th>Max</th><th>Scaled</th><th>ScaledSD</th><th>Gen 0</th><th>Allocated</th>
 </tr>
-</thead><tbody><tr><td>   Baseline</td><td>Clr</td><td>Clr</td><td>1.710 us</td><td>0.0110 us</td><td>0.0086 us</td><td>1.698 us</td><td>1.726 us</td><td>1.00</td><td>0.00</td><td>2.0542</td><td>6.31 KB</td>
-</tr><tr><td>BoilerplateMapper</td><td>Clr</td><td>Clr</td><td>2.850 us</td><td>0.0572 us</td><td>0.0535 us</td><td>2.732 us</td><td>2.917 us</td><td>1.67</td><td>0.03</td><td>2.0523</td><td>6.31 KB</td>
-</tr><tr><td> Automapper</td><td>Clr</td><td>Clr</td><td>10.606 us</td><td>0.2095 us</td><td>0.4814 us</td><td>9.719 us</td><td>11.521 us</td><td>6.20</td><td>0.28</td><td>2.4719</td><td>7.62 KB</td>
-</tr><tr><td>   Baseline</td><td>Core</td><td>Core</td><td>1.613 us</td><td>0.0191 us</td><td>0.0138 us</td><td>1.589 us</td><td>1.634 us</td><td>1.00</td><td>0.00</td><td>2.0542</td><td>6.31 KB</td>
-</tr><tr><td>BoilerplateMapper</td><td>Core</td><td>Core</td><td>2.294 us</td><td>0.0457 us</td><td>0.0763 us</td><td>2.172 us</td><td>2.518 us</td><td>1.42</td><td>0.05</td><td>2.0523</td><td>6.31 KB</td>
-</tr><tr><td> Automapper</td><td>Core</td><td>Core</td><td>3.178 us</td><td>0.0520 us</td><td>0.0487 us</td><td>3.104 us</td><td>3.268 us</td><td>1.97</td><td>0.03</td><td>2.4757</td><td>7.62 KB</td>
+</thead><tbody><tr><td>   Baseline</td><td>Clr</td><td>Clr</td><td>1.812 us</td><td>0.0312 us</td><td>0.0277 us</td><td>1.773 us</td><td>1.859 us</td><td>1.00</td><td>0.00</td><td>2.0542</td><td>6.31 KB</td>
+</tr><tr><td>BoilerplateMapper</td><td>Clr</td><td>Clr</td><td>3.107 us</td><td>0.0606 us</td><td>0.0869 us</td><td>2.960 us</td><td>3.239 us</td><td>1.72</td><td>0.05</td><td>2.0523</td><td>6.31 KB</td>
+</tr><tr><td> Automapper</td><td>Clr</td><td>Clr</td><td>11.080 us</td><td>0.2111 us</td><td>0.2513 us</td><td>10.629 us</td><td>11.509 us</td><td>6.12</td><td>0.16</td><td>2.4719</td><td>7.62 KB</td>
+</tr><tr><td>   Baseline</td><td>Core</td><td>Core</td><td>1.610 us</td><td>0.0315 us</td><td>0.0409 us</td><td>1.548 us</td><td>1.703 us</td><td>1.00</td><td>0.00</td><td>2.0542</td><td>6.31 KB</td>
+</tr><tr><td>BoilerplateMapper</td><td>Core</td><td>Core</td><td>2.206 us</td><td>0.0436 us</td><td>0.0680 us</td><td>2.081 us</td><td>2.349 us</td><td>1.37</td><td>0.05</td><td>2.0523</td><td>6.31 KB</td>
+</tr><tr><td> Automapper</td><td>Core</td><td>Core</td><td>3.181 us</td><td>0.0621 us</td><td>0.1003 us</td><td>3.041 us</td><td>3.439 us</td><td>1.98</td><td>0.08</td><td>2.4757</td><td>7.62 KB</td>
 </tr></tbody></table>
 </body>
 </html>
