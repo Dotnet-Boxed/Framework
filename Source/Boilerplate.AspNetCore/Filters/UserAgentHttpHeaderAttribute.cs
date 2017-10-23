@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.Filters
+namespace Boilerplate.AspNetCore.Filters
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -32,8 +32,7 @@
 
             if (!StringValues.IsNullOrEmpty(headerValues))
             {
-                var values = headerValues
-                    .SelectMany(x => Split(x))
+                var values = Split(headerValues)
                     .Select(
                         x =>
                         {
@@ -49,7 +48,7 @@
                 isValid = values.All(x => x.Parsed) &&
                     values
                         .Where(x => x.ProductInfo.Product != null)
-                        .All(x => !string.IsNullOrWhiteSpace(x.ProductInfo.Product.Name) && !string.IsNullOrWhiteSpace(x.ProductInfo.Product.Version));
+                        .All(x => !string.IsNullOrWhiteSpace(x.ProductInfo.Product.Name));
             }
 
             return isValid;
