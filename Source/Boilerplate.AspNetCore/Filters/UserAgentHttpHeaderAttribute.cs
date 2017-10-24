@@ -32,7 +32,8 @@ namespace Boilerplate.AspNetCore.Filters
 
             if (!StringValues.IsNullOrEmpty(headerValues))
             {
-                var values = Split(headerValues)
+                var value = string.Join(" ", headerValues);
+                var values = Split(value)
                     .Select(
                         x =>
                         {
