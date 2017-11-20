@@ -24,7 +24,7 @@ namespace Boilerplate.AspNetCore
 
         /// <summary>JavaScript Object Notation JSON; Defined in RFC 4627.</summary>
         public const string Json = "application/json";
-        
+
         /// <summary>Web App Manifest.</summary>
         public const string Manifest = "application/manifest+json";
 
