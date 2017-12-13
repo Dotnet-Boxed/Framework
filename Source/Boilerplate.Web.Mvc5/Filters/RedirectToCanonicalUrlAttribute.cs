@@ -71,7 +71,8 @@
                 throw new ArgumentNullException("filterContext");
             }
 
-            if (string.Equals(filterContext.HttpContext.Request.HttpMethod, "GET", StringComparison.Ordinal))
+            if (string.Equals(filterContext.HttpContext.Request.HttpMethod, "GET", StringComparison.Ordinal)
+                && !filterContext.IsChildAction)
             {
                 string canonicalUrl;
                 if (!this.TryGetCanonicalUrl(filterContext, out canonicalUrl))
