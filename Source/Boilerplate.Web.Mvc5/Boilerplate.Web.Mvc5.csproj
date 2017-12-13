@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>1.0.25</VersionPrefix>
+    <VersionPrefix>1.0.26</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
     <Product>ASP.NET MVC 5 Boilerplate Framework</Product>
     <Description>Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.</Description>
@@ -21,7 +21,7 @@
     <RepositoryUrl>https://github.com/ASP-NET-MVC-Boilerplate/Framework.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>ASP.NET;MVC;MVC 5;Boilerplate;Muhammad Rehan Saeed;Framework</PackageTags>
-    <PackageReleaseNotes>Only RedirectToCanonicalUrlAttribute for GET requests.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix RedirectToCanonicalUrlAttribute support for child actions.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing">
