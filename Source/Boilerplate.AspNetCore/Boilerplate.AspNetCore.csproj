@@ -31,8 +31,8 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.0" />
