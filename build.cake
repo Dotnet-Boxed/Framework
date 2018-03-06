@@ -19,11 +19,7 @@ var buildNumber =
     0;
 
 var artifactsDirectory = Directory("./Artifacts");
-string versionSuffix = null;
-if (!string.IsNullOrEmpty(preReleaseSuffix))
-{
-    versionSuffix = preReleaseSuffix + "-" + buildNumber.ToString("D4");
-}
+var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 
 IList<string> GetCoreFrameworks(string csprojFilePath)
 {
@@ -41,8 +37,8 @@ Task("Clean")
     .Does(() =>
     {
         CleanDirectory(artifactsDirectory);
-        DeleteDirectories(GetDirectories("**/bin"), true);
-        DeleteDirectories(GetDirectories("**/obj"), true);
+        DeleteDirectories(GetDirectories("**/bin"), new DeleteDirectorySettings() { Force = true, Recursive = true });
+        DeleteDirectories(GetDirectories("**/obj"), new DeleteDirectorySettings() { Force = true, Recursive = true });
     });
 
 Task("Restore")
@@ -62,6 +58,7 @@ Task("Restore")
             var settings = new DotNetCoreBuildSettings()
             {
                 Configuration = configuration,
+                NoRestore = true,
                 VersionSuffix = versionSuffix
             };
 
