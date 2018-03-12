@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.Swagger.SchemaFilters
+namespace Boilerplate.AspNetCore.Swagger.SchemaFilters
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -24,7 +24,10 @@
                 modelState.AddModelError("Property1", "Error message 1");
                 modelState.AddModelError("Property1", "Error message 2");
                 modelState.AddModelError("Property2", "Error message 3");
-                model.Default = new SerializableError(modelState);
+                var serializableError = new SerializableError(modelState);
+
+                model.Default = serializableError;
+                model.Example = serializableError;
             }
         }
     }

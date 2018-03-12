@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>3.0.0</VersionPrefix>
+    <VersionPrefix>3.0.1</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
     <Product>ASP.NET Core Boilerplate Framework Swagger</Product>
     <Description>Provides boilerplate framework code for an ASP.NET Core project implementing Swagger using Swashbuckle. ASP.NET Core Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default ASP.NET Core template provided by Microsoft. You can download the ASP.NET Core Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.</Description>
@@ -21,7 +21,7 @@
     <RepositoryUrl>https://github.com/ASP-NET-Core-Boilerplate/Framework.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>ASP.NET;ASP.NET Core;MVC;MVC 6;Boilerplate;Muhammad Rehan Saeed;Framework;Swagger;Swashbuckle;Ahoy</PackageTags>
-    <PackageReleaseNotes>Upgrade to Swashbuckle.AspNetCore 1.0.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix schema filters not showing JSON PATCH and ModelStateDictionary examples.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing">

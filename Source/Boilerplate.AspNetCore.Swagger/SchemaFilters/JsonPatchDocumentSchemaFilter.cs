@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.Swagger.SchemaFilters
+namespace Boilerplate.AspNetCore.Swagger.SchemaFilters
 {
     using Microsoft.AspNetCore.JsonPatch;
     using Swashbuckle.AspNetCore.Swagger;
@@ -22,7 +22,10 @@
             if (context.SystemType.GenericTypeArguments.Length > 0 &&
                 context.SystemType.GetGenericTypeDefinition() == typeof(JsonPatchDocument<>))
             {
-                model.Default = GetExample();
+                var example = GetExample();
+
+                model.Default = example;
+                model.Example = example;
                 model.ExternalDocs = new ExternalDocs()
                 {
                     Description = "JSON Patch Documentation",
