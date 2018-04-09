@@ -1,6 +1,13 @@
-﻿namespace Boilerplate.AspNetCore.Test.Filters
+namespace Boilerplate.AspNetCore.Test.Filters
 {
+    using System;
+    using System.Collections.Generic;
     using Boilerplate.AspNetCore.Filters;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Abstractions;
+    using Microsoft.AspNetCore.Mvc.Filters;
+    using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Primitives;
     using Xunit;
 
@@ -8,10 +15,8 @@
     {
         private readonly RequestIdHttpHeaderAttribute filter;
 
-        public RequestIdHttpHeaderAttributeTest()
-        {
+        public RequestIdHttpHeaderAttributeTest() =>
             this.filter = new RequestIdHttpHeaderAttribute();
-        }
 
         [Theory]
         [InlineData("75b552c1-5a00-4872-b07f-e6bef735a7b7")]
@@ -34,9 +39,41 @@
             Assert.False(isValid);
         }
 
-        private static StringValues GetStringValues(string value)
+        [Fact]
+        public void OnHasHeader_UpdateTraceIdentifierIsTrue_TraceIdentifierSet()
         {
-            return value == null ? StringValues.Empty : new StringValues(value.Split(','));
+            var context = GetContext();
+            var requestId = Guid.NewGuid().ToString();
+            this.filter.UpdateTraceIdentifier = true;
+
+            this.filter.OnHasHeader(context, requestId);
+
+            Assert.Equal(context.HttpContext.TraceIdentifier, requestId);
         }
+
+        [Fact]
+        public void OnHasHeader_UpdateTraceIdentifierIsFalse_TraceIdentifierNotSet()
+        {
+            var context = GetContext();
+            var requestId = Guid.NewGuid().ToString();
+            this.filter.UpdateTraceIdentifier = false;
+
+            this.filter.OnHasHeader(context, requestId);
+
+            Assert.NotEqual(context.HttpContext.TraceIdentifier, requestId);
+        }
+
+        private static ActionExecutingContext GetContext() =>
+            new ActionExecutingContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new ActionDescriptor()),
+                new List<IFilterMetadata>(),
+                new Dictionary<string, object>(),
+                null);
+
+        private static StringValues GetStringValues(string value) =>
+            value == null ? StringValues.Empty : new StringValues(value.Split(','));
     }
 }

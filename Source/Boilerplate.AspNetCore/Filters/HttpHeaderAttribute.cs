@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.AspNetCore.Filters
+namespace Boilerplate.AspNetCore.Filters
 {
     using System;
     using System.Linq;
@@ -57,6 +57,13 @@
         /// <value><c>true</c> if required; otherwise, <c>false</c>.</value>
         public bool Required { get; set; }
 
+        /// <summary>
+        /// Returns <c>true</c> if the header value is valid, otherwise <c>false</c>.
+        /// </summary>
+        /// <param name="headerValues">The header values.</param>
+        /// <returns><c>true</c> if the specified HTTP header values are valid; otherwise, <c>false</c>.</returns>
+        public virtual bool IsValid(StringValues headerValues) => true;
+
         /// <inheritdoc />
         public override void OnActionExecuting(ActionExecutingContext context)
         {
@@ -87,15 +94,19 @@
                     LogInformation(context, message);
                     context.Result = new BadRequestObjectResult(message);
                 }
+
+                this.OnHasHeader(context, headerValue);
             }
         }
 
         /// <summary>
-        /// Returns <c>true</c> if the header value is valid, otherwise <c>false</c>.
+        /// Called when the header exists.
         /// </summary>
-        /// <param name="headerValues">The header values.</param>
-        /// <returns><c>true</c> if the specified HTTP header values are valid; otherwise, <c>false</c>.</returns>
-        public virtual bool IsValid(StringValues headerValues) => true;
+        /// <param name="context">The action executing context.</param>
+        /// <param name="headerValue">The header values.</param>
+        public virtual void OnHasHeader(ActionExecutingContext context, StringValues headerValue)
+        {
+        }
 
         private static void LogInformation(ActionExecutingContext context, string message)
         {
