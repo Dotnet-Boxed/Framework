@@ -16,19 +16,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{D37BD4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Web.Mvc5", "Source\Boilerplate.Web.Mvc5\Boilerplate.Web.Mvc5.csproj", "{B0C024C9-531C-425E-9A58-22E46D90C0C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.AspNetCore", "Source\Boxed.AspNetCore\Boxed.AspNetCore.csproj", "{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore", "Source\Boilerplate.AspNetCore\Boilerplate.AspNetCore.csproj", "{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.AspNetCore.TagHelpers", "Source\Boxed.AspNetCore.TagHelpers\Boxed.AspNetCore.TagHelpers.csproj", "{EE9EDF54-81FE-455B-BC4B-D435B08E25A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.TagHelpers", "Source\Boilerplate.AspNetCore.TagHelpers\Boilerplate.AspNetCore.TagHelpers.csproj", "{EE9EDF54-81FE-455B-BC4B-D435B08E25A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.AspNetCore.Test", "Tests\Boxed.AspNetCore.Test\Boxed.AspNetCore.Test.csproj", "{0CDB5E52-B7A1-4CB9-BAD1-F4E68A391B93}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.Test", "Tests\Boilerplate.AspNetCore.Test\Boilerplate.AspNetCore.Test.csproj", "{0CDB5E52-B7A1-4CB9-BAD1-F4E68A391B93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.AspNetCore.TagHelpers.Test", "Tests\Boxed.AspNetCore.TagHelpers.Test\Boxed.AspNetCore.TagHelpers.Test.csproj", "{DF19E131-3E30-40F6-A5B2-1E0EDB75DC00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.TagHelpers.Test", "Tests\Boilerplate.AspNetCore.TagHelpers.Test\Boilerplate.AspNetCore.TagHelpers.Test.csproj", "{DF19E131-3E30-40F6-A5B2-1E0EDB75DC00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.AspNetCore.Swagger", "Source\Boxed.AspNetCore.Swagger\Boxed.AspNetCore.Swagger.csproj", "{503A5A5C-6AA2-4890-B7C0-0E53F0E63CF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.Swagger", "Source\Boilerplate.AspNetCore.Swagger\Boilerplate.AspNetCore.Swagger.csproj", "{503A5A5C-6AA2-4890-B7C0-0E53F0E63CF7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.Swagger.Test", "Tests\Boilerplate.AspNetCore.Swagger.Test\Boilerplate.AspNetCore.Swagger.Test.csproj", "{FB1DACF8-4475-4266-B303-682A186E912C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.AspNetCore.Swagger.Test", "Tests\Boxed.AspNetCore.Swagger.Test\Boxed.AspNetCore.Swagger.Test.csproj", "{FB1DACF8-4475-4266-B303-682A186E912C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{DC7FDD72-F9C9-42E9-90CC-468BDD9A5CC2}"
 	ProjectSection(SolutionItems) = preProject
@@ -37,13 +35,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Mapping", "Source\Boilerplate.Mapping\Boilerplate.Mapping.csproj", "{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Mapping", "Source\Boxed.Mapping\Boxed.Mapping.csproj", "{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Mapping.Test", "Tests\Boilerplate.Mapping.Test\Boilerplate.Mapping.Test.csproj", "{B03DDD55-8A3B-4B28-AE9F-9197F098664D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Mapping.Test", "Tests\Boxed.Mapping.Test\Boxed.Mapping.Test.csproj", "{B03DDD55-8A3B-4B28-AE9F-9197F098664D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{D941A0C1-E1B6-45CF-AB7A-E1C724385404}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Mapping.Benchmark", "Benchmarks\Boilerplate.Mapping.Benchmark\Boilerplate.Mapping.Benchmark.csproj", "{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Mapping.Benchmark", "Benchmarks\Boxed.Mapping.Benchmark\Boxed.Mapping.Benchmark.csproj", "{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +49,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B0C024C9-531C-425E-9A58-22E46D90C0C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0C024C9-531C-425E-9A58-22E46D90C0C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0C024C9-531C-425E-9A58-22E46D90C0C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0C024C9-531C-425E-9A58-22E46D90C0C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -96,7 +90,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B0C024C9-531C-425E-9A58-22E46D90C0C6} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
 		{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
 		{EE9EDF54-81FE-455B-BC4B-D435B08E25A8} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
 		{0CDB5E52-B7A1-4CB9-BAD1-F4E68A391B93} = {6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}

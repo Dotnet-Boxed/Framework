@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Build">
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <CodeAnalysisRuleSet>../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
+    <Product>ASP.NET Core Framework Boxed</Product>
+    <Description>Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project.</Description>
+    <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://github.com/Dotnet-Boxed/Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Dotnet-Boxed/Framework</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Icon-256x256.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/Dotnet-Boxed/Framework.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>ASP.NET;ASP.NET Core;MVC;Boxed;Muhammad Rehan Saeed;Framework;Middleware;Filters</PackageTags>
+    <PackageReleaseNotes>Initial version.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Signing">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../Key.snk</AssemblyOriginatorKeyFile>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.0-beta006" />
+  </ItemGroup>
+
+</Project>

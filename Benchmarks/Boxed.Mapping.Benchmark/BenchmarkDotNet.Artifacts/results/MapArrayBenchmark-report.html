@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>MapArrayBenchmark</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.10.9, OS=Windows 10 Redstone 2 (10.0.15063)
+Processor=Intel Core i7-6700HQ CPU 2.60GHz (Skylake), ProcessorCount=8
+Frequency=2531248 Hz, Resolution=395.0620 ns, Timer=TSC
+.NET Core SDK=2.0.0
+  [Host] : .NET Core 2.0.0 (Framework 4.6.00001.0), 64bit RyuJIT  [AttachedDebugger]
+  Clr    : .NET Framework 4.7 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.2115.0
+  Core   : .NET Core 2.0.0 (Framework 4.6.00001.0), 64bit RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>     Method</th><th>Job</th><th>Runtime</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Min</th><th>Max</th><th>Scaled</th><th>ScaledSD</th><th>Gen 0</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>   Baseline</td><td>Clr</td><td>Clr</td><td>1.083 us</td><td>0.0095 us</td><td>0.0079 us</td><td>1.066 us</td><td>1.095 us</td><td>1.00</td><td>0.00</td><td>2.0409</td><td>6.27 KB</td>
+</tr><tr><td>BoxedMapper</td><td>Clr</td><td>Clr</td><td>3.234 us</td><td>0.0779 us</td><td>0.2273 us</td><td>2.665 us</td><td>3.744 us</td><td>2.99</td><td>0.21</td><td>2.0409</td><td>6.27 KB</td>
+</tr><tr><td> Automapper</td><td>Clr</td><td>Clr</td><td>11.498 us</td><td>0.2297 us</td><td>0.6664 us</td><td>10.380 us</td><td>13.136 us</td><td>10.62</td><td>0.62</td><td>2.0294</td><td>6.27 KB</td>
+</tr><tr><td>   Baseline</td><td>Core</td><td>Core</td><td>1.367 us</td><td>0.0271 us</td><td>0.0654 us</td><td>1.234 us</td><td>1.516 us</td><td>1.00</td><td>0.00</td><td>2.0409</td><td>6.27 KB</td>
+</tr><tr><td>BoxedMapper</td><td>Core</td><td>Core</td><td>1.995 us</td><td>0.0400 us</td><td>0.0966 us</td><td>1.855 us</td><td>2.286 us</td><td>1.46</td><td>0.10</td><td>2.0409</td><td>6.27 KB</td>
+</tr><tr><td> Automapper</td><td>Core</td><td>Core</td><td>2.561 us</td><td>0.0510 us</td><td>0.0824 us</td><td>2.423 us</td><td>2.702 us</td><td>1.88</td><td>0.11</td><td>2.0409</td><td>6.27 KB</td>
+</tr></tbody></table>
+</body>
+</html>

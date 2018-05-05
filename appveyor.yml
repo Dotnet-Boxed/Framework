@@ -36,12 +36,12 @@ artifacts:
 deploy:
 # Publish MyGet packages
 - provider: NuGet
-  server: https://www.myget.org/F/aspnet-mvc-boilerplate/api/v2
+  server: https://www.myget.org/F/dotnet-boxed/api/v2
   api_key:
     secure: aunGGWt32irQiOTX2wIO6e2Y5Ga0girA3xSUsmQv6E9d6ohHdbK5HJpXpmxW9QM3
   # Deploy symbol packages to the MyGet symbol server
   skip_symbols: false
-  symbol_server: https://www.myget.org/F/aspnet-mvc-boilerplate/symbols/api/v2/package
+  symbol_server: https://www.myget.org/F/dotnet-boxed/symbols/api/v2/package
   on:
     # Only publish from the master branch
     branch: master
