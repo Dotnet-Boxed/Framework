@@ -21,18 +21,6 @@ var buildNumber =
 var artifactsDirectory = Directory("./Artifacts");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 
-IList<string> GetCoreFrameworks(string csprojFilePath)
-{
-    return XDocument
-        .Load(csprojFilePath)
-        .Descendants("TargetFrameworks")
-        .First()
-        .Value
-        .Split(';')
-        .Where(x => Regex.IsMatch(x, @"net[^\d]"))
-        .ToList();
-}
-
 Task("Clean")
     .Does(() =>
     {
@@ -54,32 +42,14 @@ Task("Restore")
     {
         foreach(var project in GetFiles("./**/*.csproj"))
         {
-            Information(project.ToString());
-            var settings = new DotNetCoreBuildSettings()
-            {
-                Configuration = configuration,
-                NoRestore = true,
-                VersionSuffix = versionSuffix
-            };
-
-            if (!IsRunningOnWindows())
-            {
-                var frameworks = GetCoreFrameworks(project.ToString());
-                if (frameworks.Count == 0)
-                {
-                    Information("Skipping .NET Framework only project " + project.ToString());
-                    continue;
-                }
-                else
-                {
-                    Information("Skipping .NET Framework, building " + frameworks.First());
-                    settings.Framework = frameworks.First();
-                }
-            }
-
             DotNetCoreBuild(
                 project.GetDirectory().FullPath,
-                settings);
+                new DotNetCoreBuildSettings()
+                {
+                    Configuration = configuration,
+                    NoRestore = true,
+                    VersionSuffix = versionSuffix
+                });
         }
     });
 
@@ -95,22 +65,6 @@ Task("Test")
                 .AppendSwitch("-configuration", configuration)
                 .AppendSwitchQuoted("-xml", outputFilePath.AppendExtension(".xml").ToString())
                 .AppendSwitchQuoted("-html", outputFilePath.AppendExtension(".html").ToString());
-
-            if (!IsRunningOnWindows())
-            {
-                var frameworks = GetCoreFrameworks(project.ToString());
-                if (frameworks.Count == 0)
-                {
-                    Information("Skipping .NET Framework only project " + project.ToString());
-                    continue;
-                }
-                else
-                {
-                    Information("Skipping .NET Framework, building " + frameworks.First());
-                    arguments.AppendSwitch("-framework", frameworks.First());
-                }
-            }
-
             DotNetCoreTool(project, "xunit", arguments);
         }
     });
