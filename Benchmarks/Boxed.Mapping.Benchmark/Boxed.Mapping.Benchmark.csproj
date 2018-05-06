@@ -2,7 +2,7 @@
 
   <PropertyGroup Label="Build">
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <CodeAnalysisRuleSet>../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
@@ -17,10 +17,6 @@
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="BenchmarkDotNet" Version="0.10.14" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.0-beta006" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="BenchmarkDotNet.Artifacts\" />
   </ItemGroup>
 
 </Project>
