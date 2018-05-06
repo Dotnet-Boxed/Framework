@@ -22,8 +22,7 @@ environment:
 
 build_script:
 # Install .NET Core SDK
-- ps: Invoke-WebRequest -Uri 'https://download.microsoft.com/download/2/E/C/2EC018A0-A0FC-40A2-849D-AA692F68349E/dotnet-sdk-2.1.105-win-x64.exe' -OutFile 'dotnet-sdk.exe'
-- ps: .\dotnet-sdk.exe -q
+- ps: choco install dotnetcore-sdk -y --version 2.1.105
 - ps: .\build.ps1
 
 test: off
