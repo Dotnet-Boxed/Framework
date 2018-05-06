@@ -2,7 +2,7 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
-    <RuntimeFrameworkVersion>2.0.6</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.0.7</RuntimeFrameworkVersion>
     <CodeAnalysisRuleSet>../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
