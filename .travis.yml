@@ -22,7 +22,7 @@ addons:
 osx_image: xcode7.2
 
 # Ensure that .NET Core is installed
-dotnet: 1.0.1
+dotnet: 2.1.105
 # Ensure Mono is installed
 mono: latest
 
