@@ -34,6 +34,9 @@ namespace Boxed.AspNetCore
         /// <summary>Portable Network Graphics; Registered,[8] Defined in RFC 2083.</summary>
         public const string Png = "image/png";
 
+        /// <summary>REST'ful JavaScript Object Notation JSON; Defined at http://restfuljson.org/.</summary>
+        public const string RestfulJson = "application/vnd.restful+json";
+
         /// <summary>Rich Site Summary; Defined by Harvard Law.</summary>
         public const string Rss = "application/rss+xml";
 
