@@ -36,7 +36,7 @@ namespace Boxed.Mapping.Benchmark
         public void GlobalSetup()
         {
             this.mapFrom = new MapFrom[100];
-            for (int i = 0; i < this.mapFrom.Length; ++i)
+            for (var i = 0; i < this.mapFrom.Length; ++i)
             {
                 this.mapFrom[i] = new MapFrom()
                 {
@@ -53,7 +53,7 @@ namespace Boxed.Mapping.Benchmark
         public MapTo[] Baseline()
         {
             var destination = new MapTo[this.mapFrom.Length];
-            for (int i = 0; i < this.mapFrom.Length; ++i)
+            for (var i = 0; i < this.mapFrom.Length; ++i)
             {
                 var item = this.mapFrom[i];
                 destination[i] = new MapTo()

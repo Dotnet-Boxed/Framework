@@ -33,8 +33,7 @@ namespace Boxed.Mapping.Benchmark
         }
 
         [GlobalSetup]
-        public void GlobalSetup()
-        {
+        public void GlobalSetup() =>
             this.mapFrom = new MapFrom()
             {
                 BooleanFrom = this.random.NextDouble() > 0.5D,
@@ -43,7 +42,6 @@ namespace Boxed.Mapping.Benchmark
                 LongFrom = this.random.Next(),
                 StringFrom = this.random.Next().ToString()
             };
-        }
 
         [Benchmark(Baseline = true)]
         public MapTo Baseline() => new MapTo()

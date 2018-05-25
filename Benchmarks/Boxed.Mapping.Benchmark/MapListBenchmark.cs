@@ -37,7 +37,7 @@ namespace Boxed.Mapping.Benchmark
         public void GlobalSetup()
         {
             this.mapFrom = new List<MapFrom>();
-            for (int i = 0; i < 100; ++i)
+            for (var i = 0; i < 100; ++i)
             {
                 this.mapFrom.Add(
                     new MapFrom()
