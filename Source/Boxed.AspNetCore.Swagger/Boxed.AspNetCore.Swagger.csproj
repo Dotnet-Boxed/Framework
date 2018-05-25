@@ -44,7 +44,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Condition="'$(OS)' == 'Windows_NT'" Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta-62909-01" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta-62909-01" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.0-beta007" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
   </ItemGroup>
