@@ -12,7 +12,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// </summary>
         /// <param name="streetAddress">The number and street of the postal address for this business.</param>
         /// <param name="locality">The city (or locality) line of the postal address for this business.</param>
-        /// <param name="postalCode">The postcode (or ZIP code) of the postal address for this business</param>
+        /// <param name="postalCode">The postcode (or ZIP code) of the postal address for this business.</param>
         /// <param name="country">The country of the postal address for this business.</param>
         /// <exception cref="System.ArgumentNullException">streetAddress or locality or postalCode or country is <c>null.</c>.</exception>
         public OpenGraphContactData(string streetAddress, string locality, string postalCode, string country)

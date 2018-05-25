@@ -9,7 +9,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// This object type represents a product. This includes both virtual and physical products, but it typically
     /// represents items that are available in an online store. This object type is not part of the Open Graph standard
     /// but is used by Facebook.
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-product",
@@ -156,7 +156,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         public IEnumerable<OpenGraphCurrency> Prices { get; set; }
 
         /// <summary>
-        /// Gets or sets a URL link to find out more about the product
+        /// Gets or sets a URL link to find out more about the product.
         /// </summary>
         [HtmlAttributeName(ProductLinkUrlAttributeName)]
         public string ProductLinkUrl { get; set; }

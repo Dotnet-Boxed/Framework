@@ -12,7 +12,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// almost no distribution. Apps should aim for between 50-100 achievements consisting of a mix of 50 (difficult), 25 (medium), and 10 (easy) point
     /// value achievements Read more on how to use achievements in this guide. This object type is not part of the Open Graph standard but is used by
     /// Facebook.
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/game.achievement/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/game.achievement/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-game-achievement",

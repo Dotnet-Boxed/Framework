@@ -8,7 +8,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// <summary>
     /// This object type represents the genre of a book or publication. This object type is not part of the Open Graph
     /// standard but is used by Facebook.
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.genre/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.genre/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-books-genre",

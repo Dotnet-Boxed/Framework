@@ -2,20 +2,19 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
+    using Boxed.AspNetCore.TagHelpers.Test.TestData;
     using Boxed.AspNetCore.TagHelpers.Twitter;
     using Microsoft.AspNetCore.Razor.TagHelpers;
-    using TestData;
     using Xunit;
 
     /// <summary>
-    /// TwitterCard Summary Card Tests
+    /// TwitterCard Summary Card Tests.
     /// </summary>
     public class TwitterCard_Summary_Test
     {
         /// <summary>
-        /// Renders the meta tags with no value for description. (exception thrown)
+        /// Renders the meta tags with no value for description. (exception thrown).
         /// </summary>
         [Fact(DisplayName = "RenderMetaTags_NoValueForDescription_ExceptionThrown")]
         public void RenderMetaTags_NoValueForDescription_ExceptionThrown()
@@ -23,7 +22,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var expected = typeof(System.ArgumentNullException);
             Exception thrownException = null;
 
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = string.Empty,
@@ -48,7 +47,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
                     });
 
-                myTagHelper.Process(context, output);
+                tagHelper.Process(context, output);
             }
             catch (Exception e)
             {
@@ -65,7 +64,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact(DisplayName = "RenderMetaTags_NoValueForImage_Rendered")]
         public void RenderMetaTags_NoValueForImage_Rendered()
         {
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
@@ -88,7 +87,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
 
-            myTagHelper.Process(context, output);
+            tagHelper.Process(context, output);
             Assert.DoesNotContain("twitter:image", output.Content.GetContent());
         }
 
@@ -98,7 +97,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact(DisplayName = "RenderMetaTags_NoValueForImageHeightOrWidth_Rendered")]
         public void RenderMetaTags_NoValueForImageHeightOrWidth_Rendered()
         {
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
@@ -121,13 +120,13 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
 
-            myTagHelper.Process(context, output);
+            tagHelper.Process(context, output);
             Assert.DoesNotContain("twitter:image:height", output.Content.GetContent());
             Assert.DoesNotContain("twitter:image:width", output.Content.GetContent());
         }
 
         /// <summary>
-        /// Renders the meta tags with no value for twitter site username. (exception thrown)
+        /// Renders the meta tags with no value for twitter site username. (exception thrown).
         /// </summary>
         [Fact(DisplayName = "RenderMetaTags_NoValueForSiteUsername_ExceptionThrown")]
         public void RenderMetaTags_NoValueForSiteUsername_ExceptionThrown()
@@ -135,7 +134,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var expected = typeof(System.ArgumentNullException);
             Exception thrownException = null;
 
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
@@ -160,7 +159,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
                     });
 
-                myTagHelper.Process(context, output);
+                tagHelper.Process(context, output);
             }
             catch (Exception e)
             {
@@ -177,7 +176,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact(DisplayName = "RenderMetaTags_NoValueForSiteUsernameUsingSiteId_Rendered")]
         public void RenderMetaTags_NoValueForSiteUsernameUsingSiteId_Rendered()
         {
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
@@ -201,12 +200,12 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
 
-            myTagHelper.Process(context, output);
+            tagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:site:id\" content=\"" + TwitterCardAnswerKey.SiteIdValue + "\"", output.Content.GetContent());
         }
 
         /// <summary>
-        /// Renders the meta tags with no value for title. (exception thrown)
+        /// Renders the meta tags with no value for title. (exception thrown).
         /// </summary>
         [Fact(DisplayName = "RenderMetaTags_NoValueForTitle_ExceptionThrown")]
         public void RenderMetaTags_NoValueForTitle_ExceptionThrown()
@@ -214,7 +213,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var expected = typeof(System.ArgumentNullException);
             Exception thrownException = null;
 
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = string.Empty,
                 Description = TwitterCardAnswerKey.DescriptionValue,
@@ -239,7 +238,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
                     });
 
-                myTagHelper.Process(context, output);
+                tagHelper.Process(context, output);
             }
             catch (Exception e)
             {
@@ -256,7 +255,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact(DisplayName = "RenderMetaTags_RenderedCorrectCardTypeTag_Match")]
         public void RenderMetaTags_RenderedCorrectCardTypeTag_Match()
         {
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
@@ -278,7 +277,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     tagHelperContent.SetContent(string.Empty);
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
-            myTagHelper.Process(context, output);
+            tagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:card\" content=\"summary\"", output.Content.GetContent());
         }
 
@@ -288,7 +287,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact(DisplayName = "RenderMetaTags_RenderedOptionalTagCreatorIdCreatorUsername_Rendered")]
         public void RenderMetaTags_RenderedOptionalTagCreatorIdCreatorUsername_Rendered()
         {
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
@@ -310,7 +309,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     tagHelperContent.SetContent(string.Empty);
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
-            myTagHelper.Process(context, output);
+            tagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:creator\" content=\"" + TwitterCardAnswerKey.CreatorUsernameValue + "\"", output.Content.GetContent());
             Assert.Contains("name=\"twitter:creator:id\" content=\"" + TwitterCardAnswerKey.CreatorId + "\"", output.Content.GetContent());
         }
@@ -321,7 +320,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact(DisplayName = "RenderMetaTags_RenderedTagDescription_Rendered")]
         public void RenderMetaTags_RenderedTagDescription_Rendered()
         {
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
@@ -342,7 +341,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     tagHelperContent.SetContent(string.Empty);
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
-            myTagHelper.Process(context, output);
+            tagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:description\" content=\"" + TwitterCardAnswerKey.DescriptionValue + "\"", output.Content.GetContent());
         }
 
@@ -352,7 +351,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact(DisplayName = "RenderMetaTags_RenderedTagImageWithImageUrlHeightAndWidth_Rendered")]
         public void RenderMetaTags_RenderedTagImageWithImageUrlHeightAndWidth_Rendered()
         {
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
@@ -373,7 +372,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     tagHelperContent.SetContent(string.Empty);
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
-            myTagHelper.Process(context, output);
+            tagHelper.Process(context, output);
 
             Assert.Contains("name=\"twitter:image\"", output.Content.GetContent());
             Assert.Contains("name=\"twitter:image:width\" content=\"" + TwitterCardAnswerKey.ImageWidthValue.ToString() + "\"", output.Content.GetContent());
@@ -386,7 +385,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact(DisplayName = "RenderMetaTags_RenderedTagTitle_Rendered")]
         public void RenderMetaTags_RenderedTagTitle_Rendered()
         {
-            TwitterCardSummary myTagHelper = new TwitterCardSummary()
+            var tagHelper = new TwitterCardSummary()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
@@ -407,7 +406,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     tagHelperContent.SetContent(string.Empty);
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
-            myTagHelper.Process(context, output);
+            tagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:title\" content=\"" + TwitterCardAnswerKey.TitleValue + "\"", output.Content.GetContent());
         }
     }

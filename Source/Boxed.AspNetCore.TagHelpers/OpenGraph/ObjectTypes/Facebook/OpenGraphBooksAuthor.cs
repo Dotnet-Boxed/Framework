@@ -7,7 +7,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// <summary>
     /// This object represents a single author of a book. This object type is not part of the Open Graph standard but
     /// is used by Facebook.
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.author/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.author/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-books-author",

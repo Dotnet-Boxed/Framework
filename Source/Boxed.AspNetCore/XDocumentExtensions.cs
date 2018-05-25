@@ -5,7 +5,7 @@ namespace Boxed
     using System.Xml.Linq;
 
     /// <summary>
-    /// <see cref="XDocument"/> extension methods
+    /// <see cref="XDocument"/> extension methods.
     /// </summary>
     public static class XDocumentExtensions
     {

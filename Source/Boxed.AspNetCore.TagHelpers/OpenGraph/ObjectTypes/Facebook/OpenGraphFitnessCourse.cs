@@ -7,7 +7,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// <summary>
     /// This object type represents the user's activity contributing to a particular run, walk, or bike course. This
     /// object type is not part of the Open Graph standard but is used by Facebook.
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/fitness.course/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/fitness.course/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-fitness-course",

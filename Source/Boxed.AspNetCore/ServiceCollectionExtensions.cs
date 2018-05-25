@@ -4,7 +4,7 @@ namespace Boxed.AspNetCore
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
-    /// <see cref="IServiceCollection"/> extension methods
+    /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

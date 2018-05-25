@@ -8,7 +8,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// <summary>
     /// This object type represents a place of business that has a location, operating hours and contact information.
     /// This object type is not part of the Open Graph standard but is used by Facebook.
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/business.business/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/business.business/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-business",

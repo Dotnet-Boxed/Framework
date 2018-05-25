@@ -17,7 +17,7 @@ namespace Boxed.AspNetCore.TagHelpers
     /// web application may use URLs which themselves grant some capability. Controlling the referrer can help prevent
     /// these capability URLs from leaking via referrer headers.
     ///
-    /// See http://www.w3.org/TR/referrer-policy/
+    /// See http://www.w3.org/TR/referrer-policy/.
     /// </summary>
     public enum ReferrerMode
     {

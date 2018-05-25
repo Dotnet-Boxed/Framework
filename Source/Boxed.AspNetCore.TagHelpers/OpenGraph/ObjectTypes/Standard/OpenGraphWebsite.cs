@@ -4,7 +4,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
     /// <summary>
     /// An object representing a website. This object type is part of the Open Graph standard.
-    /// See http://ogp.me/
+    /// See http://ogp.me/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-website",

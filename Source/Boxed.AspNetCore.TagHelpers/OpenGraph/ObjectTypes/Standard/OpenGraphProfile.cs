@@ -7,7 +7,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// This object type represents a person. While appropriate for celebrities, artists, or musicians, this object
     /// type can be used for the profile of any individual. This object type is part of the Open Graph standard.
     /// See http://ogp.me/
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/profile/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/profile/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-profile",

@@ -8,7 +8,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// <summary>
     /// This object represents a single song. This object type is part of the Open Graph standard.
     /// See http://ogp.me/
-    /// https://developers.facebook.com/docs/reference/opengraph/object-type/music.song/
+    /// https://developers.facebook.com/docs/reference/opengraph/object-type/music.song/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-music-song",

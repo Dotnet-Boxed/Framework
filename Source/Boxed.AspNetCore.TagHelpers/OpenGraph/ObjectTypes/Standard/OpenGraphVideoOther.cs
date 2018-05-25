@@ -10,7 +10,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// specific types of video content, use the video.movie or video.tv_show object types. This type is for any other type of video content not
     /// represented elsewhere (eg. trailers, music videos, clips, news segments etc.). This object type is part of the Open Graph standard.
     /// See http://ogp.me/
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.other/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.other/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-video-other",

@@ -10,7 +10,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
     /// to the Tweet that's visible to all of their followers. See
     /// https://dev.twitter.com/cards/overview. Sign up for Twitter Card analytics to see who is
     /// sharing your site pages on Twitter. See https://analytics.twitter.com/about Validate your
-    /// Twitter cards. See https://twitter.com/login?redirect_after_login=https%3A%2F%2Fcards-dev.twitter.com%2Fvalidator
+    /// Twitter cards. See https://twitter.com/login?redirect_after_login=https%3A%2F%2Fcards-dev.twitter.com%2Fvalidator.
     /// </summary>
     public abstract class TwitterCard : TagHelper
     {

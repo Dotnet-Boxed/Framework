@@ -3,18 +3,18 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Boxed.AspNetCore.TagHelpers.Test.TestData;
     using Boxed.AspNetCore.TagHelpers.Twitter;
     using Microsoft.AspNetCore.Razor.TagHelpers;
-    using TestData;
     using Xunit;
 
     /// <summary>
-    /// TwitterCard App Tests
+    /// TwitterCard App Tests.
     /// </summary>
     public class TwitterCard_App_Test
     {
         /// <summary>
-        /// Renders the meta tags with no value for google play. (exception thrown)
+        /// Renders the meta tags with no value for google play. (exception thrown).
         /// </summary>
         [Fact(DisplayName = "RenderMetaTags_NoValueForGooglePlay_ExceptionThrown")]
         public void RenderMetaTags_NoValueForGooglePlay_ExceptionThrown()
@@ -22,7 +22,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var expected = typeof(System.ArgumentNullException);
             Exception thrownException = null;
 
-            TwitterCardApp myTagHelper = new TwitterCardApp()
+            var tagHelper = new TwitterCardApp()
             {
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = "307234931",
@@ -47,7 +47,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
                     });
 
-                myTagHelper.Process(context, output);
+                tagHelper.Process(context, output);
             }
             catch (Exception e)
             {
@@ -59,7 +59,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         }
 
         /// <summary>
-        /// Renders the meta tags with no value for iPad. (exception thrown)
+        /// Renders the meta tags with no value for iPad. (exception thrown).
         /// </summary>
         [Fact(DisplayName = "RenderMetaTags_NoValueForIPad_ExceptionThrown")]
         public void RenderMetaTags_NoValueForIPad_ExceptionThrown()
@@ -67,7 +67,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var expected = typeof(System.ArgumentNullException);
             Exception thrownException = null;
 
-            TwitterCardApp myTagHelper = new TwitterCardApp()
+            var tagHelper = new TwitterCardApp()
             {
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = "307234931",
@@ -92,7 +92,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
                     });
 
-                myTagHelper.Process(context, output);
+                tagHelper.Process(context, output);
             }
             catch (Exception e)
             {
@@ -104,7 +104,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         }
 
         /// <summary>
-        /// Renders the meta tags with no value for twitter site username. (exception thrown)
+        /// Renders the meta tags with no value for twitter site username. (exception thrown).
         /// </summary>
         [Fact(DisplayName = "RenderMetaTags_NoValueForSiteUsername_ExceptionThrown")]
         public void RenderMetaTags_NoValueForSiteUsername_ExceptionThrown()
@@ -112,7 +112,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var expected = typeof(System.ArgumentNullException);
             Exception thrownException = null;
 
-            TwitterCardApp myTagHelper = new TwitterCardApp()
+            var tagHelper = new TwitterCardApp()
             {
                 SiteUsername = string.Empty,
                 IPhone = "307234931",
@@ -137,7 +137,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
                     });
 
-                myTagHelper.Process(context, output);
+                tagHelper.Process(context, output);
             }
             catch (Exception e)
             {
@@ -154,7 +154,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact(DisplayName = "RenderMetaTags_RenderedCorrectTwitterCardTypeTag_Match")]
         public void RenderMetaTags_RenderedCorrectTwitterCardTypeTag_Match()
         {
-            TwitterCardApp myTagHelper = new TwitterCardApp()
+            var tagHelper = new TwitterCardApp()
             {
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = "307234931",
@@ -177,13 +177,13 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
 
-            myTagHelper.Process(context, output);
+            tagHelper.Process(context, output);
             Assert.Contains("name=\"twitter:card\" content=\"app\"", output.Content.GetContent());
         }
 
         /// <summary>
         /// Renders the meta tags for the card application validation fails missing iPhone.
-        /// (exception thrown)
+        /// (exception thrown).
         /// </summary>
         [Fact(DisplayName = "RenderMetaTags_NoValueForIPhone_ExceptionThrown")]
         public void TwitterCard_App_Validation_Fails_Missing_IPhone()
@@ -191,7 +191,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var expected = typeof(System.ArgumentNullException);
             Exception thrownException = null;
 
-            TwitterCardApp myTagHelper = new TwitterCardApp()
+            var tagHelper = new TwitterCardApp()
             {
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = string.Empty,
@@ -216,7 +216,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                         return Task.FromResult<TagHelperContent>(tagHelperContent);
                     });
 
-                myTagHelper.Process(context, output);
+                tagHelper.Process(context, output);
             }
             catch (Exception e)
             {

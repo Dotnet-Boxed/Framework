@@ -10,7 +10,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// This object represents a music playlist, an ordered collection of songs from a collection of artists. This
     /// object type is part of the Open Graph standard.
     /// See http://ogp.me/
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/music.playlist/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/music.playlist/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-music-playlist",

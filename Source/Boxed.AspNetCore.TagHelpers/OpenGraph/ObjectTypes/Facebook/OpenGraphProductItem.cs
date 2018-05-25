@@ -7,7 +7,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
     /// <summary>
     /// This object type represents a product item. This object type is not part of the Open Graph standard but is used by Facebook.
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product.item/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product.item/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-product-item",

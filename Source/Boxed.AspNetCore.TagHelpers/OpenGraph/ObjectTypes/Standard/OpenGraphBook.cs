@@ -8,7 +8,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// <summary>
     /// This object represents a physical book or e-book. This object type is part of the Open Graph standard but
     /// Facebook uses the books.book object type instead which requires an ISBN number.
-    /// See http://ogp.me/
+    /// See http://ogp.me/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-book",

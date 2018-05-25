@@ -7,7 +7,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
     /// <summary>
     /// This object type represents a restaurant at a specific location. This object type is not part of the Open Graph standard but is used by Facebook.
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.restaurant/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.restaurant/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-restaurant",

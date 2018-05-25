@@ -24,7 +24,7 @@ namespace Boxed.AspNetCore
         /// </summary>
         /// <param name="context">The HTTP context.</param>
         /// <param name="cacheProfile">The cache profile.</param>
-        /// <returns>The HTTP context</returns>
+        /// <returns>The same HTTP context.</returns>
         /// <exception cref="System.ArgumentNullException">context or cacheProfile.</exception>
         public static HttpContext ApplyCacheProfile(this HttpContext context, CacheProfile cacheProfile)
         {

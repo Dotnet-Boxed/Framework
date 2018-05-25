@@ -10,7 +10,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// defined by us as a full-length feature or short film. Do not use this type to represent movie trailers, movie clips, user-generated video
     /// content, etc. This object type is part of the Open Graph standard.
     /// See http://ogp.me/
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.movie/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.movie/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-video-movie",

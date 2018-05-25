@@ -43,7 +43,7 @@ namespace Boxed.AspNetCore
         /// <summary>Textual data; Defined in RFC 2046 and RFC 3676.</summary>
         public const string Text = "text/plain";
 
-        /// <summary>Extensible Markup Language; Defined in RFC 3023</summary>
+        /// <summary>Extensible Markup Language; Defined in RFC 3023.</summary>
         public const string Xml = "application/xml";
 
         /// <summary>Compressed ZIP.</summary>

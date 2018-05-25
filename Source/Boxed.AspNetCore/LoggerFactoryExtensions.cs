@@ -4,7 +4,7 @@ namespace Boxed.AspNetCore
     using Microsoft.Extensions.Logging;
 
     /// <summary>
-    /// <see cref="ILoggerFactory"/> extension methods
+    /// <see cref="ILoggerFactory"/> extension methods.
     /// </summary>
     public static class LoggerFactoryExtensions
     {

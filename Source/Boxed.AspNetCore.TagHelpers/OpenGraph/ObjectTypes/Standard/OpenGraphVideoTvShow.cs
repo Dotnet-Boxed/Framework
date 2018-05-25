@@ -10,7 +10,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// episodes of a series, use the video.episode object type. A TV show is defined by us as a series or set of episodes that are produced under the
     /// same title (eg. a television or online series). This object type is part of the Open Graph standard.
     /// See http://ogp.me/
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.tv_show/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.tv_show/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-video-tv-show",

@@ -9,7 +9,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// This object represents an article on a website. It is the preferred type for blog posts and news stories.
     /// This object type is part of the Open Graph standard.
     /// See http://ogp.me/
-    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/article/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/article/.
     /// </summary>
     [HtmlTargetElement(
         "open-graph-article",

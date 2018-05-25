@@ -18,7 +18,7 @@ namespace Boxed.AspNetCore
         /// Go to definition on this method to see a code example. To learn more about friendly URL's see
         /// https://moz.com/blog/15-seo-best-practices-for-structuring-urls.
         /// To learn more about how this was implemented see
-        /// http://stackoverflow.com/questions/25259/how-does-stack-overflow-generate-its-seo-friendly-urls/25486
+        /// http://stackoverflow.com/questions/25259/how-does-stack-overflow-generate-its-seo-friendly-urls/25486.
         /// </summary>
         /// <param name="title">The title of the URL.</param>
         /// <param name="remapToAscii">if set to <c>true</c>, remaps special UTF8 characters like 'è' to their ASCII
@@ -28,6 +28,7 @@ namespace Boxed.AspNetCore
         /// <param name="maxlength">The maximum allowed length of the title.</param>
         /// <returns>The SEO and human friendly title.</returns>
         /// <code>
+        /// <c>
         /// [HttpGet("product/{id}/{title}", Name = "GetDetails")]
         /// public IActionResult Product(int id, string title)
         /// {
@@ -54,6 +55,7 @@ namespace Boxed.AspNetCore
         ///     // The URL the client has browsed to is correct, show them the view containing the product.
         ///     return this.View(product);
         /// }
+        /// </c>
         /// </code>
         public static string GetFriendlyTitle(string title, bool remapToAscii = false, int maxlength = 80)
         {
@@ -127,10 +129,10 @@ namespace Boxed.AspNetCore
 
         /// <summary>
         /// Remaps the international character to their equivalent ASCII characters. See
-        /// http://meta.stackexchange.com/questions/7435/non-us-ascii-characters-dropped-from-full-profile-url/7696#7696
+        /// http://meta.stackexchange.com/questions/7435/non-us-ascii-characters-dropped-from-full-profile-url/7696#7696.
         /// </summary>
         /// <param name="character">The character to remap to its ASCII equivalent.</param>
-        /// <returns>The remapped character</returns>
+        /// <returns>The remapped character.</returns>
         private static string RemapInternationalCharToAscii(char character)
         {
             var s = character.ToString().ToLowerInvariant();
