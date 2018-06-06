@@ -189,10 +189,8 @@ namespace Boxed.AspNetCore.Sitemap
         {
             if (sitemapCount > MaximumSitemapCount)
             {
-                this.LogWarning(new SitemapException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    "Sitemap index file exceeds the maximum number of allowed sitemaps of 50,000. Count:<{1}>",
-                    sitemapCount)));
+                this.LogWarning(new SitemapException(
+                    $"Sitemap index file exceeds the maximum number of allowed sitemaps of 50,000. Count:<{sitemapCount}>"));
             }
         }
     }
