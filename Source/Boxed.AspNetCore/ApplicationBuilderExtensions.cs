@@ -234,20 +234,5 @@ namespace Boxed.AspNetCore
 
             return application.UseMiddleware<InternalServerErrorOnExceptionMiddleware>();
         }
-
-        /// <summary>
-        /// Removes the Server HTTP header from the HTTP response for marginally better security and performance.
-        /// </summary>
-        /// <param name="application">The application builder.</param>
-        /// <returns>The same application builder.</returns>
-        public static IApplicationBuilder UseNoServerHttpHeader(this IApplicationBuilder application)
-        {
-            if (application == null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
-
-            return application.UseMiddleware<NoServerHttpHeaderMiddleware>();
-        }
     }
 }
