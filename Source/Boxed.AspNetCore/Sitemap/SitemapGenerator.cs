@@ -174,10 +174,8 @@ namespace Boxed.AspNetCore.Sitemap
         {
             if (sitemapXml.Length >= MaximumSitemapSizeInBytes)
             {
-                this.LogWarning(new SitemapException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    "Sitemap exceeds the maximum size of 10MB. This is because you have unusually long URL's. Consider reducing the MaximumSitemapNodeCount. Size:<{0}>.",
-                    sitemapXml.Length)));
+                this.LogWarning(new SitemapException(
+                    $"Sitemap exceeds the maximum size of 10MB. This is because you have unusually long URL's. Consider reducing the MaximumSitemapNodeCount. Size:<{sitemapXml.Length}>."));
             }
         }
 
