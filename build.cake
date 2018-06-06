@@ -59,13 +59,16 @@ Task("Test")
     {
         foreach(var project in GetFiles("./Tests/**/*.csproj"))
         {
-            var outputFilePath = MakeAbsolute(artifactsDirectory.Path)
-                .CombineWithFilePath(project.GetFilenameWithoutExtension());
-            var arguments = new ProcessArgumentBuilder()
-                .AppendSwitch("-configuration", configuration)
-                .AppendSwitchQuoted("-xml", outputFilePath.AppendExtension(".xml").ToString())
-                .AppendSwitchQuoted("-html", outputFilePath.AppendExtension(".html").ToString());
-            DotNetCoreTool(project, "xunit", arguments);
+            DotNetCoreTest(
+                project.ToString(),
+                new DotNetCoreTestSettings()
+                {
+                    Configuration = configuration,
+                    Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
+                    NoBuild = true,
+                    NoRestore = true,
+                    ResultsDirectory = artifactsDirectory
+                });
         }
     });
 

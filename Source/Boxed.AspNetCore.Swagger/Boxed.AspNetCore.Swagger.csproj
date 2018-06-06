@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>2.0.0</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
     <Product>ASP.NET Core Swagger Framework Boxed</Product>
     <Description>Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project implementing Swagger (OpenAPI).</Description>
@@ -44,9 +44,9 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Condition="'$(OS)' == 'Windows_NT'" Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta-62909-01" />
+    <PackageReference Condition="'$(OS)' == 'Windows_NT'" Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta-62925-02" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.0-beta007" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.5.0" />
   </ItemGroup>
 
 </Project>

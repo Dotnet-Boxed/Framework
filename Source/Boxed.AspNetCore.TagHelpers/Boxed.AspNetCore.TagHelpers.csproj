@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>2.0.0</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
     <Product>ASP.NET Core Tag Helpers Boxed</Product>
     <Description>ASP.NET Core tag helpers for Subresource Integrity (SRI), Referrer meta tags, OpenGraph (Facebook) and Twitter social network meta tags.</Description>
@@ -40,10 +40,10 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.0.2" />
-    <PackageReference Condition="'$(OS)' == 'Windows_NT'" Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta-62909-01" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.1.0" />
+    <PackageReference Condition="'$(OS)' == 'Windows_NT'" Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta-62925-02" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.0-beta007" />
   </ItemGroup>
 

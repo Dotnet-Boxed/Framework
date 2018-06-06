@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
-    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
-    <RuntimeFrameworkVersion>2.0.7</RuntimeFrameworkVersion>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <CodeAnalysisRuleSet>../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>

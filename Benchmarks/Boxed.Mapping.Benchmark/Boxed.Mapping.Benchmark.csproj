@@ -2,8 +2,8 @@
 
   <PropertyGroup Label="Build">
     <OutputType>Exe</OutputType>
-    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netcoreapp2.0;net461</TargetFrameworks>
-    <TargetFramework Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.0</TargetFramework>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netcoreapp2.1;net461</TargetFrameworks>
+    <TargetFramework Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.1</TargetFramework>
     <CodeAnalysisRuleSet>../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper" Version="7.0.0" />
     <PackageReference Include="BenchmarkDotNet" Version="0.10.14" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.0-beta007" />
   </ItemGroup>
