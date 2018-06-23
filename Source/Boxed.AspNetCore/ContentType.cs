@@ -34,7 +34,13 @@ namespace Boxed.AspNetCore
         /// <summary>Portable Network Graphics; Registered,[8] Defined in RFC 2083.</summary>
         public const string Png = "image/png";
 
-        /// <summary>REST'ful JavaScript Object Notation JSON; Defined at http://restfuljson.org/.</summary>
+        /// <summary>Problem Details JavaScript Object Notation (JSON); Defined at https://tools.ietf.org/html/rfc7807.</summary>
+        public const string ProblemJson = "application/problem+json";
+
+        /// <summary>Problem Details Extensible Markup Language (XML); Defined at https://tools.ietf.org/html/rfc7807.</summary>
+        public const string ProblemXml = "application/problem+xml";
+
+        /// <summary>REST'ful JavaScript Object Notation (JSON); Defined at http://restfuljson.org/.</summary>
         public const string RestfulJson = "application/vnd.restful+json";
 
         /// <summary>Rich Site Summary; Defined by Harvard Law.</summary>
