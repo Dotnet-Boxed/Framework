@@ -3,7 +3,7 @@ namespace Boxed.AspNetCore.Sitemap
     using System;
 
     /// <summary>
-    /// Represents errors that occur during sitemap creation.
+    /// Represents errors that occur during site-map creation.
     /// </summary>
     public class SitemapException : Exception
     {

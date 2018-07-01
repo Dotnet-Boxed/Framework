@@ -20,12 +20,10 @@ namespace Boxed.AspNetCore.Swagger.Test.SchemaFilters
         }
 
         [Fact]
-        public void Apply_TypeIsNotModelStateDictionary_DoesNothing()
-        {
+        public void Apply_TypeIsNotModelStateDictionary_DoesNothing() =>
             this.schemaFilter.Apply(
                 this.schema,
                 new SchemaFilterContext(typeof(string), new JsonStringContract(typeof(string)), null));
-        }
 
         [Fact]
         public void Apply_TypeIsModelStateDictionary_DoesNothing()

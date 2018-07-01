@@ -12,10 +12,8 @@ namespace Boxed.AspNetCore.Swagger.Test
     {
         private readonly List<FilterDescriptor> filterDescriptors;
 
-        public FilterDescriptorExtensionsTest()
-        {
+        public FilterDescriptorExtensionsTest() =>
             this.filterDescriptors = new List<FilterDescriptor>();
-        }
 
         [Fact]
         public void GetPolicyRequirements_HasNoFilters_ReturnsNull()

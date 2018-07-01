@@ -9,21 +9,19 @@ namespace Boxed.AspNetCore
     /// <seealso cref="Exception" />
     public class HttpException : Exception
     {
-        private readonly int httpStatusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
         /// </summary>
         /// <param name="httpStatusCode">The HTTP status code.</param>
         public HttpException(int httpStatusCode) =>
-            this.httpStatusCode = httpStatusCode;
+            this.StatusCode = httpStatusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
         /// </summary>
         /// <param name="httpStatusCode">The HTTP status code.</param>
         public HttpException(HttpStatusCode httpStatusCode) =>
-            this.httpStatusCode = (int)httpStatusCode;
+            this.StatusCode = (int)httpStatusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
@@ -32,7 +30,7 @@ namespace Boxed.AspNetCore
         /// <param name="message">The exception message.</param>
         public HttpException(int httpStatusCode, string message)
             : base(message) =>
-            this.httpStatusCode = httpStatusCode;
+            this.StatusCode = httpStatusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
@@ -41,7 +39,7 @@ namespace Boxed.AspNetCore
         /// <param name="message">The exception message.</param>
         public HttpException(HttpStatusCode httpStatusCode, string message)
             : base(message) =>
-            this.httpStatusCode = (int)httpStatusCode;
+            this.StatusCode = (int)httpStatusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
@@ -51,7 +49,7 @@ namespace Boxed.AspNetCore
         /// <param name="inner">The inner exception.</param>
         public HttpException(int httpStatusCode, string message, Exception inner)
             : base(message, inner) =>
-            this.httpStatusCode = httpStatusCode;
+            this.StatusCode = httpStatusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpException" /> class.
@@ -61,7 +59,7 @@ namespace Boxed.AspNetCore
         /// <param name="inner">The inner exception.</param>
         public HttpException(HttpStatusCode httpStatusCode, string message, Exception inner)
             : base(message, inner) =>
-            this.httpStatusCode = (int)httpStatusCode;
+            this.StatusCode = (int)httpStatusCode;
 
         /// <summary>
         /// Gets the HTTP status code.
@@ -69,6 +67,6 @@ namespace Boxed.AspNetCore
         /// <value>
         /// The HTTP status code.
         /// </value>
-        public int StatusCode => this.httpStatusCode;
+        public int StatusCode { get; }
     }
 }

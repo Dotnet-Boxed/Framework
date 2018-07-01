@@ -22,9 +22,6 @@ namespace Boxed.AspNetCore.Filters
     {
         private const char SlashCharacter = '/';
 
-        private readonly bool appendTrailingSlash;
-        private readonly bool lowercaseUrls;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToCanonicalUrlAttribute"/> class.
         /// </summary>
@@ -44,8 +41,8 @@ namespace Boxed.AspNetCore.Filters
             bool appendTrailingSlash,
             bool lowercaseUrls)
         {
-            this.appendTrailingSlash = appendTrailingSlash;
-            this.lowercaseUrls = lowercaseUrls;
+            this.AppendTrailingSlash = appendTrailingSlash;
+            this.LowercaseUrls = lowercaseUrls;
         }
 
         /// <summary>
@@ -54,7 +51,7 @@ namespace Boxed.AspNetCore.Filters
         /// <value>
         /// <c>true</c> if appending trailing slashes; otherwise, strip trailing slashes.
         /// </value>
-        public bool AppendTrailingSlash => this.appendTrailingSlash;
+        public bool AppendTrailingSlash { get; }
 
         /// <summary>
         /// Gets a value indicating whether to lower-case all URL's.
@@ -62,7 +59,7 @@ namespace Boxed.AspNetCore.Filters
         /// <value>
         /// <c>true</c> if lower-casing URL's; otherwise, <c>false</c>.
         /// </value>
-        public bool LowercaseUrls => this.lowercaseUrls;
+        public bool LowercaseUrls { get; }
 
         /// <summary>
         /// Executes the resource filter. Called before execution of the remainder of the pipeline. Determines whether
@@ -74,7 +71,7 @@ namespace Boxed.AspNetCore.Filters
         {
             if (HttpMethods.IsGet(context.HttpContext.Request.Method))
             {
-                if (!this.TryGetCanonicalUrl(context, out string canonicalUrl))
+                if (!this.TryGetCanonicalUrl(context, out var canonicalUrl))
                 {
                     this.HandleNonCanonicalRequest(context, canonicalUrl);
                 }
@@ -108,7 +105,7 @@ namespace Boxed.AspNetCore.Filters
             {
                 var hasTrailingSlash = request.Path.Value[request.Path.Value.Length - 1] == SlashCharacter;
 
-                if (this.appendTrailingSlash)
+                if (this.AppendTrailingSlash)
                 {
                     // Append a trailing slash to the end of the URL.
                     if (!hasTrailingSlash && !this.HasAttribute<NoTrailingSlashAttribute>(context))
@@ -130,7 +127,7 @@ namespace Boxed.AspNetCore.Filters
 
             if (hasPath || request.QueryString.HasValue)
             {
-                if (this.lowercaseUrls && !this.HasAttribute<NoTrailingSlashAttribute>(context))
+                if (this.LowercaseUrls && !this.HasAttribute<NoTrailingSlashAttribute>(context))
                 {
                     foreach (var character in request.Path.Value)
                     {

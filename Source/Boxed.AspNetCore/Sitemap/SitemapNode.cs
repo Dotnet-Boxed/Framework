@@ -3,11 +3,10 @@ namespace Boxed.AspNetCore.Sitemap
     using System;
 
     /// <summary>
-    /// Represents a page or URL in your sitemap.
+    /// Represents a page or URL in your site-map.
     /// </summary>
     public sealed class SitemapNode
     {
-        private readonly string url;
         private double? priority;
 
         /// <summary>
@@ -15,7 +14,7 @@ namespace Boxed.AspNetCore.Sitemap
         /// </summary>
         /// <param name="url">The URL of the page.</param>
         public SitemapNode(string url) =>
-            this.url = url ?? throw new ArgumentNullException(nameof(url));
+            this.Url = url ?? throw new ArgumentNullException(nameof(url));
 
         /// <summary>
         /// Gets or sets how frequently the page is likely to change. This value provides general information to search
@@ -81,6 +80,6 @@ namespace Boxed.AspNetCore.Sitemap
         /// <value>
         /// The URL of the page.
         /// </value>
-        public string Url => this.url;
+        public string Url { get; }
     }
 }

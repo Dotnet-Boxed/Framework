@@ -15,18 +15,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <exception cref="System.ArgumentNullException">name or price is <c>null</c>.</exception>
         public OpenGraphMenuItemVariation(string name, OpenGraphCurrency price)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            if (price == null)
-            {
-                throw new ArgumentNullException(nameof(price));
-            }
-
-            this.Name = name;
-            this.Price = price;
+            this.Name = name ?? throw new ArgumentNullException(nameof(name));
+            this.Price = price ?? throw new ArgumentNullException(nameof(price));
         }
 
         /// <summary>

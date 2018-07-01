@@ -12,7 +12,7 @@ namespace Boxed.Mapping
     {
         /// <summary>
         /// Maps the specified source object to a new object with a type of <typeparamref name="TDestination"/>.
-        /// </summary>dotnet test
+        /// </summary>
         /// <typeparam name="TSource">The type of the source object.</typeparam>
         /// <typeparam name="TDestination">The type of the destination object.</typeparam>
         /// <param name="translator">The translator.</param>
@@ -109,7 +109,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new TDestination[source.Count];
-            for (int i = 0; i < source.Count; ++i)
+            for (var i = 0; i < source.Count; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -147,7 +147,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new TDestination[source.Count];
-            for (int i = 0; i < source.Count; ++i)
+            for (var i = 0; i < source.Count; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -185,7 +185,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new TDestination[source.Length];
-            for (int i = 0; i < source.Length; ++i)
+            for (var i = 0; i < source.Length; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -306,7 +306,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new Collection<TDestination>();
-            for (int i = 0; i < source.Count; ++i)
+            for (var i = 0; i < source.Count; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -344,7 +344,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new Collection<TDestination>();
-            for (int i = 0; i < source.Count; ++i)
+            for (var i = 0; i < source.Count; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -382,7 +382,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new Collection<TDestination>();
-            for (int i = 0; i < source.Length; ++i)
+            for (var i = 0; i < source.Length; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -457,7 +457,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new List<TDestination>(source.Count);
-            for (int i = 0; i < source.Count; ++i)
+            for (var i = 0; i < source.Count; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -495,7 +495,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new List<TDestination>(source.Count);
-            for (int i = 0; i < source.Count; ++i)
+            for (var i = 0; i < source.Count; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -533,7 +533,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new List<TDestination>(source.Length);
-            for (int i = 0; i < source.Length; ++i)
+            for (var i = 0; i < source.Length; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -608,7 +608,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new ObservableCollection<TDestination>();
-            for (int i = 0; i < source.Count; ++i)
+            for (var i = 0; i < source.Count; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -646,7 +646,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new ObservableCollection<TDestination>();
-            for (int i = 0; i < source.Count; ++i)
+            for (var i = 0; i < source.Count; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
@@ -684,7 +684,7 @@ namespace Boxed.Mapping
             }
 
             var destination = new ObservableCollection<TDestination>();
-            for (int i = 0; i < source.Length; ++i)
+            for (var i = 0; i < source.Length; ++i)
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();

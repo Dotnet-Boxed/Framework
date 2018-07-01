@@ -35,13 +35,11 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             Assert.True(output.IsContentModified);
         }
 
-        private static TagHelperContext GetContext()
-        {
-            return new TagHelperContext(
+        private static TagHelperContext GetContext() =>
+            new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
                 "test");
-        }
 
         private static TagHelperOutput GetOutput()
         {
