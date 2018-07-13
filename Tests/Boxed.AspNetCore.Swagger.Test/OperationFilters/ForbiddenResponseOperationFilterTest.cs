@@ -1,6 +1,7 @@
 namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Boxed.AspNetCore.Swagger.OperationFilters;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Authorization.Infrastructure;
@@ -36,7 +37,8 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
             this.operationFilter = new ForbiddenResponseOperationFilter();
             this.operationFilterContext = new OperationFilterContext(
                 this.apiDescription,
-                new Mock<ISchemaRegistry>().Object);
+                new Mock<ISchemaRegistry>().Object,
+                this.GetType().GetMethods().First());
         }
 
         [Fact]

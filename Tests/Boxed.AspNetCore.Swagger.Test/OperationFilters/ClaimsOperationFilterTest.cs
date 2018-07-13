@@ -37,7 +37,8 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
             this.operationFilter = new ClaimsOperationFilter();
             this.operationFilterContext = new OperationFilterContext(
                 this.apiDescription,
-                new Mock<ISchemaRegistry>().Object);
+                new Mock<ISchemaRegistry>().Object,
+                this.GetType().GetMethods().First());
         }
 
         [Fact]
