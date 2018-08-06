@@ -138,53 +138,53 @@ csharp_prefer_braces = true:warning
 
 # Organize usings
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#usings
-dotnet_sort_system_directives_first = true:warning
+dotnet_sort_system_directives_first = true
 # C# formatting settings
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#c-formatting-settings
 csharp_new_line_before_open_brace = all
-csharp_new_line_before_else = true:warning
-csharp_new_line_before_catch = true:warning
-csharp_new_line_before_finally = true:warning
-csharp_new_line_before_members_in_object_initializers = true:warning
-csharp_new_line_before_members_in_anonymous_types = true:warning
-csharp_new_line_between_query_expression_clauses = true:warning
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
 # Indentation options
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#indent
-csharp_indent_case_contents = true:warning
-csharp_indent_switch_labels = true:warning
-csharp_indent_labels = no_change:warning
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_indent_labels = no_change
 # Spacing options
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#spacing
-csharp_space_after_cast = false:warning
-csharp_space_after_keywords_in_control_flow_statements = true:warning
-csharp_space_between_method_declaration_parameter_list_parentheses = false:warning
-csharp_space_between_method_call_parameter_list_parentheses = false:warning
-csharp_space_between_parentheses = expressions:warning
-csharp_space_before_colon_in_inheritance_clause = true:warning
-csharp_space_after_colon_in_inheritance_clause = true:warning
-csharp_space_around_binary_operators = before_and_after:warning
-csharp_space_between_method_declaration_empty_parameter_list_parentheses = false:warning
-csharp_space_between_method_call_name_and_opening_parenthesis = false:warning
-csharp_space_between_method_call_empty_parameter_list_parentheses = false:warning
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_parentheses = expressions
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
 # Wrapping options
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#wrapping
-csharp_preserve_single_line_statements = false:warning
-csharp_preserve_single_line_blocks = true:warning
+csharp_preserve_single_line_statements = false
+csharp_preserve_single_line_blocks = true
 # More Indentation options (Undocumented)
-csharp_indent_block_contents = true:warning
-csharp_indent_braces = false:warning
+csharp_indent_block_contents = true
+csharp_indent_braces = false
 # Spacing Options (Undocumented)
-csharp_space_after_comma = true:warning
-csharp_space_after_dot = false:warning
-csharp_space_after_semicolon_in_for_statement = true:warning
-csharp_space_around_declaration_statements = do_not_ignore:warning
-csharp_space_before_comma = false:warning
-csharp_space_before_dot = false:warning
-csharp_space_before_semicolon_in_for_statement = false:warning
-csharp_space_before_open_square_brackets = false:warning
-csharp_space_between_empty_square_brackets = false:warning
-csharp_space_between_method_declaration_name_and_open_parenthesis = false:warning
-csharp_space_between_square_brackets = false:warning
+csharp_space_after_comma = true
+csharp_space_after_dot = false
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_around_declaration_statements = do_not_ignore
+csharp_space_before_comma = false
+csharp_space_before_dot = false
+csharp_space_before_semicolon_in_for_statement = false
+csharp_space_before_open_square_brackets = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_square_brackets = false
 
 #########################
 # .NET Naming conventions
