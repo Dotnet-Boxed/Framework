@@ -4,9 +4,6 @@ namespace Boxed.Mapping.Benchmark
     using System.Collections.Generic;
     using AutoMapper;
     using BenchmarkDotNet.Attributes;
-    using BenchmarkDotNet.Attributes.Columns;
-    using BenchmarkDotNet.Attributes.Exporters;
-    using BenchmarkDotNet.Attributes.Jobs;
     using Boxed.Mapping.Benchmark.Mapping;
     using Boxed.Mapping.Benchmark.Models;
 
