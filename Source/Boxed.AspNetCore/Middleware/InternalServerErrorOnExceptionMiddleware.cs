@@ -5,17 +5,13 @@ namespace Boxed.AspNetCore.Middleware
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
-    internal class InternalServerErrorOnExceptionMiddleware
+    internal class InternalServerErrorOnExceptionMiddleware : IMiddleware
     {
-        private readonly RequestDelegate next;
-
-        public InternalServerErrorOnExceptionMiddleware(RequestDelegate next) => this.next = next;
-
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try
             {
-                await this.next.Invoke(context).ConfigureAwait(false);
+                await next.Invoke(context).ConfigureAwait(false);
             }
             catch
             {
