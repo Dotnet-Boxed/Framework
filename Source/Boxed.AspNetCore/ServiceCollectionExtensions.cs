@@ -1,7 +1,9 @@
 namespace Boxed.AspNetCore
 {
     using System;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Options;
 
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
@@ -57,5 +59,20 @@ namespace Boxed.AspNetCore
 
             return services;
         }
+
+        /// <summary>
+        /// Registers <see cref="IOptions{TOptions}"/> and <typeparamref name="TOptions"/> to the services container.
+        /// </summary>
+        /// <typeparam name="TOptions">The type of the options.</typeparam>
+        /// <param name="services">The services collection.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The same services collection.</returns>
+        public static IServiceCollection AddOptions<TOptions>(
+            this IServiceCollection services,
+            IConfiguration configuration)
+            where TOptions : class, new() =>
+            services
+                .Configure<TOptions>(configuration)
+                .AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
     }
 }
