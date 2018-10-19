@@ -67,7 +67,7 @@ namespace Boxed.AspNetCore
         /// <param name="services">The services collection.</param>
         /// <param name="configuration">The configuration.</param>
         /// <returns>The same services collection.</returns>
-        public static IServiceCollection AddOptions<TOptions>(
+        public static IServiceCollection ConfigureOptions<TOptions>(
             this IServiceCollection services,
             IConfiguration configuration)
             where TOptions : class, new() =>
