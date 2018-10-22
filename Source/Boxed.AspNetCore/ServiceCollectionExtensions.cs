@@ -1,4 +1,4 @@
-namespace Boxed.AspNetCore
+ namespace Boxed.AspNetCore
 {
     using System;
     using Microsoft.Extensions.Configuration;
@@ -67,7 +67,7 @@ namespace Boxed.AspNetCore
         /// <param name="services">The services collection.</param>
         /// <param name="configuration">The configuration.</param>
         /// <returns>The same services collection.</returns>
-        public static IServiceCollection ConfigureOptions<TOptions>(
+        public static IServiceCollection ConfigureSingleton<TOptions>(
             this IServiceCollection services,
             IConfiguration configuration)
             where TOptions : class, new() =>
