@@ -17,7 +17,7 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="BenchmarkDotNet" Version="0.11.1" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.0-beta007" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.0-beta009" />
   </ItemGroup>
 
 </Project>
