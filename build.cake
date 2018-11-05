@@ -75,6 +75,8 @@ Task("Pack")
             new DotNetCorePackSettings()
             {
                 Configuration = configuration,
+                NoBuild = true,
+                NoRestore = true,
                 OutputDirectory = artifactsDirectory,
                 VersionSuffix = versionSuffix
             });
