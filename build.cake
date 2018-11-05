@@ -1,6 +1,3 @@
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
-
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
@@ -40,17 +37,14 @@ Task("Restore")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        foreach(var project in GetFiles("./**/*.csproj"))
-        {
-            DotNetCoreBuild(
-                project.GetDirectory().FullPath,
-                new DotNetCoreBuildSettings()
-                {
-                    Configuration = configuration,
-                    NoRestore = true,
-                    VersionSuffix = versionSuffix
-                });
-        }
+        DotNetCoreBuild(
+            ".",
+            new DotNetCoreBuildSettings()
+            {
+                Configuration = configuration,
+                NoRestore = true,
+                VersionSuffix = versionSuffix
+            });
     });
 
 Task("Test")
