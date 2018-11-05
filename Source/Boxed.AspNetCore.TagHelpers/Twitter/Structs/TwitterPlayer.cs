@@ -17,7 +17,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// </param>
         /// <param name="width">The width of the iFrame player in pixels.</param>
         /// <param name="height">The height of the iFrame player in pixels.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="playerUrl"/></exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="playerUrl"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="width"/> and <paramref name="height"/> must be more than zero.
         /// </exception>
@@ -59,7 +59,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// audio and video with the following codecs: Video: H.264, Baseline Profile(BP), Level 3.0, up to 640 x 480 at
         /// 30 fps. Audio: AAC, Low Complexity Profile(LC).
         /// </param>
-        /// <exception cref="ArgumentNullException"><paramref name="playerUrl"/></exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="playerUrl"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="width"/> and <paramref name="height"/> must be more than zero.
         /// </exception>

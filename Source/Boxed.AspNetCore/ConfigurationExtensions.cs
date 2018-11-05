@@ -4,7 +4,7 @@ namespace Boxed.AspNetCore
     using Microsoft.Extensions.Configuration;
 
     /// <summary>
-    /// <see cref="IConfiguration"/>
+    /// <see cref="IConfiguration"/> extension methods.
     /// </summary>
     public static class ConfigurationExtensions
     {

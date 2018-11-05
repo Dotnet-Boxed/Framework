@@ -7,7 +7,7 @@ namespace Boxed.AspNetCore
     /// <summary>
     /// Executes a single command with one parameter and returns a result.
     /// </summary>
-    /// <typeparam name="T">The type of the parameter</typeparam>
+    /// <typeparam name="T">The type of the parameter.</typeparam>
     public interface IAsyncCommand<T>
     {
         /// <summary>

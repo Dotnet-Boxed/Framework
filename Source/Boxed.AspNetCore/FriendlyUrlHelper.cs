@@ -56,6 +56,7 @@ namespace Boxed.AspNetCore
         ///     return this.View(product);
         /// }
         /// </c>
+        /// .
         /// </code>
         public static string GetFriendlyTitle(string title, bool remapToAscii = false, int maxlength = 80)
         {
