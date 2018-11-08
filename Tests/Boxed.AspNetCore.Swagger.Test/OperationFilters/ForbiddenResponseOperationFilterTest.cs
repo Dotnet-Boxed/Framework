@@ -8,11 +8,11 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
     using Microsoft.AspNetCore.Mvc.Abstractions;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.AspNetCore.Mvc.Authorization;
-    using Microsoft.AspNetCore.Mvc.Filters;
     using Moq;
     using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
     using Xunit;
+    using FilterDescriptor = Microsoft.AspNetCore.Mvc.Filters.FilterDescriptor;
 
     public class ForbiddenResponseOperationFilterTest
     {
