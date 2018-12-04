@@ -40,7 +40,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.1.0" />
     <PackageReference Condition="'$(OS)' == 'Windows_NT'" Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta-63127-02" />
