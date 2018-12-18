@@ -44,7 +44,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Condition="'$(OS)' == 'Windows_NT'" Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta-63127-02" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.1-beta.61" />
