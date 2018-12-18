@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
@@ -14,8 +14,7 @@
     <Product>ASP.NET Core Framework Boxed</Product>
     <Description>Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project.</Description>
     <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl>https://github.com/Dotnet-Boxed/Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Dotnet-Boxed/Framework</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Icon-256x256.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/Dotnet-Boxed/Framework.git</RepositoryUrl>
@@ -47,8 +46,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.0" />
     <PackageReference Condition="'$(OS)' == 'Windows_NT'" Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta-63127-02" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.0-beta009" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.1-beta.61" />
   </ItemGroup>
 
 </Project>
