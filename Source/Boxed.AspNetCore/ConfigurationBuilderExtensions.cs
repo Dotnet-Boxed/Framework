@@ -21,6 +21,16 @@ namespace Boxed.AspNetCore
             bool condition,
             Func<IConfigurationBuilder, IConfigurationBuilder> action)
         {
+            if (configurationBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(configurationBuilder));
+            }
+
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             if (condition)
             {
                 configurationBuilder = action(configurationBuilder);
@@ -48,6 +58,21 @@ namespace Boxed.AspNetCore
             Func<IConfigurationBuilder, IConfigurationBuilder> ifAction,
             Func<IConfigurationBuilder, IConfigurationBuilder> elseAction)
         {
+            if (configurationBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(configurationBuilder));
+            }
+
+            if (ifAction == null)
+            {
+                throw new ArgumentNullException(nameof(ifAction));
+            }
+
+            if (elseAction == null)
+            {
+                throw new ArgumentNullException(nameof(elseAction));
+            }
+
             if (condition)
             {
                 configurationBuilder = ifAction(configurationBuilder);

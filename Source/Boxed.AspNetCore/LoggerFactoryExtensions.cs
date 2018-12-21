@@ -21,6 +21,16 @@ namespace Boxed.AspNetCore
             bool condition,
             Func<ILoggerFactory, ILoggerFactory> action)
         {
+            if (loggerFactory == null)
+            {
+                throw new ArgumentNullException(nameof(loggerFactory));
+            }
+
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             if (condition)
             {
                 loggerFactory = action(loggerFactory);
@@ -46,6 +56,21 @@ namespace Boxed.AspNetCore
             Func<ILoggerFactory, ILoggerFactory> ifAction,
             Func<ILoggerFactory, ILoggerFactory> elseAction)
         {
+            if (loggerFactory == null)
+            {
+                throw new ArgumentNullException(nameof(loggerFactory));
+            }
+
+            if (ifAction == null)
+            {
+                throw new ArgumentNullException(nameof(ifAction));
+            }
+
+            if (elseAction == null)
+            {
+                throw new ArgumentNullException(nameof(elseAction));
+            }
+
             if (condition)
             {
                 loggerFactory = ifAction(loggerFactory);
