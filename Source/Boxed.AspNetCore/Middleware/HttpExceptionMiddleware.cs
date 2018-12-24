@@ -2,7 +2,6 @@ namespace Boxed.AspNetCore.Middleware
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Http.Features;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
@@ -19,15 +18,11 @@ namespace Boxed.AspNetCore.Middleware
                 var factory = context.RequestServices.GetRequiredService<ILoggerFactory>();
                 var logger = factory.CreateLogger<HttpExceptionMiddleware>();
                 logger.LogInformation(
+                    httpException,
                     "Executing HttpExceptionMiddleware, setting HTTP status code {0}.",
                     httpException.StatusCode);
 
                 context.Response.StatusCode = httpException.StatusCode;
-                if (httpException != null)
-                {
-                    var responseFeature = context.Features.Get<IHttpResponseFeature>();
-                    responseFeature.ReasonPhrase = httpException.Message;
-                }
             }
         }
     }
