@@ -7,7 +7,7 @@ namespace Boxed.Mapping.Benchmark
     using Boxed.Mapping.Benchmark.Mapping;
     using Boxed.Mapping.Benchmark.Models;
 
-    // [KeepBenchmarkFiles]
+    [KeepBenchmarkFiles]
     [ClrJob]
     [CoreJob]
     [MinColumn]

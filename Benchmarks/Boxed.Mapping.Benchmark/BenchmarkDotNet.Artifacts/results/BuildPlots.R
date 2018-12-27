@@ -1,8 +1,8 @@
-BenchmarkDotNetVersion <- "BenchmarkDotNet v0.10.9 "
+BenchmarkDotNetVersion <- "BenchmarkDotNet v0.11.3 "
 dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE, showWarnings = FALSE)
 list.of.packages <- c("ggplot2", "dplyr", "gdata", "tidyr", "grid", "gridExtra", "Rcpp")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages, lib = Sys.getenv("R_LIBS_USER"), repos = "http://cran.rstudio.com/")
+if(length(new.packages)) install.packages(new.packages, lib = Sys.getenv("R_LIBS_USER"), repos = "https://cran.rstudio.com/")
 library(ggplot2)
 library(dplyr)
 library(gdata)
@@ -26,7 +26,11 @@ cummean <- function(x) cumsum(x)/(1:length(x))
 BenchmarkDotNetVersionGrob <- textGrob(BenchmarkDotNetVersion, gp = gpar(fontface=3, fontsize=10), hjust=1, x=1)
 nicePlot <- function(p) grid.arrange(p, bottom = BenchmarkDotNetVersionGrob)
 printNice <- function(p) print(nicePlot(p))
-ggsaveNice <- function(fileName, p, ...) ggsave(fileName, plot = nicePlot(p), ...)
+ggsaveNice <- function(fileName, p, ...) {
+  cat(paste0("*** Plot: ", fileName, " ***\n"))
+  ggsave(fileName, plot = nicePlot(p), ...)
+  cat("------------------------------\n")
+}
 
 args <- commandArgs(trailingOnly = TRUE)
 files <- if (length(args) > 0) args else list.files()[list.files() %>% ends_with("-measurements.csv")]
@@ -34,7 +38,7 @@ for (file in files) {
   title <- gsub("-measurements.csv", "", basename(file))
   measurements <- read.csv(file, sep = ",")
 
-  result <- measurements %>% filter(Measurement_IterationMode == "Result")
+  result <- measurements %>% filter(Measurement_IterationStage == "Result")
   if (nrow(result[is.na(result$Job_Id),]) > 0)
     result[is.na(result$Job_Id),]$Job_Id <- ""
   if (nrow(result[is.na(result$Params),]) > 0) {
@@ -96,6 +100,21 @@ for (file in files) {
     facetDensityPlot <- densityPlot + facet_wrap(~Job_Id)
     printNice(facetDensityPlot)
     ggsaveNice(gsub("-measurements.csv", paste0("-", target, "-facetDensity.png"), file), facetDensityPlot)
+
+    for (params in unique(df$Params)) {
+      paramsDf <- df %>% filter(Params == params)
+
+      paramsDensityPlot <- ggplot(paramsDf, aes(x=Measurement_Value, fill=Job_Id)) +
+        ggtitle(paste(title, "/", target, "/", params)) +
+        xlab(paste("Time,", timeUnit)) +
+        geom_density(alpha=.5)
+      printNice(paramsDensityPlot)
+      ggsaveNice(gsub("-measurements.csv", paste0("-", target, "-", params, "-density.png"), file), paramsDensityPlot)
+
+      paramsFacetDensityPlot <- paramsDensityPlot + facet_wrap(~Job_Id)
+      printNice(paramsFacetDensityPlot)
+      ggsaveNice(gsub("-measurements.csv", paste0("-", target, "-", params, "-facetDensity.png"), file), paramsFacetDensityPlot)
+    }
 
     for (job in unique(df$Job_Id)) {
       jobDf <- df %>% filter(Job_Id == job)

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Boxed.Mapping.Benchmark.MapListBenchmark</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.11.3, OS=Windows 10.0.17134.472 (1803/April2018Update/Redstone4)
+Intel Core i7-6700HQ CPU 2.60GHz (Skylake), 1 CPU, 8 logical and 4 physical cores
+.NET Core SDK=2.2.100
+  [Host] : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
+  Clr    : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3260.0
+  Core   : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method</th><th>Job</th><th>Runtime</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Min</th><th>Max</th><th>Ratio</th><th>RatioSD</th><th>Gen 0/1k Op</th><th>Gen 1/1k Op</th><th>Gen 2/1k Op</th><th>Allocated Memory/Op</th>
+</tr>
+</thead><tbody><tr><td>Baseline</td><td>Clr</td><td>Clr</td><td>1.833 us</td><td>0.0229 us</td><td>0.0214 us</td><td>1.791 us</td><td>1.853 us</td><td>1.00</td><td>0.00</td><td>2.0542</td><td>-</td><td>-</td><td>6.31 KB</td>
+</tr><tr><td>BoxedMapper</td><td>Clr</td><td>Clr</td><td>3.295 us</td><td>0.0404 us</td><td>0.0378 us</td><td>3.241 us</td><td>3.348 us</td><td>1.80</td><td>0.03</td><td>2.0523</td><td>-</td><td>-</td><td>6.31 KB</td>
+</tr><tr><td>Automapper</td><td>Clr</td><td>Clr</td><td>10.569 us</td><td>0.2024 us</td><td>0.1893 us</td><td>10.232 us</td><td>10.867 us</td><td>5.77</td><td>0.13</td><td>2.4872</td><td>-</td><td>-</td><td>7.65 KB</td>
+</tr><tr><td>Baseline</td><td>Core</td><td>Core</td><td>1.735 us</td><td>0.0118 us</td><td>0.0110 us</td><td>1.713 us</td><td>1.751 us</td><td>1.00</td><td>0.00</td><td>2.0542</td><td>-</td><td>-</td><td>6.31 KB</td>
+</tr><tr><td>BoxedMapper</td><td>Core</td><td>Core</td><td>2.237 us</td><td>0.0426 us</td><td>0.0398 us</td><td>2.178 us</td><td>2.288 us</td><td>1.29</td><td>0.03</td><td>2.0523</td><td>-</td><td>-</td><td>6.31 KB</td>
+</tr><tr><td>Automapper</td><td>Core</td><td>Core</td><td>3.220 us</td><td>0.0491 us</td><td>0.0459 us</td><td>3.138 us</td><td>3.283 us</td><td>1.86</td><td>0.03</td><td>2.4872</td><td>-</td><td>-</td><td>7.65 KB</td>
+</tr></tbody></table>
+</body>
+</html>
