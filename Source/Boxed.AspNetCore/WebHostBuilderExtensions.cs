@@ -57,6 +57,11 @@ namespace Boxed.AspNetCore
                 throw new ArgumentNullException(nameof(hostBuilder));
             }
 
+            if (condition == null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
             if (action == null)
             {
                 throw new ArgumentNullException(nameof(action));
@@ -134,6 +139,11 @@ namespace Boxed.AspNetCore
             if (hostBuilder == null)
             {
                 throw new ArgumentNullException(nameof(hostBuilder));
+            }
+
+            if (condition == null)
+            {
+                throw new ArgumentNullException(nameof(condition));
             }
 
             if (ifAction == null)
