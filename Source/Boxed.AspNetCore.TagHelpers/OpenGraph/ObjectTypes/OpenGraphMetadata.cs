@@ -6,7 +6,9 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     using System.Text;
     using Microsoft.AspNetCore.Http.Features;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.DependencyInjection;
@@ -359,11 +361,16 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         private string GetRequestUrl()
         {
             var httpContext = this.ViewContext.HttpContext;
-            var urlHelper = httpContext
+            var services = httpContext
                 .Features
                 .Get<IServiceProvidersFeature>()
-                .RequestServices
-                .GetRequiredService<IUrlHelper>();
+                .RequestServices;
+            var actionContext = services
+                .GetRequiredService<IActionContextAccessor>()
+                .ActionContext;
+            var urlHelper = services
+                .GetRequiredService<IUrlHelperFactory>()
+                .GetUrlHelper(actionContext);
             var request = httpContext.Request;
             return new Uri(new Uri(request.Scheme + "://" + request.Host.Value), urlHelper.Content(request.Path.Value)).ToString();
         }

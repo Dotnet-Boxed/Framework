@@ -8,6 +8,8 @@ namespace Boxed.AspNetCore.TagHelpers.Test
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
+    using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
     using Moq;
@@ -17,6 +19,8 @@ namespace Boxed.AspNetCore.TagHelpers.Test
     {
         private readonly Mock<IDistributedCache> distributedCacheMock;
         private readonly Mock<IHostingEnvironment> hostingEnvironmentMock;
+        private readonly Mock<IActionContextAccessor> actionContextAccessor;
+        private readonly Mock<IUrlHelperFactory> urlHelperFactoryMock;
         private readonly Mock<IUrlHelper> urlHelperMock;
         private readonly SubresourceIntegrityTagHelper tagHelper;
 
@@ -24,11 +28,18 @@ namespace Boxed.AspNetCore.TagHelpers.Test
         {
             this.distributedCacheMock = new Mock<IDistributedCache>(MockBehavior.Strict);
             this.hostingEnvironmentMock = new Mock<IHostingEnvironment>(MockBehavior.Strict);
+            this.actionContextAccessor = new Mock<IActionContextAccessor>(MockBehavior.Strict);
+            this.urlHelperFactoryMock = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
             this.urlHelperMock = new Mock<IUrlHelper>(MockBehavior.Strict);
+
+            this.actionContextAccessor.SetupGet(x => x.ActionContext).Returns((ActionContext)null);
+            this.urlHelperFactoryMock.Setup(x => x.GetUrlHelper(this.actionContextAccessor.Object.ActionContext)).Returns(this.urlHelperMock.Object);
+
             this.tagHelper = new TestSubresourceIntegrityTagHelper(
                 this.distributedCacheMock.Object,
                 this.hostingEnvironmentMock.Object,
-                this.urlHelperMock.Object);
+                this.actionContextAccessor.Object,
+                this.urlHelperFactoryMock.Object);
         }
 
         [Fact]
@@ -131,8 +142,9 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             public TestSubresourceIntegrityTagHelper(
                 IDistributedCache distributedCache,
                 IHostingEnvironment hostingEnvironment,
-                IUrlHelper urlHelper)
-                : base(distributedCache, hostingEnvironment, urlHelper)
+                IActionContextAccessor actionContextAccessor,
+                IUrlHelperFactory urlHelperFactory)
+                : base(distributedCache, hostingEnvironment, actionContextAccessor, urlHelperFactory)
             {
             }
 
