@@ -361,16 +361,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         private string GetRequestUrl()
         {
             var httpContext = this.ViewContext.HttpContext;
-            var services = httpContext
-                .Features
-                .Get<IServiceProvidersFeature>()
-                .RequestServices;
-            var actionContext = services
-                .GetRequiredService<IActionContextAccessor>()
-                .ActionContext;
-            var urlHelper = services
-                .GetRequiredService<IUrlHelperFactory>()
-                .GetUrlHelper(actionContext);
+            var urlHelper = httpContext.GetUrlHelper();
             var request = httpContext.Request;
             return new Uri(new Uri(request.Scheme + "://" + request.Host.Value), urlHelper.Content(request.Path.Value)).ToString();
         }
