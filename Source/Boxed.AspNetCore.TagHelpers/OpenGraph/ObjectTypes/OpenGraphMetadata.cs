@@ -363,7 +363,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
             var httpContext = this.ViewContext.HttpContext;
             var urlHelper = httpContext.GetUrlHelper();
             var request = httpContext.Request;
-            return new Uri(new Uri(request.Scheme + "://" + request.Host.Value), urlHelper.Content(request.Path.Value)).ToString();
+            var baseUri = new Uri(string.Concat(request.Scheme, "://", request.Host.Value));
+            return new Uri(baseUri, urlHelper.Content(request.Path.Value)).ToString();
         }
     }
 }
