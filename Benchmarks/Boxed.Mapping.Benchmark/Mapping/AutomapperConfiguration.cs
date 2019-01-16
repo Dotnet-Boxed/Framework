@@ -14,6 +14,7 @@ namespace Boxed.Mapping.Benchmark.Mapping
                     .ForMember(y => y.IntegerTo, y => y.MapFrom(z => z.IntegerFrom))
                     .ForMember(y => y.LongTo, y => y.MapFrom(z => z.LongFrom))
                     .ForMember(y => y.StringTo, y => y.MapFrom(z => z.StringFrom)));
+            configuration.AssertConfigurationIsValid();
             return configuration.CreateMapper();
         }
     }
