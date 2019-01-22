@@ -15,14 +15,24 @@ namespace Boxed.AspNetCore
         /// </summary>
         /// <param name="application">The application builder.</param>
         /// <returns>The same application builder.</returns>
-        public static IApplicationBuilder UseHttpException(this IApplicationBuilder application)
+        public static IApplicationBuilder UseHttpException(this IApplicationBuilder application) => UseHttpException(application, null);
+
+        /// <summary>
+        /// Allows the use of <see cref="HttpException"/> as an alternative method of returning an error result.
+        /// </summary>
+        /// <param name="application">The application builder.</param>
+        /// <param name="configureOptions">The middleware options.</param>
+        /// <returns>The same application builder.</returns>
+        public static IApplicationBuilder UseHttpException(this IApplicationBuilder application, Action<HttpExceptionMiddlewareOptions> configureOptions)
         {
             if (application == null)
             {
                 throw new ArgumentNullException(nameof(application));
             }
 
-            return application.UseMiddleware<HttpExceptionMiddleware>();
+            var options = new HttpExceptionMiddlewareOptions();
+            configureOptions?.Invoke(options);
+            return application.UseMiddleware<HttpExceptionMiddleware>(options);
         }
 
         /// <summary>
