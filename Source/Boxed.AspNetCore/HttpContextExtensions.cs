@@ -5,6 +5,9 @@ namespace Boxed.AspNetCore
     using System.Globalization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
+    using Microsoft.AspNetCore.Mvc.Routing;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Net.Http.Headers;
 
     /// <summary>
@@ -84,6 +87,24 @@ namespace Boxed.AspNetCore
             }
 
             return context;
+        }
+
+        /// <summary>
+        /// Gets an <see cref="IUrlHelper"/> instance. Uses <see cref="IUrlHelperFactory"/> and
+        /// <see cref="IActionContextAccessor"/>.
+        /// </summary>
+        /// <param name="httpContext">The HTTP context.</param>
+        /// <returns>An <see cref="IUrlHelper"/> instance for the current request.</returns>
+        public static IUrlHelper GetUrlHelper(this HttpContext httpContext)
+        {
+            var services = httpContext.RequestServices;
+            var actionContext = services
+                .GetRequiredService<IActionContextAccessor>()
+                .ActionContext;
+            var urlHelper = services
+                .GetRequiredService<IUrlHelperFactory>()
+                .GetUrlHelper(actionContext);
+            return urlHelper;
         }
     }
 }
