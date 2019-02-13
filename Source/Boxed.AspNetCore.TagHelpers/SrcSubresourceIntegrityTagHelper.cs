@@ -2,6 +2,8 @@ namespace Boxed.AspNetCore.TagHelpers
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
+    using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
 
@@ -17,12 +19,14 @@ namespace Boxed.AspNetCore.TagHelpers
         /// </summary>
         /// <param name="distributedCache">The distributed cache.</param>
         /// <param name="hostingEnvironment">The hosting environment.</param>
-        /// <param name="urlHelper">The URL helper.</param>
+        /// <param name="actionContextAccessor">The MVC action context accessor.</param>
+        /// <param name="urlHelperFactory">The URL helper factory.</param>
         public SrcSubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
             IHostingEnvironment hostingEnvironment,
-            IUrlHelper urlHelper)
-            : base(distributedCache, hostingEnvironment, urlHelper)
+            IActionContextAccessor actionContextAccessor,
+            IUrlHelperFactory urlHelperFactory)
+            : base(distributedCache, hostingEnvironment, actionContextAccessor, urlHelperFactory)
         {
         }
 
