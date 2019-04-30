@@ -48,7 +48,7 @@
     <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="2.2.0" />
     <PackageReference Condition="'$(OS)' == 'Windows_NT'" Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta2-18618-05" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.1-beta.61" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.118" />
   </ItemGroup>
 
 </Project>
