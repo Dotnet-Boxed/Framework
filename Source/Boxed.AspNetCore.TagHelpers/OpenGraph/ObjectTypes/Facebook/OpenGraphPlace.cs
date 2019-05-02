@@ -1,6 +1,7 @@
 namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -56,7 +57,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             if (this.Location == null)
             {
-                throw new ArgumentNullException(nameof(this.Location));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.Location)} cannot be null."));
             }
         }
     }

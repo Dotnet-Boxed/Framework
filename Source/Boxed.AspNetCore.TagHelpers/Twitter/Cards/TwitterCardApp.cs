@@ -1,6 +1,7 @@
 namespace Boxed.AspNetCore.TagHelpers.Twitter
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -51,7 +52,9 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// scheme name).
         /// </summary>
         [HtmlAttributeName(GooglePlayCustomUrlSchemeAttributeName)]
+#pragma warning disable CA1056 // Uri properties should not be strings
         public string GooglePlayCustomUrlScheme { get; set; }
+#pragma warning restore CA1056 // Uri properties should not be strings
 
         /// <summary>
         /// Gets or sets numeric representation of your iPad app ID in the App Store (.i.e. "307234931").
@@ -63,7 +66,9 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// Gets or sets your iPad app’s custom URL scheme (you must include "://" after your scheme name).
         /// </summary>
         [HtmlAttributeName(IPadCustomUrlSchemeAttributeName)]
+#pragma warning disable CA1056 // Uri properties should not be strings
         public string IPadCustomUrlScheme { get; set; }
+#pragma warning restore CA1056 // Uri properties should not be strings
 
         /// <summary>
         /// Gets or sets numeric representation of your iPhone app ID in the App Store (.i.e. “307234931”).
@@ -76,7 +81,9 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// scheme name).
         /// </summary>
         [HtmlAttributeName(IPhoneCustomUrlSchemeAttributeName)]
+#pragma warning disable CA1056 // Uri properties should not be strings
         public string IPhoneCustomUrlScheme { get; set; }
+#pragma warning restore CA1056 // Uri properties should not be strings
 
         /// <summary>
         /// Gets the type of the Twitter card.
@@ -111,22 +118,22 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
 
             if (string.IsNullOrEmpty(this.SiteUsername))
             {
-                throw new ArgumentNullException(nameof(this.SiteUsername));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.SiteUsername)} cannot be null or empty."));
             }
 
             if (string.IsNullOrEmpty(this.IPhone))
             {
-                throw new ArgumentNullException(nameof(this.IPhone));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.IPhone)} cannot be null or empty."));
             }
 
             if (string.IsNullOrEmpty(this.IPad))
             {
-                throw new ArgumentNullException(nameof(this.IPad));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.IPad)} cannot be null or empty."));
             }
 
             if (string.IsNullOrEmpty(this.GooglePlay))
             {
-                throw new ArgumentNullException(nameof(this.GooglePlay));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.GooglePlay)} cannot be null or empty."));
             }
         }
     }

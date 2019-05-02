@@ -21,7 +21,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="width"/> and <paramref name="height"/> must be more than zero.
         /// </exception>
-        public TwitterPlayer(string playerUrl, int width, int height)
+        public TwitterPlayer(Uri playerUrl, int width, int height)
         {
             this.PlayerUrl = playerUrl ?? throw new ArgumentNullException(nameof(playerUrl));
 
@@ -63,7 +63,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="width"/> and <paramref name="height"/> must be more than zero.
         /// </exception>
-        public TwitterPlayer(string playerUrl, int width, int height, string streamContentType, string streamUrl)
+        public TwitterPlayer(Uri playerUrl, int width, int height, string streamContentType, Uri streamUrl)
             : this(playerUrl, width, height)
         {
             this.StreamContentType = streamContentType;
@@ -81,7 +81,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// warnings in a web browser.
         /// </summary>
         /// <value>The HTTPS URL to the iframe player.</value>
-        public string PlayerUrl { get; }
+        public Uri PlayerUrl { get; }
 
         /// <summary>
         /// Gets or sets the MIME type/subtype combination that describes the content contained in twitter:player:stream.
@@ -98,7 +98,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// to 640 x 480 at 30 fps. Audio: AAC, Low Complexity Profile(LC).
         /// </summary>
         /// <value>The URL to a raw stream that will be rendered in Twitter’s mobile applications directly..</value>
-        public string StreamUrl { get; set; }
+        public Uri StreamUrl { get; set; }
 
         /// <summary>
         /// Gets the width of the iFrame player in pixels.

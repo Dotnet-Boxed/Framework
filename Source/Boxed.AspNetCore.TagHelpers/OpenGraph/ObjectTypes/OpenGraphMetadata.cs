@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
     using Microsoft.AspNetCore.Http;
@@ -158,12 +159,16 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the images, videos or audio which should represent your object within the graph.
         /// </summary>
         [HtmlAttributeName(MediaAttributeName)]
+#pragma warning disable CA2227 // Collection properties should be read only
         public ICollection<OpenGraphMedia> Media { get; set; }
+#pragma warning restore CA2227 // Collection properties should be read only
 
         /// <summary>
         /// Gets the namespace of this open graph type.
         /// </summary>
+#pragma warning disable CA1716 // Identifiers should not match keywords
         public abstract string Namespace { get; }
+#pragma warning restore CA1716 // Identifiers should not match keywords
 
         /// <summary>
         /// Gets or sets the list of URL's used to supply an additional link that shows related content to the object. This property is not part of the
@@ -195,7 +200,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// e.g. "http://www.imdb.com/title/tt0117500/". Leave as <c>null</c> to get the URL of the current page.
         /// </summary>
         [HtmlAttributeName(UrlAttributeName)]
-        public string Url { get; set; }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// Gets the videos which should represent your object within the graph. Use the Media property to add a video file.
@@ -349,12 +354,12 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         {
             if (this.Title == null)
             {
-                throw new ArgumentNullException(nameof(this.Title));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.Title)} cannot be null."));
             }
 
             if (this.MainImage == null)
             {
-                throw new ArgumentNullException(nameof(this.MainImage));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.MainImage)} cannot be null."));
             }
         }
 
@@ -370,13 +375,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
             return urlHelper;
         }
 
-        private string GetRequestUrl()
+        private Uri GetRequestUrl()
         {
             var httpContext = this.ViewContext.HttpContext;
             var urlHelper = GetUrlHelper(httpContext);
             var request = httpContext.Request;
             var baseUri = new Uri(string.Concat(request.Scheme, "://", request.Host.Value));
-            return new Uri(baseUri, urlHelper.Content(request.Path.Value)).ToString();
+            return new Uri(baseUri, urlHelper.Content(request.Path.Value));
         }
     }
 }

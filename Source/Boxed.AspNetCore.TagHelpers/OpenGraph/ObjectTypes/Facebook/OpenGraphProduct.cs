@@ -159,7 +159,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets a URL link to find out more about the product.
         /// </summary>
         [HtmlAttributeName(ProductLinkUrlAttributeName)]
-        public string ProductLinkUrl { get; set; }
+        public Uri ProductLinkUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum number of times a person can purchase the product.
@@ -171,7 +171,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the retailer of the product. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(RetailerUrlAttributeName)]
-        public string RetailerUrl { get; set; }
+        public Uri RetailerUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the retailer's category for the product.

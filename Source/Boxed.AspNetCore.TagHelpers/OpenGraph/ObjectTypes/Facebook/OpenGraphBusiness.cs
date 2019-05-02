@@ -2,6 +2,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -73,8 +75,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 foreach (var hours in this.OpeningHours)
                 {
                     stringBuilder.AppendMetaPropertyContent("business:hours:day", hours.Day.ToLowercaseString());
-                    stringBuilder.AppendMetaPropertyContent("business:hours:start", hours.Start.ToString(TimeOfDayFormat));
-                    stringBuilder.AppendMetaPropertyContent("business:hours:end", hours.End.ToString(TimeOfDayFormat));
+                    stringBuilder.AppendMetaPropertyContent("business:hours:start", hours.Start.ToString(TimeOfDayFormat, CultureInfo.InvariantCulture));
+                    stringBuilder.AppendMetaPropertyContent("business:hours:end", hours.End.ToString(TimeOfDayFormat, CultureInfo.InvariantCulture));
                 }
             }
 
@@ -92,12 +94,12 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             if (this.ContactData == null)
             {
-                throw new ArgumentNullException(nameof(this.ContactData));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.ContactData)} cannot be null."));
             }
 
             if (this.Location == null)
             {
-                throw new ArgumentNullException(nameof(this.Location));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.Location)} cannot be null."));
             }
         }
     }

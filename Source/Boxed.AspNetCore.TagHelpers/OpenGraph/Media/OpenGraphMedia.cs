@@ -13,21 +13,20 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// </summary>
         /// <param name="mediaUrl">The media URL.</param>
         /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="mediaUrl"/> is <c>null</c>.</exception>
-        public OpenGraphMedia(string mediaUrl)
+        public OpenGraphMedia(Uri mediaUrl)
         {
             if (mediaUrl == null)
             {
                 throw new ArgumentNullException(nameof(mediaUrl));
             }
 
-            // If the URL starts with https.
-            if (mediaUrl[4] == 's')
+            if (string.Equals(mediaUrl.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
             {
                 this.Url = new UriBuilder(mediaUrl)
                 {
                     Port = -1,
-                    Scheme = "https"
-                }.ToString();
+                    Scheme = Uri.UriSchemeHttps
+                }.Uri;
                 this.UrlSecure = mediaUrl;
             }
             else
@@ -45,12 +44,12 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// Gets the absolute HTTP media URL which should represent your object within the graph.
         /// </summary>
-        public string Url { get; }
+        public Uri Url { get; }
 
         /// <summary>
         /// Gets the absolute HTTPS media URL which should represent your object within the graph.
         /// </summary>
-        public string UrlSecure { get; }
+        public Uri UrlSecure { get; }
 
         /// <summary>
         /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.

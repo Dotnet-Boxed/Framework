@@ -1,6 +1,7 @@
 namespace Boxed.AspNetCore.TagHelpers.Twitter
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -94,17 +95,17 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
 
             if (string.IsNullOrEmpty(this.Title))
             {
-                throw new ArgumentNullException(nameof(this.Title));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.Title)} cannot be null or empty."));
             }
 
             if (string.IsNullOrEmpty(this.Description))
             {
-                throw new ArgumentNullException(nameof(this.Description));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.Description)} cannot be null or empty."));
             }
 
             if (string.IsNullOrEmpty(this.SiteId) && string.IsNullOrEmpty(this.SiteUsername))
             {
-                throw new ArgumentNullException(nameof(this.SiteUsername), "Either twitter:site or twitter:site:id is required.");
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.SiteUsername)} cannot be null or empty and either twitter:site or twitter:site:id is required."));
             }
         }
     }

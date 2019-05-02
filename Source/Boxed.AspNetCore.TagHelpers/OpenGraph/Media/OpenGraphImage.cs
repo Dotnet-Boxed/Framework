@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
+    using System;
     using System.Text;
 
     /// <summary>
@@ -16,8 +17,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Initializes a new instance of the <see cref="OpenGraphImage"/> class.
         /// </summary>
         /// <param name="imageUrl">The image URL.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if imageUrl is <c>null</c>.</exception>
-        public OpenGraphImage(string imageUrl)
+        /// <exception cref="ArgumentNullException">Thrown if imageUrl is <c>null</c>.</exception>
+        public OpenGraphImage(Uri imageUrl)
             : base(imageUrl)
         {
         }
@@ -28,8 +29,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="imageUrl">The media URL.</param>
         /// <param name="type">The MIME type of the media e.g. media/jpeg. This is optional if your media URL ends with
         /// a file extension, otherwise it is recommended.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="imageUrl"/> is <c>null</c>.</exception>
-        public OpenGraphImage(string imageUrl, string type)
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="imageUrl"/> is <c>null</c>.</exception>
+        public OpenGraphImage(Uri imageUrl, string type)
             : this(imageUrl) =>
             this.Type = type;
 
@@ -39,8 +40,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="imageUrl">The media URL.</param>
         /// <param name="width">The width of the media in pixels. This is optional.</param>
         /// <param name="height">The height of the media in pixels. This is optional.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="imageUrl"/> is <c>null</c>.</exception>
-        public OpenGraphImage(string imageUrl, int width, int height)
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="imageUrl"/> is <c>null</c>.</exception>
+        public OpenGraphImage(Uri imageUrl, int width, int height)
             : this(imageUrl)
         {
             this.Height = height;
@@ -55,8 +56,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// a file extension, otherwise it is recommended.</param>
         /// <param name="width">The width of the media in pixels. This is optional.</param>
         /// <param name="height">The height of the media in pixels. This is optional.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="imageUrl"/> is <c>null</c>.</exception>
-        public OpenGraphImage(string imageUrl, string type, int width, int height)
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="imageUrl"/> is <c>null</c>.</exception>
+        public OpenGraphImage(Uri imageUrl, string type, int width, int height)
             : this(imageUrl, type)
         {
             this.Height = height;

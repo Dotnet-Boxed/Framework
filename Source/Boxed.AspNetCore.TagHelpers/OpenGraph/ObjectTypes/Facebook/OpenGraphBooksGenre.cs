@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -70,7 +71,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             if (this.CanonicalName == null)
             {
-                throw new ArgumentNullException(nameof(this.CanonicalName));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.CanonicalName)} cannot be null."));
             }
         }
     }

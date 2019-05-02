@@ -59,7 +59,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// This particular property is not part of the Open Graph standard but is documented by Facebook.
         /// </summary>
         [HtmlAttributeName(PublisherUrlAttributeName)]
-        public string PublisherUrl { get; set; }
+        public Uri PublisherUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the high-level section or category name e.g. Technology.

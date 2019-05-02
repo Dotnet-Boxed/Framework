@@ -84,7 +84,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the product group. This URL must contain profile meta tags <see cref="OpenGraphProductGroup"/>.
         /// </summary>
         [HtmlAttributeName(GroupUrlAttributeName)]
-        public string GroupUrl { get; set; }
+        public Uri GroupUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the Global Trade Item Number (GTIN), which encompasses UPC, EAN, JAN, and ISBN.
@@ -259,12 +259,12 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             if (this.Prices == null)
             {
-                throw new ArgumentNullException(nameof(this.Prices));
+                throw new ArgumentNullException(FormattableString.Invariant($"{nameof(this.Prices)} cannot be null."));
             }
 
             if (this.RetailerItemId == null)
             {
-                throw new ArgumentNullException(nameof(this.RetailerItemId));
+                throw new ArgumentNullException(FormattableString.Invariant($"{nameof(this.RetailerItemId)} cannot be null."));
             }
         }
     }

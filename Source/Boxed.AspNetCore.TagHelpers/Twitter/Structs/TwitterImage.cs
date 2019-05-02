@@ -11,7 +11,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// Initializes a new instance of the <see cref="TwitterImage"/> class.
         /// </summary>
         /// <param name="imageUrl">The image URL. The Image must be less than 1MB in size.</param>
-        public TwitterImage(string imageUrl) =>
+        public TwitterImage(Uri imageUrl) =>
             this.ImageUrl = imageUrl ?? throw new ArgumentNullException(nameof(imageUrl));
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// The height of the image in pixels to help Twitter accurately preserve the aspect ratio of
         /// the image when resizing. This property is optional.
         /// </param>
-        public TwitterImage(string imageUrl, int width, int height)
+        public TwitterImage(Uri imageUrl, int width, int height)
             : this(imageUrl)
         {
             this.Height = height;
@@ -42,7 +42,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// <summary>
         /// Gets the image URL. The Image must be less than 1MB in size.
         /// </summary>
-        public string ImageUrl { get; }
+        public Uri ImageUrl { get; }
 
         /// <summary>
         /// Gets or sets the width of the image in pixels to help Twitter accurately preserve the

@@ -59,7 +59,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the television series. This URL's must contain television show meta tags <see cref="OpenGraphVideoTvShow"/>.
         /// </summary>
         [HtmlAttributeName(SeriesUrlAttributeName)]
-        public string SeriesUrl { get; set; }
+        public Uri SeriesUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the tag words associated with the episode.

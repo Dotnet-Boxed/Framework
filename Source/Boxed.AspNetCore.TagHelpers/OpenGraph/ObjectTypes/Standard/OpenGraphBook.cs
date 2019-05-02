@@ -25,7 +25,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the author who wrote the book. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(AuthorUrlAttributeName)]
-        public string AuthorUrl { get; set; }
+        public Uri AuthorUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the books unique ISBN number.

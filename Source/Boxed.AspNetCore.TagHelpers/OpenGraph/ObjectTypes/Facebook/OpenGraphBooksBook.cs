@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -84,7 +85,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to a sample of the book.
         /// </summary>
         [HtmlAttributeName(SampleUrlAttributeName)]
-        public string SampleUrl { get; set; }
+        public Uri SampleUrl { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.
@@ -125,7 +126,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             if (this.ISBN == null)
             {
-                throw new ArgumentNullException(nameof(this.ISBN));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.ISBN)} cannot be null."));
             }
         }
     }

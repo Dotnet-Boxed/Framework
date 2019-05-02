@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Text;
 
     /// <summary>
@@ -72,11 +73,11 @@ namespace Boxed.AspNetCore
             stringBuilder.Append("\" content=\"");
             if ((content.Hour == 0) && (content.Minute == 0) && (content.Second == 0))
             {
-                stringBuilder.Append(content.ToString("yyyy-MM-dd"));
+                stringBuilder.Append(content.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
             }
             else
             {
-                stringBuilder.Append(content.ToString("s") + "Z");
+                stringBuilder.Append(content.ToString("s", CultureInfo.InvariantCulture) + "Z");
             }
 
             stringBuilder.AppendLine("\">");

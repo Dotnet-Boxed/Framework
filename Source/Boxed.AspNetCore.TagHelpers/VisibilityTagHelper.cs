@@ -20,7 +20,7 @@ namespace Boxed.AspNetCore.TagHelpers
         public bool IsVisible { get; set; } = true;
 
         /// <summary>
-        /// Synchronously executes the <see cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" /> with the given
+        /// Synchronously executes the <see cref="TagHelper" /> with the given
         /// <paramref name="context" /> and <paramref name="output" />.
         /// </summary>
         /// <param name="context">Contains information associated with the current HTML tag.</param>

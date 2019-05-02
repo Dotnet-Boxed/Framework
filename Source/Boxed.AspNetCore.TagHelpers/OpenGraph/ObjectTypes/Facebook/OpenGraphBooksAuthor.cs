@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
+    using System;
     using System.Collections.Generic;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -47,7 +48,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the official site URL of the author.
         /// </summary>
         [HtmlAttributeName(OfficialSiteUrlAttributeName)]
-        public string OfficialSiteUrl { get; set; }
+        public Uri OfficialSiteUrl { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.

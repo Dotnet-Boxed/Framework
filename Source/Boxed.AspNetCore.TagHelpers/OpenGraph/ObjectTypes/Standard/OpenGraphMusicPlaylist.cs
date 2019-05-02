@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -27,7 +28,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the creator of the playlist. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(CreatorUrlAttributeName)]
-        public string CreatorUrl { get; set; }
+        public Uri CreatorUrl { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -84,7 +85,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             if (this.SongUrls == null)
             {
-                throw new ArgumentNullException(nameof(this.SongUrls));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.SongUrls)} cannot be null."));
             }
         }
     }

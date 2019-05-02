@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
+    using System;
     using System.Text;
 
     /// <summary>
@@ -11,8 +12,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Initializes a new instance of the <see cref="OpenGraphPreviewAudio"/> class.
         /// </summary>
         /// <param name="audioUrl">The audio URL.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if audioUrl is <c>null</c>.</exception>
-        public OpenGraphPreviewAudio(string audioUrl)
+        /// <exception cref="ArgumentNullException">Thrown if audioUrl is <c>null</c>.</exception>
+        public OpenGraphPreviewAudio(Uri audioUrl)
             : base(audioUrl)
         {
         }
@@ -23,8 +24,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="mediaUrl">The media URL.</param>
         /// <param name="type">The MIME type of the media e.g. media/ogg. This is optional if your media URL ends with
         /// a file extension, otherwise it is recommended.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="mediaUrl"/> is <c>null</c>.</exception>
-        public OpenGraphPreviewAudio(string mediaUrl, string type)
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="mediaUrl"/> is <c>null</c>.</exception>
+        public OpenGraphPreviewAudio(Uri mediaUrl, string type)
             : this(mediaUrl) =>
             this.Type = type;
 

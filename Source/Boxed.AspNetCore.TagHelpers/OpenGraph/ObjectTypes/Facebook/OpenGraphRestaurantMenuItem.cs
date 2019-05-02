@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -28,7 +29,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the section this menu item is from. This URL must contain profile meta tags <see cref="OpenGraphRestaurantMenuSection"/>.
         /// </summary>
         [HtmlAttributeName(SectionUrlAttributeName)]
-        public string SectionUrl { get; set; }
+        public Uri SectionUrl { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.
@@ -71,7 +72,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             if (this.SectionUrl == null)
             {
-                throw new ArgumentNullException(nameof(this.SectionUrl));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.SectionUrl)} cannot be null."));
             }
         }
     }

@@ -38,16 +38,16 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         public ViewContext ViewContext { get; set; }
 
         /// <summary>
-        /// Asynchronously executes the <see cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" /> with the given <paramref name="context" /> and
+        /// Asynchronously executes the <see cref="TagHelper" /> with the given <paramref name="context" /> and
         /// <paramref name="output" />.
         /// </summary>
         /// <param name="context">Contains information associated with the current HTML tag.</param>
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
         /// <returns>
-        /// A <see cref="T:System.Threading.Tasks.Task" /> that on completion updates the <paramref name="output" />.
+        /// A <see cref="Task" /> that on completion updates the <paramref name="output" />.
         /// </returns>
         /// <remarks>
-        /// By default this calls into <see cref="M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)" />.
+        /// By default this calls into <see cref="TagHelper.Process(TagHelperContext, TagHelperOutput)" />.
         /// </remarks>
         /// .
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)

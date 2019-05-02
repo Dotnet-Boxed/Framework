@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -115,7 +116,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             if (this.AlbumUrls == null)
             {
-                throw new ArgumentNullException(nameof(this.AlbumUrls));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.AlbumUrls)} cannot be null."));
             }
         }
     }

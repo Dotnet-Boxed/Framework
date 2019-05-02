@@ -72,7 +72,9 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <value>
         /// The name of the attribute containing the URL to the resource.
         /// </value>
+#pragma warning disable CA1056 // Uri properties should not be strings
         protected abstract string UrlAttributeName { get; }
+#pragma warning restore CA1056 // Uri properties should not be strings
 
         /// <summary>
         /// Asynchronously executes the <see cref="TagHelper" /> with the given context and output.
@@ -103,7 +105,9 @@ namespace Boxed.AspNetCore.TagHelpers
         /// </summary>
         /// <param name="url">The URL to the resource.</param>
         /// <returns>A key value for the URL.</returns>
+#pragma warning disable CA1054 // Uri parameters should not be strings
         protected virtual string GetSriKey(string url) => "SRI:" + url;
+#pragma warning restore CA1054 // Uri parameters should not be strings
 
         /// <summary>
         /// Reads all bytes from the file with the specified path.
@@ -141,9 +145,8 @@ namespace Boxed.AspNetCore.TagHelpers
             }
             else
             {
-                throw new ArgumentException(
-                    $"Hash algorithm not recognized. Type<{type}>.",
-                    nameof(T));
+                throw new InvalidOperationException(
+                    FormattableString.Invariant($"Hash algorithm not recognized. Type<{type}>."));
             }
         }
 
@@ -178,7 +181,7 @@ namespace Boxed.AspNetCore.TagHelpers
                     break;
                 default:
                     throw new ArgumentException(
-                        $"Hash algorithm not recognized. HashAlgorithm<{hashAlgorithm}>.",
+                        FormattableString.Invariant($"Hash algorithm not recognized. HashAlgorithm<{hashAlgorithm}>."),
                         nameof(hashAlgorithm));
             }
         }

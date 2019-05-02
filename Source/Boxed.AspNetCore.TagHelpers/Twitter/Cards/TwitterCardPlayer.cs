@@ -1,6 +1,7 @@
 namespace Boxed.AspNetCore.TagHelpers.Twitter
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -90,38 +91,42 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
 
             if (string.IsNullOrEmpty(this.SiteUsername))
             {
-                throw new ArgumentNullException(nameof(this.SiteUsername));
+                throw new ValidationException(FormattableString.Invariant(
+                    $"{nameof(this.SiteUsername)} cannot be null or empty."));
             }
 
             if (this.Image == null)
             {
-                throw new ArgumentNullException(nameof(this.Image));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.Image)} cannot be null."));
             }
 
             if (string.IsNullOrEmpty(this.Title))
             {
-                throw new ArgumentNullException(nameof(this.Title));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.Title)} cannot be null or empty."));
             }
 
             // ToDo: Add Check for Image.Alt if this.Player.StreamUrl is provided
             if (this.Player == null)
             {
-                throw new ArgumentNullException(nameof(this.Player));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.Player)} cannot be null."));
             }
 
-            if (!this.Player.PlayerUrl.ToLower().Contains("https:"))
+#pragma warning disable CA1308 // Normalize strings to uppercase
+            if (!string.Equals(this.Player.PlayerUrl.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
+#pragma warning restore CA1308 // Normalize strings to uppercase
             {
-                throw new ArgumentNullException(nameof(this.Player.PlayerUrl), $"The " + nameof(this.Player.PlayerUrl) + " must be a HTTPS URL which does not generate active mixed content warnings in a web browser.");
+                throw new ValidationException(FormattableString.Invariant(
+                    $"The {nameof(this.Player.PlayerUrl)} must be a HTTPS URL which does not generate active mixed content warnings in a web browser."));
             }
 
             if (this.Player.Width <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(this.Player.Width));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.Player.Width)} must be more than zero."));
             }
 
             if (this.Player.Height <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(this.Player.Height));
+                throw new ValidationException(FormattableString.Invariant($"{nameof(this.Player.Height)} must be more than zero."));
             }
         }
     }
