@@ -37,7 +37,7 @@ namespace Boxed.Mapping
             }
 
             var destination = Factory<TDestination>.CreateInstance();
-            await translator.Map(source, destination);
+            await translator.Map(source, destination).ConfigureAwait(false);
             return destination;
         }
 
@@ -89,7 +89,7 @@ namespace Boxed.Mapping
                 ++i;
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -131,7 +131,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -173,7 +173,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -215,7 +215,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -258,7 +258,7 @@ namespace Boxed.Mapping
                 ++i;
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -313,7 +313,7 @@ namespace Boxed.Mapping
                 ++i;
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -355,7 +355,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -397,7 +397,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -439,7 +439,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -482,7 +482,7 @@ namespace Boxed.Mapping
                 ++i;
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -524,7 +524,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -566,7 +566,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -608,7 +608,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -651,7 +651,7 @@ namespace Boxed.Mapping
                 ++i;
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -693,7 +693,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -735,7 +735,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -777,7 +777,7 @@ namespace Boxed.Mapping
                 tasks[i] = translator.Map(sourceItem, destinationItem);
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
@@ -820,7 +820,7 @@ namespace Boxed.Mapping
                 ++i;
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return destination;
         }
