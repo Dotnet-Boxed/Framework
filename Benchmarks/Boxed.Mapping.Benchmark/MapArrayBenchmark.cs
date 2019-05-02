@@ -1,6 +1,7 @@
 namespace Boxed.Mapping.Benchmark
 {
     using System;
+    using System.Globalization;
     using AutoMapper;
     using BenchmarkDotNet.Attributes;
     using Boxed.Mapping.Benchmark.Mapping;
@@ -41,7 +42,7 @@ namespace Boxed.Mapping.Benchmark
                     DateTimeOffsetFrom = DateTimeOffset.UtcNow,
                     IntegerFrom = this.random.Next(),
                     LongFrom = this.random.Next(),
-                    StringFrom = this.random.Next().ToString()
+                    StringFrom = this.random.Next().ToString(CultureInfo.InvariantCulture)
                 };
             }
         }
