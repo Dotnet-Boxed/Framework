@@ -18,7 +18,7 @@ namespace Boxed.AspNetCore.Filters
         /// <summary>
         /// Executes the resource filter. Called after execution of the remainder of the pipeline.
         /// </summary>
-        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext" />.</param>
+        /// <param name="context">The <see cref="ResourceExecutedContext" />.</param>
         public void OnResourceExecuted(ResourceExecutedContext context)
         {
         }
@@ -28,7 +28,7 @@ namespace Boxed.AspNetCore.Filters
         /// a request contains a trailing slash and, if it does, calls the <see cref="HandleTrailingSlashRequest"/>
         /// method.
         /// </summary>
-        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
+        /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
             var path = context.HttpContext.Request.Path;
@@ -44,7 +44,7 @@ namespace Boxed.AspNetCore.Filters
         /// <summary>
         /// Handles HTTP requests that have a trailing slash but are not meant to.
         /// </summary>
-        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
+        /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         protected virtual void HandleTrailingSlashRequest(ResourceExecutingContext context) =>
             context.Result = new NotFoundResult();
     }

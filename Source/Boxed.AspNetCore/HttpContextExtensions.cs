@@ -78,7 +78,7 @@ namespace Boxed.AspNetCore
                         headers[HeaderNames.Pragma] = NoCache;
                         break;
                     default:
-                        var exception = new NotImplementedException($"Unknown {nameof(ResponseCacheLocation)}: {cacheProfile.Location}");
+                        var exception = new NotImplementedException(FormattableString.Invariant($"Unknown {nameof(ResponseCacheLocation)}: {cacheProfile.Location}"));
                         Debug.Fail(exception.ToString());
                         throw exception;
                 }

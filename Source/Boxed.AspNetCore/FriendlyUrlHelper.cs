@@ -136,7 +136,9 @@ namespace Boxed.AspNetCore
         /// <returns>The remapped character.</returns>
         private static string RemapInternationalCharToAscii(char character)
         {
-            var s = character.ToString().ToLowerInvariant();
+#pragma warning disable CA1308 // Normalize strings to uppercase
+            var s = new string(character, 1).ToLowerInvariant();
+#pragma warning restore CA1308 // Normalize strings to uppercase
             if ("àåáâäãåąā".Contains(s))
             {
                 return "a";

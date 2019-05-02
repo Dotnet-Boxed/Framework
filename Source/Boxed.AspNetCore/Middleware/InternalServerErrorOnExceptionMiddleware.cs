@@ -13,6 +13,7 @@ namespace Boxed.AspNetCore.Middleware
             {
                 await next.Invoke(context).ConfigureAwait(false);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch
             {
                 var factory = context.RequestServices.GetRequiredService<ILoggerFactory>();
@@ -23,6 +24,7 @@ namespace Boxed.AspNetCore.Middleware
 
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             }
+#pragma warning restore CA1031 // Do not catch general exception types
         }
     }
 }

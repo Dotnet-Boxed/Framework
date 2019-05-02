@@ -73,7 +73,7 @@ namespace Boxed.AspNetCore.Sitemap
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns>The site-map URL.</returns>
-        protected abstract string GetSitemapUrl(int index);
+        protected abstract Uri GetSitemapUrl(int index);
 
         /// <summary>
         /// Logs warnings when a site-map exceeds the maximum size of 10MB or if the site-map index file exceeds the
@@ -107,7 +107,7 @@ namespace Boxed.AspNetCore.Sitemap
                 var lastModifiedElement = lastModified.HasValue ?
                     new XElement(
                         xmlns + "lastmod",
-                        lastModified.Value.ToLocalTime().ToString("yyyy-MM-ddTHH:mm:sszzz")) :
+                        lastModified.Value.ToLocalTime().ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture)) :
                     null;
                 var sitemapElement = new XElement(
                     xmlns + "sitemap",
@@ -138,12 +138,14 @@ namespace Boxed.AspNetCore.Sitemap
                 var lastModifiedElement = sitemapNode.LastModified.HasValue ?
                     new XElement(
                         xmlns + "lastmod",
-                        sitemapNode.LastModified.Value.ToLocalTime().ToString("yyyy-MM-ddTHH:mm:sszzz")) :
+                        sitemapNode.LastModified.Value.ToLocalTime().ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture)) :
                     null;
                 var frequencyElement = sitemapNode.Frequency.HasValue ?
                     new XElement(
                         xmlns + "changefreq",
+#pragma warning disable CA1308 // Normalize strings to uppercase
                         sitemapNode.Frequency.Value.ToString().ToLowerInvariant()) :
+#pragma warning restore CA1308 // Normalize strings to uppercase
                     null;
                 var priorityElement = sitemapNode.Priority.HasValue ?
                     new XElement(
@@ -153,7 +155,7 @@ namespace Boxed.AspNetCore.Sitemap
 
                 var urlElement = new XElement(
                     xmlns + "url",
-                    new XElement(xmlns + "loc", Uri.EscapeUriString(sitemapNode.Url)),
+                    new XElement(xmlns + "loc", Uri.EscapeUriString(sitemapNode.Url.ToString())),
                     lastModifiedElement,
                     frequencyElement,
                     priorityElement);
@@ -174,8 +176,8 @@ namespace Boxed.AspNetCore.Sitemap
         {
             if (sitemapXml.Length >= MaximumSitemapSizeInBytes)
             {
-                this.LogWarning(new SitemapException(
-                    $"Sitemap exceeds the maximum size of 10MB. This is because you have unusually long URL's. Consider reducing the MaximumSitemapNodeCount. Size:<{sitemapXml.Length}>."));
+                this.LogWarning(new SitemapException(FormattableString.Invariant(
+                    $"Sitemap exceeds the maximum size of 10MB. This is because you have unusually long URL's. Consider reducing the MaximumSitemapNodeCount. Size:<{sitemapXml.Length}>.")));
             }
         }
 
@@ -187,8 +189,8 @@ namespace Boxed.AspNetCore.Sitemap
         {
             if (sitemapCount > MaximumSitemapCount)
             {
-                this.LogWarning(new SitemapException(
-                    $"Sitemap index file exceeds the maximum number of allowed sitemaps of 50,000. Count:<{sitemapCount}>"));
+                this.LogWarning(new SitemapException(FormattableString.Invariant(
+                    $"Sitemap index file exceeds the maximum number of allowed sitemaps of 50,000. Count:<{sitemapCount}>")));
             }
         }
     }

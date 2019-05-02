@@ -66,7 +66,7 @@ namespace Boxed.AspNetCore.Filters
         /// the HTTP request contains a non-canonical URL using <see cref="TryGetCanonicalUrl"/>, if it doesn't calls
         /// the <see cref="HandleNonCanonicalRequest"/> method.
         /// </summary>
-        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
+        /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
             if (HttpMethods.IsGet(context.HttpContext.Request.Method))
@@ -81,7 +81,7 @@ namespace Boxed.AspNetCore.Filters
         /// <summary>
         /// Executes the resource filter. Called after execution of the remainder of the pipeline.
         /// </summary>
-        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext" />.</param>
+        /// <param name="context">The <see cref="ResourceExecutedContext" />.</param>
         public void OnResourceExecuted(ResourceExecutedContext context)
         {
         }
@@ -89,7 +89,7 @@ namespace Boxed.AspNetCore.Filters
         /// <summary>
         /// Determines whether the specified URl is canonical and if it is not, outputs the canonical URL.
         /// </summary>
-        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
+        /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         /// <param name="canonicalUrl">The canonical URL.</param>
         /// <returns><c>true</c> if the URL is canonical, otherwise <c>false</c>.</returns>
         protected virtual bool TryGetCanonicalUrl(ResourceExecutingContext context, out string canonicalUrl)
@@ -133,7 +133,9 @@ namespace Boxed.AspNetCore.Filters
                     {
                         if (char.IsUpper(character))
                         {
-                            request.Path = new PathString(request.Path.Value.ToLower());
+#pragma warning disable CA1308 // Normalize strings to uppercase
+                            request.Path = new PathString(request.Path.Value.ToLowerInvariant());
+#pragma warning restore CA1308 // Normalize strings to uppercase
                             isCanonical = false;
                             break;
                         }
@@ -145,7 +147,9 @@ namespace Boxed.AspNetCore.Filters
                         {
                             if (char.IsUpper(character))
                             {
-                                request.QueryString = new QueryString(request.QueryString.Value.ToLower());
+#pragma warning disable CA1308 // Normalize strings to uppercase
+                                request.QueryString = new QueryString(request.QueryString.Value.ToLowerInvariant());
+#pragma warning restore CA1308 // Normalize strings to uppercase
                                 isCanonical = false;
                                 break;
                             }
@@ -169,7 +173,7 @@ namespace Boxed.AspNetCore.Filters
         /// <summary>
         /// Handles HTTP requests for URL's that are not canonical. Performs a 301 Permanent Redirect to the canonical URL.
         /// </summary>
-        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
+        /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         /// <param name="canonicalUrl">The canonical URL.</param>
         protected virtual void HandleNonCanonicalRequest(ResourceExecutingContext context, string canonicalUrl) =>
             context.Result = new RedirectResult(canonicalUrl, true);
@@ -179,7 +183,7 @@ namespace Boxed.AspNetCore.Filters
         /// <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the attribute.</typeparam>
-        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
+        /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         /// <returns><c>true</c> if a <typeparamref name="T"/> attribute is specified, otherwise <c>false</c>.</returns>
         protected virtual bool HasAttribute<T>(ResourceExecutingContext context)
         {

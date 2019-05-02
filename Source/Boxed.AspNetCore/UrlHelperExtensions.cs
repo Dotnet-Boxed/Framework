@@ -59,8 +59,10 @@ namespace Boxed.AspNetCore
         /// <param name="routeName">Name of the route.</param>
         /// <param name="routeValues">The route values.</param>
         /// <returns>The absolute URL.</returns>
+#pragma warning disable CA1055 // Uri return values should not be strings
         public static string AbsoluteRouteUrl(
             this IUrlHelper urlHelper,
+#pragma warning restore CA1055 // Uri return values should not be strings
             string routeName,
             object routeValues = null)
         {

@@ -13,7 +13,7 @@ namespace Boxed.AspNetCore.Sitemap
         /// Initializes a new instance of the <see cref="SitemapNode"/> class.
         /// </summary>
         /// <param name="url">The URL of the page.</param>
-        public SitemapNode(string url) =>
+        public SitemapNode(Uri url) =>
             this.Url = url ?? throw new ArgumentNullException(nameof(url));
 
         /// <summary>
@@ -64,8 +64,8 @@ namespace Boxed.AspNetCore.Sitemap
                     if ((value.Value < 0D) || (value.Value > 1D))
                     {
                         throw new ArgumentOutOfRangeException(
-                            "value",
-                            $"Priority must be a value between 0 and 1. Value:<{value.Value}>.");
+                            nameof(value),
+                            FormattableString.Invariant($"Priority must be a value between 0 and 1. Value:<{value.Value}>."));
                     }
                 }
 
@@ -80,6 +80,6 @@ namespace Boxed.AspNetCore.Sitemap
         /// <value>
         /// The URL of the page.
         /// </value>
-        public string Url { get; }
+        public Uri Url { get; }
     }
 }

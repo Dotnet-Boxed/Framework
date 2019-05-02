@@ -23,7 +23,7 @@ namespace Boxed
         /// <summary>
         /// Initializes a new instance of the <see cref="StringWriterWithEncoding"/> class.
         /// </summary>
-        /// <param name="formatProvider">An <see cref="T:System.IFormatProvider" /> object that controls formatting.</param>
+        /// <param name="formatProvider">An <see cref="IFormatProvider" /> object that controls formatting.</param>
         public StringWriterWithEncoding(IFormatProvider formatProvider)
             : base(formatProvider)
         {
@@ -34,7 +34,9 @@ namespace Boxed
         /// </summary>
         /// <param name="stringBuilder">The string builder to write to.</param>
         public StringWriterWithEncoding(StringBuilder stringBuilder)
+#pragma warning disable CA1305 // Specify IFormatProvider
             : base(stringBuilder)
+#pragma warning restore CA1305 // Specify IFormatProvider
         {
         }
 
@@ -70,7 +72,9 @@ namespace Boxed
         /// <param name="stringBuilder">The string builder to write to.</param>
         /// <param name="encoding">The encoding.</param>
         public StringWriterWithEncoding(StringBuilder stringBuilder, Encoding encoding)
+#pragma warning disable CA1305 // Specify IFormatProvider
             : base(stringBuilder) =>
+#pragma warning restore CA1305 // Specify IFormatProvider
             this.encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
 
         /// <summary>
@@ -84,7 +88,7 @@ namespace Boxed
             this.encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
 
         /// <summary>
-        /// Gets the <see cref="T:System.Text.Encoding" /> in which the output is written.
+        /// Gets the <see cref="Encoding" /> in which the output is written.
         /// </summary>
         public override Encoding Encoding => this.encoding ?? base.Encoding;
     }

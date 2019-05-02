@@ -10,6 +10,13 @@ namespace Boxed.AspNetCore.Sitemap
         /// <summary>
         /// Initializes a new instance of the <see cref="SitemapException"/> class.
         /// </summary>
+        public SitemapException()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SitemapException"/> class.
+        /// </summary>
         /// <param name="message">The message that describes the error.</param>
         public SitemapException(string message)
             : base(message)
