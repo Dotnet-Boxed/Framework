@@ -80,12 +80,5 @@ namespace Boxed.AspNetCore.Swagger.Test
             Assert.Same(requirement2, policyRequirements.First());
             Assert.Same(requirement1, policyRequirements.Last());
         }
-
-        private FilterDescriptor GetFilterDescriptor(IAuthorizationRequirement requirement, int filterScope)
-        {
-            var requirements = new List<IAuthorizationRequirement>() { requirement };
-            var policy = new AuthorizationPolicy(requirements, new List<string>());
-            return new FilterDescriptor(new AuthorizeFilter(policy), 30);
-        }
     }
 }
