@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Threading.Tasks;
     using Boxed.AspNetCore.TagHelpers.Test.TestData;
     using Boxed.AspNetCore.TagHelpers.Twitter;
@@ -36,7 +37,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 var context = new TagHelperContext(
                     new TagHelperAttributeList(),
                     new Dictionary<object, object>(),
-                    Guid.NewGuid().ToString("N"));
+                    Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
 
                 var output = new TagHelperOutput(
                     "meta",
