@@ -32,7 +32,6 @@ env:
     # Disable sending usage data to Microsoft
   - DOTNET_CLI_TELEMETRY_OPTOUT=true
 
-# You must run the following command for Travis to be able to have permissions to execute the shell script below
-# git update-index --chmod=+x build.sh
 script:
-  - ./build.sh
+  - dotnet tool install --global Cake.Tool
+  - dotnet cake
