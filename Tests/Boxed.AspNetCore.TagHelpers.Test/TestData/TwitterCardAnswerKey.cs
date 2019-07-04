@@ -1,7 +1,7 @@
-using System;
-
 namespace Boxed.AspNetCore.TagHelpers.Test.TestData
 {
+    using System;
+
     /// <summary>
     /// Answer Key For the Twitter Card Testing.
     /// </summary>

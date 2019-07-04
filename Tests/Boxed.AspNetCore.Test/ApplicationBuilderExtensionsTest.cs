@@ -38,7 +38,7 @@ namespace Boxed.AspNetCore.Test
                         actionCalled = true;
                         return next.Invoke();
                     }));
-            await this.applicationBuilder.Build().Invoke(this.httpContext);
+            await this.applicationBuilder.Build().Invoke(this.httpContext).ConfigureAwait(false);
 
             Assert.Equal(actionCalled, condition);
         }
@@ -67,7 +67,7 @@ namespace Boxed.AspNetCore.Test
                         elseActionCalled = true;
                         return next.Invoke();
                     }));
-            await this.applicationBuilder.Build().Invoke(this.httpContext);
+            await this.applicationBuilder.Build().Invoke(this.httpContext).ConfigureAwait(false);
 
             Assert.Equal(ifActionCalled, condition);
             Assert.NotEqual(elseActionCalled, condition);
