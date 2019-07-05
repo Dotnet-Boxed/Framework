@@ -6,10 +6,12 @@
   
 ## Continuous Integration
 
-| Name      | Operating System | Status |
-| :---      | :---             | :---   |
-| AppVeyor  | Windows          | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/aknwu9sil3dv3im0?svg=true)](https://ci.appveyor.com/project/RehanSaeed/framework) |
-| Travis CI | Linux & Mac      | [![Travis CI Build Status](https://img.shields.io/travis/Dotnet-Boxed/Framework.svg?maxAge=3600&label=travis)](https://travis-ci.org/Dotnet-Boxed/Framework) |
+| Name         | Operating System | Status |
+| :---         | :---             | :---   |
+| AppVeyor     | Windows          | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/aknwu9sil3dv3im0?svg=true)](https://ci.appveyor.com/project/RehanSaeed/framework) |
+| Azure DevOps | Ubuntu           | [![Azure DevOps Ubuntu Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Linux)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) |
+| Azure DevOps | Mac              | [![Azure DevOps Mac Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Mac)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) |
+| Azure DevOps | Windows          | [![Azure DevOps Windows Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Windows)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) |
 
 ## NuGet Packages
 
