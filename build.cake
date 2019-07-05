@@ -5,15 +5,24 @@ var configuration =
     "Release";
 var preReleaseSuffix =
     HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
+    (TFBuild.IsRunningOnAzurePipelinesHosted && Environment.GetEnvironmentVariable("BUILD_SOURCEBRANCH").StartsWith("refs/tags/")) ? null :
     (AppVeyor.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
     EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
     "beta";
 var buildNumber =
     HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
+    TFBuild.IsRunningOnAzurePipelinesHosted ? TFBuild.Environment.Build.Id :
     AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
-    TravisCI.IsRunningOnTravisCI ? TravisCI.Environment.Build.BuildNumber :
     EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
     0;
+var nuGetSource =
+    HasArgument("NuGetSource") ? Argument<string>("NuGetSource") :
+    EnvironmentVariable("NuGetSource") != null ? EnvironmentVariable("NuGetSource") :
+    null;
+var nuGetApiKey =
+    HasArgument("NuGetApiKey") ? Argument<string>("NuGetApiKey") :
+    EnvironmentVariable("NuGetApiKey") != null ? EnvironmentVariable("NuGetApiKey") :
+    null;
 
 var artifactsDirectory = Directory("./Artifacts");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
@@ -33,7 +42,7 @@ Task("Restore")
         DotNetCoreRestore();
     });
 
- Task("Build")
+Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
     {
@@ -48,7 +57,6 @@ Task("Restore")
     });
 
 Task("Test")
-    .IsDependentOn("Build")
     .Does(() =>
     {
         foreach(var project in GetFiles("./Tests/**/*.csproj"))
@@ -67,7 +75,6 @@ Task("Test")
     });
 
 Task("Pack")
-    .IsDependentOn("Test")
     .Does(() =>
     {
         DotNetCorePack(
@@ -75,14 +82,28 @@ Task("Pack")
             new DotNetCorePackSettings()
             {
                 Configuration = configuration,
+                IncludeSymbols = true,
+                MSBuildSettings = new DotNetCoreMSBuildSettings().WithProperty("SymbolPackageFormat", "snupkg"),
                 NoBuild = true,
                 NoRestore = true,
                 OutputDirectory = artifactsDirectory,
-                VersionSuffix = versionSuffix
+                VersionSuffix = versionSuffix,
+            });
+    });
+
+Task("Push")
+    .Does(() =>
+    {
+        DotNetCoreNuGetPush(
+            "**/*.nupkg",
+            new DotNetCoreNuGetPushSettings()
+            {
+                ApiKey = nuGetApiKey,
+                Source = nuGetSource,
             });
     });
 
 Task("Default")
-    .IsDependentOn("Pack");
+    .IsDependentOn("Build");
 
 RunTarget(target);
