@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Boxed.AspNetCore.TagHelpers.Test.TestData;
     using Boxed.AspNetCore.TagHelpers.Twitter;
@@ -37,7 +38,8 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
 
-            Assert.Throws<ArgumentNullException>("GooglePlay", () => tagHelper.Process(context, output));
+            var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
+            Assert.Contains(nameof(TwitterCardApp.GooglePlay), validationException.Message);
         }
 
         /// <summary>
@@ -46,9 +48,6 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact]
         public void RenderMetaTags_NoValueForIPad_ExceptionThrown()
         {
-            var expected = typeof(System.ArgumentNullException);
-            Exception thrownException = null;
-
             var tagHelper = new TwitterCardApp()
             {
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
@@ -56,33 +55,22 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 IPad = string.Empty,
                 GooglePlay = "com.android.app"
             };
+            var context = new TagHelperContext(
+                new TagHelperAttributeList(),
+                new Dictionary<object, object>(),
+                Guid.NewGuid().ToString("N"));
+            var output = new TagHelperOutput(
+                "meta",
+                new TagHelperAttributeList(),
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
-            try
-            {
-                var context = new TagHelperContext(
-                    new TagHelperAttributeList(),
-                    new Dictionary<object, object>(),
-                    Guid.NewGuid().ToString("N"));
-
-                var output = new TagHelperOutput(
-                    "meta",
-                    new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
-
-                tagHelper.Process(context, output);
-            }
-            catch (Exception e)
-            {
-                thrownException = e;
-            }
-
-            Assert.Equal(expected, thrownException.GetType());
-            Assert.Equal("IPad", ((System.ArgumentException)thrownException).ParamName.ToString());
+            var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
+            Assert.Contains(nameof(TwitterCardApp.IPad), validationException.Message);
         }
 
         /// <summary>
@@ -91,9 +79,6 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact]
         public void RenderMetaTags_NoValueForSiteUsername_ExceptionThrown()
         {
-            var expected = typeof(System.ArgumentNullException);
-            Exception thrownException = null;
-
             var tagHelper = new TwitterCardApp()
             {
                 SiteUsername = string.Empty,
@@ -101,33 +86,22 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 IPad = "307234931",
                 GooglePlay = "com.android.app"
             };
+            var context = new TagHelperContext(
+                new TagHelperAttributeList(),
+                new Dictionary<object, object>(),
+                Guid.NewGuid().ToString("N"));
+            var output = new TagHelperOutput(
+                "meta",
+                new TagHelperAttributeList(),
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
-            try
-            {
-                var context = new TagHelperContext(
-                     new TagHelperAttributeList(),
-                     new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N"));
-
-                var output = new TagHelperOutput(
-                    "meta",
-                    new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
-
-                tagHelper.Process(context, output);
-            }
-            catch (Exception e)
-            {
-                thrownException = e;
-            }
-
-            Assert.Equal(expected, thrownException.GetType());
-            Assert.Equal("SiteUsername", ((System.ArgumentException)thrownException).ParamName.ToString());
+            var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
+            Assert.Contains(nameof(TwitterCardApp.SiteUsername), validationException.Message);
         }
 
         /// <summary>
@@ -143,12 +117,10 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 IPad = "307234931",
                 GooglePlay = "com.android.app"
             };
-
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
                 Guid.NewGuid().ToString("N"));
-
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -160,6 +132,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             tagHelper.Process(context, output);
+
             Assert.Contains("name=\"twitter:card\" content=\"app\"", output.Content.GetContent());
         }
 
@@ -170,9 +143,6 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact]
         public void TwitterCard_App_Validation_Fails_Missing_IPhone()
         {
-            var expected = typeof(System.ArgumentNullException);
-            Exception thrownException = null;
-
             var tagHelper = new TwitterCardApp()
             {
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
@@ -180,33 +150,22 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 IPad = "307234931",
                 GooglePlay = "com.android.app"
             };
+            var context = new TagHelperContext(
+                new TagHelperAttributeList(),
+                new Dictionary<object, object>(),
+                Guid.NewGuid().ToString("N"));
+            var output = new TagHelperOutput(
+                "meta",
+                new TagHelperAttributeList(),
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
-            try
-            {
-                var context = new TagHelperContext(
-                    new TagHelperAttributeList(),
-                    new Dictionary<object, object>(),
-                    Guid.NewGuid().ToString("N"));
-
-                var output = new TagHelperOutput(
-                    "meta",
-                    new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
-
-                tagHelper.Process(context, output);
-            }
-            catch (Exception e)
-            {
-                thrownException = e;
-            }
-
-            Assert.Equal(expected, thrownException.GetType());
-            Assert.Equal("IPhone", ((System.ArgumentException)thrownException).ParamName.ToString());
+            var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
+            Assert.Contains(nameof(TwitterCardApp.IPhone), validationException.Message);
         }
     }
 }

@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Boxed.AspNetCore.TagHelpers.Test.TestData;
     using Boxed.AspNetCore.TagHelpers.Twitter;
@@ -16,9 +17,6 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact]
         public void RenderMetaTags_NoValueForDescription_ExceptionThrown()
         {
-            var expected = typeof(System.ArgumentNullException);
-            Exception thrownException = null;
-
             var tagHelper = new TwitterCardSummaryLargeImage()
             {
                 Title = TwitterCardAnswerKey.TitleValue,
@@ -26,33 +24,22 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 SiteUsername = TwitterCardAnswerKey.SiteIdValue,
                 Image = null
             };
+            var context = new TagHelperContext(
+                new TagHelperAttributeList(),
+                new Dictionary<object, object>(),
+                Guid.NewGuid().ToString("N"));
+            var output = new TagHelperOutput(
+                "meta",
+                new TagHelperAttributeList(),
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
-            try
-            {
-                var context = new TagHelperContext(
-                     new TagHelperAttributeList(),
-                     new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N"));
-
-                var output = new TagHelperOutput(
-                    "meta",
-                    new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
-
-                tagHelper.Process(context, output);
-            }
-            catch (Exception e)
-            {
-                thrownException = e;
-            }
-
-            Assert.Equal(expected, thrownException.GetType());
-            Assert.Equal("Description", ((ArgumentException)thrownException).ParamName.ToString());
+            var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
+            Assert.Contains(nameof(TwitterCardSummaryLargeImage.Description), validationException.Message);
         }
 
         /// <summary>
@@ -128,9 +115,6 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact]
         public void RenderMetaTags_NoValueForTitle_ExceptionThrown()
         {
-            var expected = typeof(System.ArgumentNullException);
-            Exception thrownException = null;
-
             var tagHelper = new TwitterCardSummaryLargeImage()
             {
                 Title = string.Empty,
@@ -138,33 +122,22 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 SiteUsername = TwitterCardAnswerKey.SiteIdValue,
                 Image = null
             };
+            var context = new TagHelperContext(
+                new TagHelperAttributeList(),
+                new Dictionary<object, object>(),
+                Guid.NewGuid().ToString("N"));
+            var output = new TagHelperOutput(
+                "meta",
+                new TagHelperAttributeList(),
+                (cache, encoder) =>
+                {
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
-            try
-            {
-                var context = new TagHelperContext(
-                     new TagHelperAttributeList(),
-                     new Dictionary<object, object>(),
-                     Guid.NewGuid().ToString("N"));
-
-                var output = new TagHelperOutput(
-                    "meta",
-                    new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
-
-                tagHelper.Process(context, output);
-            }
-            catch (Exception e)
-            {
-                thrownException = e;
-            }
-
-            Assert.Equal(expected, thrownException.GetType());
-            Assert.Equal("Title", ((ArgumentException)thrownException).ParamName.ToString());
+            var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
+            Assert.Contains(nameof(TwitterCardSummaryLargeImage.Title), validationException.Message);
         }
 
         /// <summary>
@@ -173,43 +146,29 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         [Fact]
         public void RenderMetaTags_NoValueForTwitterSiteUsername_ExceptionThrown()
         {
-            var expected = typeof(System.ArgumentNullException);
-            Exception thrownException = null;
-
-            try
+            var tagHelper = new TwitterCardSummaryLargeImage()
             {
-                var tagHelper = new TwitterCardSummaryLargeImage()
+                Title = TwitterCardAnswerKey.TitleValue,
+                Description = TwitterCardAnswerKey.DescriptionValue,
+                SiteUsername = string.Empty,
+                Image = null
+            };
+            var context = new TagHelperContext(
+                new TagHelperAttributeList(),
+                new Dictionary<object, object>(),
+                Guid.NewGuid().ToString("N"));
+            var output = new TagHelperOutput(
+                "meta",
+                new TagHelperAttributeList(),
+                (cache, encoder) =>
                 {
-                    Title = TwitterCardAnswerKey.TitleValue,
-                    Description = TwitterCardAnswerKey.DescriptionValue,
-                    SiteUsername = string.Empty,
-                    Image = null
-                };
+                    var tagHelperContent = new DefaultTagHelperContent();
+                    tagHelperContent.SetContent(string.Empty);
+                    return Task.FromResult<TagHelperContent>(tagHelperContent);
+                });
 
-                var context = new TagHelperContext(
-                    new TagHelperAttributeList(),
-                    new Dictionary<object, object>(),
-                    Guid.NewGuid().ToString("N"));
-
-                var output = new TagHelperOutput(
-                    "meta",
-                    new TagHelperAttributeList(),
-                    (cache, encoder) =>
-                    {
-                        var tagHelperContent = new DefaultTagHelperContent();
-                        tagHelperContent.SetContent(string.Empty);
-                        return Task.FromResult<TagHelperContent>(tagHelperContent);
-                    });
-
-                tagHelper.Process(context, output);
-            }
-            catch (Exception e)
-            {
-                thrownException = e;
-            }
-
-            Assert.Equal(expected, thrownException.GetType());
-            Assert.Contains("Either twitter:site or twitter:site:id is required.", thrownException.Message.ToString());
+            var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
+            Assert.Contains("either twitter:site or twitter:site:id is required.", validationException.Message);
         }
 
         /// <summary>

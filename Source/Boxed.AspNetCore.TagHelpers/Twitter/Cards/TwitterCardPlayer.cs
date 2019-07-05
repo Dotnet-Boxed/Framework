@@ -110,7 +110,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
                 throw new ValidationException(FormattableString.Invariant($"{nameof(this.Title)} cannot be null or empty."));
             }
 
-            // ToDo: Add Check for Image.Alt if this.Player.StreamUrl is provided
+            // TODO: Add Check for Image.Alt if this.Player.StreamUrl is provided
             if (this.Player == null)
             {
                 throw new ValidationException(FormattableString.Invariant($"{nameof(this.Player)} cannot be null."));
