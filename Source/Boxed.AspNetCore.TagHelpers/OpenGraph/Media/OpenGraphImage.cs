@@ -70,6 +70,11 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
+            if (stringBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(stringBuilder));
+            }
+
             stringBuilder.AppendMetaPropertyContent("og:image", this.Url);
             stringBuilder.AppendMetaPropertyContentIfNotNull("og:image:secure_url", this.UrlSecure);
             stringBuilder.AppendMetaPropertyContentIfNotNull("og:image:type", this.Type);

@@ -70,6 +70,11 @@ namespace Boxed.Mapping
                 throw new ArgumentNullException(nameof(sourceCollection));
             }
 
+            if (destinationCollection == null)
+            {
+                throw new ArgumentNullException(nameof(destinationCollection));
+            }
+
             var i = 0;
             foreach (var item in sourceCollection)
             {

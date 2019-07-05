@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
+    using System;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -14,8 +15,20 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="htmlHelper">The HTML helper.</param>
         /// <param name="openGraphMetadata">The open graph metadata.</param>
         /// <returns>The meta tags.</returns>
-        public static HtmlString OpenGraph(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata) =>
-            new HtmlString(openGraphMetadata.ToString());
+        public static HtmlString OpenGraph(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
+        {
+            if (htmlHelper == null)
+            {
+                throw new ArgumentNullException(nameof(htmlHelper));
+            }
+
+            if (openGraphMetadata == null)
+            {
+                throw new ArgumentNullException(nameof(openGraphMetadata));
+            }
+
+            return new HtmlString(openGraphMetadata.ToString());
+        }
 
         /// <summary>
         /// Creates a <see cref="string"/> representing the Open Graph, Facebook and object namespaces. The namespaces are added to the HTML head element.
@@ -23,7 +36,19 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="htmlHelper">The HTML helper.</param>
         /// <param name="openGraphMetadata">The open graph metadata.</param>
         /// <returns>The Open Graph namespaces.</returns>
-        public static HtmlString OpenGraphNamespace(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata) =>
-            new HtmlString("prefix=\"" + openGraphMetadata.GetNamespaces() + "\"");
+        public static HtmlString OpenGraphNamespace(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
+        {
+            if (htmlHelper == null)
+            {
+                throw new ArgumentNullException(nameof(htmlHelper));
+            }
+
+            if (openGraphMetadata == null)
+            {
+                throw new ArgumentNullException(nameof(openGraphMetadata));
+            }
+
+            return new HtmlString("prefix=\"" + openGraphMetadata.GetNamespaces() + "\"");
+        }
     }
 }

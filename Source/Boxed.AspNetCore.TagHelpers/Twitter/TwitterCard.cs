@@ -77,6 +77,16 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (output == null)
+            {
+                throw new ArgumentNullException(nameof(output));
+            }
+
             output.Content.SetHtmlContent(this.ToString());
             output.TagName = null;
         }
@@ -103,6 +113,11 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// <param name="stringBuilder">The string builder.</param>
         public virtual void ToString(StringBuilder stringBuilder)
         {
+            if (stringBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(stringBuilder));
+            }
+
             this.Validate();
 
             stringBuilder.AppendMetaNameContent("twitter:card", this.Type.ToTwitterString());

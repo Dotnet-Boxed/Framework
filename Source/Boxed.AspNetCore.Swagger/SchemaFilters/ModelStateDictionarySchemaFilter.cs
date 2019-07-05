@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.Swagger.SchemaFilters
 {
+    using System;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Swashbuckle.AspNetCore.Swagger;
@@ -18,6 +19,16 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
         /// <param name="context">The context.</param>
         public void Apply(Schema model, SchemaFilterContext context)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             if (context.SystemType == typeof(ModelStateDictionary))
             {
                 var modelState = new ModelStateDictionary();

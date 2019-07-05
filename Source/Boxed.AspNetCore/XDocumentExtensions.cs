@@ -1,5 +1,6 @@
 namespace Boxed
 {
+    using System;
     using System.IO;
     using System.Text;
     using System.Xml.Linq;
@@ -19,6 +20,11 @@ namespace Boxed
         /// </returns>
         public static string ToString(this XDocument document, Encoding encoding)
         {
+            if (document == null)
+            {
+                throw new ArgumentNullException(nameof(document));
+            }
+
             var stringBuilder = new StringBuilder();
 
             using (StringWriter stringWriter = new StringWriterWithEncoding(stringBuilder, encoding))

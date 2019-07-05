@@ -63,7 +63,7 @@ namespace Boxed.AspNetCore
             }
             else
             {
-                string cacheControlValue = null;
+                string cacheControlValue;
                 var duration = cacheProfile.Duration.GetValueOrDefault().ToString(CultureInfo.InvariantCulture);
                 switch (cacheProfile.Location)
                 {
@@ -97,6 +97,11 @@ namespace Boxed.AspNetCore
         /// <returns>An <see cref="IUrlHelper"/> instance for the current request.</returns>
         public static IUrlHelper GetUrlHelper(this HttpContext httpContext)
         {
+            if (httpContext == null)
+            {
+                throw new ArgumentNullException(nameof(httpContext));
+            }
+
             var services = httpContext.RequestServices;
             var actionContext = services
                 .GetRequiredService<IActionContextAccessor>()

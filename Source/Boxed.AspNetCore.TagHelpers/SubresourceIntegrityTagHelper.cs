@@ -46,8 +46,19 @@ namespace Boxed.AspNetCore.TagHelpers
             IActionContextAccessor actionContextAccessor,
             IUrlHelperFactory urlHelperFactory)
         {
-            this.distributedCache = distributedCache;
-            this.hostingEnvironment = hostingEnvironment;
+            this.distributedCache = distributedCache ?? throw new ArgumentNullException(nameof(distributedCache));
+            this.hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+
+            if (actionContextAccessor == null)
+            {
+                throw new ArgumentNullException(nameof(actionContextAccessor));
+            }
+
+            if (urlHelperFactory == null)
+            {
+                throw new ArgumentNullException(nameof(urlHelperFactory));
+            }
+
             this.urlHelper = urlHelperFactory.GetUrlHelper(actionContextAccessor.ActionContext);
         }
 
@@ -55,8 +66,8 @@ namespace Boxed.AspNetCore.TagHelpers
         /// Gets or sets the one or more hashing algorithms to be used. This is a required property.
         /// </summary>
         [HtmlAttributeName(SubresourceIntegrityHashAlgorithmsAttributeName)]
-        public SubresourceIntegrityHashAlgorithm HashAlgorithms { get; set; }
-            = SubresourceIntegrityHashAlgorithm.SHA512;
+        public SubresourceIntegrityHashAlgorithm HashAlgorithms { get; set; } =
+            SubresourceIntegrityHashAlgorithm.SHA512;
 
         /// <summary>
         /// Gets or sets the source file.
@@ -84,6 +95,16 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <returns>A task representing the operation.</returns>
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (output == null)
+            {
+                throw new ArgumentNullException(nameof(output));
+            }
+
             var url = output.Attributes[this.UrlAttributeName].Value.ToString();
 
             if (!string.IsNullOrWhiteSpace(url) && !string.IsNullOrWhiteSpace(this.Source))

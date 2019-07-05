@@ -251,6 +251,16 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (output == null)
+            {
+                throw new ArgumentNullException(nameof(output));
+            }
+
             // Workaround for context.Items not working across _Layout.cshtml and Index.cshtml using ViewContext.
             // https://github.com/aspnet/Mvc/issues/3233 and https://github.com/aspnet/Razor/issues/564
             this.ViewContext.ViewData[nameof(OpenGraphPrefixTagHelper)] = this.GetNamespaces();
@@ -279,6 +289,11 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="stringBuilder">The string builder.</param>
         public virtual void ToString(StringBuilder stringBuilder)
         {
+            if (stringBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(stringBuilder));
+            }
+
             this.Validate();
 
             // Three required tags.

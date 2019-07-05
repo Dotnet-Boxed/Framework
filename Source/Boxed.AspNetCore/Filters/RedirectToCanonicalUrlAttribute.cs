@@ -27,8 +27,14 @@ namespace Boxed.AspNetCore.Filters
         /// </summary>
         /// <param name="options">The route options.</param>
         public RedirectToCanonicalUrlAttribute(IOptions<RouteOptions> options)
-            : this(options.Value.AppendTrailingSlash, options.Value.LowercaseUrls)
         {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            this.AppendTrailingSlash = options.Value.AppendTrailingSlash;
+            this.LowercaseUrls = options.Value.LowercaseUrls;
         }
 
         /// <summary>
@@ -69,6 +75,11 @@ namespace Boxed.AspNetCore.Filters
         /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             if (HttpMethods.IsGet(context.HttpContext.Request.Method))
             {
                 if (!this.TryGetCanonicalUrl(context, out var canonicalUrl))
@@ -94,6 +105,11 @@ namespace Boxed.AspNetCore.Filters
         /// <returns><c>true</c> if the URL is canonical, otherwise <c>false</c>.</returns>
         protected virtual bool TryGetCanonicalUrl(ResourceExecutingContext context, out string canonicalUrl)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             var isCanonical = true;
 
             var request = context.HttpContext.Request;
@@ -175,8 +191,15 @@ namespace Boxed.AspNetCore.Filters
         /// </summary>
         /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         /// <param name="canonicalUrl">The canonical URL.</param>
-        protected virtual void HandleNonCanonicalRequest(ResourceExecutingContext context, string canonicalUrl) =>
+        protected virtual void HandleNonCanonicalRequest(ResourceExecutingContext context, string canonicalUrl)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             context.Result = new RedirectResult(canonicalUrl, true);
+        }
 
         /// <summary>
         /// Determines whether the specified action or its controller has the attribute with the specified type
@@ -187,6 +210,11 @@ namespace Boxed.AspNetCore.Filters
         /// <returns><c>true</c> if a <typeparamref name="T"/> attribute is specified, otherwise <c>false</c>.</returns>
         protected virtual bool HasAttribute<T>(ResourceExecutingContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             foreach (var filterMetadata in context.Filters)
             {
                 if (filterMetadata is T)

@@ -40,6 +40,11 @@ namespace Boxed.AspNetCore.Sitemap
         /// <returns>A collection of XML site-map documents.</returns>
         protected virtual List<string> GetSitemapDocuments(IReadOnlyCollection<SitemapNode> sitemapNodes)
         {
+            if (sitemapNodes == null)
+            {
+                throw new ArgumentNullException(nameof(sitemapNodes));
+            }
+
             var sitemapCount = (int)Math.Ceiling(sitemapNodes.Count / (double)MaximumSitemapNodeCount);
             this.CheckSitemapCount(sitemapCount);
             var sitemaps = Enumerable

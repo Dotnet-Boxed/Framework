@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.TagHelpers.Twitter
 {
+    using System;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -14,7 +15,19 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// <param name="htmlHelper">The HTML helper.</param>
         /// <param name="twitterCard">The Twitter card metadata.</param>
         /// <returns>The Twitter card's HTML meta tags.</returns>
-        public static HtmlString TwitterCard(this IHtmlHelper htmlHelper, TwitterCard twitterCard) =>
-            new HtmlString(twitterCard.ToString());
+        public static HtmlString TwitterCard(this IHtmlHelper htmlHelper, TwitterCard twitterCard)
+        {
+            if (htmlHelper == null)
+            {
+                throw new ArgumentNullException(nameof(htmlHelper));
+            }
+
+            if (twitterCard == null)
+            {
+                throw new ArgumentNullException(nameof(twitterCard));
+            }
+
+            return new HtmlString(twitterCard.ToString());
+        }
     }
 }

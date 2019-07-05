@@ -31,6 +31,11 @@ namespace Boxed.AspNetCore.Filters
         /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             var path = context.HttpContext.Request.Path;
             if (path.HasValue)
             {
@@ -45,7 +50,14 @@ namespace Boxed.AspNetCore.Filters
         /// Handles HTTP requests that have a trailing slash but are not meant to.
         /// </summary>
         /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
-        protected virtual void HandleTrailingSlashRequest(ResourceExecutingContext context) =>
+        protected virtual void HandleTrailingSlashRequest(ResourceExecutingContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             context.Result = new NotFoundResult();
+        }
     }
 }

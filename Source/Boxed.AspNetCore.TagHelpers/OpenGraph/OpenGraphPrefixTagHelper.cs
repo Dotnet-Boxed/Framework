@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 {
+    using System;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -52,6 +53,16 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// .
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (output == null)
+            {
+                throw new ArgumentNullException(nameof(output));
+            }
+
             if (this.Enabled)
             {
                 await output.GetChildContentAsync().ConfigureAwait(false);

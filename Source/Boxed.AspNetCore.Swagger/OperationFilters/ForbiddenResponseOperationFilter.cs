@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.Swagger.OperationFilters
 {
+    using System;
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Authorization.Infrastructure;
@@ -27,6 +28,16 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
         /// <param name="context">The context.</param>
         public void Apply(Operation operation, OperationFilterContext context)
         {
+            if (operation == null)
+            {
+                throw new ArgumentNullException(nameof(operation));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             var filterDescriptors = context.ApiDescription.ActionDescriptor.FilterDescriptors;
             var authorizationRequirements = filterDescriptors.GetPolicyRequirements();
             if (!operation.Responses.ContainsKey(ForbiddenStatusCode) &&

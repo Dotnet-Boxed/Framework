@@ -61,6 +61,11 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
+            if (stringBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(stringBuilder));
+            }
+
             base.ToString(stringBuilder);
 
             stringBuilder.AppendMetaPropertyContentIfNotNull("books:book", this.BookUrls);

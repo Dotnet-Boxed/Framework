@@ -26,6 +26,11 @@ namespace Boxed.AspNetCore.Filters
         /// <param name="context">The exception context.</param>
         public override void OnException(ExceptionContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             if (context.Exception is OperationCanceledException)
             {
                 this.logger.LogInformation("Request was cancelled");

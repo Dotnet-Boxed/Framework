@@ -381,8 +381,11 @@ namespace Boxed.AspNetCore.Caching
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
             {
-                var binaryWriter = new BinaryWriter(memoryStream);
-                binaryWriter.Write(value);
+                using (var binaryWriter = new BinaryWriter(memoryStream))
+                {
+                    binaryWriter.Write(value);
+                }
+
                 bytes = memoryStream.ToArray();
             }
 
@@ -422,8 +425,11 @@ namespace Boxed.AspNetCore.Caching
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
             {
-                var binaryWriter = new BinaryWriter(memoryStream);
-                binaryWriter.Write(value);
+                using (var binaryWriter = new BinaryWriter(memoryStream))
+                {
+                    binaryWriter.Write(value);
+                }
+
                 bytes = memoryStream.ToArray();
             }
 
@@ -463,8 +469,11 @@ namespace Boxed.AspNetCore.Caching
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
             {
-                var binaryWriter = new BinaryWriter(memoryStream);
-                binaryWriter.Write(value);
+                using (var binaryWriter = new BinaryWriter(memoryStream))
+                {
+                    binaryWriter.Write(value);
+                }
+
                 bytes = memoryStream.ToArray();
             }
 
@@ -504,8 +513,11 @@ namespace Boxed.AspNetCore.Caching
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
             {
-                var binaryWriter = new BinaryWriter(memoryStream);
-                binaryWriter.Write(value);
+                using (var binaryWriter = new BinaryWriter(memoryStream))
+                {
+                    binaryWriter.Write(value);
+                }
+
                 bytes = memoryStream.ToArray();
             }
 
@@ -545,8 +557,11 @@ namespace Boxed.AspNetCore.Caching
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
             {
-                var binaryWriter = new BinaryWriter(memoryStream);
-                binaryWriter.Write(value);
+                using (var binaryWriter = new BinaryWriter(memoryStream))
+                {
+                    binaryWriter.Write(value);
+                }
+
                 bytes = memoryStream.ToArray();
             }
 
@@ -586,8 +601,11 @@ namespace Boxed.AspNetCore.Caching
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
             {
-                var binaryWriter = new BinaryWriter(memoryStream);
-                binaryWriter.Write(value);
+                using (var binaryWriter = new BinaryWriter(memoryStream))
+                {
+                    binaryWriter.Write(value);
+                }
+
                 bytes = memoryStream.ToArray();
             }
 
@@ -627,8 +645,11 @@ namespace Boxed.AspNetCore.Caching
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
             {
-                var binaryWriter = new BinaryWriter(memoryStream);
-                binaryWriter.Write(value);
+                using (var binaryWriter = new BinaryWriter(memoryStream))
+                {
+                    binaryWriter.Write(value);
+                }
+
                 bytes = memoryStream.ToArray();
             }
 
@@ -668,8 +689,11 @@ namespace Boxed.AspNetCore.Caching
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
             {
-                var binaryWriter = new BinaryWriter(memoryStream);
-                binaryWriter.Write(value);
+                using (var binaryWriter = new BinaryWriter(memoryStream))
+                {
+                    binaryWriter.Write(value);
+                }
+
                 bytes = memoryStream.ToArray();
             }
 

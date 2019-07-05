@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.Swagger.SchemaFilters
 {
+    using System;
     using Microsoft.AspNetCore.JsonPatch;
     using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
@@ -19,6 +20,16 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
         /// <param name="context">The context.</param>
         public void Apply(Schema model, SchemaFilterContext context)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             if (context.SystemType.GenericTypeArguments.Length > 0 &&
                 context.SystemType.GetGenericTypeDefinition() == typeof(JsonPatchDocument<>))
             {
