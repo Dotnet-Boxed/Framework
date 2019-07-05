@@ -9,15 +9,12 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Xunit;
 
-    /// <summary>
-    /// TwitterCard Player Tests.
-    /// </summary>
-    public class TwitterCard_Player_Test
+    public class TwitterCardPlayerTest
     {
         /// <summary>
         /// Renders the meta tags with no value for image. (exception thrown).
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_NoValueForImage_ExceptionThrown")]
+        [Fact]
         public void RenderMetaTags_NoValueForImage_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
@@ -63,7 +60,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         /// <summary>
         /// Renders the meta tags with no value for player. (exception thrown).
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_NoValueForPlayer_ExceptionThrown")]
+        [Fact]
         public void RenderMetaTags_NoValueForPlayer_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
@@ -109,7 +106,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         /// <summary>
         /// Renders the meta tags with no value for twitter site username. (exception thrown).
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_NoValueForSiteUsername_ExceptionThrown")]
+        [Fact]
         public void RenderMetaTags_NoValueForSiteUsername_ExceptionThrown()
         {
             var expected = typeof(ArgumentNullException);
@@ -161,7 +158,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         /// <summary>
         /// Renders the meta tags with no value for title. (exception thrown).
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_NoValueForTitle_ExceptionThrown")]
+        [Fact]
         public void RenderMetaTags_NoValueForTitle_ExceptionThrown()
         {
             var expected = typeof(System.ArgumentNullException);
@@ -207,7 +204,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         /// <summary>
         /// Renders the meta tags with the correct twitter card type tag.
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_RenderedCorrectTwitterCardTypeTag_Match")]
+        [Fact]
         public void RenderMetaTags_RenderedCorrectTwitterCardTypeTag_Match()
         {
             var tagHelper = new TwitterCardPlayer()
@@ -247,7 +244,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         /// <summary>
         /// Renders the meta tags rendered tag player with an HTTPS URI.
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_RenderedTagPlayerWithHTTPS_Rendered")]
+        [Fact]
         public void RenderMetaTags_RenderedTagPlayerWithHTTPS_Rendered()
         {
             var tagHelper = new TwitterCardPlayer()
@@ -288,7 +285,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         /// <summary>
         /// Renders the meta tags for the player without an HTTPS URI (exception thrown).
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_RenderedTagPlayerWithoutHTTPS_ExceptionThrown")]
+        [Fact]
         public void RenderMetaTags_RenderedTagPlayerWithoutHTTPS_ExceptionThrown()
         {
             var expected = typeof(ArgumentNullException);
@@ -340,7 +337,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         /// <summary>
         /// Renders the meta tags with a zero value for player height. (exception thrown).
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_ZeroValueForPlayerHeight_ExceptionThrown")]
+        [Fact]
         public void RenderMetaTags_ZeroValueForPlayerHeight_ExceptionThrown()
         {
             var expected = typeof(ArgumentOutOfRangeException);
@@ -389,7 +386,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
         /// <summary>
         /// Renders the meta tags with a zero value for player width. (exception thrown).
         /// </summary>
-        [Fact(DisplayName = "RenderMetaTags_ZeroValueForPlayerWidth_ExceptionThrown")]
+        [Fact]
         public void RenderMetaTags_ZeroValueForPlayerWidth_ExceptionThrown()
         {
             var expected = typeof(ArgumentOutOfRangeException);
