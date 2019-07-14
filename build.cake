@@ -104,6 +104,8 @@ Task("Push")
     });
 
 Task("Default")
-    .IsDependentOn("Build");
+    .IsDependentOn("Build")
+    .IsDependentOn("Test")
+    .IsDependentOn("Pack");
 
 RunTarget(target);
