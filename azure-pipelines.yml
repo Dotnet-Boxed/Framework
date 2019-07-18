@@ -76,7 +76,7 @@ stages:
             inputs:
               command: push
               nuGetFeedType: internal
-              packagesToPush: '/home/vsts/work/1/Windows/*.nupkg'
+              packagesToPush: '$(Build.BuildDirectory)/Windows/*.nupkg'
               publishVstsFeed: dotnet-boxed
   - deployment: NuGet
     pool:
@@ -93,5 +93,5 @@ stages:
             inputs:
               command: push
               nuGetFeedType: external
-              packagesToPush: '/home/vsts/work/1/Windows/*.nupkg'
+              packagesToPush: '$(Build.BuildDirectory)/Windows/*.nupkg'
               publishFeedCredentials: NuGet
