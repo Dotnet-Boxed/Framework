@@ -71,13 +71,13 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: 'echo $(Build.BuildDirectory)'
+          - script: 'echo $(Agent.BuildDirectory)'
           - task: DotNetCoreCLI@2
             displayName: 'Dotnet NuGet Push'
             inputs:
               command: push
               nuGetFeedType: internal
-              packagesToPush: '$(Build.BuildDirectory)/Windows/*.nupkg'
+              packagesToPush: '$(Agent.BuildDirectory)/Windows/*.nupkg'
               publishVstsFeed: dotnet-boxed
   - deployment: NuGet
     pool:
@@ -94,5 +94,5 @@ stages:
             inputs:
               command: push
               nuGetFeedType: external
-              packagesToPush: '$(Build.BuildDirectory)/Windows/*.nupkg'
+              packagesToPush: '$(Agent.BuildDirectory)/Windows/*.nupkg'
               publishFeedCredentials: NuGet
