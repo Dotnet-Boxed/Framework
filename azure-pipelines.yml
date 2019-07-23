@@ -62,7 +62,6 @@ stages:
         targetPath: './Artifacts'
 - stage: Deploy
   jobs:
-  - script: 'echo $(Build.BuildDirectory)'
   - deployment: AzureArtifacts
     displayName: 'Azure Artifacts'
     pool:
@@ -72,6 +71,7 @@ stages:
       runOnce:
         deploy:
           steps:
+          - script: 'echo $(Build.BuildDirectory)'
           - task: DotNetCoreCLI@2
             displayName: 'Dotnet NuGet Push'
             inputs:
