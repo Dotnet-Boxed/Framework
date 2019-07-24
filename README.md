@@ -6,7 +6,7 @@
 
 ## Boxed.Mapping
 
-[![Boxed.Mapping](https://img.shields.io/nuget/v/Boxed.Mapping.svg)](https://www.nuget.org/packages/Boxed.Mapping/) [![Boxed.Mapping](https://img.shields.io/myget/dotnet-boxed/vpre/Boxed.Mapping.svg)](http://myget.org/gallery/Boxed.Mapping)
+[![Boxed.Mapping](https://img.shields.io/nuget/v/Boxed.Mapping.svg)](https://www.nuget.org/packages/Boxed.Mapping/) [![Boxed.Mapping package in dotnet-boxed feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet-boxed/_apis/public/Packaging/Feeds/03bd56a4-9269-43f7-9f75-d82037c56a46/Packages/5ed2eb60-9538-4890-b90e-5d4d4cbb2a7a/Badge)](https://dev.azure.com/dotnet-boxed/Framework/_packaging?_a=package&feed=03bd56a4-9269-43f7-9f75-d82037c56a46&package=5ed2eb60-9538-4890-b90e-5d4d4cbb2a7a&preferRelease=true)
 
 A simple and fast (fastest?) object to object mapper that does not use reflection. Read [A Simple and Fast Object Mapper](https://rehansaeed.com/a-simple-and-fast-object-mapper/) for more information.
 
@@ -52,7 +52,7 @@ public class UsageExample
 
 ## Boxed.AspNetCore
 
-[![Boxed.AspNetCore](https://img.shields.io/nuget/v/Boxed.AspNetCore.svg)](https://www.nuget.org/packages/Boxed.AspNetCore/) [![Boxed.AspNetCore](https://img.shields.io/myget/dotnet-boxed/vpre/Boxed.AspNetCore.svg)](http://myget.org/gallery/Boxed.AspNetCore)
+[![Boxed.AspNetCore](https://img.shields.io/nuget/v/Boxed.AspNetCore.svg)](https://www.nuget.org/packages/Boxed.AspNetCore/) [![Boxed.AspNetCore package in dotnet-boxed feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet-boxed/_apis/public/Packaging/Feeds/03bd56a4-9269-43f7-9f75-d82037c56a46/Packages/47bb453b-3fe4-44c1-8b82-3c64a2a9009a/Badge)](https://dev.azure.com/dotnet-boxed/Framework/_packaging?_a=package&feed=03bd56a4-9269-43f7-9f75-d82037c56a46&package=47bb453b-3fe4-44c1-8b82-3c64a2a9009a&preferRelease=true)
 
 Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project.
 
@@ -136,13 +136,13 @@ public IActionResult GetProduct(int id, string title)
 
 ## Boxed.AspNetCore.Swagger
 
-[![Boxed.AspNetCore.Swagger](https://img.shields.io/nuget/v/Boxed.AspNetCore.Swagger.svg)](https://www.nuget.org/packages/Boxed.AspNetCore.Swagger/) [![Boxed.AspNetCore.Swagger](https://img.shields.io/myget/dotnet-boxed/vpre/Boxed.AspNetCore.Swagger.svg)](http://myget.org/gallery/Boxed.AspNetCore.Swagger)
+[![Boxed.AspNetCore.Swagger](https://img.shields.io/nuget/v/Boxed.AspNetCore.Swagger.svg)](https://www.nuget.org/packages/Boxed.AspNetCore.Swagger/) [![Boxed.AspNetCore.Swagger package in dotnet-boxed feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet-boxed/_apis/public/Packaging/Feeds/03bd56a4-9269-43f7-9f75-d82037c56a46/Packages/be991e58-86c8-4de4-8117-4a301e530669/Badge)](https://dev.azure.com/dotnet-boxed/Framework/_packaging?_a=package&feed=03bd56a4-9269-43f7-9f75-d82037c56a46&package=be991e58-86c8-4de4-8117-4a301e530669&preferRelease=true)
 
 Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project implementing Swagger (OpenAPI).
 
 ## Boxed.AspNetCore.TagHelpers
 
-[![Boxed.AspNetCore.TagHelpers](https://img.shields.io/nuget/v/Boxed.AspNetCore.TagHelpers.svg)](https://www.nuget.org/packages/Boxed.AspNetCore.TagHelpers/) [![Boxed.AspNetCore.TagHelpers](https://img.shields.io/myget/dotnet-boxed/vpre/Boxed.AspNetCore.TagHelpers.svg)](http://myget.org/gallery/Boxed.AspNetCore.TagHelpers)
+[![Boxed.AspNetCore.TagHelpers](https://img.shields.io/nuget/v/Boxed.AspNetCore.TagHelpers.svg)](https://www.nuget.org/packages/Boxed.AspNetCore.TagHelpers/) [![Boxed.AspNetCore.TagHelpers package in dotnet-boxed feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet-boxed/_apis/public/Packaging/Feeds/03bd56a4-9269-43f7-9f75-d82037c56a46/Packages/0b0ed292-8769-4d42-9d89-b037e936633f/Badge)](https://dev.azure.com/dotnet-boxed/Framework/_packaging?_a=package&feed=03bd56a4-9269-43f7-9f75-d82037c56a46&package=0b0ed292-8769-4d42-9d89-b037e936633f&preferRelease=true)
 
 ASP.NET Core tag helpers for Subresource Integrity (SRI), Referrer meta tags, OpenGraph (Facebook) and Twitter social network meta tags. Read more at:
 
