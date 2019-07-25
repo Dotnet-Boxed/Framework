@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -44,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Mapping.Benchmark", "Benchmarks\Boxed.Mapping.Benchmark\Boxed.Mapping.Benchmark.csproj", "{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxed.DotnetNewTest", "Source\Boxed.DotnetNewTest\Boxed.DotnetNewTest.csproj", "{1E0E624E-9291-4F6A-B68F-2E5FA178B6CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,10 @@ Global
 		{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E0E624E-9291-4F6A-B68F-2E5FA178B6CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E0E624E-9291-4F6A-B68F-2E5FA178B6CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E0E624E-9291-4F6A-B68F-2E5FA178B6CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E0E624E-9291-4F6A-B68F-2E5FA178B6CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,6 +106,7 @@ Global
 		{DFEBAFE9-A7BE-4974-B619-3B0CAAA55460} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
 		{B03DDD55-8A3B-4B28-AE9F-9197F098664D} = {6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}
 		{D4893F37-7C6F-4E16-B587-F48B4C5F73DC} = {D941A0C1-E1B6-45CF-AB7A-E1C724385404}
+		{1E0E624E-9291-4F6A-B68F-2E5FA178B6CF} = {D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3BCEA536-0EA4-4EC0-B121-7B83926F8514}
