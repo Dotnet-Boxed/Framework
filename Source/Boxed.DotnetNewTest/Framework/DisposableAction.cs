@@ -1,4 +1,4 @@
-namespace Boxed.Templates.FunctionalTest
+namespace Boxed.DotnetNewTest
 {
     using System;
 

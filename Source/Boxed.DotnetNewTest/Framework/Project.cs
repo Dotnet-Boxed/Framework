@@ -1,4 +1,4 @@
-namespace Boxed.Templates.FunctionalTest
+namespace Boxed.DotnetNewTest
 {
     public class Project
     {
