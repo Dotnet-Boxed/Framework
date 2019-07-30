@@ -16,7 +16,7 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="All" Version="2.9.3" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="All" Version="2.9.4" />
 	<!-- See https://github.com/Microsoft/dotnet/tree/master/releases/reference-assemblies -->
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.118" />
