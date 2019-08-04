@@ -58,7 +58,7 @@ namespace Boxed.AspNetCore
                 throw new ArgumentNullException(nameof(getCursorProperty));
             }
 
-            if (enumerable == null || enumerable.Count() == 0)
+            if (enumerable == null || !enumerable.Any())
             {
                 return (null, null);
             }
