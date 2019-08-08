@@ -238,7 +238,7 @@ namespace Boxed.DotnetNewTest
         {
             var cancellationTokenSource = new CancellationTokenSource();
             var noRestoreArgument = noRestore == null ? null : "--no-restore";
-            var urlsParameter = string.Join(';', urls);
+            var urlsParameter = string.Join(";", urls);
             var task = AssertStartAsync(
                 directoryPath,
                 "dotnet",
