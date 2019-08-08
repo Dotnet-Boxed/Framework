@@ -3,7 +3,7 @@ namespace Boxed.DotnetNewTest
     using System;
     using System.Diagnostics;
 
-    public static class TestLogger
+    internal static class TestLogger
     {
         public static void Write(string message, ConsoleColor? color = null) =>
             UseColor(

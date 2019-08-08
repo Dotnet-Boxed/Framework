@@ -4,8 +4,15 @@ namespace Boxed.DotnetNewTest
     using System.IO;
     using System.Linq;
 
+    /// <summary>
+    /// The configuration service.
+    /// </summary>
     public static class ConfigurationService
     {
+        /// <summary>
+        /// Gets the temporary directory path.
+        /// </summary>
+        /// <returns>The temporary directory path.</returns>
         public static string GetTempDirectoryPath()
         {
             // Don't want to overwork my SSD drive, so use the D drive where available.

@@ -11,14 +11,23 @@ namespace Boxed.DotnetNewTest
     /// <summary>
     /// <see cref="Process"/> extension methods.
     /// </summary>
-    public static class ProcessExtensions
+    public static partial class ProcessExtensions
     {
         private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
         private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-        // Add process.Kill(true) when 3.0 comes out to kill the entire process tree.
+        /// <summary>
+        /// Kills the process tree.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <remarks>Add process.Kill(true) when 3.0 comes out to kill the entire process tree.</remarks>
         public static void KillTree(this Process process) => process.KillTree(DefaultTimeout);
 
+        /// <summary>
+        /// Kills the process tree.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <param name="timeout">The timeout to wait to try to kill the process tree.</param>
         public static void KillTree(this Process process, TimeSpan timeout)
         {
             if (IsWindows)
@@ -42,6 +51,11 @@ namespace Boxed.DotnetNewTest
             }
         }
 
+        /// <summary>
+        /// Starts the specified <see cref="Process"/> and then waits for exit asynchronously for the process to exit.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <returns>A task representing the operation.</returns>
         public static Task StartAndWaitForExitAsync(this Process process)
         {
             var taskCompletionSource = new TaskCompletionSource<object>();

@@ -7,18 +7,21 @@ namespace Boxed.DotnetNewTest
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using Xunit;
 
-    public static class ProcessAssert
+    /// <summary>
+    /// <see cref="Process"/> extension methods.
+    /// </summary>
+    public static partial class ProcessExtensions
     {
-        private enum ProcessResult
-        {
-            Succeeded,
-            Failed,
-            TimedOut,
-        }
-
-        public static async Task AssertStart(
+        /// <summary>
+        /// Starts the a <see cref="Process"/> asynchronously.
+        /// </summary>
+        /// <param name="workingDirectory">The working directory.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="arguments">The arguments.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>The result and console output from executing the process.</returns>
+        public static async Task<(ProcessResult processResult, string message)> StartAsync(
             string workingDirectory,
             string fileName,
             string arguments,
@@ -28,7 +31,7 @@ namespace Boxed.DotnetNewTest
 
             var output = new StringBuilder();
             var error = new StringBuilder();
-            ProcessResult result;
+            ProcessResult processResult;
             try
             {
                 var exitCode = await StartProcess(
@@ -38,34 +41,25 @@ namespace Boxed.DotnetNewTest
                     cancellationToken,
                     new StringWriter(output),
                     new StringWriter(error));
-                result = exitCode == 0 ? ProcessResult.Succeeded : ProcessResult.Failed;
+                processResult = exitCode == 0 ? ProcessResult.Succeeded : ProcessResult.Failed;
             }
             catch (TaskCanceledException)
             {
                 TestLogger.WriteLine($"Timed Out {fileName} {arguments} from {workingDirectory}");
-                result = ProcessResult.TimedOut;
+                processResult = ProcessResult.TimedOut;
             }
 
             var standardOutput = output.ToString();
             var standardError = error.ToString();
 
             var message = GetAndWriteMessage(
-                fileName,
-                arguments,
-                workingDirectory,
-                result,
+                processResult,
                 standardOutput,
                 standardError);
-            if (result != ProcessResult.Succeeded)
-            {
-                Assert.False(true, message);
-            }
+            return (processResult, message);
         }
 
         private static string GetAndWriteMessage(
-            string fileName,
-            string arguments,
-            string workingDirectory,
             ProcessResult result,
             string standardOutput,
             string standardError)

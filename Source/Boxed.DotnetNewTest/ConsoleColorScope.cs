@@ -2,7 +2,7 @@ namespace Boxed.DotnetNewTest
 {
     using System;
 
-    public class ConsoleColorScope : IDisposable
+    internal class ConsoleColorScope : IDisposable
     {
         private readonly ConsoleColor backgroundColor;
         private readonly ConsoleColor foregroundColor;

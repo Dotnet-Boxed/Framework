@@ -3,7 +3,7 @@ namespace Boxed.DotnetNewTest
     using System;
     using System.Threading;
 
-    public static class CancellationTokenFactory
+    internal static class CancellationTokenFactory
     {
         public static CancellationToken GetCancellationToken(TimeSpan? timeout) =>
             GetCancellationToken(timeout ?? TimeSpan.FromMinutes(1));

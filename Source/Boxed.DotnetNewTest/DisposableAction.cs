@@ -2,7 +2,7 @@ namespace Boxed.DotnetNewTest
 {
     using System;
 
-    public class DisposableAction : IDisposable
+    internal class DisposableAction : IDisposable
     {
         private readonly Action action;
 

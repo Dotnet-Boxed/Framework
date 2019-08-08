@@ -3,7 +3,7 @@ namespace Boxed.DotnetNewTest
     using System.Net;
     using System.Net.Sockets;
 
-    public static class PortHelper
+    internal static class PortHelper
     {
         public static int GetFreeTcpPort()
         {

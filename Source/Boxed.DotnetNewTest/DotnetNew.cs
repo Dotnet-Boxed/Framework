@@ -6,15 +6,28 @@ namespace Boxed.DotnetNewTest
     using System.Reflection;
     using System.Threading.Tasks;
 
-    public static class TemplateAssert
+    /// <summary>
+    /// Runs 'dotnet new' commands.
+    /// </summary>
+    public static class DotnetNew
     {
-        public static TempDirectory GetTempDirectory() =>
-            new TempDirectory(DirectoryExtended.GetTempDirectoryPath());
+        /// <summary>
+        /// Installs a template from the specified source.
+        /// </summary>
+        /// <typeparam name="T">A type from the assembly used to find the directory path of the project to install.</typeparam>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns>A task representing the operation.</returns>
+        public static Task Install<T>(string fileName) =>
+            Install(typeof(T).GetTypeInfo().Assembly, fileName);
 
-        public static Task DotnetNewInstall<T>(string fileName) =>
-            DotnetNewInstall(typeof(T).GetTypeInfo().Assembly, fileName);
-
-        public static Task DotnetNewInstall(Assembly assembly, string fileName)
+        /// <summary>
+        /// Installs a template from the specified source.
+        /// </summary>
+        /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns>A task representing the operation.</returns>
+        /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
+        public static Task Install(Assembly assembly, string fileName)
         {
             var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
             if (projectFilePath == null)
@@ -22,12 +35,18 @@ namespace Boxed.DotnetNewTest
                 throw new FileNotFoundException($"{fileName} not found.");
             }
 
-            return DotnetNewInstall(projectFilePath);
+            return Install(projectFilePath);
         }
 
-        public static Task DotnetNewInstall(string source, TimeSpan? timeout = null) =>
-            ProcessAssert.AssertStart(
-                DirectoryExtended.GetCurrentDirectory(),
+        /// <summary>
+        /// Installs a template from the specified source.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <returns>A task representing the operation.</returns>
+        public static Task Install(string source, TimeSpan? timeout = null) =>
+            ProcessExtensions.StartAsync(
+                DirectoryExtensions.GetCurrentDirectory(),
                 "dotnet",
                 $"new --install \"{source}\"",
                 CancellationTokenFactory.GetCancellationToken(timeout));

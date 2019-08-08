@@ -5,7 +5,7 @@ namespace Boxed.DotnetNewTest
     using System.Reflection;
     using System.Threading.Tasks;
 
-    public static class DirectoryExtended
+    internal static class DirectoryExtensions
     {
         public static void Copy(string sourceDirectoryPath, string destinationDirectoryPath)
         {
