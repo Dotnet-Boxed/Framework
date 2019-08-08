@@ -16,3 +16,5 @@
 # Special Thanks
 
 As thanks for all contributions, your username will be posted to the front page of the project with a short description of how you helped.
+
+- [VictorioBerra](https://github.com/VictorioBerra)
