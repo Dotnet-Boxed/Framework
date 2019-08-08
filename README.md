@@ -181,10 +181,67 @@ ASP.NET Core tag helpers for Subresource Integrity (SRI), Referrer meta tags, Op
 
 ## Continuous Integration
 
-| Name            | Operating System | Status | History |
-| :---            | :---             | :---   | :---    |
-| Azure Pipelines | Ubuntu           | [![Azure Pipelines Ubuntu Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Linux)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) | |
-| Azure Pipelines | Mac              | [![Azure Pipelines Mac Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Mac)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) | |
-| Azure Pipelines | Windows          | [![Azure Pipelines Windows Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Windows)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) | |
-| Azure Pipelines | Overall          | [![Azure Pipelines Overall Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=2&branchName=master) | |
-| AppVeyor        | Ubuntu & Windows | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/aknwu9sil3dv3im0?svg=true)](https://ci.appveyor.com/project/RehanSaeed/framework) | [![AppVeyor Build history](https://buildstats.info/appveyor/chart/RehanSaeed/Framework?branch=master&includeBuildsFromPullRequest=false)](https://ci.appveyor.com/project/RehanSaeed/Framework) |
+| Name         | Operating System | Status | History |
+| :---         | :---             | :---   | :---    |
+| Azure DevOps | Ubuntu           | [![Azure DevOps Ubuntu Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Linux)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) | |
+| Azure DevOps | Mac              | [![Azure DevOps Mac Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Mac)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) | |
+| Azure DevOps | Windows          | [![Azure DevOps Windows Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Windows)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) | |
+| AppVeyor     | Ubuntu & Windows | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/aknwu9sil3dv3im0?svg=true)](https://ci.appveyor.com/project/RehanSaeed/framework) | [![AppVeyor Build history](https://buildstats.info/appveyor/chart/RehanSaeed/Framework?branch=master&includeBuildsFromPullRequest=false)](https://ci.appveyor.com/project/RehanSaeed/Framework) |
+
+## Boxed.AspNetCore.DotnetNewTest
+
+[![Boxed.AspNetCore.DotnetNewTest](https://img.shields.io/nuget/v/Boxed.AspNetCore.DotnetNewTest.svg)](https://www.nuget.org/packages/Boxed.AspNetCore.DotnetNewTest/) [![Boxed.AspNetCore.DotnetNewTest package in dotnet-boxed feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet-boxed/_apis/public/Packaging/Feeds/03bd56a4-9269-43f7-9f75-d82037c56a46/Packages/0b0ed292-8769-4d42-9d89-b037e936633f/Badge)](https://dev.azure.com/dotnet-boxed/Framework/_packaging?_a=package&feed=03bd56a4-9269-43f7-9f75-d82037c56a46&package=0b0ed292-8769-4d42-9d89-b037e936633f&preferRelease=true)
+
+ASP.NET Core test framework for dotnet new templates.
+
+### Install your template
+
+```csharp
+    public class ApiTemplateTest
+    {
+        public ApiTemplateTest()
+        {
+            TemplateAssert.DotnetNewInstall<ApiTemplateTest>("ApiTemplate.sln").Wait();
+        }
+
+        // ...
+```
+
+### Generate a template
+
+```csharp
+    public class ApiTemplateTest
+    {
+        public async Task Generate_restore_and_build(string name, params string[] arguments)
+        {
+            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            {
+                var project = await tempDirectory.DotnetNew("api", name);
+                await project.DotnetRestore();
+                await project.DotnetBuild();
+            }
+        }
+    }
+```
+
+### Run the template, and hit an endpoint
+
+```csharp
+    [Fact]
+    public async Task Run_Default_Successful()
+    {
+        using (var tempDirectory = TemplateAssert.GetTempDirectory())
+        {
+            var project = await tempDirectory.DotnetNew("api", "Default");
+            await project.DotnetRestore();
+            await project.DotnetBuild();
+            await project.DotnetRun(
+                @"Source\Default",
+                async (httpClient, httpsClient) =>
+                {
+                    var httpResponse = await httpClient.GetAsync("status");
+                    Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
+                });
+        }
+    }
+```
