@@ -179,6 +179,58 @@ ASP.NET Core tag helpers for Subresource Integrity (SRI), Referrer meta tags, Op
                     determiner="OpenGraphDeterminer.Blank">
 ```
 
+## Boxed.DotnetNewTest
+
+[![Boxed.DotnetNewTest](https://img.shields.io/nuget/v/Boxed.DotnetNewTest.svg)](https://www.nuget.org/packages/Boxed.DotnetNewTest/)
+
+A unit test framework for project templates built using [dotnet new](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
+
+1. Install dotnet new based project templates from a directory.
+2. Run `dotnet restore`, `dotnet build` and `dotnet publish` commands.
+3. For ASP.NET Core project templates you can run `dotnet run` which gives you a `HttpClient` that you can use to call the app and run further tests.
+
+```c#
+public class ApiTemplateTest
+{
+    public ApiTemplateTest() => DotnetNew.Install<ApiTemplateTest>("ApiTemplate.sln").Wait();
+
+    [Theory]
+    [InlineData("StatusEndpointOn", "status-endpoint=true")]
+    [InlineData("StatusEndpointOff", "status-endpoint=false")]
+    public async Task RestoreAndBuild_CustomArguments_IsSuccessful(string name, params string[] arguments)
+    {
+        using (var tempDirectory = TempDirectory.NewTempDirectory())
+        {
+            var dictionary = arguments
+                .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
+                .ToDictionary(x => x.First(), x => x.Last());
+            var project = await tempDirectory.DotnetNew("api", name, dictionary);
+            await project.DotnetRestore();
+            await project.DotnetBuild();
+        }
+    }
+
+    [Fact]
+    public async Task Run_DefaultArguments_IsSuccessful()
+    {
+        using (var tempDirectory = TempDirectory.NewTempDirectory())
+        {
+            var project = await tempDirectory.DotnetNew("api", "DefaultArguments");
+            await project.DotnetRestore();
+            await project.DotnetBuild();
+            await project.DotnetRun(
+                @"Source\DefaultArguments",
+                async (httpClient, httpsClient) =>
+                {
+                    var httpResponse = await httpsClient.GetAsync("status");
+                    Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
+                });
+        }
+    }
+}
+```
+
+
 ## Continuous Integration
 
 | Name         | Operating System | Status | History |
@@ -187,61 +239,3 @@ ASP.NET Core tag helpers for Subresource Integrity (SRI), Referrer meta tags, Op
 | Azure DevOps | Mac              | [![Azure DevOps Mac Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Mac)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) | |
 | Azure DevOps | Windows          | [![Azure DevOps Windows Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Windows)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) | |
 | AppVeyor     | Ubuntu & Windows | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/aknwu9sil3dv3im0?svg=true)](https://ci.appveyor.com/project/RehanSaeed/framework) | [![AppVeyor Build history](https://buildstats.info/appveyor/chart/RehanSaeed/Framework?branch=master&includeBuildsFromPullRequest=false)](https://ci.appveyor.com/project/RehanSaeed/Framework) |
-
-## Boxed.AspNetCore.DotnetNewTest
-
-[![Boxed.AspNetCore.DotnetNewTest](https://img.shields.io/nuget/v/Boxed.AspNetCore.DotnetNewTest.svg)](https://www.nuget.org/packages/Boxed.AspNetCore.DotnetNewTest/) [![Boxed.AspNetCore.DotnetNewTest package in dotnet-boxed feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet-boxed/_apis/public/Packaging/Feeds/03bd56a4-9269-43f7-9f75-d82037c56a46/Packages/0b0ed292-8769-4d42-9d89-b037e936633f/Badge)](https://dev.azure.com/dotnet-boxed/Framework/_packaging?_a=package&feed=03bd56a4-9269-43f7-9f75-d82037c56a46&package=0b0ed292-8769-4d42-9d89-b037e936633f&preferRelease=true)
-
-ASP.NET Core test framework for dotnet new templates.
-
-### Install your template
-
-```csharp
-    public class ApiTemplateTest
-    {
-        public ApiTemplateTest()
-        {
-            TemplateAssert.DotnetNewInstall<ApiTemplateTest>("ApiTemplate.sln").Wait();
-        }
-
-        // ...
-```
-
-### Generate a template
-
-```csharp
-    public class ApiTemplateTest
-    {
-        public async Task Generate_restore_and_build(string name, params string[] arguments)
-        {
-            using (var tempDirectory = TemplateAssert.GetTempDirectory())
-            {
-                var project = await tempDirectory.DotnetNew("api", name);
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-            }
-        }
-    }
-```
-
-### Run the template, and hit an endpoint
-
-```csharp
-    [Fact]
-    public async Task Run_Default_Successful()
-    {
-        using (var tempDirectory = TemplateAssert.GetTempDirectory())
-        {
-            var project = await tempDirectory.DotnetNew("api", "Default");
-            await project.DotnetRestore();
-            await project.DotnetBuild();
-            await project.DotnetRun(
-                @"Source\Default",
-                async (httpClient, httpsClient) =>
-                {
-                    var httpResponse = await httpClient.GetAsync("status");
-                    Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
-                });
-        }
-    }
-```
