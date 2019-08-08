@@ -11,7 +11,6 @@ namespace Boxed.DotnetNewTest
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.TestHost;
-    using Xunit;
 
     /// <summary>
     /// <see cref="Project"/> extension methods.
@@ -108,23 +107,15 @@ namespace Boxed.DotnetNewTest
             };
             var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(httpUrl) };
 
-            Exception unhandledException = null;
             try
             {
                 await action(httpClient);
             }
-            catch (Exception exception)
+            finally
             {
-                unhandledException = exception;
-            }
-
-            httpClient.Dispose();
-            httpClientHandler.Dispose();
-            dotnetRun.Dispose();
-
-            if (unhandledException != null)
-            {
-                Assert.False(true, unhandledException.ToString());
+                httpClient.Dispose();
+                httpClientHandler.Dispose();
+                dotnetRun.Dispose();
             }
         }
 
@@ -162,24 +153,16 @@ namespace Boxed.DotnetNewTest
             var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(httpUrl) };
             var httpsClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(httpsUrl) };
 
-            Exception unhandledException = null;
             try
             {
                 await action(httpClient, httpsClient);
             }
-            catch (Exception exception)
+            finally
             {
-                unhandledException = exception;
-            }
-
-            httpClient.Dispose();
-            httpsClient.Dispose();
-            httpClientHandler.Dispose();
-            dotnetRun.Dispose();
-
-            if (unhandledException != null)
-            {
-                Assert.False(true, unhandledException.ToString());
+                httpClient.Dispose();
+                httpsClient.Dispose();
+                httpClientHandler.Dispose();
+                dotnetRun.Dispose();
             }
         }
 
@@ -204,7 +187,7 @@ namespace Boxed.DotnetNewTest
 
             if (string.IsNullOrEmpty(assemblyFilePath))
             {
-                Assert.False(true, $"Project assembly {assemblyFilePath} not found.");
+                throw new FileNotFoundException($"Project assembly not found.", assemblyFilePath);
             }
             else
             {
@@ -214,7 +197,7 @@ namespace Boxed.DotnetNewTest
                     .FirstOrDefault(x => string.Equals(x.Name, startupTypeName, StringComparison.Ordinal));
                 if (startupType == null)
                 {
-                    Assert.False(true, $"Startup type '{startupTypeName}' not found.");
+                    throw new Exception($"Startup type '{startupTypeName}' not found.");
                 }
 
                 var webHostBuilder = new WebHostBuilder()
@@ -332,7 +315,7 @@ namespace Boxed.DotnetNewTest
                 cancellationToken);
             if (processResult != ProcessResult.Succeeded)
             {
-                Assert.False(true, message);
+                throw new Exception(message);
             }
         }
     }
