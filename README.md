@@ -181,7 +181,7 @@ ASP.NET Core tag helpers for Subresource Integrity (SRI), Referrer meta tags, Op
 
 ## Boxed.DotnetNewTest
 
-[![Boxed.DotnetNewTest](https://img.shields.io/nuget/v/Boxed.DotnetNewTest.svg)](https://www.nuget.org/packages/Boxed.DotnetNewTest/)
+[![Boxed.DotnetNewTest](https://img.shields.io/nuget/v/Boxed.DotnetNewTest.svg)](https://www.nuget.org/packages/Boxed.DotnetNewTest/) [![Boxed.DotnetNewTest package in dotnet-boxed feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet-boxed/_apis/public/Packaging/Feeds/03bd56a4-9269-43f7-9f75-d82037c56a46/Packages/537173a7-9aba-493c-abd2-935fa9c14e27/Badge)](https://dev.azure.com/dotnet-boxed/Framework/_packaging?_a=package&feed=03bd56a4-9269-43f7-9f75-d82037c56a46&package=537173a7-9aba-493c-abd2-935fa9c14e27&preferRelease=true)
 
 A unit test framework for project templates built using [dotnet new](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
 
