@@ -239,3 +239,7 @@ public class ApiTemplateTest
 | Azure DevOps | Mac              | [![Azure DevOps Mac Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Mac)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) | |
 | Azure DevOps | Windows          | [![Azure DevOps Windows Build Status](https://dev.azure.com/dotnet-boxed/Framework/_apis/build/status/Dotnet-Boxed.Framework?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Windows)](https://dev.azure.com/dotnet-boxed/Framework/_build/latest?definitionId=1&branchName=master) | |
 | AppVeyor     | Ubuntu & Windows | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/aknwu9sil3dv3im0?svg=true)](https://ci.appveyor.com/project/RehanSaeed/framework) | [![AppVeyor Build history](https://buildstats.info/appveyor/chart/RehanSaeed/Framework?branch=master&includeBuildsFromPullRequest=false)](https://ci.appveyor.com/project/RehanSaeed/Framework) |
+
+## Contributions and Thanks
+
+- [VictorioBerra](https://github.com/VictorioBerra)
