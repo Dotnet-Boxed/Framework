@@ -243,6 +243,6 @@ public class ApiTemplateTest
 
 ## Contributions and Thanks
 
-Please view the [Contributing guide](CONTRIBUTING.md) for more information.
+Please view the [contributing guide](CONTRIBUTING.md) for more information.
 
 - [VictorioBerra](https://github.com/VictorioBerra) - Helping to create the `Boxed.DotnetNewTest` NuGet package.
