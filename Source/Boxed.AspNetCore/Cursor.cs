@@ -37,6 +37,11 @@ namespace Boxed.AspNetCore
             var type = typeof(T);
             type = Nullable.GetUnderlyingType(type) ?? type;
 
+            if (type == typeof(DateTimeOffset))
+            {
+                return (T)(object)DateTimeOffset.ParseExact(decodedValue, "o", CultureInfo.InvariantCulture);
+            }
+
             return (T)Convert.ChangeType(decodedValue, type, CultureInfo.InvariantCulture);
         }
 
@@ -81,6 +86,11 @@ namespace Boxed.AspNetCore
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
+            }
+
+            if (value is DateTimeOffset dateTimeOffset)
+            {
+                return Base64Encode(dateTimeOffset.ToString("o", CultureInfo.InvariantCulture));
             }
 
             return Base64Encode(value.ToString());

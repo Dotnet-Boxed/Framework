@@ -6,6 +6,24 @@ namespace Boxed.AspNetCore.Test
 
     public class CursorTest
     {
+        public static IEnumerable<object[]> DateTimeOffsetToCursor
+        {
+            get
+            {
+                // If no-store is set, then location is ignored.
+                yield return new object[]
+                {
+                    null,
+                    string.Empty,
+                };
+                yield return new object[]
+                {
+                    new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero),
+                    "MDEvMDEvMjAwMCAwMDowMDowMCArMDA6MDA=",
+                };
+            }
+        }
+
         [Theory]
         [InlineData("MA=", 0)]
         [InlineData("MA==", 0)]
@@ -38,6 +56,22 @@ namespace Boxed.AspNetCore.Test
             var value = Cursor.FromCursor<string>(cursor);
 
             Assert.Equal(expectedValue, value);
+        }
+
+        [Fact]
+        public void FromCursor_DateTimeOffsetValue_ReturnsPrefixedBase64Cursor()
+        {
+            var value = Cursor.FromCursor<DateTimeOffset>("MjAwMC0wMS0wMVQwMDowMDowMC4wMDAwMDAwKzAwOjAw");
+
+            Assert.Equal(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero), value);
+        }
+
+        [Fact]
+        public void FromCursor_NullableDateTimeOffsetValue_ReturnsPrefixedBase64Cursor()
+        {
+            var value = Cursor.FromCursor<DateTimeOffset?>("MjAwMC0wMS0wMVQwMDowMDowMC4wMDAwMDAwKzAwOjAw");
+
+            Assert.Equal(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero), value);
         }
 
         [Fact]
@@ -158,6 +192,22 @@ namespace Boxed.AspNetCore.Test
             var cursor = Cursor.ToCursor(value);
 
             Assert.Equal(expectedCursor, cursor);
+        }
+
+        [Fact]
+        public void ToCursor_DateTimeOffsetValue_ReturnsPrefixedBase64Cursor()
+        {
+            var cursor = Cursor.ToCursor(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
+
+            Assert.Equal("MjAwMC0wMS0wMVQwMDowMDowMC4wMDAwMDAwKzAwOjAw", cursor);
+        }
+
+        [Fact]
+        public void ToCursor_NullableDateTimeOffsetValue_ReturnsPrefixedBase64Cursor()
+        {
+            var cursor = Cursor.ToCursor(new DateTimeOffset?(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero)));
+
+            Assert.Equal("MjAwMC0wMS0wMVQwMDowMDowMC4wMDAwMDAwKzAwOjAw", cursor);
         }
 
         private class Item
