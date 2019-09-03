@@ -16,7 +16,7 @@ var buildNumber =
     EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
     0;
 
-Information($"SourceBranch<{TFBuild.Environment.Repository.SourceBranch}>");
+Information($"IsRunningOnAzurePipelinesHosted<{TFBuild.IsRunningOnAzurePipelinesHosted}> SourceBranch<{TFBuild.Environment.Repository.SourceBranch}> preReleaseSuffix<{preReleaseSuffix}>");
 
 var artifactsDirectory = Directory("./Artifacts");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
