@@ -109,11 +109,11 @@ namespace Boxed.AspNetCore.TagHelpers
 
             if (!string.IsNullOrWhiteSpace(url) && !string.IsNullOrWhiteSpace(this.Source))
             {
-                var sri = await this.GetCachedSri(url).ConfigureAwait(false);
+                var sri = await this.GetCachedSriAsync(url).ConfigureAwait(false);
                 if (sri == null)
                 {
                     sri = this.GetSubresourceIntegrityFromContentFile(this.Source, this.HashAlgorithms);
-                    await this.SetCachedSri(url, sri).ConfigureAwait(false);
+                    await this.SetCachedSriAsync(url, sri).ConfigureAwait(false);
                 }
 
                 output.Attributes.SetAttribute(CrossOriginAttributeName, "anonymous");
@@ -223,13 +223,13 @@ namespace Boxed.AspNetCore.TagHelpers
             return stringBuilder.ToString();
         }
 
-        private Task<string> GetCachedSri(string url)
+        private Task<string> GetCachedSriAsync(string url)
         {
             var key = this.GetSriKey(url);
             return this.distributedCache.GetStringAsync(key);
         }
 
-        private Task SetCachedSri(string url, string value)
+        private Task SetCachedSriAsync(string url, string value)
         {
             var key = this.GetSriKey(url);
             return this.distributedCache.SetStringAsync(key, value);
