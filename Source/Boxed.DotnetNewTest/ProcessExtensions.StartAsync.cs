@@ -31,32 +31,36 @@ namespace Boxed.DotnetNewTest
 
             var output = new StringBuilder();
             var error = new StringBuilder();
-            ProcessResult processResult;
-            try
+            using (var outputStringWriter = new StringWriter(output))
+            using (var errorStringWriter = new StringWriter(error))
             {
-                var exitCode = await StartProcess(
-                    fileName,
-                    arguments,
-                    workingDirectory,
-                    cancellationToken,
-                    new StringWriter(output),
-                    new StringWriter(error));
-                processResult = exitCode == 0 ? ProcessResult.Succeeded : ProcessResult.Failed;
-            }
-            catch (TaskCanceledException)
-            {
-                TestLogger.WriteLine($"Timed Out {fileName} {arguments} from {workingDirectory}");
-                processResult = ProcessResult.TimedOut;
-            }
+                ProcessResult processResult;
+                try
+                {
+                    var exitCode = await StartProcessAsync(
+                        fileName,
+                        arguments,
+                        workingDirectory,
+                        outputStringWriter,
+                        errorStringWriter,
+                        cancellationToken).ConfigureAwait(false);
+                    processResult = exitCode == 0 ? ProcessResult.Succeeded : ProcessResult.Failed;
+                }
+                catch (TaskCanceledException)
+                {
+                    TestLogger.WriteLine($"Timed Out {fileName} {arguments} from {workingDirectory}");
+                    processResult = ProcessResult.TimedOut;
+                }
 
-            var standardOutput = output.ToString();
-            var standardError = error.ToString();
+                var standardOutput = output.ToString();
+                var standardError = error.ToString();
 
-            var message = GetAndWriteMessage(
-                processResult,
-                standardOutput,
-                standardError);
-            return (processResult, message);
+                var message = GetAndWriteMessage(
+                    processResult,
+                    standardOutput,
+                    standardError);
+                return (processResult, message);
+            }
         }
 
         private static string GetAndWriteMessage(
@@ -92,13 +96,13 @@ namespace Boxed.DotnetNewTest
             return stringBuilder.ToString();
         }
 
-        private static async Task<int> StartProcess(
+        private static async Task<int> StartProcessAsync(
             string filename,
             string arguments,
             string workingDirectory = null,
-            CancellationToken cancellationToken = default,
             TextWriter outputTextWriter = null,
-            TextWriter errorTextWriter = null)
+            TextWriter errorTextWriter = null,
+            CancellationToken cancellationToken = default)
         {
             var processStartInfo = new ProcessStartInfo()
             {
@@ -146,7 +150,7 @@ namespace Boxed.DotnetNewTest
 
                     try
                     {
-                        await Task.WhenAll(tasks);
+                        await Task.WhenAll(tasks).ConfigureAwait(false);
                     }
                     catch
                     {

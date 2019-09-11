@@ -9,6 +9,16 @@ namespace Boxed.DotnetNewTest
     {
         public static void Copy(string sourceDirectoryPath, string destinationDirectoryPath)
         {
+            if (sourceDirectoryPath == null)
+            {
+                throw new ArgumentNullException(nameof(sourceDirectoryPath));
+            }
+
+            if (destinationDirectoryPath == null)
+            {
+                throw new ArgumentNullException(nameof(destinationDirectoryPath));
+            }
+
             sourceDirectoryPath = sourceDirectoryPath.TrimEnd('\\');
 
             foreach (var sourceSubDirectoryPath in Directory.GetDirectories(
@@ -34,6 +44,11 @@ namespace Boxed.DotnetNewTest
 
         public static void CheckCreate(string directoryPath)
         {
+            if (directoryPath == null)
+            {
+                throw new ArgumentNullException(nameof(directoryPath));
+            }
+
             var destinationSubDirectory = new DirectoryInfo(directoryPath);
             if (!destinationSubDirectory.Exists)
             {
@@ -47,7 +62,7 @@ namespace Boxed.DotnetNewTest
         public static string GetCurrentDirectory() =>
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-        public static async Task<bool> TryDeleteDirectory(
+        public static async Task<bool> TryDeleteDirectoryAsync(
            string directoryPath,
            int maxRetries = 10,
            int millisecondsDelay = 30)
@@ -80,11 +95,11 @@ namespace Boxed.DotnetNewTest
                 }
                 catch (IOException)
                 {
-                    await Task.Delay(millisecondsDelay);
+                    await Task.Delay(millisecondsDelay).ConfigureAwait(false);
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    await Task.Delay(millisecondsDelay);
+                    await Task.Delay(millisecondsDelay).ConfigureAwait(false);
                 }
             }
 

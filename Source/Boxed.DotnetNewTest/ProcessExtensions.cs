@@ -30,6 +30,11 @@ namespace Boxed.DotnetNewTest
         /// <param name="timeout">The timeout to wait to try to kill the process tree.</param>
         public static void KillTree(this Process process, TimeSpan timeout)
         {
+            if (process is null)
+            {
+                throw new ArgumentNullException(nameof(process));
+            }
+
             if (IsWindows)
             {
                 _ = RunProcessAndWaitForExit(
@@ -58,6 +63,11 @@ namespace Boxed.DotnetNewTest
         /// <returns>A task representing the operation.</returns>
         public static Task StartAndWaitForExitAsync(this Process process)
         {
+            if (process is null)
+            {
+                throw new ArgumentNullException(nameof(process));
+            }
+
             var taskCompletionSource = new TaskCompletionSource<object>();
 
             process.EnableRaisingEvents = true;
@@ -85,6 +95,11 @@ namespace Boxed.DotnetNewTest
             this Process process,
             CancellationToken cancellationToken = default)
         {
+            if (process is null)
+            {
+                throw new ArgumentNullException(nameof(process));
+            }
+
             var taskCompletionSource = new TaskCompletionSource<object>();
 
             process.EnableRaisingEvents = true;

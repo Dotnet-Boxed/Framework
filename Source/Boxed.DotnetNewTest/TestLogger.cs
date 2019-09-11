@@ -3,31 +3,39 @@ namespace Boxed.DotnetNewTest
     using System;
     using System.Diagnostics;
 
-    internal static class TestLogger
+    /// <summary>
+    /// The dotnet new logger used to log output from dotnet new commands.
+    /// </summary>
+    public static class TestLogger
     {
-        public static void Write(string message, ConsoleColor? color = null) =>
-            UseColor(
-                () =>
-                {
-                    Debug.Write(message);
-                    Console.Write(message);
-                },
-                color);
+        private static readonly Action<string> DefaultWriteMessage =
+            (message) =>
+            {
+                Debug.Write(message);
+                Console.Write(message);
+            };
 
-        public static void WriteLine()
+        /// <summary>
+        /// Gets the write message function which defaults to writing to the debug output and console.
+        /// </summary>
+        public static Action<string> WriteMessage { get; set; }
+
+        internal static void Write(string message, ConsoleColor? color = null)
         {
-            Debug.WriteLine(string.Empty);
-            Console.WriteLine();
+            if (WriteMessage == null)
+            {
+                UseColor(() => DefaultWriteMessage(message), color);
+            }
+            else
+            {
+                WriteMessage(message);
+            }
         }
 
-        public static void WriteLine(string message, ConsoleColor? color = null) =>
-            UseColor(
-                () =>
-                {
-                    Debug.WriteLine(message);
-                    Console.WriteLine(message);
-                },
-                color);
+        internal static void WriteLine() => Write(Environment.NewLine);
+
+        internal static void WriteLine(string message, ConsoleColor? color = null) =>
+            Write(message + Environment.NewLine, color);
 
         private static void UseColor(Action action, ConsoleColor? color = null)
         {

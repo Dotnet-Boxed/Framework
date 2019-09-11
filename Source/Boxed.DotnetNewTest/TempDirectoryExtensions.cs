@@ -20,13 +20,18 @@ namespace Boxed.DotnetNewTest
         /// <param name="arguments">The custom arguments to pass to the template.</param>
         /// <param name="timeout">The timeout.</param>
         /// <returns>A project created from a project template.</returns>
-        public static async Task<Project> DotnetNew(
+        public static async Task<Project> DotnetNewAsync(
             this TempDirectory tempDirectory,
             string templateName,
             string name,
             IDictionary<string, string> arguments = null,
             TimeSpan? timeout = null)
         {
+            if (tempDirectory == null)
+            {
+                throw new ArgumentNullException(nameof(tempDirectory));
+            }
+
             var stringBuilder = new StringBuilder($"new {templateName} --name \"{name}\"");
             if (arguments != null)
             {
@@ -36,11 +41,13 @@ namespace Boxed.DotnetNewTest
                 }
             }
 
-            await ProcessExtensions.StartAsync(
-                tempDirectory.DirectoryPath,
-                "dotnet",
-                stringBuilder.ToString(),
-                CancellationTokenFactory.GetCancellationToken(timeout));
+            await ProcessExtensions
+                .StartAsync(
+                    tempDirectory.DirectoryPath,
+                    "dotnet",
+                    stringBuilder.ToString(),
+                    CancellationTokenFactory.GetCancellationToken(timeout))
+                .ConfigureAwait(false);
 
             var projectDirectoryPath = Path.Combine(tempDirectory.DirectoryPath, name);
             var publishDirectoryPath = Path.Combine(projectDirectoryPath, "Publish");

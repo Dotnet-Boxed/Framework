@@ -19,7 +19,7 @@ namespace Boxed.DotnetNewTest
             var drivePath = DriveInfo
                 .GetDrives()
                 .Where(x => x.DriveType == DriveType.Fixed)
-                .OrderByDescending(x => string.Equals(x.Name, @"D:\"))
+                .OrderByDescending(x => string.Equals(x.Name, @"D:\", StringComparison.Ordinal))
                 .FirstOrDefault()
                 ?.Name;
             if (drivePath == null)

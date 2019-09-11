@@ -25,12 +25,19 @@ namespace Boxed.DotnetNewTest
         /// <param name="project">The project.</param>
         /// <param name="timeout">The timeout.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task DotnetRestore(this Project project, TimeSpan? timeout = null) =>
-            AssertStartAsync(
+        public static Task DotnetRestoreAsync(this Project project, TimeSpan? timeout = null)
+        {
+            if (project == null)
+            {
+                throw new ArgumentNullException(nameof(project));
+            }
+
+            return AssertStartAsync(
                 project.DirectoryPath,
                 "dotnet",
                 "restore",
                 CancellationTokenFactory.GetCancellationToken(timeout));
+        }
 
         /// <summary>
         /// Runs 'dotnet build' on the specified project.
@@ -39,8 +46,13 @@ namespace Boxed.DotnetNewTest
         /// <param name="noRestore">Whether to restore the project.</param>
         /// <param name="timeout">The timeout.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task DotnetBuild(this Project project, bool? noRestore = true, TimeSpan? timeout = null)
+        public static Task DotnetBuildAsync(this Project project, bool? noRestore = true, TimeSpan? timeout = null)
         {
+            if (project == null)
+            {
+                throw new ArgumentNullException(nameof(project));
+            }
+
             var noRestoreArgument = noRestore == null ? null : "--no-restore";
             return AssertStartAsync(
                 project.DirectoryPath,
@@ -58,13 +70,18 @@ namespace Boxed.DotnetNewTest
         /// <param name="noRestore">Whether to restore the project.</param>
         /// <param name="timeout">The timeout.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task DotnetPublish(
+        public static Task DotnetPublishAsync(
             this Project project,
             string framework = null,
             string runtime = null,
             bool? noRestore = true,
             TimeSpan? timeout = null)
         {
+            if (project == null)
+            {
+                throw new ArgumentNullException(nameof(project));
+            }
+
             var frameworkArgument = framework == null ? null : $"--framework {framework}";
             var runtimeArgument = runtime == null ? null : $"--self-contained --runtime {runtime}";
             var noRestoreArgument = noRestore == null ? null : "--no-restore";
@@ -86,7 +103,7 @@ namespace Boxed.DotnetNewTest
         /// <param name="validateCertificate">Validate the project certificate.</param>
         /// <param name="timeout">The timeout.</param>
         /// <returns>A task representing the operation.</returns>
-        public static async Task DotnetRun(
+        public static async Task DotnetRunAsync(
             this Project project,
             string projectRelativeDirectoryPath,
             Func<HttpClient, Task> action,
@@ -94,11 +111,26 @@ namespace Boxed.DotnetNewTest
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
             TimeSpan? timeout = null)
         {
+            if (project == null)
+            {
+                throw new ArgumentNullException(nameof(project));
+            }
+
+            if (projectRelativeDirectoryPath == null)
+            {
+                throw new ArgumentNullException(nameof(projectRelativeDirectoryPath));
+            }
+
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             var httpPort = PortHelper.GetFreeTcpPort();
             var httpUrl = $"http://localhost:{httpPort}";
 
             var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
-            var dotnetRun = await DotnetRunInternal(projectFilePath, noRestore, timeout, httpUrl);
+            var dotnetRun = await DotnetRunInternalAsync(projectFilePath, noRestore, timeout, httpUrl).ConfigureAwait(false);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -109,7 +141,7 @@ namespace Boxed.DotnetNewTest
 
             try
             {
-                await action(httpClient);
+                await action(httpClient).ConfigureAwait(false);
             }
             finally
             {
@@ -129,7 +161,7 @@ namespace Boxed.DotnetNewTest
         /// <param name="validateCertificate">Validate the project certificate.</param>
         /// <param name="timeout">The timeout.</param>
         /// <returns>A task representing the operation.</returns>
-        public static async Task DotnetRun(
+        public static async Task DotnetRunAsync(
             this Project project,
             string projectRelativeDirectoryPath,
             Func<HttpClient, HttpClient, Task> action,
@@ -137,13 +169,28 @@ namespace Boxed.DotnetNewTest
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
             TimeSpan? timeout = null)
         {
+            if (project == null)
+            {
+                throw new ArgumentNullException(nameof(project));
+            }
+
+            if (projectRelativeDirectoryPath == null)
+            {
+                throw new ArgumentNullException(nameof(projectRelativeDirectoryPath));
+            }
+
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             var httpPort = PortHelper.GetFreeTcpPort();
             var httpsPort = PortHelper.GetFreeTcpPort();
             var httpUrl = $"http://localhost:{httpPort}";
             var httpsUrl = $"https://localhost:{httpsPort}";
 
             var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
-            var dotnetRun = await DotnetRunInternal(projectFilePath, noRestore, timeout, httpUrl, httpsUrl);
+            var dotnetRun = await DotnetRunInternalAsync(projectFilePath, noRestore, timeout, httpUrl, httpsUrl).ConfigureAwait(false);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -155,7 +202,7 @@ namespace Boxed.DotnetNewTest
 
             try
             {
-                await action(httpClient, httpsClient);
+                await action(httpClient, httpsClient).ConfigureAwait(false);
             }
             finally
             {
@@ -175,12 +222,22 @@ namespace Boxed.DotnetNewTest
         /// <param name="startupTypeName">Name of the startup type.</param>
         /// <returns>A task representing the operation.</returns>
         /// <remarks>This doesn't work yet, needs API's from .NET Core 3.0.</remarks>
-        internal static async Task DotnetRunInMemory(
+        internal static async Task DotnetRunInMemoryAsync(
             this Project project,
             Func<TestServer, Task> action,
             string environmentName = "Development",
             string startupTypeName = "Startup")
         {
+            if (project == null)
+            {
+                throw new ArgumentNullException(nameof(project));
+            }
+
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             var projectName = Path.GetFileName(project.DirectoryPath);
             var directoryPath = project.PublishDirectoryPath;
             var assemblyFilePath = Path.Combine(directoryPath, $"{projectName}.dll");
@@ -191,35 +248,40 @@ namespace Boxed.DotnetNewTest
             }
             else
             {
-                var assembly = new AssemblyResolver(assemblyFilePath).Assembly;
-                var startupType = assembly
-                    .DefinedTypes
-                    .FirstOrDefault(x => string.Equals(x.Name, startupTypeName, StringComparison.Ordinal));
-                if (startupType == null)
+                using (var assemblyResolver = new AssemblyResolver(assemblyFilePath))
                 {
-                    throw new Exception($"Startup type '{startupTypeName}' not found.");
-                }
+                    var assembly = assemblyResolver.Assembly;
+                    var startupType = assembly
+                        .DefinedTypes
+                        .FirstOrDefault(x => string.Equals(x.Name, startupTypeName, StringComparison.Ordinal));
+                    if (startupType == null)
+                    {
+                        throw new Exception($"Startup type '{startupTypeName}' not found.");
+                    }
 
-                var webHostBuilder = new WebHostBuilder()
-                    .UseEnvironment(environmentName)
-                    .UseStartup(startupType)
-                    .UseUrls(DefaultUrls);
-                using (var testServer = new TestServer(webHostBuilder))
-                {
-                    await action(testServer);
-                }
+                    var webHostBuilder = new WebHostBuilder()
+                        .UseEnvironment(environmentName)
+                        .UseStartup(startupType)
+                        .UseUrls(DefaultUrls);
+                    using (var testServer = new TestServer(webHostBuilder))
+                    {
+                        await action(testServer).ConfigureAwait(false);
+                    }
 
-                // TODO: Unload startupType when supported: https://github.com/dotnet/corefx/issues/14724
+                    // TODO: Unload startupType when supported: https://github.com/dotnet/corefx/issues/14724
+                }
             }
         }
 
-        private static async Task<IDisposable> DotnetRunInternal(
+        private static async Task<IDisposable> DotnetRunInternalAsync(
             string directoryPath,
             bool? noRestore = true,
             TimeSpan? timeout = null,
             params string[] urls)
         {
+#pragma warning disable CA2000 // Dispose objects before losing scope. Object disposed below.
             var cancellationTokenSource = new CancellationTokenSource();
+#pragma warning restore CA2000 // Dispose objects before losing scope. Object disposed below.
             var noRestoreArgument = noRestore == null ? null : "--no-restore";
             var urlsParameter = string.Join(";", urls);
             var task = AssertStartAsync(
@@ -227,7 +289,7 @@ namespace Boxed.DotnetNewTest
                 "dotnet",
                 $"run {noRestoreArgument} --urls {urlsParameter}",
                 cancellationTokenSource.Token);
-            await WaitForStart(urls.First(), timeout ?? TimeSpan.FromMinutes(1));
+            await WaitForStartAsync(urls.First(), timeout ?? TimeSpan.FromMinutes(1)).ConfigureAwait(false);
 
             return new DisposableAction(
                 () =>
@@ -242,36 +304,40 @@ namespace Boxed.DotnetNewTest
                     when (exception.GetBaseException().GetBaseException() is TaskCanceledException)
                     {
                     }
+
+                    cancellationTokenSource.Dispose();
                 });
         }
 
-        private static async Task WaitForStart(string url, TimeSpan timeout)
+        private static async Task WaitForStartAsync(string url, TimeSpan timeout)
         {
             const int intervalMilliseconds = 100;
 
-            var httpClientHandler = new HttpClientHandler()
-            {
-                AllowAutoRedirect = false,
-                ServerCertificateCustomValidationCallback = DefaultValidateCertificate,
-            };
-            using (var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(url) })
-            {
-                for (var i = 0; i < (timeout.TotalMilliseconds / intervalMilliseconds); ++i)
+            using (var httpClientHandler = new HttpClientHandler()
                 {
-                    try
+                    AllowAutoRedirect = false,
+                    ServerCertificateCustomValidationCallback = DefaultValidateCertificate,
+                })
+            {
+                using (var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(url) })
+                {
+                    for (var i = 0; i < (timeout.TotalMilliseconds / intervalMilliseconds); ++i)
                     {
-                        _ = await httpClient.GetAsync("/");
-                        return;
+                        try
+                        {
+                            await httpClient.GetAsync("/").ConfigureAwait(false);
+                            return;
+                        }
+                        catch (HttpRequestException exception)
+                        when (IsApiDownException(exception))
+                        {
+                            await Task.Delay(intervalMilliseconds).ConfigureAwait(false);
+                        }
                     }
-                    catch (HttpRequestException exception)
-                    when (IsApiDownException(exception))
-                    {
-                        await Task.Delay(intervalMilliseconds);
-                    }
-                }
 
-                throw new TimeoutException(
-                    $"Timed out after waiting {timeout} for application to start using dotnet run.");
+                    throw new TimeoutException(
+                        $"Timed out after waiting {timeout} for application to start using dotnet run.");
+                }
             }
         }
 
@@ -312,7 +378,7 @@ namespace Boxed.DotnetNewTest
                 workingDirectory,
                 fileName,
                 arguments,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             if (processResult != ProcessResult.Succeeded)
             {
                 throw new Exception(message);

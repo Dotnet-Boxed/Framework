@@ -17,8 +17,8 @@ namespace Boxed.DotnetNewTest
         /// <typeparam name="T">A type from the assembly used to find the directory path of the project to install.</typeparam>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task Install<T>(string fileName) =>
-            Install(typeof(T).GetTypeInfo().Assembly, fileName);
+        public static Task InstallAsync<T>(string fileName) =>
+            InstallAsync(typeof(T).GetTypeInfo().Assembly, fileName);
 
         /// <summary>
         /// Installs a template from the specified source.
@@ -27,15 +27,25 @@ namespace Boxed.DotnetNewTest
         /// <param name="fileName">Name of the file.</param>
         /// <returns>A task representing the operation.</returns>
         /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
-        public static Task Install(Assembly assembly, string fileName)
+        public static Task InstallAsync(Assembly assembly, string fileName)
         {
+            if (assembly == null)
+            {
+                throw new ArgumentNullException(nameof(assembly));
+            }
+
+            if (fileName == null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
             var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
             if (projectFilePath == null)
             {
                 throw new FileNotFoundException($"{fileName} not found.");
             }
 
-            return Install(projectFilePath);
+            return InstallAsync(projectFilePath);
         }
 
         /// <summary>
@@ -44,12 +54,19 @@ namespace Boxed.DotnetNewTest
         /// <param name="source">The source.</param>
         /// <param name="timeout">The timeout.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task Install(string source, TimeSpan? timeout = null) =>
-            ProcessExtensions.StartAsync(
+        public static Task InstallAsync(string source, TimeSpan? timeout = null)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return ProcessExtensions.StartAsync(
                 DirectoryExtensions.GetCurrentDirectory(),
                 "dotnet",
                 $"new --install \"{source}\"",
                 CancellationTokenFactory.GetCancellationToken(timeout));
+        }
 
         private static string GetFilePath(Assembly assembly, string projectName)
         {
