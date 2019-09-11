@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netstandard1.3;netstandard2.0</TargetFrameworks>
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>1.4.0</VersionPrefix>
+    <VersionPrefix>2.0.0</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
     <Product>Object Mapping Boxed</Product>
     <Description>An object to object mapper that does not use reflection.</Description>
@@ -39,8 +39,12 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="All" Version="2.9.4" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0-beta2-19367-01" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzer Package References">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.4" />
+    <PackageReference Condition="'$(TargetFramework)' != 'netstandard1.3'" Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="All" Version="16.3.52 " />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.118" />
   </ItemGroup>
 

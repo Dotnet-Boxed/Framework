@@ -9,29 +9,29 @@ namespace Boxed.Mapping.Test
     public class AsyncMapperTest
     {
         [Fact]
-        public void Map_Null_ThrowsArgumentNullException()
+        public Task MapAsync_Null_ThrowsArgumentNullException()
         {
             var mapper = new AsyncMapper();
 
-            Assert.ThrowsAsync<ArgumentNullException>("source", () => mapper.Map(null));
+            return Assert.ThrowsAsync<ArgumentNullException>("source", () => mapper.MapAsync(null));
         }
 
         [Fact]
-        public async Task Map_ToNewObject_Mapped()
+        public async Task MapAsync_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.Map(new MapFrom() { Property = 1 });
+            var to = await mapper.MapAsync(new MapFrom() { Property = 1 });
 
             Assert.Equal(1, to.Property);
         }
 
         [Fact]
-        public async Task MapArray_Empty_Mapped()
+        public async Task MapArrayAsync_Empty_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.MapArray(
+            var to = await mapper.MapArrayAsync(
                 new MapFrom[0]);
 
             Assert.IsType<MapTo[]>(to);
@@ -39,11 +39,11 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
-        public async Task MapArray_ToNewObject_Mapped()
+        public async Task MapArrayAsync_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.MapArray(
+            var to = await mapper.MapArrayAsync(
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
@@ -57,11 +57,11 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
-        public async Task MapTypedCollection_Empty_Mapped()
+        public async Task MapTypedCollectionAsync_Empty_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.MapCollection(
+            var to = await mapper.MapCollectionAsync(
                 new MapFrom[0],
                 new List<MapTo>());
 
@@ -70,11 +70,11 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
-        public async Task MapTypedCollection_ToNewObject_Mapped()
+        public async Task MapTypedCollectionAsync_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.MapCollection(
+            var to = await mapper.MapCollectionAsync(
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
@@ -89,11 +89,11 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
-        public async Task MapCollection_Empty_Mapped()
+        public async Task MapCollectionAsync_Empty_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.MapCollection(
+            var to = await mapper.MapCollectionAsync(
                 new MapFrom[0]);
 
             Assert.IsType<Collection<MapTo>>(to);
@@ -101,11 +101,11 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
-        public async Task MapCollection_ToNewObject_Mapped()
+        public async Task MapCollectionAsync_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.MapCollection(
+            var to = await mapper.MapCollectionAsync(
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
@@ -119,11 +119,11 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
-        public async Task MapList_Empty_Mapped()
+        public async Task MapListAsync_Empty_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.MapList(
+            var to = await mapper.MapListAsync(
                 new MapFrom[0]);
 
             Assert.IsType<List<MapTo>>(to);
@@ -131,11 +131,11 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
-        public async Task MapList_ToNewObject_Mapped()
+        public async Task MapListAsync_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.MapList(
+            var to = await mapper.MapListAsync(
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
@@ -149,11 +149,11 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
-        public async Task MapObservableCollection_Empty_Mapped()
+        public async Task MapObservableCollectionAsync_Empty_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.MapObservableCollection(
+            var to = await mapper.MapObservableCollectionAsync(
                 new MapFrom[0]);
 
             Assert.IsType<ObservableCollection<MapTo>>(to);
@@ -161,11 +161,11 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
-        public async Task MapObservableCollection_ToNewObject_Mapped()
+        public async Task MapObservableCollectionAsync_ToNewObject_Mapped()
         {
             var mapper = new AsyncMapper();
 
-            var to = await mapper.MapObservableCollection(
+            var to = await mapper.MapObservableCollectionAsync(
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },

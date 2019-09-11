@@ -15,6 +15,6 @@ namespace Boxed.Mapping
         /// <param name="source">The source object to map from.</param>
         /// <param name="destination">The destination object to map to.</param>
         /// <returns>A task representing the operation.</returns>
-        Task Map(TSource source, TDestination destination);
+        Task MapAsync(TSource source, TDestination destination);
     }
 }
