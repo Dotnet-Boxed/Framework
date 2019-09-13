@@ -54,8 +54,8 @@ stages:
       displayName: 'Publish Test Results'
       inputs:
         testResultsFormat: 'VSTest'
-        testResultsFiles: '**\*.trx'
-    - publish: '.\Artifacts'
+        testResultsFiles: '**/*.trx'
+    - publish: './Artifacts'
       artifact: $(matrixName)
       displayName: 'Publish Artifacts'
 - stage: Deploy
@@ -74,12 +74,12 @@ stages:
             inputs:
               command: push
               nuGetFeedType: internal
-              packagesToPush: '$(Agent.BuildDirectory)\Windows\*.nupkg'
+              packagesToPush: '$(Agent.BuildDirectory)/Windows/*.nupkg'
               publishVstsFeed: dotnet-boxed
               allowPackageConflicts: true
   - deployment: NuGet
     pool:
-      vmImage: windows-latest
+      vmImage: ubuntu-latest
     environment: 'NuGet'
     condition: startsWith(variables['Build.sourceBranch'], 'refs/tags/')
     strategy:
@@ -88,6 +88,6 @@ stages:
           steps:
           - task: NuGetToolInstaller@1
             displayName: 'Install NuGet'
-          - script: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(NuGetApiKey) -SkipDuplicate
+          - script: nuget push $(Agent.BuildDirectory)/Windows/*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(NuGetApiKey) -SkipDuplicate
             displayName: 'NuGet Push'
             failOnStderr: true
