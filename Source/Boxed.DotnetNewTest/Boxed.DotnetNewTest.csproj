@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
@@ -16,7 +16,7 @@
     <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Dotnet-Boxed/Framework</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Icon-256x256.png</PackageIconUrl>
+    <PackageIcon>Icon-256x256.png</PackageIcon>
     <RepositoryUrl>https://github.com/Dotnet-Boxed/Framework.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>ASP.NET;ASP.NET Core;dotnet new;template;Boxed;Muhammad Rehan Saeed;Framework;</PackageTags>
@@ -50,6 +50,10 @@
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.4" />
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="All" Version="16.3.52" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.118" />
+  </ItemGroup>
+
+  <ItemGroup Label="Files">
+    <None Include="..\..\Images\Icon-256x256.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
