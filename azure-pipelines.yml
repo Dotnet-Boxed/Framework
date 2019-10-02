@@ -57,31 +57,46 @@ stages:
       inputs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/*.trx'
-    - publish: './Artifacts'
+    - publish: './Artefacts'
       artifact: $(matrixName)
-      displayName: 'Publish Artifacts'
+      displayName: 'Publish Artefacts'
 - stage: Deploy
   jobs:
-  - deployment: AzureArtifacts
-    displayName: 'Azure Artifacts'
+  - deployment: AzureArtefacts
+    displayName: 'Azure Artefacts'
     pool:
       vmImage: windows-latest
-    environment: 'Azure Artifacts'
+    environment: 'Azure Artefacts'
     strategy:
       runOnce:
         deploy:
           steps:
-          - task: NuGetCommand@2
+          - task: NuGetToolInstaller@1
+            displayName: 'NuGet Install'
+          - task: NuGetAuthenticate@0
+            displayName: 'NuGet Authenticate'
+          - script: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source https://pkgs.dev.azure.com/dotnet-boxed/_packaging/dotnet-boxed/nuget/v3/index.json -ApiKey AzureArtifacts -SkipDuplicate
             displayName: 'NuGet Push'
-            inputs:
-              command: push
-              nuGetFeedType: internal
-              packagesToPush: '$(Agent.BuildDirectory)/Windows/*.nupkg'
-              publishVstsFeed: dotnet-boxed
-              allowPackageConflicts: true # Only works on Windows
+            failOnStderr: true
+  - deployment: GitHub
+    pool:
+      vmImage: windows-latest
+    environment: 'GitHub'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: NuGetToolInstaller@1
+            displayName: 'NuGet Install'
+          - script: nuget source Add -Name GitHub -Source https://nuget.pkg.github.com/Dotnet-Boxed/index.json -UserName $(GitHubUserName) -Password $(GitHubPersonalAccessToken)
+            displayName: 'NuGet Add Source'
+            failOnStderr: true
+          - script: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source GitHub -SkipDuplicate
+            displayName: 'NuGet Push'
+            failOnStderr: true
   - deployment: NuGet
     pool:
-      vmImage: ubuntu-latest
+      vmImage: windows-latest
     environment: 'NuGet'
     condition: startsWith(variables['Build.sourceBranch'], 'refs/tags/')
     strategy:
@@ -90,6 +105,6 @@ stages:
           steps:
           - task: NuGetToolInstaller@1
             displayName: 'Install NuGet'
-          - script: nuget push $(Agent.BuildDirectory)/Windows/*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(NuGetApiKey) -SkipDuplicate
+          - script: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(NuGetApiKey) -SkipDuplicate
             displayName: 'NuGet Push'
             failOnStderr: true
