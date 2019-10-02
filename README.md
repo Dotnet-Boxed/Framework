@@ -14,26 +14,46 @@ A simple and fast (fastest?) object to object mapper that does not use reflectio
 public class MapFrom
 {
     public bool BooleanFrom { get; set; }
-    public DateTimeOffset DateTimeOffsetFrom { get; set; }
     public int IntegerFrom { get; set; }
+    public List<MapFromChild> ChildrenFrom { get; set; }
+}
+public class MapFromChild
+{
+    public DateTimeOffset DateTimeOffsetFrom { get; set; }
     public string StringFrom { get; set; }
 }
  
 public class MapTo
 {
     public bool BooleanTo { get; set; }
-    public DateTimeOffset DateTimeOffsetTo { get; set; }
     public int IntegerTo { get; set; }
+    public List<MapToChild> ChildrenTo { get; set; }
+}
+public class MapToChild
+{
+    public DateTimeOffset DateTimeOffsetTo { get; set; }
     public string StringTo { get; set; }
 }
 
 public class DemoMapper : IMapper<MapFrom, MapTo>
 {
+    private readonly IMapper<MapFromChild, MapToChild> childMapper;
+    
+    public DemoMapper(IMapper<MapFromChild, MapToChild> childMapper) => this.childMapper = childMapper;
+    
     public void Map(MapFrom source, MapTo destination)
     {
         destination.BooleanTo = source.BooleanFrom;
-        destination.DateTimeOffsetTo = source.DateTimeOffsetFrom;
         destination.IntegerTo = source.IntegerFrom;
+        destination.ChildrenTo = childMapper.MapList(source.ChildrenFrom);
+    }
+}
+
+public class DemoChildMapper : IMapper<MapFromChild, MapToChild>
+{
+    public void Map(MapFromChild source, MapToChild destination)
+    {
+        destination.DateTimeOffsetTo = source.DateTimeOffsetFrom;
         destination.StringTo = source.StringFrom;
     }
 }
