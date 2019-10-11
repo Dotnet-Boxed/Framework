@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore
 {
+    using System;
     using System.Text;
 
     /// <summary>
@@ -139,63 +140,63 @@ namespace Boxed.AspNetCore
 #pragma warning disable CA1308 // Normalize strings to uppercase
             var s = new string(character, 1).ToLowerInvariant();
 #pragma warning restore CA1308 // Normalize strings to uppercase
-            if ("àåáâäãåąā".Contains(s))
+            if ("àåáâäãåąā".Contains(s, StringComparison.Ordinal))
             {
                 return "a";
             }
-            else if ("èéêěëę".Contains(s))
+            else if ("èéêěëę".Contains(s, StringComparison.Ordinal))
             {
                 return "e";
             }
-            else if ("ìíîïı".Contains(s))
+            else if ("ìíîïı".Contains(s, StringComparison.Ordinal))
             {
                 return "i";
             }
-            else if ("òóôõöøőð".Contains(s))
+            else if ("òóôõöøőð".Contains(s, StringComparison.Ordinal))
             {
                 return "o";
             }
-            else if ("ùúûüŭů".Contains(s))
+            else if ("ùúûüŭů".Contains(s, StringComparison.Ordinal))
             {
                 return "u";
             }
-            else if ("çćčĉ".Contains(s))
+            else if ("çćčĉ".Contains(s, StringComparison.Ordinal))
             {
                 return "c";
             }
-            else if ("żźž".Contains(s))
+            else if ("żźž".Contains(s, StringComparison.Ordinal))
             {
                 return "z";
             }
-            else if ("śşšŝ".Contains(s))
+            else if ("śşšŝ".Contains(s, StringComparison.Ordinal))
             {
                 return "s";
             }
-            else if ("ñń".Contains(s))
+            else if ("ñń".Contains(s, StringComparison.Ordinal))
             {
                 return "n";
             }
-            else if ("ýÿ".Contains(s))
+            else if ("ýÿ".Contains(s, StringComparison.Ordinal))
             {
                 return "y";
             }
-            else if ("ğĝ".Contains(s))
+            else if ("ğĝ".Contains(s, StringComparison.Ordinal))
             {
                 return "g";
             }
-            else if ("ŕř".Contains(s))
+            else if ("ŕř".Contains(s, StringComparison.Ordinal))
             {
                 return "r";
             }
-            else if ("ĺľł".Contains(s))
+            else if ("ĺľł".Contains(s, StringComparison.Ordinal))
             {
                 return "l";
             }
-            else if ("úů".Contains(s))
+            else if ("úů".Contains(s, StringComparison.Ordinal))
             {
                 return "u";
             }
-            else if ("đď".Contains(s))
+            else if ("đď".Contains(s, StringComparison.Ordinal))
             {
                 return "d";
             }

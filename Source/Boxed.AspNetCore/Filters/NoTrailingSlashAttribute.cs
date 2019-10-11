@@ -39,7 +39,7 @@ namespace Boxed.AspNetCore.Filters
             var path = context.HttpContext.Request.Path;
             if (path.HasValue)
             {
-                if (path.Value[path.Value.Length - 1] == SlashCharacter)
+                if (path.Value[^1] == SlashCharacter)
                 {
                     this.HandleTrailingSlashRequest(context);
                 }

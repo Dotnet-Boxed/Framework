@@ -28,7 +28,8 @@ namespace Boxed.DotnetNewTest
             {
                 var destinationSubDirectoryPath = sourceSubDirectoryPath.Replace(
                     sourceDirectoryPath,
-                    destinationDirectoryPath);
+                    destinationDirectoryPath,
+                    StringComparison.Ordinal);
                 CheckCreate(destinationSubDirectoryPath);
             }
 
@@ -37,7 +38,10 @@ namespace Boxed.DotnetNewTest
                 "*.*",
                 SearchOption.AllDirectories))
             {
-                var destinationFilePath = sourceFilePath.Replace(sourceDirectoryPath, destinationDirectoryPath);
+                var destinationFilePath = sourceFilePath.Replace(
+                    sourceDirectoryPath,
+                    destinationDirectoryPath,
+                    StringComparison.Ordinal);
                 new FileInfo(sourceFilePath).CopyTo(destinationFilePath, true);
             }
         }

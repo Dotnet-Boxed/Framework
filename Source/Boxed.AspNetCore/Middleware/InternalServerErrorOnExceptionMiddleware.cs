@@ -19,8 +19,7 @@ namespace Boxed.AspNetCore.Middleware
                 var factory = context.RequestServices.GetRequiredService<ILoggerFactory>();
                 var logger = factory.CreateLogger<InternalServerErrorOnExceptionMiddleware>();
                 logger.LogInformation(
-                    "Executing InternalServerErrorOnExceptionMiddleware, setting HTTP status code {0}.",
-                    StatusCodes.Status500InternalServerError);
+                    "Executing InternalServerErrorOnExceptionMiddleware, setting HTTP status code 500.");
 
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             }

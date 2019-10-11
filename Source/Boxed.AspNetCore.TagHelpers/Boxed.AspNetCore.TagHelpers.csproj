@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -52,7 +52,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Files">
-    <None Include="..\..\Images\Icon-256x256.png" Pack="true" PackagePath="\"/>
+    <None Include="..\..\Images\Icon-256x256.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

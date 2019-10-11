@@ -119,7 +119,7 @@ namespace Boxed.AspNetCore.Filters
             // if there is a trailing slash or not. Both will be treated as the same by search engines.
             if (hasPath)
             {
-                var hasTrailingSlash = request.Path.Value[request.Path.Value.Length - 1] == SlashCharacter;
+                var hasTrailingSlash = request.Path.Value[^1] == SlashCharacter;
 
                 if (this.AppendTrailingSlash)
                 {
