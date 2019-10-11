@@ -40,7 +40,7 @@ stages:
       inputs:
         packageType: 'sdk'
         version: '3.0.100'
-    - script: 'dotnet tool install --global Cake.Tool --version 0.35.0-alpha0029 --add-source https://pkgs.dev.azure.com/cake-build/Cake/_packaging/cake/nuget/v3/index.json'
+    - script: 'dotnet tool install --global Cake.Tool'
       displayName: 'Install Cake Tool'
       failOnStderr: true
     - script: 'dotnet cake --target=Build'
@@ -64,6 +64,7 @@ stages:
   jobs:
   - deployment: AzureArtefacts
     displayName: 'Azure Artefacts'
+    condition: ne(variables['Build.Reason'], 'PullRequest')
     pool:
       vmImage: windows-latest
     environment: 'Azure Artefacts'
@@ -79,6 +80,7 @@ stages:
             displayName: 'NuGet Push'
             failOnStderr: true
   - deployment: GitHub
+    condition: ne(variables['Build.Reason'], 'PullRequest')
     pool:
       vmImage: windows-latest
     environment: 'GitHub'
@@ -95,10 +97,10 @@ stages:
             displayName: 'NuGet Push'
             failOnStderr: true
   - deployment: NuGet
+    condition: and(ne(variables['Build.Reason'], 'PullRequest'), startsWith(variables['Build.sourceBranch'], 'refs/tags/'))
     pool:
       vmImage: windows-latest
     environment: 'NuGet'
-    condition: startsWith(variables['Build.sourceBranch'], 'refs/tags/')
     strategy:
       runOnce:
         deploy:
