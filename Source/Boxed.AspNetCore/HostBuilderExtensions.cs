@@ -1,12 +1,12 @@
 namespace Boxed.AspNetCore
 {
     using System;
-    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
 
     /// <summary>
-    /// <see cref="IWebHostBuilder"/> extension methods.
+    /// <see cref="IHostBuilder"/> extension methods.
     /// </summary>
-    public static class WebHostBuilderExtensions
+    public static class HostBuilderExtensions
     {
         /// <summary>
         /// Executes the specified action if the specified <paramref name="condition"/> is <c>true</c> which can be
@@ -16,10 +16,10 @@ namespace Boxed.AspNetCore
         /// <param name="condition">If set to <c>true</c> the action is executed.</param>
         /// <param name="action">The action used to add to the host builder.</param>
         /// <returns>The same host builder.</returns>
-        public static IWebHostBuilder UseIf(
-            this IWebHostBuilder hostBuilder,
+        public static IHostBuilder UseIf(
+            this IHostBuilder hostBuilder,
             bool condition,
-            Func<IWebHostBuilder, IWebHostBuilder> action)
+            Func<IHostBuilder, IHostBuilder> action)
         {
             if (hostBuilder == null)
             {
@@ -47,10 +47,10 @@ namespace Boxed.AspNetCore
         /// <param name="condition">If <c>true</c> is returned the action is executed.</param>
         /// <param name="action">The action used to add to the host builder.</param>
         /// <returns>The same host builder.</returns>
-        public static IWebHostBuilder UseIf(
-            this IWebHostBuilder hostBuilder,
-            Func<IWebHostBuilder, bool> condition,
-            Func<IWebHostBuilder, IWebHostBuilder> action)
+        public static IHostBuilder UseIf(
+            this IHostBuilder hostBuilder,
+            Func<IHostBuilder, bool> condition,
+            Func<IHostBuilder, IHostBuilder> action)
         {
             if (hostBuilder == null)
             {
@@ -86,11 +86,11 @@ namespace Boxed.AspNetCore
         /// <param name="ifAction">The action used to add to the host builder if the condition is <c>true</c>.</param>
         /// <param name="elseAction">The action used to add to the host builder if the condition is <c>false</c>.</param>
         /// <returns>The same host builder.</returns>
-        public static IWebHostBuilder UseIfElse(
-            this IWebHostBuilder hostBuilder,
+        public static IHostBuilder UseIfElse(
+            this IHostBuilder hostBuilder,
             bool condition,
-            Func<IWebHostBuilder, IWebHostBuilder> ifAction,
-            Func<IWebHostBuilder, IWebHostBuilder> elseAction)
+            Func<IHostBuilder, IHostBuilder> ifAction,
+            Func<IHostBuilder, IHostBuilder> elseAction)
         {
             if (hostBuilder == null)
             {
@@ -130,11 +130,11 @@ namespace Boxed.AspNetCore
         /// <param name="ifAction">The action used to add to the host builder if the condition is <c>true</c>.</param>
         /// <param name="elseAction">The action used to add to the host builder if the condition is <c>false</c>.</param>
         /// <returns>The same host builder.</returns>
-        public static IWebHostBuilder UseIfElse(
-            this IWebHostBuilder hostBuilder,
-            Func<IWebHostBuilder, bool> condition,
-            Func<IWebHostBuilder, IWebHostBuilder> ifAction,
-            Func<IWebHostBuilder, IWebHostBuilder> elseAction)
+        public static IHostBuilder UseIfElse(
+            this IHostBuilder hostBuilder,
+            Func<IHostBuilder, bool> condition,
+            Func<IHostBuilder, IHostBuilder> ifAction,
+            Func<IHostBuilder, IHostBuilder> elseAction)
         {
             if (hostBuilder == null)
             {

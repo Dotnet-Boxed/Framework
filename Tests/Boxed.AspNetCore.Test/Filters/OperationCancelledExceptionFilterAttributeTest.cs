@@ -10,7 +10,6 @@ namespace Boxed.AspNetCore.Test.Filters
     using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Logging.Internal;
     using Moq;
     using Xunit;
 
@@ -44,7 +43,7 @@ namespace Boxed.AspNetCore.Test.Filters
             this.loggerMock.Setup(x => x.Log(
                 LogLevel.Information,
                 0,
-                It.IsAny<FormattedLogValues>(),
+                It.IsAny<object>(),
                 null,
                 It.IsAny<Func<object, Exception, string>>()));
 

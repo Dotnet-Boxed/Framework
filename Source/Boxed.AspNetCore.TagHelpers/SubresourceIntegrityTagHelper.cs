@@ -6,16 +6,16 @@ namespace Boxed.AspNetCore.TagHelpers
     using System.Security.Cryptography;
     using System.Text;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
+    using Microsoft.Extensions.Hosting;
 
     /// <summary>
-    /// Adds Subresource Integrity (SRI) to a script tag. Subresource Integrity (SRI) is a security feature that
+    /// Adds Sub-resource Integrity (SRI) to a script tag. Sub-resource Integrity (SRI) is a security feature that
     /// enables browsers to verify that files they fetch (for example, from a CDN) are delivered without unexpected
     /// manipulation. It works by allowing you to provide a cryptographic hash that a fetched file must match.
     /// See https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity and https://www.w3.org/TR/SRI/.
@@ -30,24 +30,24 @@ namespace Boxed.AspNetCore.TagHelpers
         private const string IntegrityAttributeName = "integrity";
 
         private readonly IDistributedCache distributedCache;
-        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IHostEnvironment hostEnvironment;
         private readonly IUrlHelper urlHelper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SubresourceIntegrityTagHelper"/> class.
         /// </summary>
         /// <param name="distributedCache">The distributed cache.</param>
-        /// <param name="hostingEnvironment">The hosting environment.</param>
+        /// <param name="hostEnvironment">The host environment.</param>
         /// <param name="actionContextAccessor">The MVC action context accessor.</param>
         /// <param name="urlHelperFactory">The URL helper factory.</param>
         public SubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
-            IHostingEnvironment hostingEnvironment,
+            IHostEnvironment hostEnvironment,
             IActionContextAccessor actionContextAccessor,
             IUrlHelperFactory urlHelperFactory)
         {
             this.distributedCache = distributedCache ?? throw new ArgumentNullException(nameof(distributedCache));
-            this.hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+            this.hostEnvironment = hostEnvironment ?? throw new ArgumentNullException(nameof(hostEnvironment));
 
             if (actionContextAccessor == null)
             {
@@ -240,7 +240,7 @@ namespace Boxed.AspNetCore.TagHelpers
             SubresourceIntegrityHashAlgorithm hashAlgorithms)
         {
             var filePath = Path.Combine(
-                this.hostingEnvironment.WebRootPath,
+                this.hostEnvironment.ContentRootPath,
                 this.urlHelper.Content(contentPath).TrimStart('/'));
             var bytes = this.ReadAllBytes(filePath);
             return GetSpaceDelimetedSri(bytes, hashAlgorithms);

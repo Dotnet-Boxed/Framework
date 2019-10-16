@@ -4,7 +4,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Authorization.Infrastructure;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
@@ -18,7 +18,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
         /// </summary>
         /// <param name="operation">The operation.</param>
         /// <param name="context">The context.</param>
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             if (operation == null)
             {
@@ -37,11 +37,11 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
                 .Select(x => x.ClaimType);
             if (claimTypes.Any())
             {
-                operation.Security = new List<IDictionary<string, IEnumerable<string>>>()
+                operation.Security = new List<OpenApiSecurityRequirement>()
                 {
-                    new Dictionary<string, IEnumerable<string>>()
+                    new OpenApiSecurityRequirement()
                     {
-                        { "oauth2", claimTypes }
+                        { new OpenApiSecurityScheme() { "oauth2" }, claimTypes }
                     }
                 };
             }

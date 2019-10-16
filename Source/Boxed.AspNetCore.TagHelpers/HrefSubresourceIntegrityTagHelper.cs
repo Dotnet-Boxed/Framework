@@ -1,11 +1,10 @@
 namespace Boxed.AspNetCore.TagHelpers
 {
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
+    using Microsoft.Extensions.Hosting;
 
     /// <inheritdoc />
     [HtmlTargetElement(Attributes = HrefAttributeName + "," + SubresourceIntegrityHrefAttributeName)]
@@ -15,18 +14,18 @@ namespace Boxed.AspNetCore.TagHelpers
         private const string SubresourceIntegrityHrefAttributeName = "asp-subresource-integrity-href";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HrefSubresourceIntegrityTagHelper"/> class.
+        /// Initializes a new instance of the <see cref="HrefSubresourceIntegrityTagHelper" /> class.
         /// </summary>
         /// <param name="distributedCache">The distributed cache.</param>
-        /// <param name="hostingEnvironment">The hosting environment.</param>
+        /// <param name="hostEnvironment">The host environment.</param>
         /// <param name="actionContextAccessor">The MVC action context accessor.</param>
         /// <param name="urlHelperFactory">The URL helper factory.</param>
         public HrefSubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
-            IHostingEnvironment hostingEnvironment,
+            IHostEnvironment hostEnvironment,
             IActionContextAccessor actionContextAccessor,
             IUrlHelperFactory urlHelperFactory)
-            : base(distributedCache, hostingEnvironment, actionContextAccessor, urlHelperFactory)
+            : base(distributedCache, hostEnvironment, actionContextAccessor, urlHelperFactory)
         {
         }
 

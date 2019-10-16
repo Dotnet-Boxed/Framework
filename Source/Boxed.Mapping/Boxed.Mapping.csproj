@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netstandard1.3;netstandard2.0</TargetFrameworks>
@@ -43,8 +43,9 @@
   </ItemGroup>
 
   <ItemGroup Label="Analyzer Package References">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.5" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.6" />
     <PackageReference Condition="'$(TargetFramework)' != 'netstandard1.3'" Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="All" Version="16.3.52 " />
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.4.16" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.118" />
   </ItemGroup>
 
