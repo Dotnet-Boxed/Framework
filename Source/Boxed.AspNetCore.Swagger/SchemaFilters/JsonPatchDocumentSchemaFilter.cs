@@ -2,7 +2,7 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
 {
     using System;
     using Microsoft.AspNetCore.JsonPatch;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
     using Operation = Microsoft.AspNetCore.JsonPatch.Operations.Operation;
 
@@ -18,7 +18,7 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="context">The context.</param>
-        public void Apply(Schema model, SchemaFilterContext context)
+        public void Apply(OpenApiSchema model, SchemaFilterContext context)
         {
             if (model == null)
             {
@@ -30,17 +30,17 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.SystemType.GenericTypeArguments.Length > 0 &&
-                context.SystemType.GetGenericTypeDefinition() == typeof(JsonPatchDocument<>))
+            if (context.ApiModel.Type.GenericTypeArguments.Length > 0 &&
+                context.ApiModel.Type.GetGenericTypeDefinition() == typeof(JsonPatchDocument<>))
             {
                 var example = GetExample();
 
-                model.Default = example;
-                model.Example = example;
-                model.ExternalDocs = new ExternalDocs()
+                // model.Default = example;
+                // model.Example = example;
+                model.ExternalDocs = new OpenApiExternalDocs()
                 {
                     Description = "JSON Patch Documentation",
-                    Url = "http://jsonpatch.com/"
+                    Url = new Uri("http://jsonpatch.com/", UriKind.Absolute),
                 };
             }
         }

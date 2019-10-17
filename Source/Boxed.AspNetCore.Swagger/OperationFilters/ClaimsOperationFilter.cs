@@ -41,7 +41,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
                 {
                     new OpenApiSecurityRequirement()
                     {
-                        { new OpenApiSecurityScheme() { "oauth2" }, claimTypes }
+                        // { new OpenApiSecurityScheme() { "oauth2" }, claimTypes }
                     }
                 };
             }

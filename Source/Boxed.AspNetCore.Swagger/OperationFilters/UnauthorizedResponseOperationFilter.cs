@@ -3,7 +3,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     using System;
     using System.Linq;
     using Microsoft.AspNetCore.Authorization.Infrastructure;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
@@ -14,7 +14,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     public class UnauthorizedResponseOperationFilter : IOperationFilter
     {
         private const string UnauthorizedStatusCode = "401";
-        private static readonly Response UnauthorizedResponse = new Response()
+        private static readonly OpenApiResponse UnauthorizedResponse = new OpenApiResponse()
         {
             Description = "Unauthorized - The user has not supplied the necessary credentials to access the resource."
         };
@@ -24,7 +24,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
         /// </summary>
         /// <param name="operation">The operation.</param>
         /// <param name="context">The context.</param>
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             if (operation == null)
             {

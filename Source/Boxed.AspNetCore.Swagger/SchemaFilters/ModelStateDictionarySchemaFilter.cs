@@ -3,6 +3,7 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
     using System;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -17,7 +18,7 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="context">The context.</param>
-        public void Apply(Schema model, SchemaFilterContext context)
+        public void Apply(OpenApiSchema model, SchemaFilterContext context)
         {
             if (model == null)
             {
@@ -29,7 +30,7 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.SystemType == typeof(ModelStateDictionary))
+            if (context.ApiModel.Type == typeof(ModelStateDictionary))
             {
                 var modelState = new ModelStateDictionary();
                 modelState.AddModelError("Property1", "Error message 1");
@@ -37,8 +38,8 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
                 modelState.AddModelError("Property2", "Error message 3");
                 var serializableError = new SerializableError(modelState);
 
-                model.Default = serializableError;
-                model.Example = serializableError;
+                // model.Default = serializableError;
+                // model.Example = serializableError;
             }
         }
     }
