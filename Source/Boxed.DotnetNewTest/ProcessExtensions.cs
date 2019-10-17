@@ -13,6 +13,7 @@ namespace Boxed.DotnetNewTest
     /// </summary>
     public static partial class ProcessExtensions
     {
+#if NETSTANDARD2_1
         private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
         private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
@@ -55,6 +56,7 @@ namespace Boxed.DotnetNewTest
                 KillProcessUnix(process.Id, timeout);
             }
         }
+#endif
 
         /// <summary>
         /// Starts the specified <see cref="Process"/> and then waits for exit asynchronously for the process to exit.

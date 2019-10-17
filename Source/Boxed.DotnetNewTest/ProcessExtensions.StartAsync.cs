@@ -119,8 +119,6 @@ namespace Boxed.DotnetNewTest
             {
                 using (var process = new Process() { StartInfo = processStartInfo })
                 {
-                    process.Start();
-
                     var tasks = new List<Task>(3) { process.WaitForExitAsync(cancellationToken) };
                     if (outputTextWriter != null)
                     {
@@ -150,14 +148,19 @@ namespace Boxed.DotnetNewTest
 
                     try
                     {
+                        process.Start();
+
                         await Task.WhenAll(tasks).ConfigureAwait(false);
                     }
                     catch
                     {
                         if (!process.HasExited)
                         {
-                            // Add process.Kill(true) when 3.0 comes out to kill the entire process tree.
+#if NETCOREAPP3_0
+                            process.Kill(true);
+#else
                             process.KillTree();
+#endif
                         }
 
                         throw;
