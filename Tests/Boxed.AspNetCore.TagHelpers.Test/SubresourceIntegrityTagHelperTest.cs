@@ -13,7 +13,6 @@ namespace Boxed.AspNetCore.TagHelpers.Test
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
-    using Microsoft.Extensions.WebEncoders.Testing;
     using Moq;
     using Xunit;
 
