@@ -4,18 +4,19 @@ namespace Boxed.Mapping.Benchmark
     using System.Globalization;
     using AutoMapper;
     using BenchmarkDotNet.Attributes;
+    using BenchmarkDotNet.Jobs;
     using Boxed.Mapping.Benchmark.Mapping;
     using Boxed.Mapping.Benchmark.Models;
 
     [KeepBenchmarkFiles]
-    [ClrJob]
-    [CoreJob]
+    [MemoryDiagnoser]
     [MinColumn]
     [MaxColumn]
     [HtmlExporter]
     [CsvMeasurementsExporter]
     [RPlotExporter]
-    [MemoryDiagnoser]
+    [SimpleJob(RuntimeMoniker.Net472)]
+    [SimpleJob(RuntimeMoniker.NetCoreApp30)]
     public class MapObjectBenchmark
     {
         private readonly IMapper automapper;
