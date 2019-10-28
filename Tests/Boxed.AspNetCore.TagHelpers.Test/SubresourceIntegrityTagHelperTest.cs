@@ -3,6 +3,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using System.Text.Encodings.Web;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Hosting;
@@ -23,6 +24,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
         private readonly Mock<IUrlHelperFactory> urlHelperFactoryMock;
         private readonly Mock<IUrlHelper> urlHelperMock;
         private readonly SubresourceIntegrityTagHelper tagHelper;
+        private readonly Mock<HtmlEncoder> htmlEncoderMock;
 
         public SubresourceIntegrityTagHelperTest()
         {
@@ -31,15 +33,18 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             this.actionContextAccessor = new Mock<IActionContextAccessor>(MockBehavior.Strict);
             this.urlHelperFactoryMock = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
             this.urlHelperMock = new Mock<IUrlHelper>(MockBehavior.Strict);
+            this.htmlEncoderMock = new Mock<HtmlEncoder>(MockBehavior.Strict);
 
             this.actionContextAccessor.SetupGet(x => x.ActionContext).Returns((ActionContext)null);
             this.urlHelperFactoryMock.Setup(x => x.GetUrlHelper(this.actionContextAccessor.Object.ActionContext)).Returns(this.urlHelperMock.Object);
+            this.htmlEncoderMock.Setup(x => x.Encode(It.IsAny<string>())).Returns((string s) => s);
 
             this.tagHelper = new TestSubresourceIntegrityTagHelper(
                 this.distributedCacheMock.Object,
                 this.hostingEnvironmentMock.Object,
                 this.actionContextAccessor.Object,
-                this.urlHelperFactoryMock.Object);
+                this.urlHelperFactoryMock.Object,
+                this.htmlEncoderMock.Object);
         }
 
         [Fact]
@@ -143,8 +148,9 @@ namespace Boxed.AspNetCore.TagHelpers.Test
                 IDistributedCache distributedCache,
                 IHostingEnvironment hostingEnvironment,
                 IActionContextAccessor actionContextAccessor,
-                IUrlHelperFactory urlHelperFactory)
-                : base(distributedCache, hostingEnvironment, actionContextAccessor, urlHelperFactory)
+                IUrlHelperFactory urlHelperFactory,
+                HtmlEncoder htmlEncoder)
+                : base(distributedCache, hostingEnvironment, actionContextAccessor, urlHelperFactory, htmlEncoder)
             {
             }
 
