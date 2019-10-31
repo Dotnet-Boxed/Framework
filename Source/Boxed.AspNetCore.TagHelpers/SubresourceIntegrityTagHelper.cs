@@ -6,13 +6,13 @@ namespace Boxed.AspNetCore.TagHelpers
     using System.Security.Cryptography;
     using System.Text;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
-    using Microsoft.Extensions.Hosting;
 
     /// <summary>
     /// Adds Sub-resource Integrity (SRI) to a script tag. Sub-resource Integrity (SRI) is a security feature that
@@ -30,24 +30,24 @@ namespace Boxed.AspNetCore.TagHelpers
         private const string IntegrityAttributeName = "integrity";
 
         private readonly IDistributedCache distributedCache;
-        private readonly IHostEnvironment hostEnvironment;
+        private readonly IWebHostEnvironment webHostEnvironment;
         private readonly IUrlHelper urlHelper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SubresourceIntegrityTagHelper"/> class.
         /// </summary>
         /// <param name="distributedCache">The distributed cache.</param>
-        /// <param name="hostEnvironment">The host environment.</param>
+        /// <param name="webHostEnvironment">The web host environment.</param>
         /// <param name="actionContextAccessor">The MVC action context accessor.</param>
         /// <param name="urlHelperFactory">The URL helper factory.</param>
         public SubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
-            IHostEnvironment hostEnvironment,
+            IWebHostEnvironment webHostEnvironment,
             IActionContextAccessor actionContextAccessor,
             IUrlHelperFactory urlHelperFactory)
         {
             this.distributedCache = distributedCache ?? throw new ArgumentNullException(nameof(distributedCache));
-            this.hostEnvironment = hostEnvironment ?? throw new ArgumentNullException(nameof(hostEnvironment));
+            this.webHostEnvironment = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
 
             if (actionContextAccessor == null)
             {
@@ -240,7 +240,7 @@ namespace Boxed.AspNetCore.TagHelpers
             SubresourceIntegrityHashAlgorithm hashAlgorithms)
         {
             var filePath = Path.Combine(
-                this.hostEnvironment.ContentRootPath,
+                this.webHostEnvironment.ContentRootPath,
                 this.urlHelper.Content(contentPath).TrimStart('/'));
             var bytes = this.ReadAllBytes(filePath);
             return GetSpaceDelimetedSri(bytes, hashAlgorithms);
