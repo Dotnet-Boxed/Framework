@@ -6,7 +6,7 @@ namespace Boxed.AspNetCore.Middleware
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
-    internal class HttpExceptionMiddleware
+    internal class HttpExceptionMiddleware : IMiddleware
     {
         private readonly RequestDelegate next;
         private readonly HttpExceptionMiddlewareOptions options;
@@ -17,7 +17,7 @@ namespace Boxed.AspNetCore.Middleware
             this.options = options;
         }
 
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try
             {
