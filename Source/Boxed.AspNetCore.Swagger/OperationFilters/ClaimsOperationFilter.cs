@@ -13,6 +13,16 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     /// <seealso cref="IOperationFilter" />
     public class ClaimsOperationFilter : IOperationFilter
     {
+        private const string OAuth2OpenApiReferenceId = "oauth2";
+        private static readonly OpenApiSecurityScheme OAuth2OpenApiSecurityScheme = new OpenApiSecurityScheme()
+        {
+            Reference = new OpenApiReference()
+            {
+                Id = OAuth2OpenApiReferenceId,
+                Type = ReferenceType.SecurityScheme,
+            },
+        };
+
         /// <inheritdoc/>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
@@ -30,15 +40,16 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
             var authorizationRequirements = filterDescriptors.GetPolicyRequirements();
             var claimTypes = authorizationRequirements
                 .OfType<ClaimsAuthorizationRequirement>()
-                .Select(x => x.ClaimType);
+                .Select(x => x.ClaimType)
+                .ToList();
             if (claimTypes.Any())
             {
                 operation.Security = new List<OpenApiSecurityRequirement>()
                 {
                     new OpenApiSecurityRequirement()
                     {
-                        // { new OpenApiSecurityScheme() { "oauth2" }, claimTypes }
-                    }
+                        { OAuth2OpenApiSecurityScheme, claimTypes },
+                    },
                 };
             }
         }

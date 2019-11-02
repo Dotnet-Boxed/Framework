@@ -10,7 +10,8 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     /// <summary>
     /// Adds a 403 Forbidden response to the Swagger response documentation when the authorization policy contains a
     /// <see cref="ClaimsAuthorizationRequirement"/>, <see cref="NameAuthorizationRequirement"/>,
-    /// <see cref="RolesAuthorizationRequirement"/> or <see cref="AssertionRequirement"/>.
+    /// <see cref="OperationAuthorizationRequirement"/>, <see cref="RolesAuthorizationRequirement"/> or
+    /// <see cref="AssertionRequirement"/>.
     /// </summary>
     /// <seealso cref="IOperationFilter" />
     public class ForbiddenResponseOperationFilter : IOperationFilter
@@ -50,6 +51,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
             {
                 if (authorizationRequirement is ClaimsAuthorizationRequirement ||
                     authorizationRequirement is NameAuthorizationRequirement ||
+                    authorizationRequirement is OperationAuthorizationRequirement ||
                     authorizationRequirement is RolesAuthorizationRequirement ||
                     authorizationRequirement is AssertionRequirement)
                 {
