@@ -19,11 +19,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
             Description = "Unauthorized - The user has not supplied the necessary credentials to access the resource."
         };
 
-        /// <summary>
-        /// Applies the specified operation.
-        /// </summary>
-        /// <param name="operation">The operation.</param>
-        /// <param name="context">The context.</param>
+        /// <inheritdoc/>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             if (operation == null)

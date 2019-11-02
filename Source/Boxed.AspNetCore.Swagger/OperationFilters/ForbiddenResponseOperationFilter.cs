@@ -21,11 +21,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
             Description = "Forbidden - The user does not have the necessary permissions to access the resource."
         };
 
-        /// <summary>
-        /// Applies the specified operation.
-        /// </summary>
-        /// <param name="operation">The operation.</param>
-        /// <param name="context">The context.</param>
+        /// <inheritdoc/>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             if (operation == null)

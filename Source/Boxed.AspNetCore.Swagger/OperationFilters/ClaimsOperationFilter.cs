@@ -13,11 +13,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     /// <seealso cref="IOperationFilter" />
     public class ClaimsOperationFilter : IOperationFilter
     {
-        /// <summary>
-        /// Applies the specified operation.
-        /// </summary>
-        /// <param name="operation">The operation.</param>
-        /// <param name="context">The context.</param>
+        /// <inheritdoc/>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             if (operation == null)
