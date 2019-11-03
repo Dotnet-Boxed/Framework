@@ -11,6 +11,41 @@ namespace Boxed.Mapping
     /// </summary>
     public static class AsyncMapperExtensions
     {
+#if NETSTANDARD2_1
+        /// <summary>
+        /// Maps the <see cref="IAsyncEnumerable{TSource}"/> into <see cref="IAsyncEnumerable{TDestination}"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source asynchronous enumerable.</param>
+        /// <returns>An <see cref="IAsyncEnumerable{TDestination}"/> collection.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async IAsyncEnumerable<TDestination> MapAsyncEnumerable<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> mapper,
+            IAsyncEnumerable<TSource> source)
+            where TDestination : new()
+        {
+            if (mapper == null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            await foreach (var sourceItem in source.ConfigureAwait(false))
+            {
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                await mapper.MapAsync(sourceItem, destinationItem).ConfigureAwait(false);
+                yield return destinationItem;
+            }
+        }
+#endif
+
         /// <summary>
         /// Maps the specified source object to a new object with a type of <typeparamref name="TDestination"/>.
         /// </summary>
