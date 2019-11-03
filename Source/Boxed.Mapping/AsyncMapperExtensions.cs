@@ -16,19 +16,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source object.</typeparam>
         /// <typeparam name="TDestination">The type of the destination object.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source object.</param>
         /// <returns>The mapped object of type <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator" /> or <paramref name="source" /> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper" /> or <paramref name="source" /> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination> MapAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             TSource source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -37,7 +37,7 @@ namespace Boxed.Mapping
             }
 
             var destination = Factory<TDestination>.CreateInstance();
-            await translator.MapAsync(source, destination).ConfigureAwait(false);
+            await mapper.MapAsync(source, destination).ConfigureAwait(false);
             return destination;
         }
 
@@ -48,24 +48,24 @@ namespace Boxed.Mapping
         /// <typeparam name="TSourceCollection">The type of the source collection.</typeparam>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source collection.</param>
         /// <param name="destination">The destination collection.</param>
         /// <param name="sourceCount">The number of items in the source collection.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination[]> MapArrayAsync<TSourceCollection, TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             TSourceCollection source,
             TDestination[] destination,
             int? sourceCount = null)
             where TSourceCollection : IEnumerable<TSource>
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -84,7 +84,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination[i] = destinationItem;
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
 
                 ++i;
             }
@@ -100,19 +100,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination[]> MapArrayAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             List<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -128,7 +128,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination[i] = destinationItem;
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -142,19 +142,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination[]> MapArrayAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -170,7 +170,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination[i] = destinationItem;
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -184,19 +184,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination[]> MapArrayAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             TSource[] source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -212,7 +212,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination[i] = destinationItem;
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -226,19 +226,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination[]> MapArrayAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -254,7 +254,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination[i] = destinationItem;
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
                 ++i;
             }
 
@@ -271,25 +271,25 @@ namespace Boxed.Mapping
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestinationCollection">The type of the destination collection.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source collection.</param>
         /// <param name="destination">The destination collection.</param>
         /// <returns>A collection of type <typeparamref name="TDestinationCollection"/> containing objects of type
         /// <typeparamref name="TDestination" />.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator" /> or <paramref name="source" /> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper" /> or <paramref name="source" /> is
         /// <c>null</c>.</exception>
         public static async Task<TDestinationCollection> MapCollectionAsync<TSourceCollection, TSource, TDestinationCollection, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             TSourceCollection source,
             TDestinationCollection destination)
             where TSourceCollection : IEnumerable<TSource>
             where TDestinationCollection : ICollection<TDestination>
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -309,7 +309,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Add(destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
                 ++i;
             }
 
@@ -324,19 +324,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<Collection<TDestination>> MapCollectionAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             List<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -352,7 +352,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -366,19 +366,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<Collection<TDestination>> MapCollectionAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -394,7 +394,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -408,19 +408,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<Collection<TDestination>> MapCollectionAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             TSource[] source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -436,7 +436,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -450,19 +450,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<Collection<TDestination>> MapCollectionAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -478,7 +478,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
                 ++i;
             }
 
@@ -493,19 +493,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<List<TDestination>> MapListAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             List<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -521,7 +521,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -535,19 +535,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<List<TDestination>> MapListAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -563,7 +563,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -577,19 +577,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<List<TDestination>> MapListAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             TSource[] source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -605,7 +605,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -619,19 +619,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<List<TDestination>> MapListAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -647,7 +647,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
                 ++i;
             }
 
@@ -662,19 +662,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<ObservableCollection<TDestination>> MapObservableCollectionAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             List<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -690,7 +690,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -704,19 +704,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<ObservableCollection<TDestination>> MapObservableCollectionAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -732,7 +732,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -746,19 +746,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<ObservableCollection<TDestination>> MapObservableCollectionAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             TSource[] source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -774,7 +774,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -788,19 +788,19 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<ObservableCollection<TDestination>> MapObservableCollectionAsync<TSource, TDestination>(
-            this IAsyncMapper<TSource, TDestination> translator,
+            this IAsyncMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper == null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
             if (source == null)
@@ -816,7 +816,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = translator.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
                 ++i;
             }
 
