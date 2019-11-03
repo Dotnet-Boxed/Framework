@@ -119,6 +119,8 @@ namespace Boxed.DotnetNewTest
             {
                 using (var process = new Process() { StartInfo = processStartInfo })
                 {
+                    process.Start();
+
                     var tasks = new List<Task>(3) { process.WaitForExitAsync(cancellationToken) };
                     if (outputTextWriter != null)
                     {
@@ -148,8 +150,6 @@ namespace Boxed.DotnetNewTest
 
                     try
                     {
-                        process.Start();
-
                         await Task.WhenAll(tasks).ConfigureAwait(false);
                     }
                     catch
