@@ -37,7 +37,7 @@ namespace Boxed.AspNetCore
         ///     var product = ProductRepository.Find(id);
         ///
         ///     // If a product with the specified ID was not found, return a 404 Not Found response.
-        ///     if (product == null)
+        ///     if (product is null)
         ///     {
         ///         return this.HttpNotFound();
         ///     }
@@ -61,7 +61,7 @@ namespace Boxed.AspNetCore
         /// </code>
         public static string GetFriendlyTitle(string title, bool remapToAscii = false, int maxlength = 80)
         {
-            if (title == null)
+            if (title is null)
             {
                 return string.Empty;
             }

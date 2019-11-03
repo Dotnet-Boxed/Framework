@@ -29,12 +29,12 @@ namespace Boxed.AspNetCore
             JsonSerializerOptions jsonSerializerOptions = null,
             CancellationToken cancellationToken = default)
         {
-            if (cache == null)
+            if (cache is null)
             {
                 throw new ArgumentNullException(nameof(cache));
             }
 
-            if (key == null)
+            if (key is null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -66,12 +66,12 @@ namespace Boxed.AspNetCore
             CancellationToken cancellationToken = default)
             where T : class
         {
-            if (cache == null)
+            if (cache is null)
             {
                 throw new ArgumentNullException(nameof(cache));
             }
 
-            if (key == null)
+            if (key is null)
             {
                 throw new ArgumentNullException(nameof(key));
             }

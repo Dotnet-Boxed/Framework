@@ -229,9 +229,9 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         {
             string namespaces;
 
-            if ((this.FacebookAdministrators == null) &&
-                (this.FacebookApplicationId == null) &&
-                (this.FacebookProfileId == null))
+            if ((this.FacebookAdministrators is null) &&
+                (this.FacebookApplicationId is null) &&
+                (this.FacebookProfileId is null))
             {
                 namespaces = OgNamespace + this.Namespace;
             }
@@ -251,12 +251,12 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (output == null)
+            if (output is null)
             {
                 throw new ArgumentNullException(nameof(output));
             }
@@ -289,7 +289,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="stringBuilder">The string builder.</param>
         public virtual void ToString(StringBuilder stringBuilder)
         {
-            if (stringBuilder == null)
+            if (stringBuilder is null)
             {
                 throw new ArgumentNullException(nameof(stringBuilder));
             }
@@ -304,7 +304,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 stringBuilder.AppendMetaPropertyContent("og:type", this.Type.ToLowercaseString());
             }
 
-            if (this.Url == null)
+            if (this.Url is null)
             {
                 this.Url = this.GetRequestUrl();
             }
@@ -367,12 +367,12 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// </summary>
         protected virtual void Validate()
         {
-            if (this.Title == null)
+            if (this.Title is null)
             {
                 throw new ValidationException(FormattableString.Invariant($"{nameof(this.Title)} cannot be null."));
             }
 
-            if (this.MainImage == null)
+            if (this.MainImage is null)
             {
                 throw new ValidationException(FormattableString.Invariant($"{nameof(this.MainImage)} cannot be null."));
             }

@@ -196,7 +196,7 @@ namespace Boxed.DotnetNewTest
             handler = new DataReceivedEventHandler(
                 (sender, e) =>
                 {
-                    if (e.Data == null)
+                    if (e.Data is null)
                     {
                         removeHandler(handler);
                         taskCompletionSource.TrySetResult(null);

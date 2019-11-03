@@ -27,7 +27,7 @@ namespace Boxed.DotnetNewTest
             IDictionary<string, string> arguments = null,
             TimeSpan? timeout = null)
         {
-            if (tempDirectory == null)
+            if (tempDirectory is null)
             {
                 throw new ArgumentNullException(nameof(tempDirectory));
             }

@@ -80,12 +80,12 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
         /// <inheritdoc/>
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
-            if (schema == null)
+            if (schema is null)
             {
                 throw new ArgumentNullException(nameof(schema));
             }
 
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }

@@ -141,7 +141,7 @@ namespace Boxed.DotnetNewTest
                     while (true)
                     {
                         var text = reader.ReadLine();
-                        if (text == null)
+                        if (text is null)
                         {
                             return;
                         }

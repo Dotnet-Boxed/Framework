@@ -24,7 +24,7 @@ namespace Boxed.AspNetCore
         /// <returns>The same application builder.</returns>
         public static IApplicationBuilder UseHttpException(this IApplicationBuilder application, Action<HttpExceptionMiddlewareOptions> configureOptions)
         {
-            if (application == null)
+            if (application is null)
             {
                 throw new ArgumentNullException(nameof(application));
             }
@@ -47,12 +47,12 @@ namespace Boxed.AspNetCore
             bool condition,
             Func<IApplicationBuilder, IApplicationBuilder> action)
         {
-            if (application == null)
+            if (application is null)
             {
                 throw new ArgumentNullException(nameof(application));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -84,17 +84,17 @@ namespace Boxed.AspNetCore
             Func<IApplicationBuilder, IApplicationBuilder> ifAction,
             Func<IApplicationBuilder, IApplicationBuilder> elseAction)
         {
-            if (application == null)
+            if (application is null)
             {
                 throw new ArgumentNullException(nameof(application));
             }
 
-            if (ifAction == null)
+            if (ifAction is null)
             {
                 throw new ArgumentNullException(nameof(ifAction));
             }
 
-            if (elseAction == null)
+            if (elseAction is null)
             {
                 throw new ArgumentNullException(nameof(elseAction));
             }

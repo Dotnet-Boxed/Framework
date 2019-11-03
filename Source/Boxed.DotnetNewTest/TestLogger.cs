@@ -22,7 +22,7 @@ namespace Boxed.DotnetNewTest
 
         internal static void Write(string message, ConsoleColor? color = null)
         {
-            if (WriteMessage == null)
+            if (WriteMessage is null)
             {
                 UseColor(() => DefaultWriteMessage(message), color);
             }

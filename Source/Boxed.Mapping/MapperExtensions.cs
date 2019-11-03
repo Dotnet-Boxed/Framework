@@ -31,12 +31,12 @@ namespace Boxed.Mapping
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -65,12 +65,12 @@ namespace Boxed.Mapping
             TSource source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -100,17 +100,17 @@ namespace Boxed.Mapping
             where TSourceCollection : IEnumerable<TSource>
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (sourceCollection == null)
+            if (sourceCollection is null)
             {
                 throw new ArgumentNullException(nameof(sourceCollection));
             }
 
-            if (destinationCollection == null)
+            if (destinationCollection is null)
             {
                 throw new ArgumentNullException(nameof(destinationCollection));
             }
@@ -143,12 +143,12 @@ namespace Boxed.Mapping
             List<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -181,12 +181,12 @@ namespace Boxed.Mapping
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -219,12 +219,12 @@ namespace Boxed.Mapping
             TSource[] source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -257,12 +257,12 @@ namespace Boxed.Mapping
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -304,12 +304,12 @@ namespace Boxed.Mapping
             where TDestinationCollection : ICollection<TDestination>
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (sourceCollection == null)
+            if (sourceCollection is null)
             {
                 throw new ArgumentNullException(nameof(sourceCollection));
             }
@@ -340,12 +340,12 @@ namespace Boxed.Mapping
             List<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -378,12 +378,12 @@ namespace Boxed.Mapping
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -416,12 +416,12 @@ namespace Boxed.Mapping
             TSource[] source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -454,12 +454,12 @@ namespace Boxed.Mapping
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -491,12 +491,12 @@ namespace Boxed.Mapping
             List<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -529,12 +529,12 @@ namespace Boxed.Mapping
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -567,12 +567,12 @@ namespace Boxed.Mapping
             TSource[] source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -605,12 +605,12 @@ namespace Boxed.Mapping
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -642,12 +642,12 @@ namespace Boxed.Mapping
             List<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -680,12 +680,12 @@ namespace Boxed.Mapping
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -718,12 +718,12 @@ namespace Boxed.Mapping
             TSource[] source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -756,12 +756,12 @@ namespace Boxed.Mapping
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }

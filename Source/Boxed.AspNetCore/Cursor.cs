@@ -58,12 +58,12 @@ namespace Boxed.AspNetCore
             IEnumerable<TItem> enumerable,
             Func<TItem, TCursor> getCursorProperty)
         {
-            if (getCursorProperty == null)
+            if (getCursorProperty is null)
             {
                 throw new ArgumentNullException(nameof(getCursorProperty));
             }
 
-            if (enumerable == null || !enumerable.Any())
+            if (enumerable is null || !enumerable.Any())
             {
                 return (null, null);
             }
@@ -83,7 +83,7 @@ namespace Boxed.AspNetCore
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is <c>null</c>.</exception>
         public static string ToCursor<T>(T value)
         {
-            if (value == null)
+            if (value is null)
             {
                 throw new ArgumentNullException(nameof(value));
             }

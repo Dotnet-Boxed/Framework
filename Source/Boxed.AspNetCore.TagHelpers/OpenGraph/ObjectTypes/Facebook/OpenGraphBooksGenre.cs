@@ -69,7 +69,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         {
             base.Validate();
 
-            if (this.CanonicalName == null)
+            if (this.CanonicalName is null)
             {
                 throw new ValidationException(FormattableString.Invariant($"{nameof(this.CanonicalName)} cannot be null."));
             }

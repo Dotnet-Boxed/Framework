@@ -28,12 +28,12 @@ namespace Boxed.AspNetCore
         /// <exception cref="System.ArgumentNullException">context or cacheProfile.</exception>
         public static HttpContext ApplyCacheProfile(this HttpContext context, CacheProfile cacheProfile)
         {
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (cacheProfile == null)
+            if (cacheProfile is null)
             {
                 throw new ArgumentNullException(nameof(cacheProfile));
             }

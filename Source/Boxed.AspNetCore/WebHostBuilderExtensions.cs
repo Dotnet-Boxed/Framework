@@ -21,12 +21,12 @@ namespace Boxed.AspNetCore
             bool condition,
             Func<IWebHostBuilder, IWebHostBuilder> action)
         {
-            if (webHostBuilder == null)
+            if (webHostBuilder is null)
             {
                 throw new ArgumentNullException(nameof(webHostBuilder));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -52,17 +52,17 @@ namespace Boxed.AspNetCore
             Func<IWebHostBuilder, bool> condition,
             Func<IWebHostBuilder, IWebHostBuilder> action)
         {
-            if (webHostBuilder == null)
+            if (webHostBuilder is null)
             {
                 throw new ArgumentNullException(nameof(webHostBuilder));
             }
 
-            if (condition == null)
+            if (condition is null)
             {
                 throw new ArgumentNullException(nameof(condition));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -92,17 +92,17 @@ namespace Boxed.AspNetCore
             Func<IWebHostBuilder, IWebHostBuilder> ifAction,
             Func<IWebHostBuilder, IWebHostBuilder> elseAction)
         {
-            if (webHostBuilder == null)
+            if (webHostBuilder is null)
             {
                 throw new ArgumentNullException(nameof(webHostBuilder));
             }
 
-            if (ifAction == null)
+            if (ifAction is null)
             {
                 throw new ArgumentNullException(nameof(ifAction));
             }
 
-            if (elseAction == null)
+            if (elseAction is null)
             {
                 throw new ArgumentNullException(nameof(elseAction));
             }
@@ -136,22 +136,22 @@ namespace Boxed.AspNetCore
             Func<IWebHostBuilder, IWebHostBuilder> ifAction,
             Func<IWebHostBuilder, IWebHostBuilder> elseAction)
         {
-            if (webHostBuilder == null)
+            if (webHostBuilder is null)
             {
                 throw new ArgumentNullException(nameof(webHostBuilder));
             }
 
-            if (condition == null)
+            if (condition is null)
             {
                 throw new ArgumentNullException(nameof(condition));
             }
 
-            if (ifAction == null)
+            if (ifAction is null)
             {
                 throw new ArgumentNullException(nameof(ifAction));
             }
 
-            if (elseAction == null)
+            if (elseAction is null)
             {
                 throw new ArgumentNullException(nameof(elseAction));
             }

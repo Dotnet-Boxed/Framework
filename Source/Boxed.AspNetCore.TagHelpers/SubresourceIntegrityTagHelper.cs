@@ -49,12 +49,12 @@ namespace Boxed.AspNetCore.TagHelpers
             this.distributedCache = distributedCache ?? throw new ArgumentNullException(nameof(distributedCache));
             this.webHostEnvironment = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
 
-            if (actionContextAccessor == null)
+            if (actionContextAccessor is null)
             {
                 throw new ArgumentNullException(nameof(actionContextAccessor));
             }
 
-            if (urlHelperFactory == null)
+            if (urlHelperFactory is null)
             {
                 throw new ArgumentNullException(nameof(urlHelperFactory));
             }
@@ -95,12 +95,12 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <returns>A task representing the operation.</returns>
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (output == null)
+            if (output is null)
             {
                 throw new ArgumentNullException(nameof(output));
             }
@@ -110,7 +110,7 @@ namespace Boxed.AspNetCore.TagHelpers
             if (!string.IsNullOrWhiteSpace(url) && !string.IsNullOrWhiteSpace(this.Source))
             {
                 var sri = await this.GetCachedSriAsync(url).ConfigureAwait(false);
-                if (sri == null)
+                if (sri is null)
                 {
                     sri = this.GetSubresourceIntegrityFromContentFile(this.Source, this.HashAlgorithms);
                     await this.SetCachedSriAsync(url, sri).ConfigureAwait(false);

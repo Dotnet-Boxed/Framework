@@ -28,7 +28,7 @@ namespace Boxed.AspNetCore
         /// <param name="options">The route options.</param>
         public RedirectToCanonicalUrlRule(IOptions<RouteOptions> options)
         {
-            if (options == null)
+            if (options is null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
@@ -70,7 +70,7 @@ namespace Boxed.AspNetCore
         /// <inheritdoc/>
         public void ApplyRule(RewriteContext context)
         {
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
@@ -92,7 +92,7 @@ namespace Boxed.AspNetCore
         /// <returns><c>true</c> if the URL is canonical, otherwise <c>false</c>.</returns>
         protected virtual bool TryGetCanonicalUrl(RewriteContext context, out Uri canonicalUrl)
         {
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
@@ -180,7 +180,7 @@ namespace Boxed.AspNetCore
         /// <param name="canonicalUrl">The canonical URL.</param>
         protected virtual void HandleNonCanonicalRequest(RewriteContext context, Uri canonicalUrl)
         {
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
@@ -206,7 +206,7 @@ namespace Boxed.AspNetCore
         protected virtual bool HasAttribute<T>(RewriteContext context)
             where T : class
         {
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }

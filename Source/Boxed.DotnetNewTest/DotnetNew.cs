@@ -29,18 +29,18 @@ namespace Boxed.DotnetNewTest
         /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
         public static Task InstallAsync(Assembly assembly, string fileName)
         {
-            if (assembly == null)
+            if (assembly is null)
             {
                 throw new ArgumentNullException(nameof(assembly));
             }
 
-            if (fileName == null)
+            if (fileName is null)
             {
                 throw new ArgumentNullException(nameof(fileName));
             }
 
             var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
-            if (projectFilePath == null)
+            if (projectFilePath is null)
             {
                 throw new FileNotFoundException($"{fileName} not found.");
             }
@@ -56,7 +56,7 @@ namespace Boxed.DotnetNewTest
         /// <returns>A task representing the operation.</returns>
         public static Task InstallAsync(string source, TimeSpan? timeout = null)
         {
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -93,7 +93,7 @@ namespace Boxed.DotnetNewTest
 
         private static bool IsInObjDirectory(DirectoryInfo directoryInfo)
         {
-            if (directoryInfo == null)
+            if (directoryInfo is null)
             {
                 return false;
             }
