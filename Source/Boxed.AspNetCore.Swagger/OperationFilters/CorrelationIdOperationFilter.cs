@@ -31,19 +31,25 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
                 operation.Parameters = new List<OpenApiParameter>();
             }
 
-            operation.Parameters.Add(
-                new OpenApiParameter()
-                {
-                    Description = "Used to uniquely identify the HTTP request. This ID is used to correlate the HTTP request between a client and server.",
-                    In = ParameterLocation.Header,
-                    Name = "X-Correlation-ID",
-                    Required = false,
-                    Schema = new OpenApiSchema()
-                    {
-                        Default = new OpenApiString(Guid.NewGuid().ToString()),
-                        Type = "string",
-                    },
-                });
+            operation.Parameters.Add(this.GetCorrelationIdParameter());
         }
+
+        /// <summary>
+        /// Gets the Open API parameter for the X-Correlation-ID HTTP header.
+        /// </summary>
+        /// <returns>The Open API parameter for the X-Correlation-ID HTTP header.</returns>
+        protected virtual OpenApiParameter GetCorrelationIdParameter() =>
+            new OpenApiParameter()
+            {
+                Description = "Used to uniquely identify the HTTP request. This ID is used to correlate the HTTP request between a client and server.",
+                In = ParameterLocation.Header,
+                Name = "X-Correlation-ID",
+                Required = false,
+                Schema = new OpenApiSchema()
+                {
+                    Default = new OpenApiString(Guid.NewGuid().ToString()),
+                    Type = "string",
+                },
+            };
     }
 }
