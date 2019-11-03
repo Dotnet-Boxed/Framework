@@ -4,6 +4,8 @@ namespace Boxed.Mapping
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -19,12 +21,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source asynchronous enumerable.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An <see cref="IAsyncEnumerable{TDestination}"/> collection.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async IAsyncEnumerable<TDestination> MapAsyncEnumerable<TSource, TDestination>(
             this IMapper<TSource, TDestination> mapper,
-            IAsyncEnumerable<TSource> source)
+            IAsyncEnumerable<TSource> source,
+            [EnumeratorCancellation] CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper == null)
@@ -37,7 +41,7 @@ namespace Boxed.Mapping
                 throw new ArgumentNullException(nameof(source));
             }
 
-            await foreach (var sourceItem in source.ConfigureAwait(false))
+            await foreach (var sourceItem in source.ConfigureAwait(false).WithCancellation(cancellationToken))
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 mapper.Map(sourceItem, destinationItem);
