@@ -29,7 +29,7 @@ namespace Boxed.AspNetCore.Test
             var actionCalled = false;
 
             this.applicationBuilder.UseIf(
-                context => condition,
+                condition,
                 application => application.Use(
                     (context, next) =>
                     {
@@ -51,7 +51,7 @@ namespace Boxed.AspNetCore.Test
             var elseActionCalled = false;
 
             this.applicationBuilder.UseIfElse(
-                context => condition,
+                condition,
                 application => application.Use(
                     (context, next) =>
                     {
