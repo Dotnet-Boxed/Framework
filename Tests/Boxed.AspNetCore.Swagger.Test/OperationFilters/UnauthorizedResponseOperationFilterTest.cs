@@ -8,8 +8,8 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
     using Microsoft.AspNetCore.Mvc.Abstractions;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.AspNetCore.Mvc.Authorization;
+    using Microsoft.OpenApi.Models;
     using Moq;
-    using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
     using Xunit;
     using FilterDescriptor = Microsoft.AspNetCore.Mvc.Filters.FilterDescriptor;
@@ -17,7 +17,7 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
     public class UnauthorizedResponseOperationFilterTest
     {
         private readonly ApiDescription apiDescription;
-        private readonly Operation operation;
+        private readonly OpenApiOperation operation;
         private readonly UnauthorizedResponseOperationFilter operationFilter;
         private readonly OperationFilterContext operationFilterContext;
 
@@ -30,14 +30,15 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
                     FilterDescriptors = new List<FilterDescriptor>()
                 }
             };
-            this.operation = new Operation()
+            this.operation = new OpenApiOperation()
             {
-                Responses = new Dictionary<string, Response>()
+                Responses = new OpenApiResponses(),
             };
             this.operationFilter = new UnauthorizedResponseOperationFilter();
             this.operationFilterContext = new OperationFilterContext(
                 this.apiDescription,
-                new Mock<ISchemaRegistry>().Object,
+                new Mock<ISchemaGenerator>().Object,
+                new SchemaRepository(),
                 this.GetType().GetMethods().First());
         }
 
@@ -66,11 +67,11 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
         [Fact]
         public void Apply_AlreadyHasForbiddenResponse_DoesNothing()
         {
-            var response = new Response();
+            var response = new OpenApiResponse();
             this.operation.Responses.Add("401", response);
             this.operationFilter.Apply(this.operation, this.operationFilterContext);
 
-            Assert.Equal(1, this.operation.Responses.Count);
+            Assert.Single(this.operation.Responses);
             Assert.Same(response, this.operation.Responses["401"]);
         }
     }

@@ -8,8 +8,8 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
     using Microsoft.AspNetCore.Mvc.Abstractions;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.AspNetCore.Mvc.Authorization;
+    using Microsoft.OpenApi.Models;
     using Moq;
-    using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
     using Xunit;
     using FilterDescriptor = Microsoft.AspNetCore.Mvc.Filters.FilterDescriptor;
@@ -17,7 +17,7 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
     public class ClaimsOperationFilterTest
     {
         private readonly ApiDescription apiDescription;
-        private readonly Operation operation;
+        private readonly OpenApiOperation operation;
         private readonly ClaimsOperationFilter operationFilter;
         private readonly OperationFilterContext operationFilterContext;
 
@@ -30,14 +30,15 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
                     FilterDescriptors = new List<FilterDescriptor>()
                 }
             };
-            this.operation = new Operation()
+            this.operation = new OpenApiOperation()
             {
-                Responses = new Dictionary<string, Response>()
+                Responses = new OpenApiResponses(),
             };
             this.operationFilter = new ClaimsOperationFilter();
             this.operationFilterContext = new OperationFilterContext(
                 this.apiDescription,
-                new Mock<ISchemaRegistry>().Object,
+                new Mock<ISchemaGenerator>().Object,
+                new SchemaRepository(),
                 this.GetType().GetMethods().First());
         }
 
@@ -54,8 +55,8 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
 
             Assert.NotNull(this.operation.Security);
             Assert.Equal(1, this.operation.Security.Count);
-            Assert.Equal(1, this.operation.Security.First().Count);
-            Assert.Equal("oauth2", this.operation.Security.First().First().Key);
+            Assert.Single(this.operation.Security.First());
+            Assert.Equal("oauth2", this.operation.Security.First().First().Key.Reference.Id);
             Assert.Equal(new string[] { "Type" }, this.operation.Security.First().First().Value);
         }
 
@@ -70,7 +71,7 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
 
             this.operationFilter.Apply(this.operation, this.operationFilterContext);
 
-            Assert.Null(this.operation.Security);
+            Assert.Empty(this.operation.Security);
         }
 
         [Fact]
@@ -78,7 +79,7 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
         {
             this.operationFilter.Apply(this.operation, this.operationFilterContext);
 
-            Assert.Null(this.operation.Security);
+            Assert.Empty(this.operation.Security);
         }
     }
 }
