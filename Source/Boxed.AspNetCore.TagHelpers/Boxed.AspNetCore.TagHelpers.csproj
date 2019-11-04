@@ -40,7 +40,7 @@
 
   <ItemGroup Label="Package References">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" Version="1.0.0-beta2-19367-01" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" Version="1.0.0-beta2-19554-01" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzer Package References">
