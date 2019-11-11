@@ -26,18 +26,15 @@ namespace Boxed.AspNetCore.TagHelpers
             IDistributedCache distributedCache,
             IWebHostEnvironment webHostEnvironment,
             IActionContextAccessor actionContextAccessor,
-            IUrlHelperFactory urlHelperFactory)
-            : base(distributedCache, webHostEnvironment, actionContextAccessor, urlHelperFactory)
+            IUrlHelperFactory urlHelperFactory,
+            HtmlEncoder htmlEncoder)
+            : base(distributedCache, webHostEnvironment, actionContextAccessor, urlHelperFactory, htmlEncoder)
         {
         }
 
         /// <inheritdoc />
         [HtmlAttributeName(SubresourceIntegrityHrefAttributeName)]
-        public override string Source
-        {
-            get;
-            set;
-        }
+        public override string Source { get; set; }
 
         /// <inheritdoc />
         protected override string UrlAttributeName => HrefAttributeName;

@@ -23,8 +23,8 @@ namespace Boxed.AspNetCore.TagHelpers.Test
         private readonly Mock<IActionContextAccessor> actionContextAccessor;
         private readonly Mock<IUrlHelperFactory> urlHelperFactoryMock;
         private readonly Mock<IUrlHelper> urlHelperMock;
-        private readonly SubresourceIntegrityTagHelper tagHelper;
         private readonly Mock<HtmlEncoder> htmlEncoderMock;
+        private readonly SubresourceIntegrityTagHelper tagHelper;
 
         public SubresourceIntegrityTagHelperTest()
         {
@@ -148,8 +148,9 @@ namespace Boxed.AspNetCore.TagHelpers.Test
                 IDistributedCache distributedCache,
                 IWebHostEnvironment webHostEnvironment,
                 IActionContextAccessor actionContextAccessor,
-                IUrlHelperFactory urlHelperFactory)
-                : base(distributedCache, webHostEnvironment, actionContextAccessor, urlHelperFactory)
+                IUrlHelperFactory urlHelperFactory,
+                HtmlEncoder htmlEncoder)
+                : base(distributedCache, webHostEnvironment, actionContextAccessor, urlHelperFactory, htmlEncoder)
             {
             }
 

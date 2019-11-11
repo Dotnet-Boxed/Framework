@@ -52,6 +52,7 @@ namespace Boxed.AspNetCore.TagHelpers
         {
             this.distributedCache = distributedCache ?? throw new ArgumentNullException(nameof(distributedCache));
             this.webHostEnvironment = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
+            this.htmlEncoder = htmlEncoder ?? throw new ArgumentNullException(nameof(htmlEncoder));
 
             if (actionContextAccessor is null)
             {
