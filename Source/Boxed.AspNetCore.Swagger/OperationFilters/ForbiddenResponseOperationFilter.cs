@@ -4,36 +4,33 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Authorization.Infrastructure;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
     /// Adds a 403 Forbidden response to the Swagger response documentation when the authorization policy contains a
     /// <see cref="ClaimsAuthorizationRequirement"/>, <see cref="NameAuthorizationRequirement"/>,
-    /// <see cref="RolesAuthorizationRequirement"/> or <see cref="AssertionRequirement"/>.
+    /// <see cref="OperationAuthorizationRequirement"/>, <see cref="RolesAuthorizationRequirement"/> or
+    /// <see cref="AssertionRequirement"/>.
     /// </summary>
     /// <seealso cref="IOperationFilter" />
     public class ForbiddenResponseOperationFilter : IOperationFilter
     {
         private const string ForbiddenStatusCode = "403";
-        private static readonly Response ForbiddenResponse = new Response()
+        private static readonly OpenApiResponse ForbiddenResponse = new OpenApiResponse()
         {
             Description = "Forbidden - The user does not have the necessary permissions to access the resource."
         };
 
-        /// <summary>
-        /// Applies the specified operation.
-        /// </summary>
-        /// <param name="operation">The operation.</param>
-        /// <param name="context">The context.</param>
-        public void Apply(Operation operation, OperationFilterContext context)
+        /// <inheritdoc/>
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            if (operation == null)
+            if (operation is null)
             {
                 throw new ArgumentNullException(nameof(operation));
             }
 
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
@@ -54,6 +51,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
             {
                 if (authorizationRequirement is ClaimsAuthorizationRequirement ||
                     authorizationRequirement is NameAuthorizationRequirement ||
+                    authorizationRequirement is OperationAuthorizationRequirement ||
                     authorizationRequirement is RolesAuthorizationRequirement ||
                     authorizationRequirement is AssertionRequirement)
                 {

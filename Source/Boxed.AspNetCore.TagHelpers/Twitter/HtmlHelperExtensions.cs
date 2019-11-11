@@ -17,12 +17,12 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// <returns>The Twitter card's HTML meta tags.</returns>
         public static HtmlString TwitterCard(this IHtmlHelper htmlHelper, TwitterCard twitterCard)
         {
-            if (htmlHelper == null)
+            if (htmlHelper is null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            if (twitterCard == null)
+            if (twitterCard is null)
             {
                 throw new ArgumentNullException(nameof(twitterCard));
             }

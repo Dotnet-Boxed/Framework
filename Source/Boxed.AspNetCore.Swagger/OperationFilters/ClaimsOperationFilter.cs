@@ -4,7 +4,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Authorization.Infrastructure;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
@@ -13,19 +13,25 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     /// <seealso cref="IOperationFilter" />
     public class ClaimsOperationFilter : IOperationFilter
     {
-        /// <summary>
-        /// Applies the specified operation.
-        /// </summary>
-        /// <param name="operation">The operation.</param>
-        /// <param name="context">The context.</param>
-        public void Apply(Operation operation, OperationFilterContext context)
+        private const string OAuth2OpenApiReferenceId = "oauth2";
+        private static readonly OpenApiSecurityScheme OAuth2OpenApiSecurityScheme = new OpenApiSecurityScheme()
         {
-            if (operation == null)
+            Reference = new OpenApiReference()
+            {
+                Id = OAuth2OpenApiReferenceId,
+                Type = ReferenceType.SecurityScheme,
+            },
+        };
+
+        /// <inheritdoc/>
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
+        {
+            if (operation is null)
             {
                 throw new ArgumentNullException(nameof(operation));
             }
 
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
@@ -34,15 +40,16 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
             var authorizationRequirements = filterDescriptors.GetPolicyRequirements();
             var claimTypes = authorizationRequirements
                 .OfType<ClaimsAuthorizationRequirement>()
-                .Select(x => x.ClaimType);
+                .Select(x => x.ClaimType)
+                .ToList();
             if (claimTypes.Any())
             {
-                operation.Security = new List<IDictionary<string, IEnumerable<string>>>()
+                operation.Security = new List<OpenApiSecurityRequirement>()
                 {
-                    new Dictionary<string, IEnumerable<string>>()
+                    new OpenApiSecurityRequirement()
                     {
-                        { "oauth2", claimTypes }
-                    }
+                        { OAuth2OpenApiSecurityScheme, claimTypes },
+                    },
                 };
             }
         }

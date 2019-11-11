@@ -7,12 +7,12 @@ namespace Boxed.Mapping.Benchmark.Mapping
     {
         public void Map(MapFrom source, MapTo destination)
         {
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (destination == null)
+            if (destination is null)
             {
                 throw new ArgumentNullException(nameof(destination));
             }

@@ -23,12 +23,12 @@
             bool condition,
             Func<IServiceCollection, IServiceCollection> action)
         {
-            if (services == null)
+            if (services is null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -58,17 +58,17 @@
             Func<IServiceCollection, IServiceCollection> ifAction,
             Func<IServiceCollection, IServiceCollection> elseAction)
         {
-            if (services == null)
+            if (services is null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
 
-            if (ifAction == null)
+            if (ifAction is null)
             {
                 throw new ArgumentNullException(nameof(ifAction));
             }
 
-            if (elseAction == null)
+            if (elseAction is null)
             {
                 throw new ArgumentNullException(nameof(elseAction));
             }
@@ -97,12 +97,12 @@
             IConfiguration configuration)
             where TOptions : class, new()
         {
-            if (services == null)
+            if (services is null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
 
-            if (configuration == null)
+            if (configuration is null)
             {
                 throw new ArgumentNullException(nameof(configuration));
             }
@@ -125,12 +125,12 @@
             IConfiguration configuration)
             where TOptions : class, new()
         {
-            if (services == null)
+            if (services is null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
 
-            if (configuration == null)
+            if (configuration is null)
             {
                 throw new ArgumentNullException(nameof(configuration));
             }
@@ -157,17 +157,17 @@
             Func<TOptions, bool> validation)
             where TOptions : class, new()
         {
-            if (services == null)
+            if (services is null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
 
-            if (configuration == null)
+            if (configuration is null)
             {
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            if (validation == null)
+            if (validation is null)
             {
                 throw new ArgumentNullException(nameof(validation));
             }
@@ -197,22 +197,22 @@
             string failureMessage)
             where TOptions : class, new()
         {
-            if (services == null)
+            if (services is null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
 
-            if (configuration == null)
+            if (configuration is null)
             {
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            if (validation == null)
+            if (validation is null)
             {
                 throw new ArgumentNullException(nameof(validation));
             }
 
-            if (failureMessage == null)
+            if (failureMessage is null)
             {
                 throw new ArgumentNullException(nameof(failureMessage));
             }

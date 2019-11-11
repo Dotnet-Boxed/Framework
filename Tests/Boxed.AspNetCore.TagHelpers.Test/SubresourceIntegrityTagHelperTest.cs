@@ -19,17 +19,17 @@ namespace Boxed.AspNetCore.TagHelpers.Test
     public class SubresourceIntegrityTagHelperTest
     {
         private readonly Mock<IDistributedCache> distributedCacheMock;
-        private readonly Mock<IHostingEnvironment> hostingEnvironmentMock;
+        private readonly Mock<IWebHostEnvironment> webHostEnvironmentMock;
         private readonly Mock<IActionContextAccessor> actionContextAccessor;
         private readonly Mock<IUrlHelperFactory> urlHelperFactoryMock;
         private readonly Mock<IUrlHelper> urlHelperMock;
-        private readonly SubresourceIntegrityTagHelper tagHelper;
         private readonly Mock<HtmlEncoder> htmlEncoderMock;
+        private readonly SubresourceIntegrityTagHelper tagHelper;
 
         public SubresourceIntegrityTagHelperTest()
         {
             this.distributedCacheMock = new Mock<IDistributedCache>(MockBehavior.Strict);
-            this.hostingEnvironmentMock = new Mock<IHostingEnvironment>(MockBehavior.Strict);
+            this.webHostEnvironmentMock = new Mock<IWebHostEnvironment>(MockBehavior.Strict);
             this.actionContextAccessor = new Mock<IActionContextAccessor>(MockBehavior.Strict);
             this.urlHelperFactoryMock = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
             this.urlHelperMock = new Mock<IUrlHelper>(MockBehavior.Strict);
@@ -41,7 +41,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
 
             this.tagHelper = new TestSubresourceIntegrityTagHelper(
                 this.distributedCacheMock.Object,
-                this.hostingEnvironmentMock.Object,
+                this.webHostEnvironmentMock.Object,
                 this.actionContextAccessor.Object,
                 this.urlHelperFactoryMock.Object,
                 this.htmlEncoderMock.Object);
@@ -84,7 +84,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             this.distributedCacheMock
                 .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
                 .ReturnsAsync((byte[])null);
-            this.hostingEnvironmentMock.SetupGet(x => x.WebRootPath).Returns(@"C:\Foo\wwwroot");
+            this.webHostEnvironmentMock.SetupGet(x => x.ContentRootPath).Returns(@"C:\Foo\wwwroot");
             this.urlHelperMock.Setup(x => x.Content("/foo.js")).Returns(@"C:\Foo\wwwroot\foo.js");
             this.distributedCacheMock
                 .Setup(x => x.SetAsync(
@@ -123,7 +123,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             this.distributedCacheMock
                 .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
                 .ReturnsAsync((byte[])null);
-            this.hostingEnvironmentMock.SetupGet(x => x.WebRootPath).Returns(@"C:\Foo\wwwroot");
+            this.webHostEnvironmentMock.SetupGet(x => x.ContentRootPath).Returns(@"C:\Foo\wwwroot");
             this.urlHelperMock.Setup(x => x.Content("/foo.js")).Returns(@"C:\Foo\wwwroot\foo.js");
             this.distributedCacheMock
                 .Setup(x => x.SetAsync(
@@ -146,11 +146,11 @@ namespace Boxed.AspNetCore.TagHelpers.Test
         {
             public TestSubresourceIntegrityTagHelper(
                 IDistributedCache distributedCache,
-                IHostingEnvironment hostingEnvironment,
+                IWebHostEnvironment webHostEnvironment,
                 IActionContextAccessor actionContextAccessor,
                 IUrlHelperFactory urlHelperFactory,
                 HtmlEncoder htmlEncoder)
-                : base(distributedCache, hostingEnvironment, actionContextAccessor, urlHelperFactory, htmlEncoder)
+                : base(distributedCache, webHostEnvironment, actionContextAccessor, urlHelperFactory, htmlEncoder)
             {
             }
 

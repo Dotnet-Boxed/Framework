@@ -22,7 +22,7 @@ namespace Boxed.DotnetNewTest
                 .OrderByDescending(x => string.Equals(x.Name, @"D:\", StringComparison.Ordinal))
                 .FirstOrDefault()
                 ?.Name;
-            if (drivePath == null)
+            if (drivePath is null)
             {
                 return Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
             }

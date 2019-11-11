@@ -9,12 +9,12 @@ namespace Boxed.DotnetNewTest
     {
         public static void Copy(string sourceDirectoryPath, string destinationDirectoryPath)
         {
-            if (sourceDirectoryPath == null)
+            if (sourceDirectoryPath is null)
             {
                 throw new ArgumentNullException(nameof(sourceDirectoryPath));
             }
 
-            if (destinationDirectoryPath == null)
+            if (destinationDirectoryPath is null)
             {
                 throw new ArgumentNullException(nameof(destinationDirectoryPath));
             }
@@ -28,7 +28,8 @@ namespace Boxed.DotnetNewTest
             {
                 var destinationSubDirectoryPath = sourceSubDirectoryPath.Replace(
                     sourceDirectoryPath,
-                    destinationDirectoryPath);
+                    destinationDirectoryPath,
+                    StringComparison.Ordinal);
                 CheckCreate(destinationSubDirectoryPath);
             }
 
@@ -37,14 +38,17 @@ namespace Boxed.DotnetNewTest
                 "*.*",
                 SearchOption.AllDirectories))
             {
-                var destinationFilePath = sourceFilePath.Replace(sourceDirectoryPath, destinationDirectoryPath);
+                var destinationFilePath = sourceFilePath.Replace(
+                    sourceDirectoryPath,
+                    destinationDirectoryPath,
+                    StringComparison.Ordinal);
                 new FileInfo(sourceFilePath).CopyTo(destinationFilePath, true);
             }
         }
 
         public static void CheckCreate(string directoryPath)
         {
-            if (directoryPath == null)
+            if (directoryPath is null)
             {
                 throw new ArgumentNullException(nameof(directoryPath));
             }
@@ -67,7 +71,7 @@ namespace Boxed.DotnetNewTest
            int maxRetries = 10,
            int millisecondsDelay = 30)
         {
-            if (directoryPath == null)
+            if (directoryPath is null)
             {
                 throw new ArgumentNullException(directoryPath);
             }

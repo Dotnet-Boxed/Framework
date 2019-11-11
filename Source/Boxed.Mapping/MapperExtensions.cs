@@ -4,39 +4,79 @@ namespace Boxed.Mapping
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// <see cref="IMapper{TSource, TDestination}"/> extension methods.
     /// </summary>
     public static class MapperExtensions
     {
+#if NETSTANDARD2_1
+        /// <summary>
+        /// Maps the <see cref="IAsyncEnumerable{TSource}"/> into <see cref="IAsyncEnumerable{TDestination}"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source asynchronous enumerable.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>An <see cref="IAsyncEnumerable{TDestination}"/> collection.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async IAsyncEnumerable<TDestination> MapAsyncEnumerable<TSource, TDestination>(
+            this IMapper<TSource, TDestination> mapper,
+            IAsyncEnumerable<TSource> source,
+            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            where TDestination : new()
+        {
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            await foreach (var sourceItem in source.ConfigureAwait(false).WithCancellation(cancellationToken))
+            {
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                mapper.Map(sourceItem, destinationItem);
+                yield return destinationItem;
+            }
+        }
+#endif
+
         /// <summary>
         /// Maps the specified source object to a new object with a type of <typeparamref name="TDestination"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source object.</typeparam>
         /// <typeparam name="TDestination">The type of the destination object.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source object.</param>
         /// <returns>The mapped object of type <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator" /> or <paramref name="source" /> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper" /> or <paramref name="source" /> is
         /// <c>null</c>.</exception>
         public static TDestination Map<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             TSource source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
             var destination = Factory<TDestination>.CreateInstance();
-            translator.Map(source, destination);
+            mapper.Map(source, destination);
             return destination;
         }
 
@@ -47,30 +87,30 @@ namespace Boxed.Mapping
         /// <typeparam name="TSourceCollection">The type of the source collection.</typeparam>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="sourceCollection">The source collection.</param>
         /// <param name="destinationCollection">The destination collection.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="sourceCollection"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="sourceCollection"/> is
         /// <c>null</c>.</exception>
         public static TDestination[] MapArray<TSourceCollection, TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             TSourceCollection sourceCollection,
             TDestination[] destinationCollection)
             where TSourceCollection : IEnumerable<TSource>
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (sourceCollection == null)
+            if (sourceCollection is null)
             {
                 throw new ArgumentNullException(nameof(sourceCollection));
             }
 
-            if (destinationCollection == null)
+            if (destinationCollection is null)
             {
                 throw new ArgumentNullException(nameof(destinationCollection));
             }
@@ -79,7 +119,7 @@ namespace Boxed.Mapping
             foreach (var item in sourceCollection)
             {
                 var destination = Factory<TDestination>.CreateInstance();
-                translator.Map(item, destination);
+                mapper.Map(item, destination);
                 destinationCollection[i] = destination;
                 ++i;
             }
@@ -93,22 +133,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static TDestination[] MapArray<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             List<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -118,7 +158,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination[i] = destinationItem;
             }
 
@@ -131,22 +171,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static TDestination[] MapArray<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -156,7 +196,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination[i] = destinationItem;
             }
 
@@ -169,22 +209,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static TDestination[] MapArray<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             TSource[] source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -194,7 +234,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination[i] = destinationItem;
             }
 
@@ -207,22 +247,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static TDestination[] MapArray<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -232,7 +272,7 @@ namespace Boxed.Mapping
             foreach (var sourceItem in source)
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination[i] = destinationItem;
                 ++i;
             }
@@ -248,28 +288,28 @@ namespace Boxed.Mapping
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestinationCollection">The type of the destination collection.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="sourceCollection">The source collection.</param>
         /// <param name="destinationCollection">The destination collection.</param>
         /// <returns>A collection of type <typeparamref name="TDestinationCollection"/> containing objects of type
         /// <typeparamref name="TDestination" />.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator" /> or <paramref name="sourceCollection" /> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper" /> or <paramref name="sourceCollection" /> is
         /// <c>null</c>.</exception>
         public static TDestinationCollection MapCollection<TSourceCollection, TSource, TDestinationCollection, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             TSourceCollection sourceCollection,
             TDestinationCollection destinationCollection)
             where TSourceCollection : IEnumerable<TSource>
             where TDestinationCollection : ICollection<TDestination>
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (sourceCollection == null)
+            if (sourceCollection is null)
             {
                 throw new ArgumentNullException(nameof(sourceCollection));
             }
@@ -277,7 +317,7 @@ namespace Boxed.Mapping
             foreach (var item in sourceCollection)
             {
                 var destination = Factory<TDestination>.CreateInstance();
-                translator.Map(item, destination);
+                mapper.Map(item, destination);
                 destinationCollection.Add(destination);
             }
 
@@ -290,22 +330,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static Collection<TDestination> MapCollection<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             List<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -315,7 +355,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Insert(i, destinationItem);
             }
 
@@ -328,22 +368,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static Collection<TDestination> MapCollection<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -353,7 +393,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Insert(i, destinationItem);
             }
 
@@ -366,22 +406,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static Collection<TDestination> MapCollection<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             TSource[] source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -391,7 +431,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Insert(i, destinationItem);
             }
 
@@ -404,22 +444,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static Collection<TDestination> MapCollection<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -428,7 +468,7 @@ namespace Boxed.Mapping
             foreach (var sourceItem in source)
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Add(destinationItem);
             }
 
@@ -441,22 +481,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static List<TDestination> MapList<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             List<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -466,7 +506,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Insert(i, destinationItem);
             }
 
@@ -479,22 +519,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static List<TDestination> MapList<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -504,7 +544,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Insert(i, destinationItem);
             }
 
@@ -517,22 +557,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static List<TDestination> MapList<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             TSource[] source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -542,7 +582,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Insert(i, destinationItem);
             }
 
@@ -555,22 +595,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static List<TDestination> MapList<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -579,7 +619,7 @@ namespace Boxed.Mapping
             foreach (var sourceItem in source)
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Add(destinationItem);
             }
 
@@ -592,22 +632,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             List<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -617,7 +657,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Insert(i, destinationItem);
             }
 
@@ -630,22 +670,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -655,7 +695,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Insert(i, destinationItem);
             }
 
@@ -668,22 +708,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             TSource[] source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -693,7 +733,7 @@ namespace Boxed.Mapping
             {
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Insert(i, destinationItem);
             }
 
@@ -706,22 +746,22 @@ namespace Boxed.Mapping
         /// </summary>
         /// <typeparam name="TSource">The type of the source objects.</typeparam>
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
-        /// <param name="translator">The translator.</param>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="translator"/> or <paramref name="source"/> is
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
-            this IMapper<TSource, TDestination> translator,
+            this IMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
             where TDestination : new()
         {
-            if (translator == null)
+            if (mapper is null)
             {
-                throw new ArgumentNullException(nameof(translator));
+                throw new ArgumentNullException(nameof(mapper));
             }
 
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -730,7 +770,7 @@ namespace Boxed.Mapping
             foreach (var sourceItem in source)
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                translator.Map(sourceItem, destinationItem);
+                mapper.Map(sourceItem, destinationItem);
                 destination.Add(destinationItem);
             }
 

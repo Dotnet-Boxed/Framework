@@ -68,7 +68,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
-            if (stringBuilder == null)
+            if (stringBuilder is null)
             {
                 throw new ArgumentNullException(nameof(stringBuilder));
             }
@@ -100,7 +100,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
                     $"{nameof(this.SiteUsername)} cannot be null or empty."));
             }
 
-            if (this.Image == null)
+            if (this.Image is null)
             {
                 throw new ValidationException(FormattableString.Invariant($"{nameof(this.Image)} cannot be null."));
             }
@@ -111,7 +111,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
             }
 
             // TODO: Add Check for Image.Alt if this.Player.StreamUrl is provided
-            if (this.Player == null)
+            if (this.Player is null)
             {
                 throw new ValidationException(FormattableString.Invariant($"{nameof(this.Player)} cannot be null."));
             }

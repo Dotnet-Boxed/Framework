@@ -1,3 +1,4 @@
+#if NETCOREAPP3_0
 namespace Boxed.DotnetNewTest
 {
     using System;
@@ -65,3 +66,4 @@ namespace Boxed.DotnetNewTest
         }
     }
 }
+#endif

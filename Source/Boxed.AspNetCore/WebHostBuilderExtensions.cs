@@ -10,162 +10,162 @@ namespace Boxed.AspNetCore
     {
         /// <summary>
         /// Executes the specified action if the specified <paramref name="condition"/> is <c>true</c> which can be
-        /// used to conditionally add to the host builder.
+        /// used to conditionally add to the web host builder.
         /// </summary>
-        /// <param name="hostBuilder">The host builder.</param>
+        /// <param name="webHostBuilder">The web host builder.</param>
         /// <param name="condition">If set to <c>true</c> the action is executed.</param>
-        /// <param name="action">The action used to add to the host builder.</param>
-        /// <returns>The same host builder.</returns>
+        /// <param name="action">The action used to add to the web host builder.</param>
+        /// <returns>The same web host builder.</returns>
         public static IWebHostBuilder UseIf(
-            this IWebHostBuilder hostBuilder,
+            this IWebHostBuilder webHostBuilder,
             bool condition,
             Func<IWebHostBuilder, IWebHostBuilder> action)
         {
-            if (hostBuilder == null)
+            if (webHostBuilder is null)
             {
-                throw new ArgumentNullException(nameof(hostBuilder));
+                throw new ArgumentNullException(nameof(webHostBuilder));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
 
             if (condition)
             {
-                hostBuilder = action(hostBuilder);
+                webHostBuilder = action(webHostBuilder);
             }
 
-            return hostBuilder;
+            return webHostBuilder;
         }
 
         /// <summary>
         /// Executes the specified action if the specified <paramref name="condition"/> is <c>true</c> which can be
-        /// used to conditionally add to the host builder.
+        /// used to conditionally add to the web host builder.
         /// </summary>
-        /// <param name="hostBuilder">The host builder.</param>
+        /// <param name="webHostBuilder">The web host builder.</param>
         /// <param name="condition">If <c>true</c> is returned the action is executed.</param>
-        /// <param name="action">The action used to add to the host builder.</param>
-        /// <returns>The same host builder.</returns>
+        /// <param name="action">The action used to add to the web host builder.</param>
+        /// <returns>The same web host builder.</returns>
         public static IWebHostBuilder UseIf(
-            this IWebHostBuilder hostBuilder,
+            this IWebHostBuilder webHostBuilder,
             Func<IWebHostBuilder, bool> condition,
             Func<IWebHostBuilder, IWebHostBuilder> action)
         {
-            if (hostBuilder == null)
+            if (webHostBuilder is null)
             {
-                throw new ArgumentNullException(nameof(hostBuilder));
+                throw new ArgumentNullException(nameof(webHostBuilder));
             }
 
-            if (condition == null)
+            if (condition is null)
             {
                 throw new ArgumentNullException(nameof(condition));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
 
-            if (condition(hostBuilder))
+            if (condition(webHostBuilder))
             {
-                hostBuilder = action(hostBuilder);
+                webHostBuilder = action(webHostBuilder);
             }
 
-            return hostBuilder;
+            return webHostBuilder;
         }
 
         /// <summary>
         /// Executes the specified <paramref name="ifAction"/> if the specified <paramref name="condition"/> is
         /// <c>true</c>, otherwise executes the <paramref name="elseAction"/>. This can be used to conditionally add to
-        /// the host builder.
+        /// the web host builder.
         /// </summary>
-        /// <param name="hostBuilder">The host builder.</param>
+        /// <param name="webHostBuilder">The web host builder.</param>
         /// <param name="condition">If set to <c>true</c> the <paramref name="ifAction"/> is executed, otherwise the
         /// <paramref name="elseAction"/> is executed.</param>
-        /// <param name="ifAction">The action used to add to the host builder if the condition is <c>true</c>.</param>
-        /// <param name="elseAction">The action used to add to the host builder if the condition is <c>false</c>.</param>
-        /// <returns>The same host builder.</returns>
+        /// <param name="ifAction">The action used to add to the web host builder if the condition is <c>true</c>.</param>
+        /// <param name="elseAction">The action used to add to the web host builder if the condition is <c>false</c>.</param>
+        /// <returns>The same web host builder.</returns>
         public static IWebHostBuilder UseIfElse(
-            this IWebHostBuilder hostBuilder,
+            this IWebHostBuilder webHostBuilder,
             bool condition,
             Func<IWebHostBuilder, IWebHostBuilder> ifAction,
             Func<IWebHostBuilder, IWebHostBuilder> elseAction)
         {
-            if (hostBuilder == null)
+            if (webHostBuilder is null)
             {
-                throw new ArgumentNullException(nameof(hostBuilder));
+                throw new ArgumentNullException(nameof(webHostBuilder));
             }
 
-            if (ifAction == null)
+            if (ifAction is null)
             {
                 throw new ArgumentNullException(nameof(ifAction));
             }
 
-            if (elseAction == null)
+            if (elseAction is null)
             {
                 throw new ArgumentNullException(nameof(elseAction));
             }
 
             if (condition)
             {
-                hostBuilder = ifAction(hostBuilder);
+                webHostBuilder = ifAction(webHostBuilder);
             }
             else
             {
-                hostBuilder = elseAction(hostBuilder);
+                webHostBuilder = elseAction(webHostBuilder);
             }
 
-            return hostBuilder;
+            return webHostBuilder;
         }
 
         /// <summary>
         /// Executes the specified <paramref name="ifAction"/> if the specified <paramref name="condition"/> is
         /// <c>true</c>, otherwise executes the <paramref name="elseAction"/>. This can be used to conditionally add to
-        /// the host builder.
+        /// the web host builder.
         /// </summary>
-        /// <param name="hostBuilder">The host builder.</param>
+        /// <param name="webHostBuilder">The web host builder.</param>
         /// <param name="condition">If <c>true</c> is returned the <paramref name="ifAction"/> is executed, otherwise the
         /// <paramref name="elseAction"/> is executed.</param>
-        /// <param name="ifAction">The action used to add to the host builder if the condition is <c>true</c>.</param>
-        /// <param name="elseAction">The action used to add to the host builder if the condition is <c>false</c>.</param>
-        /// <returns>The same host builder.</returns>
+        /// <param name="ifAction">The action used to add to the web host builder if the condition is <c>true</c>.</param>
+        /// <param name="elseAction">The action used to add to the web host builder if the condition is <c>false</c>.</param>
+        /// <returns>The same web host builder.</returns>
         public static IWebHostBuilder UseIfElse(
-            this IWebHostBuilder hostBuilder,
+            this IWebHostBuilder webHostBuilder,
             Func<IWebHostBuilder, bool> condition,
             Func<IWebHostBuilder, IWebHostBuilder> ifAction,
             Func<IWebHostBuilder, IWebHostBuilder> elseAction)
         {
-            if (hostBuilder == null)
+            if (webHostBuilder is null)
             {
-                throw new ArgumentNullException(nameof(hostBuilder));
+                throw new ArgumentNullException(nameof(webHostBuilder));
             }
 
-            if (condition == null)
+            if (condition is null)
             {
                 throw new ArgumentNullException(nameof(condition));
             }
 
-            if (ifAction == null)
+            if (ifAction is null)
             {
                 throw new ArgumentNullException(nameof(ifAction));
             }
 
-            if (elseAction == null)
+            if (elseAction is null)
             {
                 throw new ArgumentNullException(nameof(elseAction));
             }
 
-            if (condition(hostBuilder))
+            if (condition(webHostBuilder))
             {
-                hostBuilder = ifAction(hostBuilder);
+                webHostBuilder = ifAction(webHostBuilder);
             }
             else
             {
-                hostBuilder = elseAction(hostBuilder);
+                webHostBuilder = elseAction(webHostBuilder);
             }
 
-            return hostBuilder;
+            return webHostBuilder;
         }
     }
 }

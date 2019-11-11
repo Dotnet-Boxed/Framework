@@ -3,6 +3,8 @@ namespace Boxed.Mapping.Test
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Xunit;
 
     public class MapperTest
@@ -175,6 +177,26 @@ namespace Boxed.Mapping.Test
             Assert.Equal(2, to.Count);
             Assert.Equal(1, to[0].Property);
             Assert.Equal(2, to[1].Property);
+        }
+
+        [Fact]
+        public async Task MapAsyncEnumerable_ToNewObject_MappedAsync()
+        {
+            var mapper = new Mapper();
+            var source = new TestAsyncEnumerable<MapFrom>(
+                new MapFrom[]
+                {
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 }
+                });
+
+            var to = mapper.MapAsyncEnumerable(source);
+
+            var list = await to.ToListAsync().ConfigureAwait(false);
+            Assert.IsType<List<MapTo>>(list);
+            Assert.Equal(2, list.Count);
+            Assert.Equal(1, list[0].Property);
+            Assert.Equal(2, list[1].Property);
         }
     }
 }

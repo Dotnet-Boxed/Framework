@@ -5,9 +5,6 @@ namespace Boxed.AspNetCore
     using System.Globalization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using Microsoft.AspNetCore.Mvc.Routing;
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Net.Http.Headers;
 
     /// <summary>
@@ -31,12 +28,12 @@ namespace Boxed.AspNetCore
         /// <exception cref="System.ArgumentNullException">context or cacheProfile.</exception>
         public static HttpContext ApplyCacheProfile(this HttpContext context, CacheProfile cacheProfile)
         {
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (cacheProfile == null)
+            if (cacheProfile is null)
             {
                 throw new ArgumentNullException(nameof(cacheProfile));
             }
@@ -87,29 +84,6 @@ namespace Boxed.AspNetCore
             }
 
             return context;
-        }
-
-        /// <summary>
-        /// Gets an <see cref="IUrlHelper"/> instance. Uses <see cref="IUrlHelperFactory"/> and
-        /// <see cref="IActionContextAccessor"/>.
-        /// </summary>
-        /// <param name="httpContext">The HTTP context.</param>
-        /// <returns>An <see cref="IUrlHelper"/> instance for the current request.</returns>
-        public static IUrlHelper GetUrlHelper(this HttpContext httpContext)
-        {
-            if (httpContext == null)
-            {
-                throw new ArgumentNullException(nameof(httpContext));
-            }
-
-            var services = httpContext.RequestServices;
-            var actionContext = services
-                .GetRequiredService<IActionContextAccessor>()
-                .ActionContext;
-            var urlHelper = services
-                .GetRequiredService<IUrlHelperFactory>()
-                .GetUrlHelper(actionContext);
-            return urlHelper;
         }
     }
 }

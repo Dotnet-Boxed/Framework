@@ -8,8 +8,8 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
     using Microsoft.AspNetCore.Mvc.Abstractions;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.AspNetCore.Mvc.Authorization;
+    using Microsoft.OpenApi.Models;
     using Moq;
-    using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
     using Xunit;
     using FilterDescriptor = Microsoft.AspNetCore.Mvc.Filters.FilterDescriptor;
@@ -17,28 +17,29 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
     public class ClaimsOperationFilterTest
     {
         private readonly ApiDescription apiDescription;
-        private readonly Operation operation;
+        private readonly OpenApiOperation operation;
+        private readonly OperationFilterContext context;
         private readonly ClaimsOperationFilter operationFilter;
-        private readonly OperationFilterContext operationFilterContext;
 
         public ClaimsOperationFilterTest()
         {
+            this.operation = new OpenApiOperation()
+            {
+                Responses = new OpenApiResponses(),
+            };
             this.apiDescription = new ApiDescription()
             {
                 ActionDescriptor = new ActionDescriptor()
                 {
                     FilterDescriptors = new List<FilterDescriptor>()
-                }
+                },
             };
-            this.operation = new Operation()
-            {
-                Responses = new Dictionary<string, Response>()
-            };
-            this.operationFilter = new ClaimsOperationFilter();
-            this.operationFilterContext = new OperationFilterContext(
+            this.context = new OperationFilterContext(
                 this.apiDescription,
-                new Mock<ISchemaRegistry>().Object,
+                new Mock<ISchemaGenerator>().Object,
+                new SchemaRepository(),
                 this.GetType().GetMethods().First());
+            this.operationFilter = new ClaimsOperationFilter();
         }
 
         [Fact]
@@ -48,14 +49,14 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
             var requirements = new List<IAuthorizationRequirement>() { requirement };
             var policy = new AuthorizationPolicy(requirements, new List<string>());
             var filterDescriptor = new FilterDescriptor(new AuthorizeFilter(policy), 30);
-            this.operationFilterContext.ApiDescription.ActionDescriptor.FilterDescriptors.Add(filterDescriptor);
+            this.context.ApiDescription.ActionDescriptor.FilterDescriptors.Add(filterDescriptor);
 
-            this.operationFilter.Apply(this.operation, this.operationFilterContext);
+            this.operationFilter.Apply(this.operation, this.context);
 
             Assert.NotNull(this.operation.Security);
             Assert.Equal(1, this.operation.Security.Count);
-            Assert.Equal(1, this.operation.Security.First().Count);
-            Assert.Equal("oauth2", this.operation.Security.First().First().Key);
+            Assert.Single(this.operation.Security.First());
+            Assert.Equal("oauth2", this.operation.Security.First().First().Key.Reference.Id);
             Assert.Equal(new string[] { "Type" }, this.operation.Security.First().First().Value);
         }
 
@@ -66,19 +67,19 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
             var requirements = new List<IAuthorizationRequirement>() { requirement };
             var policy = new AuthorizationPolicy(requirements, new List<string>());
             var filterDescriptor = new FilterDescriptor(new AuthorizeFilter(policy), 30);
-            this.operationFilterContext.ApiDescription.ActionDescriptor.FilterDescriptors.Add(filterDescriptor);
+            this.context.ApiDescription.ActionDescriptor.FilterDescriptors.Add(filterDescriptor);
 
-            this.operationFilter.Apply(this.operation, this.operationFilterContext);
+            this.operationFilter.Apply(this.operation, this.context);
 
-            Assert.Null(this.operation.Security);
+            Assert.Empty(this.operation.Security);
         }
 
         [Fact]
         public void Apply_DoesNotHaveClaimsAuthorizationRequirement_DoesNothing()
         {
-            this.operationFilter.Apply(this.operation, this.operationFilterContext);
+            this.operationFilter.Apply(this.operation, this.context);
 
-            Assert.Null(this.operation.Security);
+            Assert.Empty(this.operation.Security);
         }
     }
 }

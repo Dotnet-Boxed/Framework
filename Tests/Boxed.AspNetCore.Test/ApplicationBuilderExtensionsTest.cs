@@ -4,7 +4,6 @@ namespace Boxed.AspNetCore.Test
     using System.Threading.Tasks;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Builder.Internal;
     using Microsoft.AspNetCore.Http;
     using Moq;
     using Xunit;
@@ -22,25 +21,39 @@ namespace Boxed.AspNetCore.Test
             this.httpContext = new DefaultHttpContext();
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public async Task UseIf_TrueCondition_ActionCalled(bool condition)
+        [Fact]
+        public async Task UseIf_TrueCondition_ActionCalled()
         {
             var actionCalled = false;
 
             this.applicationBuilder.UseIf(
-                context => condition,
-                application => application.Use(
-                    (context, next) =>
-                    {
-                        Assert.NotSame(application, this.applicationBuilder);
-                        actionCalled = true;
-                        return next.Invoke();
-                    }));
+                true,
+                application =>
+                {
+                    Assert.Same(this.applicationBuilder, application);
+                    actionCalled = true;
+                    return application;
+                });
             await this.applicationBuilder.Build().Invoke(this.httpContext).ConfigureAwait(false);
 
-            Assert.Equal(actionCalled, condition);
+            Assert.True(actionCalled);
+        }
+
+        [Fact]
+        public async Task UseIf_FalseCondition_ActionCalled()
+        {
+            var actionCalled = false;
+
+            this.applicationBuilder.UseIf(
+                false,
+                application =>
+                {
+                    actionCalled = true;
+                    return application;
+                });
+            await this.applicationBuilder.Build().Invoke(this.httpContext).ConfigureAwait(false);
+
+            Assert.False(actionCalled);
         }
 
         [Theory]
@@ -52,29 +65,25 @@ namespace Boxed.AspNetCore.Test
             var elseActionCalled = false;
 
             this.applicationBuilder.UseIfElse(
-                context => condition,
-                application => application.Use(
-                    (context, next) =>
-                    {
-                        Assert.NotSame(application, this.applicationBuilder);
-                        ifActionCalled = true;
-                        return next.Invoke();
-                    }),
-                application => application.Use(
-                    (context, next) =>
-                    {
-                        Assert.NotSame(application, this.applicationBuilder);
-                        elseActionCalled = true;
-                        return next.Invoke();
-                    }));
+                condition,
+                application =>
+                {
+                    Assert.Same(application, this.applicationBuilder);
+                    ifActionCalled = true;
+                    return application;
+                },
+                application =>
+                {
+                    Assert.Same(application, this.applicationBuilder);
+                    elseActionCalled = true;
+                    return application;
+                });
             await this.applicationBuilder.Build().Invoke(this.httpContext).ConfigureAwait(false);
 
             Assert.Equal(ifActionCalled, condition);
             Assert.NotEqual(elseActionCalled, condition);
         }
 
-        public void Dispose() =>
-            Mock.VerifyAll(
-                this.serviceProviderMock);
+        public void Dispose() => Mock.VerifyAll(this.serviceProviderMock);
     }
 }

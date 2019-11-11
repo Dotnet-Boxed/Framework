@@ -48,7 +48,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
-            if (stringBuilder == null)
+            if (stringBuilder is null)
             {
                 throw new ArgumentNullException(nameof(stringBuilder));
             }
@@ -75,7 +75,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         {
             base.Validate();
 
-            if (this.SectionUrl == null)
+            if (this.SectionUrl is null)
             {
                 throw new ValidationException(FormattableString.Invariant($"{nameof(this.SectionUrl)} cannot be null."));
             }

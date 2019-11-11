@@ -9,15 +9,20 @@ namespace Boxed.DotnetNewTest
     using System.Security.Cryptography.X509Certificates;
     using System.Threading;
     using System.Threading.Tasks;
+#if NETCOREAPP3_0
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.TestHost;
+    using Microsoft.Extensions.Hosting;
+#endif
 
     /// <summary>
     /// <see cref="Project"/> extension methods.
     /// </summary>
     public static class ProjectExtensions
     {
+#if NETCOREAPP3_0
         private static readonly string[] DefaultUrls = new string[] { "http://localhost", "https://localhost" };
+#endif
 
         /// <summary>
         /// Runs 'dotnet restore' on the specified project.
@@ -27,7 +32,7 @@ namespace Boxed.DotnetNewTest
         /// <returns>A task representing the operation.</returns>
         public static Task DotnetRestoreAsync(this Project project, TimeSpan? timeout = null)
         {
-            if (project == null)
+            if (project is null)
             {
                 throw new ArgumentNullException(nameof(project));
             }
@@ -48,12 +53,12 @@ namespace Boxed.DotnetNewTest
         /// <returns>A task representing the operation.</returns>
         public static Task DotnetBuildAsync(this Project project, bool? noRestore = true, TimeSpan? timeout = null)
         {
-            if (project == null)
+            if (project is null)
             {
                 throw new ArgumentNullException(nameof(project));
             }
 
-            var noRestoreArgument = noRestore == null ? null : "--no-restore";
+            var noRestoreArgument = noRestore is null ? null : "--no-restore";
             return AssertStartAsync(
                 project.DirectoryPath,
                 "dotnet",
@@ -77,14 +82,14 @@ namespace Boxed.DotnetNewTest
             bool? noRestore = true,
             TimeSpan? timeout = null)
         {
-            if (project == null)
+            if (project is null)
             {
                 throw new ArgumentNullException(nameof(project));
             }
 
-            var frameworkArgument = framework == null ? null : $"--framework {framework}";
-            var runtimeArgument = runtime == null ? null : $"--self-contained --runtime {runtime}";
-            var noRestoreArgument = noRestore == null ? null : "--no-restore";
+            var frameworkArgument = framework is null ? null : $"--framework {framework}";
+            var runtimeArgument = runtime is null ? null : $"--self-contained --runtime {runtime}";
+            var noRestoreArgument = noRestore is null ? null : "--no-restore";
             DirectoryExtensions.CheckCreate(project.PublishDirectoryPath);
             return AssertStartAsync(
                 project.DirectoryPath,
@@ -111,17 +116,17 @@ namespace Boxed.DotnetNewTest
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
             TimeSpan? timeout = null)
         {
-            if (project == null)
+            if (project is null)
             {
                 throw new ArgumentNullException(nameof(project));
             }
 
-            if (projectRelativeDirectoryPath == null)
+            if (projectRelativeDirectoryPath is null)
             {
                 throw new ArgumentNullException(nameof(projectRelativeDirectoryPath));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -169,17 +174,17 @@ namespace Boxed.DotnetNewTest
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
             TimeSpan? timeout = null)
         {
-            if (project == null)
+            if (project is null)
             {
                 throw new ArgumentNullException(nameof(project));
             }
 
-            if (projectRelativeDirectoryPath == null)
+            if (projectRelativeDirectoryPath is null)
             {
                 throw new ArgumentNullException(nameof(projectRelativeDirectoryPath));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -213,6 +218,7 @@ namespace Boxed.DotnetNewTest
             }
         }
 
+#if NETCOREAPP3_0
         /// <summary>
         /// Runs the project in-memory.
         /// </summary>
@@ -228,12 +234,12 @@ namespace Boxed.DotnetNewTest
             string environmentName = "Development",
             string startupTypeName = "Startup")
         {
-            if (project == null)
+            if (project is null)
             {
                 throw new ArgumentNullException(nameof(project));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -254,7 +260,7 @@ namespace Boxed.DotnetNewTest
                     var startupType = assembly
                         .DefinedTypes
                         .FirstOrDefault(x => string.Equals(x.Name, startupTypeName, StringComparison.Ordinal));
-                    if (startupType == null)
+                    if (startupType is null)
                     {
                         throw new Exception($"Startup type '{startupTypeName}' not found.");
                     }
@@ -272,6 +278,7 @@ namespace Boxed.DotnetNewTest
                 }
             }
         }
+#endif
 
         private static async Task<IDisposable> DotnetRunInternalAsync(
             string directoryPath,
@@ -282,7 +289,7 @@ namespace Boxed.DotnetNewTest
 #pragma warning disable CA2000 // Dispose objects before losing scope. Object disposed below.
             var cancellationTokenSource = new CancellationTokenSource();
 #pragma warning restore CA2000 // Dispose objects before losing scope. Object disposed below.
-            var noRestoreArgument = noRestore == null ? null : "--no-restore";
+            var noRestoreArgument = noRestore is null ? null : "--no-restore";
             var urlsParameter = string.Join(";", urls);
             var task = AssertStartAsync(
                 directoryPath,
@@ -325,7 +332,7 @@ namespace Boxed.DotnetNewTest
                     {
                         try
                         {
-                            await httpClient.GetAsync("/").ConfigureAwait(false);
+                            await httpClient.GetAsync(new Uri("/", UriKind.Relative)).ConfigureAwait(false);
                             return;
                         }
                         catch (HttpRequestException exception)

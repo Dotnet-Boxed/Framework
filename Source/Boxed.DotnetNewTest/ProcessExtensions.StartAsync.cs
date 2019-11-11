@@ -156,8 +156,11 @@ namespace Boxed.DotnetNewTest
                     {
                         if (!process.HasExited)
                         {
-                            // Add process.Kill(true) when 3.0 comes out to kill the entire process tree.
+#if NETCOREAPP3_0
+                            process.Kill(true);
+#else
                             process.KillTree();
+#endif
                         }
 
                         throw;
@@ -193,7 +196,7 @@ namespace Boxed.DotnetNewTest
             handler = new DataReceivedEventHandler(
                 (sender, e) =>
                 {
-                    if (e.Data == null)
+                    if (e.Data is null)
                     {
                         removeHandler(handler);
                         taskCompletionSource.TrySetResult(null);

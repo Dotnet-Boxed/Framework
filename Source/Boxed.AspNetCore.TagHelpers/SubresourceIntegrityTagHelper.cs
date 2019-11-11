@@ -16,7 +16,7 @@ namespace Boxed.AspNetCore.TagHelpers
     using Microsoft.Extensions.Caching.Distributed;
 
     /// <summary>
-    /// Adds Subresource Integrity (SRI) to a script tag. Subresource Integrity (SRI) is a security feature that
+    /// Adds Sub-resource Integrity (SRI) to a script tag. Sub-resource Integrity (SRI) is a security feature that
     /// enables browsers to verify that files they fetch (for example, from a CDN) are delivered without unexpected
     /// manipulation. It works by allowing you to provide a cryptographic hash that a fetched file must match.
     /// See https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity and https://www.w3.org/TR/SRI/.
@@ -31,7 +31,7 @@ namespace Boxed.AspNetCore.TagHelpers
         private const string IntegrityAttributeName = "integrity";
 
         private readonly IDistributedCache distributedCache;
-        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IWebHostEnvironment webHostEnvironment;
         private readonly IUrlHelper urlHelper;
         private readonly HtmlEncoder htmlEncoder;
 
@@ -39,27 +39,27 @@ namespace Boxed.AspNetCore.TagHelpers
         /// Initializes a new instance of the <see cref="SubresourceIntegrityTagHelper"/> class.
         /// </summary>
         /// <param name="distributedCache">The distributed cache.</param>
-        /// <param name="hostingEnvironment">The hosting environment.</param>
+        /// <param name="webHostEnvironment">The web host environment.</param>
         /// <param name="actionContextAccessor">The MVC action context accessor.</param>
         /// <param name="urlHelperFactory">The URL helper factory.</param>
         /// <param name="htmlEncoder">The <see cref="HtmlEncoder"/>.</param>
         public SubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
-            IHostingEnvironment hostingEnvironment,
+            IWebHostEnvironment webHostEnvironment,
             IActionContextAccessor actionContextAccessor,
             IUrlHelperFactory urlHelperFactory,
             HtmlEncoder htmlEncoder)
         {
             this.distributedCache = distributedCache ?? throw new ArgumentNullException(nameof(distributedCache));
-            this.hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+            this.webHostEnvironment = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
             this.htmlEncoder = htmlEncoder ?? throw new ArgumentNullException(nameof(htmlEncoder));
 
-            if (actionContextAccessor == null)
+            if (actionContextAccessor is null)
             {
                 throw new ArgumentNullException(nameof(actionContextAccessor));
             }
 
-            if (urlHelperFactory == null)
+            if (urlHelperFactory is null)
             {
                 throw new ArgumentNullException(nameof(urlHelperFactory));
             }
@@ -100,12 +100,12 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <returns>A task representing the operation.</returns>
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (output == null)
+            if (output is null)
             {
                 throw new ArgumentNullException(nameof(output));
             }
@@ -115,7 +115,7 @@ namespace Boxed.AspNetCore.TagHelpers
             if (!string.IsNullOrWhiteSpace(url) && !string.IsNullOrWhiteSpace(this.Source))
             {
                 var sri = await this.GetCachedSriAsync(url).ConfigureAwait(false);
-                if (sri == null)
+                if (sri is null)
                 {
                     sri = this.GetSubresourceIntegrityFromContentFile(this.Source, this.HashAlgorithms);
                     await this.SetCachedSriAsync(url, sri).ConfigureAwait(false);
@@ -245,7 +245,7 @@ namespace Boxed.AspNetCore.TagHelpers
             SubresourceIntegrityHashAlgorithm hashAlgorithms)
         {
             var filePath = Path.Combine(
-                this.hostingEnvironment.WebRootPath,
+                this.webHostEnvironment.ContentRootPath,
                 this.urlHelper.Content(contentPath).TrimStart('/'));
             var bytes = this.ReadAllBytes(filePath);
             return GetSpaceDelimetedSri(bytes, hashAlgorithms);

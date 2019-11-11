@@ -8,8 +8,8 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
     using Microsoft.AspNetCore.Mvc.Abstractions;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.AspNetCore.Mvc.Authorization;
+    using Microsoft.OpenApi.Models;
     using Moq;
-    using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
     using Xunit;
     using FilterDescriptor = Microsoft.AspNetCore.Mvc.Filters.FilterDescriptor;
@@ -17,12 +17,16 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
     public class UnauthorizedResponseOperationFilterTest
     {
         private readonly ApiDescription apiDescription;
-        private readonly Operation operation;
+        private readonly OpenApiOperation operation;
+        private readonly OperationFilterContext context;
         private readonly UnauthorizedResponseOperationFilter operationFilter;
-        private readonly OperationFilterContext operationFilterContext;
 
         public UnauthorizedResponseOperationFilterTest()
         {
+            this.operation = new OpenApiOperation()
+            {
+                Responses = new OpenApiResponses(),
+            };
             this.apiDescription = new ApiDescription()
             {
                 ActionDescriptor = new ActionDescriptor()
@@ -30,15 +34,12 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
                     FilterDescriptors = new List<FilterDescriptor>()
                 }
             };
-            this.operation = new Operation()
-            {
-                Responses = new Dictionary<string, Response>()
-            };
-            this.operationFilter = new UnauthorizedResponseOperationFilter();
-            this.operationFilterContext = new OperationFilterContext(
+            this.context = new OperationFilterContext(
                 this.apiDescription,
-                new Mock<ISchemaRegistry>().Object,
+                new Mock<ISchemaGenerator>().Object,
+                new SchemaRepository(),
                 this.GetType().GetMethods().First());
+            this.operationFilter = new UnauthorizedResponseOperationFilter();
         }
 
         [Fact]
@@ -48,9 +49,9 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
             var requirements = new List<IAuthorizationRequirement>() { requirement };
             var policy = new AuthorizationPolicy(requirements, new List<string>());
             var filterDescriptor = new FilterDescriptor(new AuthorizeFilter(policy), 30);
-            this.operationFilterContext.ApiDescription.ActionDescriptor.FilterDescriptors.Add(filterDescriptor);
+            this.context.ApiDescription.ActionDescriptor.FilterDescriptors.Add(filterDescriptor);
 
-            this.operationFilter.Apply(this.operation, this.operationFilterContext);
+            this.operationFilter.Apply(this.operation, this.context);
 
             Assert.True(this.operation.Responses.ContainsKey("401"));
         }
@@ -58,7 +59,7 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
         [Fact]
         public void Apply_DoesNotHaveDenyAnonymousAuthorizationRequirement_DoesNothing()
         {
-            this.operationFilter.Apply(this.operation, this.operationFilterContext);
+            this.operationFilter.Apply(this.operation, this.context);
 
             Assert.Empty(this.operation.Responses);
         }
@@ -66,11 +67,11 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
         [Fact]
         public void Apply_AlreadyHasForbiddenResponse_DoesNothing()
         {
-            var response = new Response();
+            var response = new OpenApiResponse();
             this.operation.Responses.Add("401", response);
-            this.operationFilter.Apply(this.operation, this.operationFilterContext);
+            this.operationFilter.Apply(this.operation, this.context);
 
-            Assert.Equal(1, this.operation.Responses.Count);
+            Assert.Single(this.operation.Responses);
             Assert.Same(response, this.operation.Responses["401"]);
         }
     }

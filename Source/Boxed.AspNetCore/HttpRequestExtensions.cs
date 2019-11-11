@@ -20,7 +20,7 @@ namespace Boxed.AspNetCore
         /// <exception cref="ArgumentNullException">The <paramref name="request"/> parameter is <c>null</c>.</exception>
         public static bool IsAjaxRequest(this HttpRequest request)
         {
-            if (request == null)
+            if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
@@ -42,7 +42,7 @@ namespace Boxed.AspNetCore
         /// <exception cref="ArgumentNullException">The <paramref name="request"/> parameter is <c>null</c>.</exception>
         public static bool IsLocalRequest(this HttpRequest request)
         {
-            if (request == null)
+            if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
@@ -61,7 +61,7 @@ namespace Boxed.AspNetCore
             }
 
             // for in memory TestServer or when dealing with default connection info
-            if (connection.RemoteIpAddress == null && connection.LocalIpAddress == null)
+            if (connection.RemoteIpAddress is null && connection.LocalIpAddress is null)
             {
                 return true;
             }

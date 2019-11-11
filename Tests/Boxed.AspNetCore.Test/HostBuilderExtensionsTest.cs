@@ -1,14 +1,14 @@
 namespace Boxed.AspNetCore.Test
 {
     using Boxed.AspNetCore;
-    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
     using Xunit;
 
-    public class WebHostBuilderExtensionsTest
+    public class HostBuilderExtensionsTest
     {
-        private readonly WebHostBuilder webHostBuilder;
+        private readonly HostBuilder hostBuilder;
 
-        public WebHostBuilderExtensionsTest() => this.webHostBuilder = new WebHostBuilder();
+        public HostBuilderExtensionsTest() => this.hostBuilder = new HostBuilder();
 
         [Theory]
         [InlineData(true)]
@@ -17,7 +17,7 @@ namespace Boxed.AspNetCore.Test
         {
             var actionCalled = false;
 
-            this.webHostBuilder.UseIf(
+            this.hostBuilder.UseIf(
                 condition,
                 x =>
                 {
@@ -36,7 +36,7 @@ namespace Boxed.AspNetCore.Test
             var ifActionCalled = false;
             var elseActionCalled = false;
 
-            this.webHostBuilder.UseIfElse(
+            this.hostBuilder.UseIfElse(
                 condition,
                 x =>
                 {

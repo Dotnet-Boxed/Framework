@@ -21,12 +21,12 @@ namespace Boxed.AspNetCore.Swagger
         /// <exception cref="System.ArgumentNullException">options or assembly.</exception>
         public static SwaggerGenOptions IncludeXmlCommentsIfExists(this SwaggerGenOptions options, Assembly assembly)
         {
-            if (options == null)
+            if (options is null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (assembly == null)
+            if (assembly is null)
             {
                 throw new ArgumentNullException(nameof(assembly));
             }
@@ -50,12 +50,12 @@ namespace Boxed.AspNetCore.Swagger
         /// <exception cref="System.ArgumentNullException">options or filePath.</exception>
         public static bool IncludeXmlCommentsIfExists(this SwaggerGenOptions options, string filePath)
         {
-            if (options == null)
+            if (options is null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (filePath == null)
+            if (filePath is null)
             {
                 throw new ArgumentNullException(nameof(filePath));
             }

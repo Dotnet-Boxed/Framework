@@ -73,7 +73,7 @@ namespace Boxed.DotnetNewTest
 
         private static string GetMessage(ProcessStartInfo processStartInfo)
         {
-            if (processStartInfo == null)
+            if (processStartInfo is null)
             {
                 throw new ArgumentNullException(nameof(processStartInfo));
             }
