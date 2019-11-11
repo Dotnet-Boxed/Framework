@@ -11,7 +11,7 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
     /// Shows an example of a <see cref="ProblemDetails"/> containing errors.
     /// </summary>
     /// <seealso cref="ISchemaFilter" />
-    public class ProblemDetailsSchemaFilter : ISchemaFilter
+    internal class ProblemDetailsSchemaFilter : ISchemaFilter
     {
 #pragma warning disable
         private static readonly OpenApiObject Status400ProblemDetails = new OpenApiObject()
