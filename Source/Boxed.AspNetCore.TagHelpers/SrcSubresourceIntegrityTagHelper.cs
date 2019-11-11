@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.TagHelpers
 {
+    using System.Text.Encodings.Web;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
@@ -21,6 +22,7 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <param name="webHostEnvironment">The web host environment.</param>
         /// <param name="actionContextAccessor">The MVC action context accessor.</param>
         /// <param name="urlHelperFactory">The URL helper factory.</param>
+        /// <param name="htmlEncoder">The <see cref="HtmlEncoder"/>.</param>
         public SrcSubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
             IWebHostEnvironment webHostEnvironment,

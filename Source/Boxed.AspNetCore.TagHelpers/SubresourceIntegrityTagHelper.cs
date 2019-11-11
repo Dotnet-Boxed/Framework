@@ -5,6 +5,7 @@ namespace Boxed.AspNetCore.TagHelpers
     using System.IO;
     using System.Security.Cryptography;
     using System.Text;
+    using System.Text.Encodings.Web;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Html;
@@ -32,6 +33,7 @@ namespace Boxed.AspNetCore.TagHelpers
         private readonly IDistributedCache distributedCache;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly IUrlHelper urlHelper;
+        private readonly HtmlEncoder htmlEncoder;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SubresourceIntegrityTagHelper"/> class.
@@ -40,11 +42,13 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <param name="webHostEnvironment">The web host environment.</param>
         /// <param name="actionContextAccessor">The MVC action context accessor.</param>
         /// <param name="urlHelperFactory">The URL helper factory.</param>
+        /// <param name="htmlEncoder">The <see cref="HtmlEncoder"/>.</param>
         public SubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
             IWebHostEnvironment webHostEnvironment,
             IActionContextAccessor actionContextAccessor,
-            IUrlHelperFactory urlHelperFactory)
+            IUrlHelperFactory urlHelperFactory,
+            HtmlEncoder htmlEncoder)
         {
             this.distributedCache = distributedCache ?? throw new ArgumentNullException(nameof(distributedCache));
             this.webHostEnvironment = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
@@ -105,7 +109,7 @@ namespace Boxed.AspNetCore.TagHelpers
                 throw new ArgumentNullException(nameof(output));
             }
 
-            var url = output.Attributes[this.UrlAttributeName].Value.ToString();
+            var url = this.GetEncodedStringValue(output.Attributes[this.UrlAttributeName].Value);
 
             if (!string.IsNullOrWhiteSpace(url) && !string.IsNullOrWhiteSpace(this.Source))
             {
@@ -244,6 +248,38 @@ namespace Boxed.AspNetCore.TagHelpers
                 this.urlHelper.Content(contentPath).TrimStart('/'));
             var bytes = this.ReadAllBytes(filePath);
             return GetSpaceDelimetedSri(bytes, hashAlgorithms);
+        }
+
+        private string GetEncodedStringValue(object attributeValue)
+        {
+            if (attributeValue is string stringValue)
+            {
+                var encodedStringValue = this.htmlEncoder.Encode(stringValue);
+                return encodedStringValue;
+            }
+            else
+            {
+                if (attributeValue is IHtmlContent htmlContent)
+                {
+                    if (htmlContent is HtmlString htmlString)
+                    {
+                        // No need for a StringWriter in this case.
+                        stringValue = htmlString.ToString();
+                    }
+                    else
+                    {
+                        using (var writer = new StringWriter())
+                        {
+                            htmlContent.WriteTo(writer, this.htmlEncoder);
+                            stringValue = writer.ToString();
+                        }
+                    }
+
+                    return stringValue;
+                }
+            }
+
+            return attributeValue.ToString();
         }
     }
 }
