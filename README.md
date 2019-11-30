@@ -67,6 +67,9 @@ public class UsageExample
     public MapTo[] MapArray(List<MapFrom> source) => this.mapper.MapArray(source);
     
     public List<MapTo> MapList(List<MapFrom> source) => this.mapper.MapList(source);
+    
+    public IAsyncEnumerable<MapTo> MapAsyncEnumerable(IAsyncEnumerable<MapFrom> source) =>
+        this.mapper.MapAsyncEnumerable(source);
 }
 ```
 
