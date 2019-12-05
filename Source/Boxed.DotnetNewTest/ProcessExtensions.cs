@@ -158,12 +158,14 @@ namespace Boxed.DotnetNewTest
             }
         }
 
+#if NETSTANDARD2_1
         private static void KillProcessUnix(int processId, TimeSpan timeout) =>
             RunProcessAndWaitForExit(
                 "kill",
                 $"-TERM {processId}",
                 timeout,
                 out _);
+#endif
 
         private static int RunProcessAndWaitForExit(string fileName, string arguments, TimeSpan timeout, out string stdout)
         {
