@@ -156,7 +156,7 @@ namespace Boxed.DotnetNewTest
                     {
                         if (!process.HasExited)
                         {
-#if NETCOREAPP3_0
+#if NETCOREAPP3_0 || NETCOREAPP3_1
                             process.Kill(true);
 #else
                             process.KillTree();
