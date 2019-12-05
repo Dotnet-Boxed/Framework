@@ -53,8 +53,9 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="timeout">The timeout.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task InstallAsync(string source, TimeSpan? timeout = null)
+        public static Task InstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
         {
             if (source is null)
             {
@@ -65,6 +66,7 @@ namespace Boxed.DotnetNewTest
                 DirectoryExtensions.GetCurrentDirectory(),
                 "dotnet",
                 $"new --install \"{source}\"",
+                showShellWindow,
                 CancellationTokenFactory.GetCancellationToken(timeout));
         }
 

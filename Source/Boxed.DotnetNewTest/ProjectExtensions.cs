@@ -29,8 +29,12 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <param name="project">The project.</param>
         /// <param name="timeout">The timeout.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task DotnetRestoreAsync(this Project project, TimeSpan? timeout = null)
+        public static Task DotnetRestoreAsync(
+            this Project project,
+            TimeSpan? timeout = null,
+            bool showShellWindow = false)
         {
             if (project is null)
             {
@@ -41,6 +45,7 @@ namespace Boxed.DotnetNewTest
                 project.DirectoryPath,
                 "dotnet",
                 "restore",
+                showShellWindow,
                 CancellationTokenFactory.GetCancellationToken(timeout));
         }
 
@@ -50,8 +55,13 @@ namespace Boxed.DotnetNewTest
         /// <param name="project">The project.</param>
         /// <param name="noRestore">Whether to restore the project.</param>
         /// <param name="timeout">The timeout.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task DotnetBuildAsync(this Project project, bool? noRestore = true, TimeSpan? timeout = null)
+        public static Task DotnetBuildAsync(
+            this Project project,
+            bool? noRestore = true,
+            TimeSpan? timeout = null,
+            bool showShellWindow = false)
         {
             if (project is null)
             {
@@ -63,6 +73,7 @@ namespace Boxed.DotnetNewTest
                 project.DirectoryPath,
                 "dotnet",
                 $"build {noRestoreArgument}",
+                showShellWindow,
                 CancellationTokenFactory.GetCancellationToken(timeout));
         }
 
@@ -74,13 +85,15 @@ namespace Boxed.DotnetNewTest
         /// <param name="runtime">The runtime.</param>
         /// <param name="noRestore">Whether to restore the project.</param>
         /// <param name="timeout">The timeout.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A task representing the operation.</returns>
         public static Task DotnetPublishAsync(
             this Project project,
             string framework = null,
             string runtime = null,
             bool? noRestore = true,
-            TimeSpan? timeout = null)
+            TimeSpan? timeout = null,
+            bool showShellWindow = false)
         {
             if (project is null)
             {
@@ -95,6 +108,7 @@ namespace Boxed.DotnetNewTest
                 project.DirectoryPath,
                 "dotnet",
                 $"publish {noRestoreArgument} {frameworkArgument} {runtimeArgument} --output {project.PublishDirectoryPath}",
+                showShellWindow,
                 CancellationTokenFactory.GetCancellationToken(timeout));
         }
 
@@ -107,6 +121,7 @@ namespace Boxed.DotnetNewTest
         /// <param name="noRestore">Whether to restore the project.</param>
         /// <param name="validateCertificate">Validate the project certificate.</param>
         /// <param name="timeout">The timeout.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A task representing the operation.</returns>
         public static async Task DotnetRunAsync(
             this Project project,
@@ -114,7 +129,8 @@ namespace Boxed.DotnetNewTest
             Func<HttpClient, Task> action,
             bool? noRestore = true,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
-            TimeSpan? timeout = null)
+            TimeSpan? timeout = null,
+            bool showShellWindow = false)
         {
             if (project is null)
             {
@@ -135,7 +151,8 @@ namespace Boxed.DotnetNewTest
             var httpUrl = $"http://localhost:{httpPort}";
 
             var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
-            var dotnetRun = await DotnetRunInternalAsync(projectFilePath, noRestore, timeout, httpUrl).ConfigureAwait(false);
+            var dotnetRun = await DotnetRunInternalAsync(projectFilePath, noRestore, timeout, showShellWindow, httpUrl)
+                .ConfigureAwait(false);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -165,6 +182,7 @@ namespace Boxed.DotnetNewTest
         /// <param name="noRestore">Whether to restore the project.</param>
         /// <param name="validateCertificate">Validate the project certificate.</param>
         /// <param name="timeout">The timeout.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A task representing the operation.</returns>
         public static async Task DotnetRunAsync(
             this Project project,
@@ -172,7 +190,8 @@ namespace Boxed.DotnetNewTest
             Func<HttpClient, HttpClient, Task> action,
             bool? noRestore = true,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
-            TimeSpan? timeout = null)
+            TimeSpan? timeout = null,
+            bool showShellWindow = false)
         {
             if (project is null)
             {
@@ -195,7 +214,8 @@ namespace Boxed.DotnetNewTest
             var httpsUrl = $"https://localhost:{httpsPort}";
 
             var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
-            var dotnetRun = await DotnetRunInternalAsync(projectFilePath, noRestore, timeout, httpUrl, httpsUrl).ConfigureAwait(false);
+            var dotnetRun = await DotnetRunInternalAsync(projectFilePath, noRestore, timeout, showShellWindow, httpUrl, httpsUrl)
+                .ConfigureAwait(false);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -282,8 +302,9 @@ namespace Boxed.DotnetNewTest
 
         private static async Task<IAsyncDisposable> DotnetRunInternalAsync(
             string directoryPath,
-            bool? noRestore = true,
-            TimeSpan? timeout = null,
+            bool? noRestore,
+            TimeSpan? timeout,
+            bool showShellWindow,
             params string[] urls)
         {
 #pragma warning disable CA2000 // Dispose objects before losing scope. Object disposed below.
@@ -295,6 +316,7 @@ namespace Boxed.DotnetNewTest
                 directoryPath,
                 "dotnet",
                 $"run {noRestoreArgument} --urls {urlsParameter}",
+                showShellWindow,
                 cancellationTokenSource.Token);
 
             try
@@ -303,14 +325,19 @@ namespace Boxed.DotnetNewTest
             }
             catch
             {
-                await Dispose(cancellationTokenSource, task).ConfigureAwait(false);
+                await Dispose(cancellationTokenSource, task, showShellWindow).ConfigureAwait(false);
                 throw;
             }
 
-            return new AsyncDisposableAction(() => Dispose(cancellationTokenSource, task));
+            return new AsyncDisposableAction(() => Dispose(cancellationTokenSource, task, showShellWindow));
 
-            async static ValueTask Dispose(CancellationTokenSource cancellationTokenSource, Task task)
+            async static ValueTask Dispose(CancellationTokenSource cancellationTokenSource, Task task, bool showShellWindow)
             {
+                if (showShellWindow)
+                {
+                    await Task.Delay(3000).ConfigureAwait(false);
+                }
+
                 cancellationTokenSource.Cancel();
 
                 try
@@ -391,12 +418,14 @@ namespace Boxed.DotnetNewTest
             string workingDirectory,
             string fileName,
             string arguments,
+            bool showShellWindow,
             CancellationToken cancellationToken)
         {
             var (processResult, message) = await ProcessExtensions.StartAsync(
                 workingDirectory,
                 fileName,
                 arguments,
+                showShellWindow,
                 cancellationToken).ConfigureAwait(false);
             if (processResult != ProcessResult.Succeeded)
             {

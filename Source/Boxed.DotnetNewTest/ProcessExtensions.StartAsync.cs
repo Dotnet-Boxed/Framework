@@ -14,25 +14,27 @@ namespace Boxed.DotnetNewTest
     public static partial class ProcessExtensions
     {
         /// <summary>
-        /// Starts the a <see cref="Process"/> asynchronously.
+        /// Starts the a <see cref="Process" /> asynchronously.
         /// </summary>
         /// <param name="workingDirectory">The working directory.</param>
         /// <param name="fileName">Name of the file.</param>
         /// <param name="arguments">The arguments.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show a shell window instead of logging.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>The result and console output from executing the process.</returns>
+        /// <returns>
+        /// The result and console output from executing the process.
+        /// </returns>
         public static async Task<(ProcessResult processResult, string message)> StartAsync(
             string workingDirectory,
             string fileName,
             string arguments,
-            CancellationToken cancellationToken)
+            bool showShellWindow = false,
+            CancellationToken cancellationToken = default)
         {
             TestLogger.WriteLine($"Executing {fileName} {arguments} from {workingDirectory}");
 
-            var output = new StringBuilder();
-            var error = new StringBuilder();
-            using (var outputStringWriter = new StringWriter(output))
-            using (var errorStringWriter = new StringWriter(error))
+            var stringBuilder = new StringBuilder();
+            using (var stringWriter = new StringWriter(stringBuilder))
             {
                 ProcessResult processResult;
                 try
@@ -41,32 +43,25 @@ namespace Boxed.DotnetNewTest
                         fileName,
                         arguments,
                         workingDirectory,
-                        outputStringWriter,
-                        errorStringWriter,
+                        stringWriter,
+                        stringWriter,
+                        showShellWindow,
                         cancellationToken).ConfigureAwait(false);
                     processResult = exitCode == 0 ? ProcessResult.Succeeded : ProcessResult.Failed;
                 }
                 catch (TaskCanceledException)
                 {
+                    await stringWriter.FlushAsync().ConfigureAwait(false);
                     TestLogger.WriteLine($"Timed Out {fileName} {arguments} from {workingDirectory}");
                     processResult = ProcessResult.TimedOut;
                 }
 
-                var standardOutput = output.ToString();
-                var standardError = error.ToString();
-
-                var message = GetAndWriteMessage(
-                    processResult,
-                    standardOutput,
-                    standardError);
+                var message = GetAndWriteMessage(processResult, stringBuilder.ToString());
                 return (processResult, message);
             }
         }
 
-        private static string GetAndWriteMessage(
-            ProcessResult result,
-            string standardOutput,
-            string standardError)
+        private static string GetAndWriteMessage(ProcessResult result, string output)
         {
             var stringBuilder = new StringBuilder();
 
@@ -74,24 +69,11 @@ namespace Boxed.DotnetNewTest
             TestLogger.Write("Result: ");
             TestLogger.WriteLine(result.ToString(), result == ProcessResult.Succeeded ? ConsoleColor.Green : ConsoleColor.Red);
 
-            if (!string.IsNullOrEmpty(standardError))
-            {
-                stringBuilder
-                    .AppendLine()
-                    .AppendLine($"StandardError: {standardError}");
-                TestLogger.WriteLine("StandardError: ");
-                TestLogger.WriteLine(standardError, ConsoleColor.Red);
-                TestLogger.WriteLine();
-            }
-
-            if (!string.IsNullOrEmpty(standardOutput))
-            {
-                stringBuilder
-                    .AppendLine()
-                    .AppendLine($"StandardOutput: {standardOutput}");
-                TestLogger.WriteLine();
-                TestLogger.WriteLine($"StandardOutput: {standardOutput}");
-            }
+            stringBuilder
+                .AppendLine()
+                .AppendLine($"Output: {output}");
+            TestLogger.WriteLine();
+            TestLogger.WriteLine($"Output: {output}");
 
             return stringBuilder.ToString();
         }
@@ -99,19 +81,20 @@ namespace Boxed.DotnetNewTest
         private static async Task<int> StartProcessAsync(
             string filename,
             string arguments,
-            string workingDirectory = null,
-            TextWriter outputTextWriter = null,
-            TextWriter errorTextWriter = null,
-            CancellationToken cancellationToken = default)
+            string workingDirectory,
+            TextWriter outputTextWriter,
+            TextWriter errorTextWriter,
+            bool showShellWindow,
+            CancellationToken cancellationToken)
         {
             var processStartInfo = new ProcessStartInfo()
             {
-                CreateNoWindow = true,
+                CreateNoWindow = showShellWindow,
                 Arguments = arguments,
                 FileName = filename,
-                RedirectStandardOutput = outputTextWriter != null,
-                RedirectStandardError = errorTextWriter != null,
-                UseShellExecute = false,
+                RedirectStandardOutput = !showShellWindow && outputTextWriter != null,
+                RedirectStandardError = !showShellWindow && errorTextWriter != null,
+                UseShellExecute = showShellWindow,
                 WorkingDirectory = workingDirectory,
             };
 
@@ -122,7 +105,7 @@ namespace Boxed.DotnetNewTest
                     process.Start();
 
                     var tasks = new List<Task>(3) { process.WaitForExitAsync(cancellationToken) };
-                    if (outputTextWriter != null)
+                    if (!showShellWindow && outputTextWriter != null)
                     {
                         tasks.Add(ReadAsync(
                             x =>
@@ -135,7 +118,7 @@ namespace Boxed.DotnetNewTest
                             cancellationToken));
                     }
 
-                    if (errorTextWriter != null)
+                    if (!showShellWindow && errorTextWriter != null)
                     {
                         tasks.Add(ReadAsync(
                             x =>

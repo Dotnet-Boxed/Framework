@@ -19,13 +19,15 @@ namespace Boxed.DotnetNewTest
         /// <param name="name">The name of the project to create from the template.</param>
         /// <param name="arguments">The custom arguments to pass to the template.</param>
         /// <param name="timeout">The timeout.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A project created from a project template.</returns>
         public static async Task<Project> DotnetNewAsync(
             this TempDirectory tempDirectory,
             string templateName,
             string name,
             IDictionary<string, string> arguments = null,
-            TimeSpan? timeout = null)
+            TimeSpan? timeout = null,
+            bool showShellWindow = false)
         {
             if (tempDirectory is null)
             {
@@ -46,6 +48,7 @@ namespace Boxed.DotnetNewTest
                     tempDirectory.DirectoryPath,
                     "dotnet",
                     stringBuilder.ToString(),
+                    showShellWindow,
                     CancellationTokenFactory.GetCancellationToken(timeout))
                 .ConfigureAwait(false);
 
