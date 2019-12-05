@@ -152,7 +152,7 @@ namespace Boxed.DotnetNewTest
             {
                 httpClient.Dispose();
                 httpClientHandler.Dispose();
-                dotnetRun.Dispose();
+                await dotnetRun.DisposeAsync().ConfigureAwait(false);
             }
         }
 
@@ -214,7 +214,7 @@ namespace Boxed.DotnetNewTest
                 httpClient.Dispose();
                 httpsClient.Dispose();
                 httpClientHandler.Dispose();
-                dotnetRun.Dispose();
+                await dotnetRun.DisposeAsync().ConfigureAwait(false);
             }
         }
 
@@ -280,7 +280,7 @@ namespace Boxed.DotnetNewTest
         }
 #endif
 
-        private static async Task<IDisposable> DotnetRunInternalAsync(
+        private static async Task<IAsyncDisposable> DotnetRunInternalAsync(
             string directoryPath,
             bool? noRestore = true,
             TimeSpan? timeout = null,
@@ -296,24 +296,36 @@ namespace Boxed.DotnetNewTest
                 "dotnet",
                 $"run {noRestoreArgument} --urls {urlsParameter}",
                 cancellationTokenSource.Token);
-            await WaitForStartAsync(urls.First(), timeout ?? TimeSpan.FromMinutes(1)).ConfigureAwait(false);
 
-            return new DisposableAction(
-                () =>
+            try
+            {
+                await WaitForStartAsync(urls.First(), timeout ?? TimeSpan.FromMinutes(1)).ConfigureAwait(false);
+            }
+            catch
+            {
+                await Dispose(cancellationTokenSource, task).ConfigureAwait(false);
+                throw;
+            }
+
+            return new AsyncDisposableAction(() => Dispose(cancellationTokenSource, task));
+
+            async static ValueTask Dispose(CancellationTokenSource cancellationTokenSource, Task task)
+            {
+                cancellationTokenSource.Cancel();
+
+                try
                 {
-                    cancellationTokenSource.Cancel();
-
-                    try
-                    {
-                        task.Wait();
-                    }
-                    catch (AggregateException exception)
-                    when (exception.GetBaseException().GetBaseException() is TaskCanceledException)
-                    {
-                    }
-
+                    await task.ConfigureAwait(false);
+                }
+                catch (Exception exception)
+                when (exception.GetBaseException() is TaskCanceledException)
+                {
+                }
+                finally
+                {
                     cancellationTokenSource.Dispose();
-                });
+                }
+            }
         }
 
         private static async Task WaitForStartAsync(string url, TimeSpan timeout)
