@@ -359,30 +359,32 @@ namespace Boxed.DotnetNewTest
         {
             const int intervalMilliseconds = 100;
 
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout))
             using (var httpClientHandler = new HttpClientHandler()
                 {
                     AllowAutoRedirect = false,
                     ServerCertificateCustomValidationCallback = DefaultValidateCertificate,
                 })
+            using (var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(url) })
             {
-                using (var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(url) })
+                while (true)
                 {
-                    for (var i = 0; i < (timeout.TotalMilliseconds / intervalMilliseconds); ++i)
+                    if (cancellationTokenSource.Token.IsCancellationRequested)
                     {
-                        try
-                        {
-                            await httpClient.GetAsync(new Uri("/", UriKind.Relative)).ConfigureAwait(false);
-                            return;
-                        }
-                        catch (HttpRequestException exception)
-                        when (IsApiDownException(exception))
-                        {
-                            await Task.Delay(intervalMilliseconds).ConfigureAwait(false);
-                        }
+                        throw new TimeoutException(
+                            $"Timed out after waiting {timeout} for application to start using dotnet run.");
                     }
 
-                    throw new TimeoutException(
-                        $"Timed out after waiting {timeout} for application to start using dotnet run.");
+                    try
+                    {
+                        await httpClient.GetAsync(new Uri("/", UriKind.Relative)).ConfigureAwait(false);
+                        return;
+                    }
+                    catch (HttpRequestException exception)
+                    when (IsApiDownException(exception))
+                    {
+                        await Task.Delay(intervalMilliseconds).ConfigureAwait(false);
+                    }
                 }
             }
         }
