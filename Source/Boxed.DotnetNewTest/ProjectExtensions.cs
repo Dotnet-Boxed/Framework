@@ -117,7 +117,7 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <param name="project">The project.</param>
         /// <param name="projectRelativeDirectoryPath">The project relative directory path.</param>
-        /// <param name="relativeUrl">The relative URL to call to test if the app has started or not.</param>
+        /// <param name="readinessCheck">The readiness check to perform to check that the app has started.</param>
         /// <param name="action">The action to perform while the project is running.</param>
         /// <param name="noRestore">Whether to restore the project.</param>
         /// <param name="validateCertificate">Validate the project certificate.</param>
@@ -127,7 +127,7 @@ namespace Boxed.DotnetNewTest
         public static async Task DotnetRunAsync(
             this Project project,
             string projectRelativeDirectoryPath,
-            Uri relativeUrl,
+            Func<HttpClient, Task<bool>> readinessCheck,
             Func<HttpClient, Task> action,
             bool? noRestore = true,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
@@ -152,16 +152,24 @@ namespace Boxed.DotnetNewTest
             var httpPort = PortHelper.GetFreeTcpPort();
             var httpUrl = new Uri($"http://localhost:{httpPort}");
 
-            var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
-            var dotnetRun = await DotnetRunInternalAsync(projectFilePath, relativeUrl, noRestore, timeout, showShellWindow, httpUrl)
-                .ConfigureAwait(false);
-
             var httpClientHandler = new HttpClientHandler()
             {
                 AllowAutoRedirect = false,
                 ServerCertificateCustomValidationCallback = validateCertificate ?? DefaultValidateCertificate,
             };
             var httpClient = new HttpClient(httpClientHandler) { BaseAddress = httpUrl };
+
+            var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
+            var dotnetRun = await DotnetRunInternalAsync(
+                    (http, https) => readinessCheck(http),
+                    httpClient,
+                    httpsClient: null,
+                    projectFilePath,
+                    noRestore,
+                    timeout,
+                    showShellWindow,
+                    httpUrl)
+                .ConfigureAwait(false);
 
             try
             {
@@ -180,7 +188,7 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <param name="project">The project.</param>
         /// <param name="projectRelativeDirectoryPath">The project relative directory path.</param>
-        /// <param name="relativeUrl">The relative URL to call to test if the app has started or not.</param>
+        /// <param name="readinessCheck">The readiness check to perform to check that the app has started.</param>
         /// <param name="action">The action to perform while the project is running.</param>
         /// <param name="noRestore">Whether to restore the project.</param>
         /// <param name="validateCertificate">Validate the project certificate.</param>
@@ -190,7 +198,7 @@ namespace Boxed.DotnetNewTest
         public static async Task DotnetRunAsync(
             this Project project,
             string projectRelativeDirectoryPath,
-            Uri relativeUrl,
+            Func<HttpClient, HttpClient, Task<bool>> readinessCheck,
             Func<HttpClient, HttpClient, Task> action,
             bool? noRestore = true,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
@@ -217,10 +225,6 @@ namespace Boxed.DotnetNewTest
             var httpUrl = new Uri($"http://localhost:{httpPort}");
             var httpsUrl = new Uri($"https://localhost:{httpsPort}");
 
-            var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
-            var dotnetRun = await DotnetRunInternalAsync(projectFilePath, relativeUrl, noRestore, timeout, showShellWindow, httpUrl, httpsUrl)
-                .ConfigureAwait(false);
-
             var httpClientHandler = new HttpClientHandler()
             {
                 AllowAutoRedirect = false,
@@ -228,6 +232,19 @@ namespace Boxed.DotnetNewTest
             };
             var httpClient = new HttpClient(httpClientHandler) { BaseAddress = httpUrl };
             var httpsClient = new HttpClient(httpClientHandler) { BaseAddress = httpsUrl };
+
+            var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
+            var dotnetRun = await DotnetRunInternalAsync(
+                    readinessCheck,
+                    httpClient,
+                    httpsClient,
+                    projectFilePath,
+                    noRestore,
+                    timeout,
+                    showShellWindow,
+                    httpUrl,
+                    httpsUrl)
+                .ConfigureAwait(false);
 
             try
             {
@@ -305,8 +322,10 @@ namespace Boxed.DotnetNewTest
 #endif
 
         private static async Task<IAsyncDisposable> DotnetRunInternalAsync(
+            Func<HttpClient, HttpClient, Task<bool>> readinessCheck,
+            HttpClient httpClient,
+            HttpClient httpsClient,
             string directoryPath,
-            Uri relativeUrl,
             bool? noRestore,
             TimeSpan? timeout,
             bool showShellWindow,
@@ -326,7 +345,12 @@ namespace Boxed.DotnetNewTest
 
             try
             {
-                await WaitForStartAsync(urls.First(), relativeUrl, timeout ?? TimeSpan.FromMinutes(1)).ConfigureAwait(false);
+                await WaitForStartAsync(
+                        readinessCheck,
+                        httpClient,
+                        httpsClient,
+                        timeout ?? TimeSpan.FromMinutes(1))
+                    .ConfigureAwait(false);
             }
             catch
             {
@@ -360,72 +384,50 @@ namespace Boxed.DotnetNewTest
             }
         }
 
-        private static async Task WaitForStartAsync(Uri baseUrl, Uri relativeUrl, TimeSpan timeout)
+        private static async Task WaitForStartAsync(
+            Func<HttpClient, HttpClient, Task<bool>> readinessCheck,
+            HttpClient httpClient,
+            HttpClient httpsClient,
+            TimeSpan timeout)
         {
             const int intervalMilliseconds = 100;
 
-            var url = new Uri(baseUrl, relativeUrl);
-            TestLogger.WriteLine($"Waiting for app at {url} to start and return success status code.");
+            TestLogger.WriteLine($"Waiting for app to start and pass readiness check.");
 
             using (var cancellationTokenSource = new CancellationTokenSource(timeout))
-            using (var httpClientHandler = new HttpClientHandler()
-                {
-                    ServerCertificateCustomValidationCallback = DefaultValidateCertificate,
-                })
-            using (var httpClient = new HttpClient(httpClientHandler) { BaseAddress = baseUrl })
             {
                 while (true)
                 {
                     if (cancellationTokenSource.Token.IsCancellationRequested)
                     {
-                        var message = $"Timed out after waiting {timeout} for app at {url} to start using dotnet run.";
+                        var message = $"Timed out after waiting {timeout} for app to start using dotnet run.";
                         TestLogger.WriteLine(message);
                         throw new TimeoutException(message);
                     }
 
                     try
                     {
-                        var response = await httpClient.GetAsync(relativeUrl).ConfigureAwait(false);
-                        if (response.IsSuccessStatusCode)
+                        var isSuccess = await readinessCheck(httpClient, httpsClient).ConfigureAwait(false);
+                        if (isSuccess)
                         {
-                            TestLogger.WriteLine($"App at {url} has started and returned success status code '{response.StatusCode}'.");
+                            TestLogger.WriteLine($"App has started and readiness check has succeeded.");
                             return;
                         }
                         else
                         {
-                            TestLogger.WriteLine($"Waiting for app at {url} to start, error status code received '{response.StatusCode}'...");
+                            TestLogger.WriteLine($"Waiting for app to start. Readiness check failed...");
                         }
                     }
-                    catch (HttpRequestException exception)
-                    when (IsApiDownException(exception))
+#pragma warning disable CA1031 // Do not catch general exception types
+                    catch
+#pragma warning restore CA1031 // Do not catch general exception types
                     {
-                        TestLogger.WriteLine($"Waiting for app at {url} to start, app is not reachable...");
+                        TestLogger.WriteLine($"Waiting for app to start. Readiness check threw exception...");
                     }
 
                     await Task.Delay(intervalMilliseconds).ConfigureAwait(false);
                 }
             }
-        }
-
-        private static bool IsApiDownException(Exception exception)
-        {
-            var result = false;
-            var baseException = exception.GetBaseException();
-            if (baseException is SocketException socketException)
-            {
-                result =
-                    string.Equals(
-                        socketException.Message,
-                        "No connection could be made because the target machine actively refused it",
-                        StringComparison.Ordinal)
-                    ||
-                    string.Equals(
-                        socketException.Message,
-                        "Connection refused",
-                        StringComparison.Ordinal);
-            }
-
-            return result;
         }
 
         private static bool DefaultValidateCertificate(
