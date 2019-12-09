@@ -14,7 +14,8 @@ namespace Boxed.AspNetCore
         /// </summary>
         /// <param name="application">The application builder.</param>
         /// <returns>The same application builder.</returns>
-        public static IApplicationBuilder UseHttpException(this IApplicationBuilder application) => UseHttpException(application, null);
+        public static IApplicationBuilder UseHttpException(this IApplicationBuilder application) =>
+            UseHttpException(application, null);
 
         /// <summary>
         /// Allows the use of <see cref="HttpException"/> as an alternative method of returning an error result.
@@ -22,7 +23,9 @@ namespace Boxed.AspNetCore
         /// <param name="application">The application builder.</param>
         /// <param name="configureOptions">The middleware options.</param>
         /// <returns>The same application builder.</returns>
-        public static IApplicationBuilder UseHttpException(this IApplicationBuilder application, Action<HttpExceptionMiddlewareOptions> configureOptions)
+        public static IApplicationBuilder UseHttpException(
+            this IApplicationBuilder application,
+            Action<HttpExceptionMiddlewareOptions> configureOptions)
         {
             if (application is null)
             {
@@ -32,6 +35,23 @@ namespace Boxed.AspNetCore
             var options = new HttpExceptionMiddlewareOptions();
             configureOptions?.Invoke(options);
             return application.UseMiddleware<HttpExceptionMiddleware>(options);
+        }
+
+        /// <summary>
+        /// Measures the time the request takes to process and returns this in a Server-Timing trailing HTTP header.
+        /// It is used to surface any back-end server timing metrics (e.g. database read/write, CPU time, file system
+        /// access, etc.) to the developer tools in the user's browser.
+        /// </summary>
+        /// <param name="application">The application builder.</param>
+        /// <returns>The same application builder.</returns>
+        public static IApplicationBuilder UseServerTiming(this IApplicationBuilder application)
+        {
+            if (application is null)
+            {
+                throw new ArgumentNullException(nameof(application));
+            }
+
+            return application.UseMiddleware<ServerTimingMiddleware>();
         }
 
         /// <summary>

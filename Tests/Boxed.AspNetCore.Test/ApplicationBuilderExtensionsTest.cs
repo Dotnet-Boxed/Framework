@@ -22,7 +22,11 @@ namespace Boxed.AspNetCore.Test
         }
 
         [Fact]
-        public async Task UseIf_TrueCondition_ActionCalled()
+        public void UseServerTiming_NullApplication_ThrowsArgumentNullException() =>
+            Assert.Throws<ArgumentNullException>(() => Boxed.AspNetCore.ApplicationBuilderExtensions.UseServerTiming(null));
+
+        [Fact]
+        public async Task UseIf_TrueCondition_ActionCalledAsync()
         {
             var actionCalled = false;
 
@@ -40,7 +44,7 @@ namespace Boxed.AspNetCore.Test
         }
 
         [Fact]
-        public async Task UseIf_FalseCondition_ActionCalled()
+        public async Task UseIf_FalseCondition_ActionCalledAsync()
         {
             var actionCalled = false;
 
@@ -59,7 +63,7 @@ namespace Boxed.AspNetCore.Test
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task UseIfElse_TrueCondition_ActionCalled(bool condition)
+        public async Task UseIfElse_TrueCondition_ActionCalledAsync(bool condition)
         {
             var ifActionCalled = false;
             var elseActionCalled = false;
