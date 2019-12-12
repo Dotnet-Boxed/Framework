@@ -41,7 +41,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
-            Assert.Contains(nameof(TwitterCardPlayer.Image), validationException.Message);
+            Assert.Contains(nameof(TwitterCardPlayer.Image), validationException.Message, StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                     new TagHelperAttributeList(),
                     new Dictionary<object, object>(),
-                    Guid.NewGuid().ToString("N"));
+                    Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -73,7 +73,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
-            Assert.Contains(nameof(TwitterCardPlayer.Player), validationException.Message);
+            Assert.Contains(nameof(TwitterCardPlayer.Player), validationException.Message, StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -111,7 +111,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
-            Assert.Contains(nameof(TwitterCardPlayer.SiteUsername), validationException.Message);
+            Assert.Contains(nameof(TwitterCardPlayer.SiteUsername), validationException.Message, StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -143,7 +143,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
-            Assert.Contains(nameof(TwitterCardPlayer.Title), validationException.Message);
+            Assert.Contains(nameof(TwitterCardPlayer.Title), validationException.Message, StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -181,7 +181,10 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             tagHelper.Process(context, output);
-            Assert.Contains("name=\"twitter:card\" content=\"player\"", output.Content.GetContent());
+            Assert.Contains(
+                "name=\"twitter:card\" content=\"player\"",
+                output.Content.GetContent(),
+                StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -207,7 +210,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -219,8 +222,11 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             tagHelper.Process(context, output);
-            Assert.Contains("HTTPS:".ToLower(), output.Content.GetContent().ToLower());
-            Assert.Contains("name=\"twitter:player\"", output.Content.GetContent());
+            Assert.Contains(
+                "HTTPS:".ToUpperInvariant(),
+                output.Content.GetContent().ToUpperInvariant(),
+                StringComparison.Ordinal);
+            Assert.Contains("name=\"twitter:player\"", output.Content.GetContent(), StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -246,7 +252,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -258,7 +264,10 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
-            Assert.Contains(nameof(TwitterCardPlayer.Player.PlayerUrl), validationException.Message);
+            Assert.Contains(
+                nameof(TwitterCardPlayer.Player.PlayerUrl),
+                validationException.Message,
+                StringComparison.Ordinal);
         }
     }
 }

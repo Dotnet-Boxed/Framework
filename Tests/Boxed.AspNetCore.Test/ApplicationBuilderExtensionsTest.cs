@@ -8,7 +8,7 @@ namespace Boxed.AspNetCore.Test
     using Moq;
     using Xunit;
 
-    public class ApplicationBuilderExtensionsTest : IDisposable
+    public sealed class ApplicationBuilderExtensionsTest : IDisposable
     {
         private readonly Mock<IServiceProvider> serviceProviderMock;
         private readonly ApplicationBuilder applicationBuilder;

@@ -17,6 +17,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6F3F861E-CB16-49D3-91E6-FAF548BA4D0A}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\.editorconfig = Tests\.editorconfig
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.AspNetCore", "Source\Boxed.AspNetCore\Boxed.AspNetCore.csproj", "{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5}"
 EndProject

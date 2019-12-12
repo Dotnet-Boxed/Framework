@@ -54,7 +54,9 @@ namespace Boxed.AspNetCore.Test
         public void ApplyRule_WithCanonicalUrl_DoNothing(
             bool appendTrailingSlash,
             bool lowercaseUrls,
+#pragma warning disable CA1054 // Uri parameters should not be strings
             string url)
+#pragma warning restore CA1054 // Uri parameters should not be strings
         {
             var rule = new RedirectToCanonicalUrlRule(appendTrailingSlash, lowercaseUrls);
             var context = new RewriteContext()
@@ -86,8 +88,10 @@ namespace Boxed.AspNetCore.Test
         public void ApplyRule_WithoutCanonicalUrl_301PermanentRedirectToCanonicalUrl(
             bool appendTrailingSlash,
             bool lowercaseUrls,
+#pragma warning disable CA1054 // Uri parameters should not be strings
             string url,
             string canonicalUrl)
+#pragma warning restore CA1054 // Uri parameters should not be strings
         {
             var rule = new RedirectToCanonicalUrlRule(appendTrailingSlash, lowercaseUrls);
             var context = new RewriteContext()

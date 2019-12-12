@@ -10,7 +10,7 @@ namespace Boxed.AspNetCore.Test
     using Moq;
     using Xunit;
 
-    public class DistributedCacheExtensionsTest : IDisposable
+    public sealed class DistributedCacheExtensionsTest : IDisposable
     {
         private readonly Mock<IDistributedCache> distributedCacheMock;
 
@@ -28,17 +28,19 @@ namespace Boxed.AspNetCore.Test
         [Fact]
         public async Task GetAsJsonAsync_ValidValue_ReturnsDeserializedObjectAsync()
         {
-            var cancellationTokenSource = new CancellationTokenSource();
-            this.distributedCacheMock
-                .Setup(x => x.GetAsync("Key", cancellationTokenSource.Token))
-                .ReturnsAsync(Encoding.UTF8.GetBytes("{\"Value\":1}"));
+            using (var cancellationTokenSource = new CancellationTokenSource())
+            {
+                this.distributedCacheMock
+                    .Setup(x => x.GetAsync("Key", cancellationTokenSource.Token))
+                    .ReturnsAsync(Encoding.UTF8.GetBytes("{\"Value\":1}"));
 
-            var testClass = await this.distributedCacheMock.Object
-                .GetAsJsonAsync<TestClass>("Key", null, cancellationTokenSource.Token)
-                .ConfigureAwait(false);
+                var testClass = await this.distributedCacheMock.Object
+                    .GetAsJsonAsync<TestClass>("Key", null, cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
 
-            Assert.NotNull(testClass);
-            Assert.Equal(1, testClass.Value);
+                Assert.NotNull(testClass);
+                Assert.Equal(1, testClass.Value);
+            }
         }
 
         [Fact]
@@ -52,23 +54,25 @@ namespace Boxed.AspNetCore.Test
         [Fact]
         public async Task SetAsJsonAsync_ValidValue_SavesSerializedValueAsync()
         {
-            var cancellationTokenSource = new CancellationTokenSource();
-            this.distributedCacheMock
-                .Setup(x => x.SetAsync(
-                    "Key",
-                    It.Is<byte[]>(y => y.SequenceEqual(Encoding.UTF8.GetBytes("{\"Value\":1}"))),
-                    null,
-                    cancellationTokenSource.Token))
-                .Returns(Task.CompletedTask);
+            using (var cancellationTokenSource = new CancellationTokenSource())
+            {
+                this.distributedCacheMock
+                    .Setup(x => x.SetAsync(
+                        "Key",
+                        It.Is<byte[]>(y => y.SequenceEqual(Encoding.UTF8.GetBytes("{\"Value\":1}"))),
+                        null,
+                        cancellationTokenSource.Token))
+                    .Returns(Task.CompletedTask);
 
-            await this.distributedCacheMock.Object
-                .SetAsJsonAsync("Key", new TestClass() { Value = 1 }, null, null, cancellationTokenSource.Token)
-                .ConfigureAwait(false);
+                await this.distributedCacheMock.Object
+                    .SetAsJsonAsync("Key", new TestClass() { Value = 1 }, null, null, cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
+            }
         }
 
         public void Dispose() => Mock.VerifyAll(this.distributedCacheMock);
 
-        public class TestClass
+        internal class TestClass
         {
             public int Value { get; set; }
         }

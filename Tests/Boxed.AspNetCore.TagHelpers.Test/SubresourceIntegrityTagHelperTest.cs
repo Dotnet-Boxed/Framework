@@ -48,7 +48,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
         }
 
         [Fact]
-        public async Task ProcessAsync_SriAlreadyCached_ReturnsCachedSri()
+        public async Task ProcessAsync_SriAlreadyCached_ReturnsCachedSriAsync()
         {
             this.tagHelper.Source = "/foo.js";
             var attributes = new TagHelperAttributeList
@@ -56,12 +56,12 @@ namespace Boxed.AspNetCore.TagHelpers.Test
                 { "src", "/foo.js" }
             };
             var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
-            var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException());
+            var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
             this.distributedCacheMock
                 .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
                 .ReturnsAsync(Encoding.UTF8.GetBytes("SRI Value"));
 
-            await this.tagHelper.ProcessAsync(context, output);
+            await this.tagHelper.ProcessAsync(context, output).ConfigureAwait(false);
 
             Assert.True(attributes.ContainsName("crossorigin"));
             Assert.Equal("anonymous", attributes["crossorigin"].Value);
@@ -71,7 +71,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
         }
 
         [Fact]
-        public async Task ProcessAsync_Sha512SriNotCached_CachesSriAndReturnsIt()
+        public async Task ProcessAsync_Sha512SriNotCached_CachesSriAndReturnsItAsync()
         {
             var expectedSri = "sha512-NhX4DJ0pPtdAJof5SyLVjlKbjMeRb4+sf933+9WvTPd309eVp6AKFr9+fz+5Vh7puq5IDan+ehh2nnGIawPzFQ==";
             this.tagHelper.Source = "/foo.js";
@@ -80,7 +80,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
                 { "src", "/foo.js" }
             };
             var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
-            var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException());
+            var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
             this.distributedCacheMock
                 .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
                 .ReturnsAsync((byte[])null);
@@ -94,7 +94,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
                     CancellationToken.None))
                 .Returns(Task.CompletedTask);
 
-            await this.tagHelper.ProcessAsync(context, output);
+            await this.tagHelper.ProcessAsync(context, output).ConfigureAwait(false);
 
             Assert.True(attributes.ContainsName("crossorigin"));
             Assert.Equal("anonymous", attributes["crossorigin"].Value);
@@ -104,7 +104,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
         }
 
         [Fact]
-        public async Task ProcessAsync_Sha256And384And512SriNotCached_CachesSriAndReturnsIt()
+        public async Task ProcessAsync_Sha256And384And512SriNotCached_CachesSriAndReturnsItAsync()
         {
             var expectedSri = "sha256-GF+NsyJx/iX1Yab8k4suJkMG7DBO2lGAB9F2SCY4GWk= " +
                 "sha384-NRn+WtLFlu/j4nam81G4/AsD24YXgkkNRfdZjr0Ktf1VIO0QLzjEpeyDTphmgDX8 " +
@@ -119,7 +119,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
                 { "src", "/foo.js" }
             };
             var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
-            var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException());
+            var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
             this.distributedCacheMock
                 .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
                 .ReturnsAsync((byte[])null);
@@ -133,7 +133,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
                     CancellationToken.None))
                 .Returns(Task.CompletedTask);
 
-            await this.tagHelper.ProcessAsync(context, output);
+            await this.tagHelper.ProcessAsync(context, output).ConfigureAwait(false);
 
             Assert.True(attributes.ContainsName("crossorigin"));
             Assert.Equal("anonymous", attributes["crossorigin"].Value);
@@ -142,7 +142,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             Assert.Equal(expectedSri, htmlString.Value);
         }
 
-        public class TestSubresourceIntegrityTagHelper : SubresourceIntegrityTagHelper
+        internal class TestSubresourceIntegrityTagHelper : SubresourceIntegrityTagHelper
         {
             public TestSubresourceIntegrityTagHelper(
                 IDistributedCache distributedCache,

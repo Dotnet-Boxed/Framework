@@ -32,8 +32,7 @@ namespace Boxed.Mapping.Test
         {
             var mapper = new Mapper();
 
-            var to = mapper.MapArray(
-                new MapFrom[0]);
+            var to = mapper.MapArray(Array.Empty<MapFrom>());
 
             Assert.IsType<MapTo[]>(to);
             Assert.Empty(to);
@@ -63,7 +62,7 @@ namespace Boxed.Mapping.Test
             var mapper = new Mapper();
 
             var to = mapper.MapCollection(
-                new MapFrom[0],
+                Array.Empty<MapFrom>(),
                 new List<MapTo>());
 
             Assert.IsType<List<MapTo>>(to);
@@ -94,8 +93,7 @@ namespace Boxed.Mapping.Test
         {
             var mapper = new Mapper();
 
-            var to = mapper.MapCollection(
-                new MapFrom[0]);
+            var to = mapper.MapCollection(Array.Empty<MapFrom>());
 
             Assert.IsType<Collection<MapTo>>(to);
             Assert.Empty(to);
@@ -124,8 +122,7 @@ namespace Boxed.Mapping.Test
         {
             var mapper = new Mapper();
 
-            var to = mapper.MapList(
-                new MapFrom[0]);
+            var to = mapper.MapList(Array.Empty<MapFrom>());
 
             Assert.IsType<List<MapTo>>(to);
             Assert.Empty(to);
@@ -154,8 +151,7 @@ namespace Boxed.Mapping.Test
         {
             var mapper = new Mapper();
 
-            var to = mapper.MapObservableCollection(
-                new MapFrom[0]);
+            var to = mapper.MapObservableCollection(Array.Empty<MapFrom>());
 
             Assert.IsType<ObservableCollection<MapTo>>(to);
             Assert.Empty(to);

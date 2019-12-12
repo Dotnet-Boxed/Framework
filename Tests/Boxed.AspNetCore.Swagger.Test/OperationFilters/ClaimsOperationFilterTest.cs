@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Boxed.AspNetCore.Swagger.OperationFilters;
@@ -45,7 +46,7 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
         [Fact]
         public void Apply_HasClaimsAuthorizationRequirements_AddsClaimsToOperation()
         {
-            var requirement = new ClaimsAuthorizationRequirement("Type", new string[0]);
+            var requirement = new ClaimsAuthorizationRequirement("Type", Array.Empty<string>());
             var requirements = new List<IAuthorizationRequirement>() { requirement };
             var policy = new AuthorizationPolicy(requirements, new List<string>());
             var filterDescriptor = new FilterDescriptor(new AuthorizeFilter(policy), 30);

@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Boxed.AspNetCore.Swagger.OperationFilters;
@@ -44,7 +45,7 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
 
         [Fact]
         public void Apply_HasClaimsAuthorizationRequirement_Adds403Response() =>
-            this.Apply_HasRequirement_Adds403Response(new ClaimsAuthorizationRequirement("Type", new string[0]));
+            this.Apply_HasRequirement_Adds403Response(new ClaimsAuthorizationRequirement("Type", Array.Empty<string>()));
 
         [Fact]
         public void Apply_HasNameAuthorizationRequirement_Adds403Response() =>

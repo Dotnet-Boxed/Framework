@@ -3,6 +3,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
     using System.Threading.Tasks;
     using Boxed.AspNetCore.TagHelpers.Test.TestData;
     using Boxed.AspNetCore.TagHelpers.Twitter;
@@ -27,7 +28,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -39,7 +40,10 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
-            Assert.Contains(nameof(TwitterCardSummary.Description), validationException.Message);
+            Assert.Contains(
+                nameof(TwitterCardSummary.Description),
+                validationException.Message,
+                StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -59,7 +63,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -72,7 +76,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             tagHelper.Process(context, output);
-            Assert.DoesNotContain("twitter:image", output.Content.GetContent());
+            Assert.DoesNotContain("twitter:image", output.Content.GetContent(), StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -92,7 +96,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -105,8 +109,8 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             tagHelper.Process(context, output);
-            Assert.DoesNotContain("twitter:image:height", output.Content.GetContent());
-            Assert.DoesNotContain("twitter:image:width", output.Content.GetContent());
+            Assert.DoesNotContain("twitter:image:height", output.Content.GetContent(), StringComparison.Ordinal);
+            Assert.DoesNotContain("twitter:image:width", output.Content.GetContent(), StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -125,7 +129,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -137,7 +141,10 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
-            Assert.Contains("either twitter:site or twitter:site:id is required.", validationException.Message);
+            Assert.Contains(
+                "either twitter:site or twitter:site:id is required.",
+                validationException.Message,
+                StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -158,7 +165,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -171,7 +178,10 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             tagHelper.Process(context, output);
-            Assert.Contains("name=\"twitter:site:id\" content=\"" + TwitterCardAnswerKey.SiteIdValue + "\"", output.Content.GetContent());
+            Assert.Contains(
+                "name=\"twitter:site:id\" content=\"" + TwitterCardAnswerKey.SiteIdValue + "\"",
+                output.Content.GetContent(),
+                StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -190,7 +200,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -202,7 +212,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
 
             var validationException = Assert.Throws<ValidationException>(() => tagHelper.Process(context, output));
-            Assert.Contains(nameof(TwitterCardSummary.Title), validationException.Message);
+            Assert.Contains(nameof(TwitterCardSummary.Title), validationException.Message, StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -222,7 +232,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
 
             var output = new TagHelperOutput(
                 "meta",
@@ -234,7 +244,10 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
             tagHelper.Process(context, output);
-            Assert.Contains("name=\"twitter:card\" content=\"summary\"", output.Content.GetContent());
+            Assert.Contains(
+                "name=\"twitter:card\" content=\"summary\"",
+                output.Content.GetContent(),
+                StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -255,7 +268,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -266,8 +279,14 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
             tagHelper.Process(context, output);
-            Assert.Contains("name=\"twitter:creator\" content=\"" + TwitterCardAnswerKey.CreatorUsernameValue + "\"", output.Content.GetContent());
-            Assert.Contains("name=\"twitter:creator:id\" content=\"" + TwitterCardAnswerKey.CreatorId + "\"", output.Content.GetContent());
+            Assert.Contains(
+                "name=\"twitter:creator\" content=\"" + TwitterCardAnswerKey.CreatorUsernameValue + "\"",
+                output.Content.GetContent(),
+                StringComparison.Ordinal);
+            Assert.Contains(
+                "name=\"twitter:creator:id\" content=\"" + TwitterCardAnswerKey.CreatorId + "\"",
+                output.Content.GetContent(),
+                StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -287,7 +306,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -298,7 +317,10 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
             tagHelper.Process(context, output);
-            Assert.Contains("name=\"twitter:description\" content=\"" + TwitterCardAnswerKey.DescriptionValue + "\"", output.Content.GetContent());
+            Assert.Contains(
+                "name=\"twitter:description\" content=\"" + TwitterCardAnswerKey.DescriptionValue + "\"",
+                output.Content.GetContent(),
+                StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -318,7 +340,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -330,9 +352,15 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 });
             tagHelper.Process(context, output);
 
-            Assert.Contains("name=\"twitter:image\"", output.Content.GetContent());
-            Assert.Contains("name=\"twitter:image:width\" content=\"" + TwitterCardAnswerKey.ImageWidthValue.ToString() + "\"", output.Content.GetContent());
-            Assert.Contains("name=\"twitter:image:height\" content=\"" + TwitterCardAnswerKey.ImageHeightValue.ToString() + "\"", output.Content.GetContent());
+            Assert.Contains("name=\"twitter:image\"", output.Content.GetContent(), StringComparison.Ordinal);
+            Assert.Contains(
+                "name=\"twitter:image:width\" content=\"" + TwitterCardAnswerKey.ImageWidthValue.ToString(CultureInfo.InvariantCulture) + "\"",
+                output.Content.GetContent(),
+                StringComparison.Ordinal);
+            Assert.Contains(
+                "name=\"twitter:image:height\" content=\"" + TwitterCardAnswerKey.ImageHeightValue.ToString(CultureInfo.InvariantCulture) + "\"",
+                output.Content.GetContent(),
+                StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -352,7 +380,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
             var output = new TagHelperOutput(
                 "meta",
                 new TagHelperAttributeList(),
@@ -363,7 +391,10 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 });
             tagHelper.Process(context, output);
-            Assert.Contains("name=\"twitter:title\" content=\"" + TwitterCardAnswerKey.TitleValue + "\"", output.Content.GetContent());
+            Assert.Contains(
+                "name=\"twitter:title\" content=\"" + TwitterCardAnswerKey.TitleValue + "\"",
+                output.Content.GetContent(),
+                StringComparison.Ordinal);
         }
     }
 }

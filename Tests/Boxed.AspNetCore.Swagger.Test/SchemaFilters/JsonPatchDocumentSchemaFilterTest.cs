@@ -49,7 +49,9 @@ namespace Boxed.AspNetCore.Swagger.Test.SchemaFilters
             Assert.Equal(new Uri("http://jsonpatch.com/"), this.schema.ExternalDocs.Url);
         }
 
-        public class Model
+#pragma warning disable CA1812 // Never instantiated
+        internal class Model
+#pragma warning restore CA1812 // Never instantiated
         {
         }
     }
