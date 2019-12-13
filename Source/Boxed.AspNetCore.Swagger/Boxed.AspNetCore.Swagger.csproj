@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>6.0.0</VersionPrefix>
+    <VersionPrefix>6.0.1</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
     <Product>ASP.NET Core Swagger Framework Boxed</Product>
     <Description>Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project implementing Swagger (OpenAPI).</Description>
@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc5" />
   </ItemGroup>

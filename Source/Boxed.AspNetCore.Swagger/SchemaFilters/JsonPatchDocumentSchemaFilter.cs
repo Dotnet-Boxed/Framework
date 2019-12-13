@@ -90,8 +90,8 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.ApiModel.Type.GenericTypeArguments.Length > 0 &&
-                context.ApiModel.Type.GetGenericTypeDefinition() == typeof(JsonPatchDocument<>))
+            if (context.Type.GenericTypeArguments.Length > 0 &&
+                context.Type.GetGenericTypeDefinition() == typeof(JsonPatchDocument<>))
             {
                 schema.Default = Example;
                 schema.Example = Example;

@@ -107,7 +107,7 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.ApiModel.Type == typeof(ProblemDetails))
+            if (context.Type == typeof(ProblemDetails))
             {
                 // TODO: Set the default and example based on the status code.
                 // schema.Default = ProblemDetails;
