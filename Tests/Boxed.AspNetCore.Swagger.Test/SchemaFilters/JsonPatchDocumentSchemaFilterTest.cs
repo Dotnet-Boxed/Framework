@@ -24,7 +24,7 @@ namespace Boxed.AspNetCore.Swagger.Test.SchemaFilters
             this.schemaFilter.Apply(
                 this.schema,
                 new SchemaFilterContext(
-                    new ApiModel(typeof(JsonPatchDocument<Model>)),
+                    typeof(JsonPatchDocument<Model>),
                     new SchemaRepository(),
                     null));
 
@@ -34,7 +34,7 @@ namespace Boxed.AspNetCore.Swagger.Test.SchemaFilters
             this.schemaFilter.Apply(
                 this.schema,
                 new SchemaFilterContext(
-                    new ApiModel(typeof(JsonPatchDocument<Model>)),
+                    typeof(JsonPatchDocument<Model>),
                     new SchemaRepository(),
                     null));
 
