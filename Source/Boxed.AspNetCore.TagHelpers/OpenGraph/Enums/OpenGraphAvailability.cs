@@ -18,6 +18,6 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// The availability of the item is pending or unknown.
         /// </summary>
-        Pending
+        Pending,
     }
 }

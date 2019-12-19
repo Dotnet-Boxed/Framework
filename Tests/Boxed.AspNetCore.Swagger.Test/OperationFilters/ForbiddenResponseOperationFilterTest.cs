@@ -32,8 +32,8 @@ namespace Boxed.AspNetCore.Swagger.Test.OperationFilters
             {
                 ActionDescriptor = new ActionDescriptor()
                 {
-                    FilterDescriptors = new List<FilterDescriptor>()
-                }
+                    FilterDescriptors = new List<FilterDescriptor>(),
+                },
             };
             this.context = new OperationFilterContext(
                 this.apiDescription,

@@ -53,7 +53,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             this.tagHelper.Source = "/foo.js";
             var attributes = new TagHelperAttributeList
             {
-                { "src", "/foo.js" }
+                { "src", "/foo.js" },
             };
             var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
             var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
@@ -77,7 +77,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             this.tagHelper.Source = "/foo.js";
             var attributes = new TagHelperAttributeList
             {
-                { "src", "/foo.js" }
+                { "src", "/foo.js" },
             };
             var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
             var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
@@ -116,7 +116,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             this.tagHelper.Source = "/foo.js";
             var attributes = new TagHelperAttributeList
             {
-                { "src", "/foo.js" }
+                { "src", "/foo.js" },
             };
             var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
             var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));

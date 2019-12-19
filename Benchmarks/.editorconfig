@@ -17,13 +17,3 @@ dotnet_diagnostic.SA1601.severity = none
 # Justification: Comments turned off
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1602.md
 dotnet_diagnostic.SA1602.severity = none
-
-##########################################
-# Custom
-##########################################
-
-[*.cs]
-# CA1707: Identifiers should not contain underscores
-# Justification: Test method names contain underscores
-# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1707
-dotnet_diagnostic.CA1707.severity = none

@@ -27,7 +27,7 @@ namespace Boxed.AspNetCore.Test
             var rule = new RedirectToCanonicalUrlRule(true, true);
             var context = new RewriteContext()
             {
-                HttpContext = new DefaultHttpContext()
+                HttpContext = new DefaultHttpContext(),
             };
             context.HttpContext.Request.Method = httpMethod;
 
@@ -61,7 +61,7 @@ namespace Boxed.AspNetCore.Test
             var rule = new RedirectToCanonicalUrlRule(appendTrailingSlash, lowercaseUrls);
             var context = new RewriteContext()
             {
-                HttpContext = new DefaultHttpContext()
+                HttpContext = new DefaultHttpContext(),
             };
             context.HttpContext.SetEndpoint(new Endpoint(x => Task.CompletedTask, new EndpointMetadataCollection(), "Name"));
             var request = context.HttpContext.Request;
@@ -96,7 +96,7 @@ namespace Boxed.AspNetCore.Test
             var rule = new RedirectToCanonicalUrlRule(appendTrailingSlash, lowercaseUrls);
             var context = new RewriteContext()
             {
-                HttpContext = new DefaultHttpContext()
+                HttpContext = new DefaultHttpContext(),
             };
             context.HttpContext.SetEndpoint(new Endpoint(x => Task.CompletedTask, new EndpointMetadataCollection(), "Name"));
             var request = context.HttpContext.Request;

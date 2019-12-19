@@ -4,6 +4,7 @@ namespace Boxed.DotnetNewTest
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -18,7 +19,7 @@ namespace Boxed.DotnetNewTest
         /// <param name="templateName">Name of the 'dotnet new' template to create.</param>
         /// <param name="name">The name of the project to create from the template.</param>
         /// <param name="arguments">The custom arguments to pass to the template.</param>
-        /// <param name="timeout">The timeout.</param>
+        /// <param name="timeout">The timeout. Defaults to one minute.</param>
         /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A project created from a project template.</returns>
         public static async Task<Project> DotnetNewAsync(
@@ -43,14 +44,17 @@ namespace Boxed.DotnetNewTest
                 }
             }
 
-            await ProcessExtensions
-                .StartAsync(
-                    tempDirectory.DirectoryPath,
-                    "dotnet",
-                    stringBuilder.ToString(),
-                    showShellWindow,
-                    CancellationTokenFactory.GetCancellationToken(timeout))
-                .ConfigureAwait(false);
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            {
+                await ProcessExtensions
+                    .StartAsync(
+                        tempDirectory.DirectoryPath,
+                        "dotnet",
+                        stringBuilder.ToString(),
+                        showShellWindow,
+                        cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
+            }
 
             var projectDirectoryPath = Path.Combine(tempDirectory.DirectoryPath, name);
             var publishDirectoryPath = Path.Combine(projectDirectoryPath, "Publish");

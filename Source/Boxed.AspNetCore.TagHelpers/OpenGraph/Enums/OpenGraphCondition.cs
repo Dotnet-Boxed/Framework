@@ -18,6 +18,6 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// The item is used.
         /// </summary>
-        Used
+        Used,
     }
 }

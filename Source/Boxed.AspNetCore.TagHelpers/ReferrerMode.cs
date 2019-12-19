@@ -90,6 +90,6 @@ namespace Boxed.AspNetCore.TagHelpers
         /// http://not.example.com/ (and every other origin) would send a referrer HTTP header with a value of
         /// https://example.com/sekrit.html.
         /// </example>
-        UnsafeUrl
+        UnsafeUrl,
     }
 }

@@ -39,7 +39,7 @@ namespace Boxed.Mapping.Benchmark
                 DateTimeOffsetFrom = DateTimeOffset.UtcNow,
                 IntegerFrom = this.random.Next(),
                 LongFrom = this.random.Next(),
-                StringFrom = this.random.Next().ToString(CultureInfo.InvariantCulture)
+                StringFrom = this.random.Next().ToString(CultureInfo.InvariantCulture),
             };
 
         [Benchmark(Baseline = true)]
@@ -49,7 +49,7 @@ namespace Boxed.Mapping.Benchmark
             DateTimeOffsetTo = this.mapFrom.DateTimeOffsetFrom,
             IntegerTo = this.mapFrom.IntegerFrom,
             LongTo = this.mapFrom.LongFrom,
-            StringTo = this.mapFrom.StringFrom
+            StringTo = this.mapFrom.StringFrom,
         };
 
         [Benchmark]

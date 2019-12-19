@@ -5,8 +5,18 @@ namespace Boxed.DotnetNewTest
     using System.Reflection;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Directory extension methods.
+    /// </summary>
     internal static class DirectoryExtensions
     {
+        /// <summary>
+        /// Copies the specified source directory to the destination directory.
+        /// </summary>
+        /// <param name="sourceDirectoryPath">The source directory path.</param>
+        /// <param name="destinationDirectoryPath">The destination directory path.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="sourceDirectoryPath"/> or
+        /// <paramref name="destinationDirectoryPath"/> are <c>null</c>.</exception>
         public static void Copy(string sourceDirectoryPath, string destinationDirectoryPath)
         {
             if (sourceDirectoryPath is null)
@@ -46,6 +56,11 @@ namespace Boxed.DotnetNewTest
             }
         }
 
+        /// <summary>
+        /// Creates the specified directory if it doesn't exist.
+        /// </summary>
+        /// <param name="directoryPath">The directory path.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="directoryPath"/> is <c>null</c>.</exception>
         public static void CheckCreate(string directoryPath)
         {
             if (directoryPath is null)
@@ -60,12 +75,30 @@ namespace Boxed.DotnetNewTest
             }
         }
 
+        /// <summary>
+        /// Gets the temporary directory path.
+        /// </summary>
+        /// <returns>The temporary directory path.</returns>
         public static string GetTempDirectoryPath() =>
             Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
 
+        /// <summary>
+        /// Gets the current directory for the currently executing assembly.
+        /// </summary>
+        /// <returns>The directory for the currently executing assembly.</returns>
         public static string GetCurrentDirectory() =>
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
+        /// <summary>
+        /// Tries to delete the specified directory.
+        /// </summary>
+        /// <param name="directoryPath">The directory path.</param>
+        /// <param name="maxRetries">The maximum retries.</param>
+        /// <param name="millisecondsDelay">The milliseconds delay between retries.</param>
+        /// <returns><c>true</c> if the directory was deleted, otherwise <c>false</c>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="directoryPath"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="maxRetries"/> or
+        /// <paramref name="millisecondsDelay"/> is less than one.</exception>
         public static async Task<bool> TryDeleteDirectoryAsync(
            string directoryPath,
            int maxRetries = 10,

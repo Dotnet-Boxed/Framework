@@ -23,7 +23,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = "307234931",
                 IPad = "307234931",
-                GooglePlay = string.Empty
+                GooglePlay = string.Empty,
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -54,7 +54,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = "307234931",
                 IPad = string.Empty,
-                GooglePlay = "com.android.app"
+                GooglePlay = "com.android.app",
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -85,7 +85,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 SiteUsername = string.Empty,
                 IPhone = "307234931",
                 IPad = "307234931",
-                GooglePlay = "com.android.app"
+                GooglePlay = "com.android.app",
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -116,7 +116,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = "307234931",
                 IPad = "307234931",
-                GooglePlay = "com.android.app"
+                GooglePlay = "com.android.app",
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -152,7 +152,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 IPhone = string.Empty,
                 IPad = "307234931",
-                GooglePlay = "com.android.app"
+                GooglePlay = "com.android.app",
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),

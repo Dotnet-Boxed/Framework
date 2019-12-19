@@ -6,7 +6,7 @@ namespace Boxed.AspNetCore.Middleware
     public class HttpExceptionMiddlewareOptions
     {
         /// <summary>
-        /// Property controlling if ReasonPhrase should be included in HttpResponseMessage.
+        /// Gets or sets a value indicating whether ReasonPhrase should be included in HttpResponseMessage.
         /// </summary>
         public bool IncludeReasonPhraseInResponse { get; set; } = false;
     }

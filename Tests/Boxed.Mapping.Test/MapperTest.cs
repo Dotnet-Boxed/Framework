@@ -47,7 +47,7 @@ namespace Boxed.Mapping.Test
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 }
+                    new MapFrom() { Property = 2 },
                 });
 
             Assert.IsType<MapTo[]>(to);
@@ -78,7 +78,7 @@ namespace Boxed.Mapping.Test
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 }
+                    new MapFrom() { Property = 2 },
                 },
                 new List<MapTo>());
 
@@ -108,7 +108,7 @@ namespace Boxed.Mapping.Test
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 }
+                    new MapFrom() { Property = 2 },
                 });
 
             Assert.IsType<Collection<MapTo>>(to);
@@ -137,7 +137,7 @@ namespace Boxed.Mapping.Test
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 }
+                    new MapFrom() { Property = 2 },
                 });
 
             Assert.IsType<List<MapTo>>(to);
@@ -166,7 +166,7 @@ namespace Boxed.Mapping.Test
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 }
+                    new MapFrom() { Property = 2 },
                 });
 
             Assert.IsType<ObservableCollection<MapTo>>(to);
@@ -183,7 +183,7 @@ namespace Boxed.Mapping.Test
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 }
+                    new MapFrom() { Property = 2 },
                 });
 
             var to = mapper.MapAsyncEnumerable(source);

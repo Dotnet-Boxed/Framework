@@ -2,7 +2,6 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-    <CodeAnalysisRuleSet>../../MinimumRecommendedRulesWithStyleCop.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>

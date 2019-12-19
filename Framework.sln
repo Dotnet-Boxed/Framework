@@ -11,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		appveyor.yml = appveyor.yml
 		azure-pipelines.yml = azure-pipelines.yml
 		build.cake = build.cake
-		MinimumRecommendedRulesWithStyleCop.ruleset = MinimumRecommendedRulesWithStyleCop.ruleset
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}"
@@ -44,6 +43,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Mapping.Test", "Tests\Boxed.Mapping.Test\Boxed.Mapping.Test.csproj", "{B03DDD55-8A3B-4B28-AE9F-9197F098664D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{D941A0C1-E1B6-45CF-AB7A-E1C724385404}"
+	ProjectSection(SolutionItems) = preProject
+		Benchmarks\.editorconfig = Benchmarks\.editorconfig
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Mapping.Benchmark", "Benchmarks\Boxed.Mapping.Benchmark\Boxed.Mapping.Benchmark.csproj", "{D4893F37-7C6F-4E16-B587-F48B4C5F73DC}"
 EndProject

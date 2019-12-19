@@ -10,12 +10,19 @@ namespace Boxed.DotnetNewTest
     using Microsoft.Extensions.DependencyModel;
     using Microsoft.Extensions.DependencyModel.Resolution;
 
+    /// <summary>
+    /// An assembly resolver.
+    /// </summary>
     internal sealed class AssemblyResolver : IDisposable
     {
         private readonly ICompilationAssemblyResolver assemblyResolver;
         private readonly DependencyContext dependencyContext;
         private readonly AssemblyLoadContext loadContext;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssemblyResolver"/> class.
+        /// </summary>
+        /// <param name="path">The path to load assemblies from.</param>
         public AssemblyResolver(string path)
         {
             this.Assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(path);
@@ -33,8 +40,12 @@ namespace Boxed.DotnetNewTest
             this.loadContext.Resolving += this.OnResolving;
         }
 
+        /// <summary>
+        /// Gets the assembly load context.
+        /// </summary>
         public Assembly Assembly { get; }
 
+        /// <inheritdoc/>
         public void Dispose() => this.loadContext.Resolving -= this.OnResolving;
 
         private Assembly OnResolving(AssemblyLoadContext context, AssemblyName name)

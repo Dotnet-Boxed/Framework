@@ -34,6 +34,6 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// website. On twitter.com and the mobile clients, the image appears below the tweet text. See
         /// https://dev.twitter.com/cards/types/summary-large-image.
         /// </summary>
-        SummaryLargeImage
+        SummaryLargeImage,
     }
 }

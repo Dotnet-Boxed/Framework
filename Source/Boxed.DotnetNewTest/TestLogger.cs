@@ -16,10 +16,15 @@ namespace Boxed.DotnetNewTest
             };
 
         /// <summary>
-        /// Gets the write message function which defaults to writing to the debug output and console.
+        /// Gets or sets the write message function which defaults to writing to the debug output and console.
         /// </summary>
         public static Action<string> WriteMessage { get; set; }
 
+        /// <summary>
+        /// Writes the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="color">The color.</param>
         internal static void Write(string message, ConsoleColor? color = null)
         {
             if (WriteMessage is null)
@@ -32,8 +37,16 @@ namespace Boxed.DotnetNewTest
             }
         }
 
+        /// <summary>
+        /// Writes a new line.
+        /// </summary>
         internal static void WriteLine() => Write(Environment.NewLine);
 
+        /// <summary>
+        /// Writes the specified message followed by a new line.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="color">The color.</param>
         internal static void WriteLine(string message, ConsoleColor? color = null) =>
             Write(message + Environment.NewLine, color);
 

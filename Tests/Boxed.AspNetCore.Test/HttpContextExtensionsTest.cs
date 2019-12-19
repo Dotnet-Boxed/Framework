@@ -19,9 +19,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 0,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "no-store"
+                    "no-store",
                 };
 
                 // If no-store is set, then location is ignored.
@@ -32,9 +32,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 0,
                         Location = ResponseCacheLocation.Client,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "no-store"
+                    "no-store",
                 };
                 yield return new object[]
                 {
@@ -43,9 +43,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 0,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "no-store"
+                    "no-store",
                 };
 
                 // If no-store is set, then duration is ignored.
@@ -56,9 +56,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 100,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "no-store"
+                    "no-store",
                 };
 
                 yield return new object[]
@@ -68,9 +68,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 10,
                         Location = ResponseCacheLocation.Client,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "private,max-age=10"
+                    "private,max-age=10",
                 };
                 yield return new object[]
                 {
@@ -79,9 +79,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 10,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "public,max-age=10"
+                    "public,max-age=10",
                 };
                 yield return new object[]
                 {
@@ -90,9 +90,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 10,
                         Location = ResponseCacheLocation.None,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "no-cache,max-age=10"
+                    "no-cache,max-age=10",
                 };
                 yield return new object[]
                 {
@@ -101,9 +101,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 365,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "public,max-age=365"
+                    "public,max-age=365",
                 };
                 yield return new object[]
                 {
@@ -112,9 +112,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 20,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "public,max-age=20"
+                    "public,max-age=20",
                 };
                 yield return new object[]
                 {
@@ -123,9 +123,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 1400,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "public,max-age=1400"
+                    "public,max-age=1400",
                 };
                 yield return new object[]
                 {
@@ -134,9 +134,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 1600,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "public,max-age=1600"
+                    "public,max-age=1600",
                 };
             }
         }
@@ -153,9 +153,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 0,
                         Location = ResponseCacheLocation.Client,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "no-store"
+                    "no-store",
                 };
                 yield return new object[]
                 {
@@ -164,9 +164,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 0,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "no-store"
+                    "no-store",
                 };
 
                 // If no-store is set, then duration is ignored.
@@ -177,9 +177,9 @@ namespace Boxed.AspNetCore.Test
                         Duration = 100,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
-                    "no-store"
+                    "no-store",
                 };
             }
         }
@@ -195,10 +195,10 @@ namespace Boxed.AspNetCore.Test
                         Duration = 10,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = "Accept"
+                        VaryByHeader = "Accept",
                     },
                     "Accept",
-                    "public,max-age=10"
+                    "public,max-age=10",
                 };
                 yield return new object[]
                 {
@@ -207,10 +207,10 @@ namespace Boxed.AspNetCore.Test
                         Duration = 0,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = "Accept"
+                        VaryByHeader = "Accept",
                     },
                     "Accept",
-                    "no-store"
+                    "no-store",
                 };
                 yield return new object[]
                 {
@@ -219,10 +219,10 @@ namespace Boxed.AspNetCore.Test
                         Duration = 10,
                         Location = ResponseCacheLocation.Client,
                         NoStore = false,
-                        VaryByHeader = "Accept"
+                        VaryByHeader = "Accept",
                     },
                     "Accept",
-                    "private,max-age=10"
+                    "private,max-age=10",
                 };
                 yield return new object[]
                 {
@@ -231,10 +231,10 @@ namespace Boxed.AspNetCore.Test
                         Duration = 10,
                         Location = ResponseCacheLocation.Client,
                         NoStore = false,
-                        VaryByHeader = "Test"
+                        VaryByHeader = "Test",
                     },
                     "Test",
-                    "private,max-age=10"
+                    "private,max-age=10",
                 };
                 yield return new object[]
                 {
@@ -243,10 +243,10 @@ namespace Boxed.AspNetCore.Test
                         Duration = 365,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = "Test"
+                        VaryByHeader = "Test",
                     },
                     "Test",
-                    "public,max-age=365"
+                    "public,max-age=365",
                 };
                 yield return new object[]
                 {
@@ -255,10 +255,10 @@ namespace Boxed.AspNetCore.Test
                         Duration = 1400,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = "Test"
+                        VaryByHeader = "Test",
                     },
                     "Test",
-                    "public,max-age=1400"
+                    "public,max-age=1400",
                 };
                 yield return new object[]
                 {
@@ -267,10 +267,10 @@ namespace Boxed.AspNetCore.Test
                         Duration = 1600,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = "Test"
+                        VaryByHeader = "Test",
                     },
                     "Test",
-                    "public,max-age=1600"
+                    "public,max-age=1600",
                 };
             }
         }
@@ -324,7 +324,7 @@ namespace Boxed.AspNetCore.Test
                 Duration = 0,
                 Location = ResponseCacheLocation.None,
                 NoStore = true,
-                VaryByHeader = null
+                VaryByHeader = null,
             };
             var context = new DefaultHttpContext();
 

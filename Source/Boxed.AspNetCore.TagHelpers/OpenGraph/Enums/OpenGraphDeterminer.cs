@@ -28,6 +28,6 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// Automatically select the word for you.
         /// </summary>
-        Auto
+        Auto,
     }
 }

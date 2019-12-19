@@ -13,6 +13,6 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// The kids age group.
         /// </summary>
-        Kids
+        Kids,
     }
 }

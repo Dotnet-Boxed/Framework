@@ -28,10 +28,10 @@ namespace Boxed.DotnetNewTest
         /// Runs 'dotnet restore' on the specified project.
         /// </summary>
         /// <param name="project">The project.</param>
-        /// <param name="timeout">The timeout.</param>
+        /// <param name="timeout">The timeout. Defaults to one minute.</param>
         /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task DotnetRestoreAsync(
+        public static async Task DotnetRestoreAsync(
             this Project project,
             TimeSpan? timeout = null,
             bool showShellWindow = false)
@@ -41,12 +41,16 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(project));
             }
 
-            return AssertStartAsync(
-                project.DirectoryPath,
-                "dotnet",
-                "restore",
-                showShellWindow,
-                CancellationTokenFactory.GetCancellationToken(timeout));
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            {
+                await AssertStartAsync(
+                        project.DirectoryPath,
+                        "dotnet",
+                        "restore",
+                        showShellWindow,
+                        cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
+            }
         }
 
         /// <summary>
@@ -54,10 +58,10 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <param name="project">The project.</param>
         /// <param name="noRestore">Whether to restore the project.</param>
-        /// <param name="timeout">The timeout.</param>
+        /// <param name="timeout">The timeout. Defaults to one minute.</param>
         /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task DotnetBuildAsync(
+        public static async Task DotnetBuildAsync(
             this Project project,
             bool? noRestore = true,
             TimeSpan? timeout = null,
@@ -69,12 +73,16 @@ namespace Boxed.DotnetNewTest
             }
 
             var noRestoreArgument = noRestore is null ? null : "--no-restore";
-            return AssertStartAsync(
-                project.DirectoryPath,
-                "dotnet",
-                $"build {noRestoreArgument}",
-                showShellWindow,
-                CancellationTokenFactory.GetCancellationToken(timeout));
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            {
+                await AssertStartAsync(
+                        project.DirectoryPath,
+                        "dotnet",
+                        $"build {noRestoreArgument}",
+                        showShellWindow,
+                        cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
+            }
         }
 
         /// <summary>
@@ -84,10 +92,10 @@ namespace Boxed.DotnetNewTest
         /// <param name="framework">The framework.</param>
         /// <param name="runtime">The runtime.</param>
         /// <param name="noRestore">Whether to restore the project.</param>
-        /// <param name="timeout">The timeout.</param>
+        /// <param name="timeout">The timeout. Defaults to one minute.</param>
         /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task DotnetPublishAsync(
+        public static async Task DotnetPublishAsync(
             this Project project,
             string framework = null,
             string runtime = null,
@@ -104,12 +112,16 @@ namespace Boxed.DotnetNewTest
             var runtimeArgument = runtime is null ? null : $"--self-contained --runtime {runtime}";
             var noRestoreArgument = noRestore is null ? null : "--no-restore";
             DirectoryExtensions.CheckCreate(project.PublishDirectoryPath);
-            return AssertStartAsync(
-                project.DirectoryPath,
-                "dotnet",
-                $"publish {noRestoreArgument} {frameworkArgument} {runtimeArgument} --output {project.PublishDirectoryPath}",
-                showShellWindow,
-                CancellationTokenFactory.GetCancellationToken(timeout));
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            {
+                await AssertStartAsync(
+                        project.DirectoryPath,
+                        "dotnet",
+                        $"publish {noRestoreArgument} {frameworkArgument} {runtimeArgument} --output {project.PublishDirectoryPath}",
+                        showShellWindow,
+                        cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
+            }
         }
 
         /// <summary>
@@ -291,7 +303,7 @@ namespace Boxed.DotnetNewTest
 
             if (string.IsNullOrEmpty(assemblyFilePath))
             {
-                throw new FileNotFoundException($"Project assembly not found.", assemblyFilePath);
+                throw new FileNotFoundException(Resources.ProjectAssemblyFileNotFound, assemblyFilePath);
             }
             else
             {
@@ -392,7 +404,7 @@ namespace Boxed.DotnetNewTest
         {
             const int intervalMilliseconds = 100;
 
-            TestLogger.WriteLine($"Waiting for app to start and pass readiness check.");
+            TestLogger.WriteLine(Resources.WaitingForAppToStartAndPassReadinessCheck);
 
             using (var cancellationTokenSource = new CancellationTokenSource(timeout))
             {
@@ -410,19 +422,19 @@ namespace Boxed.DotnetNewTest
                         var isSuccess = await readinessCheck(httpClient, httpsClient).ConfigureAwait(false);
                         if (isSuccess)
                         {
-                            TestLogger.WriteLine($"App has started and readiness check has succeeded.");
+                            TestLogger.WriteLine(Resources.AppHasStartedAndReadinessCheckHasSucceeded);
                             return;
                         }
                         else
                         {
-                            TestLogger.WriteLine($"Waiting for app to start. Readiness check failed...");
+                            TestLogger.WriteLine(Resources.WaitingForAppToStartReadinessCheckFailed);
                         }
                     }
 #pragma warning disable CA1031 // Do not catch general exception types
                     catch
 #pragma warning restore CA1031 // Do not catch general exception types
                     {
-                        TestLogger.WriteLine($"Waiting for app to start. Readiness check threw exception...");
+                        TestLogger.WriteLine(Resources.WaitingForAppToStartReadinessCheckThrewException);
                     }
 
                     await Task.Delay(intervalMilliseconds).ConfigureAwait(false);

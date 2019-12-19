@@ -13,6 +13,6 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// The female gender.
         /// </summary>
-        Female
+        Female,
     }
 }

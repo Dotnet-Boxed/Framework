@@ -5,8 +5,16 @@ namespace Boxed.AspNetCore.Swagger
     using Microsoft.AspNetCore.Mvc.Authorization;
     using Microsoft.AspNetCore.Mvc.Filters;
 
+    /// <summary>
+    /// <see cref="IList{FilterDescriptor}"/> extension methods.
+    /// </summary>
     internal static class FilterDescriptorExtensions
     {
+        /// <summary>
+        /// Gets the authorization policy requirements.
+        /// </summary>
+        /// <param name="filterDescriptors">The filter descriptors.</param>
+        /// <returns>A collection of authorization policy requirements.</returns>
         public static IList<IAuthorizationRequirement> GetPolicyRequirements(
             this IList<FilterDescriptor> filterDescriptors)
         {

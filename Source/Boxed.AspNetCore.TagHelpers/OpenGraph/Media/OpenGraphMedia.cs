@@ -25,7 +25,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 this.Url = new UriBuilder(mediaUrl)
                 {
                     Port = -1,
-                    Scheme = Uri.UriSchemeHttps
+                    Scheme = Uri.UriSchemeHttps,
                 }.Uri;
                 this.UrlSecure = mediaUrl;
             }

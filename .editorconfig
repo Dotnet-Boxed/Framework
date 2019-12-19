@@ -382,6 +382,22 @@ dotnet_naming_rule.parameters_rule.style                = camel_case_style
 dotnet_naming_rule.parameters_rule.severity             = warning
 
 ##########################################
+# StyleCop
+##########################################
+
+[*]
+# SA0001: XML comment analysis is disabled due to project configuration
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md
+dotnet_diagnostic.SA0001.severity = none
+
+[*.cs]
+# SA1633: A C# code file is missing a standard file header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md
+dotnet_diagnostic.SA1633.severity = none
+
+##########################################
 # License
 ##########################################
 # The following applies as to the .editorconfig file ONLY, and is

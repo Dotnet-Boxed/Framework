@@ -25,7 +25,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
         {
             var tagHelper = new VisibilityTagHelper()
             {
-                IsVisible = false
+                IsVisible = false,
             };
             var context = GetContext();
             var output = GetOutput();

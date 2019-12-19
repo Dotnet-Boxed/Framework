@@ -18,6 +18,6 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// This is an anthology.
         /// </summary>
-        Anthology
+        Anthology,
     }
 }

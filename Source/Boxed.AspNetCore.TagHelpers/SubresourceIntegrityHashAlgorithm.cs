@@ -23,6 +23,6 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <summary>
         /// The SHA512 cryptographic hashing algorithm.
         /// </summary>
-        SHA512 = 4
+        SHA512 = 4,
     }
 }

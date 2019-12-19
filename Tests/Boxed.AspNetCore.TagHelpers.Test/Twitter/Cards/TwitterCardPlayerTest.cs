@@ -24,7 +24,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = null,
-                Player = new TwitterPlayer(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
+                Player = new TwitterPlayer(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -56,7 +56,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
-                Player = null
+                Player = null,
             };
             var context = new TagHelperContext(
                     new TagHelperAttributeList(),
@@ -94,7 +94,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Player = new TwitterPlayer(
                     TwitterCardAnswerKey.ImageUrlValue,
                     TwitterCardAnswerKey.ImageWidthValue,
-                    TwitterCardAnswerKey.ImageHeightValue)
+                    TwitterCardAnswerKey.ImageHeightValue),
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -126,7 +126,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
-                Player = new TwitterPlayer(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
+                Player = new TwitterPlayer(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -164,7 +164,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Player = new TwitterPlayer(
                     TwitterCardAnswerKey.PlayerUrlValue,
                     TwitterCardAnswerKey.ImageWidthValue,
-                    TwitterCardAnswerKey.ImageHeightValue)
+                    TwitterCardAnswerKey.ImageHeightValue),
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -205,7 +205,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Player = new TwitterPlayer(
                     TwitterCardAnswerKey.PlayerUrlValue,
                     TwitterCardAnswerKey.PlayerWidthValue,
-                    TwitterCardAnswerKey.PlayerHeightValue)
+                    TwitterCardAnswerKey.PlayerHeightValue),
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -247,7 +247,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Player = new TwitterPlayer(
                     TwitterCardAnswerKey.ImageUrlValue,
                     TwitterCardAnswerKey.PlayerWidthValue,
-                    TwitterCardAnswerKey.PlayerHeightValue)
+                    TwitterCardAnswerKey.PlayerHeightValue),
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),

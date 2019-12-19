@@ -4,6 +4,7 @@ namespace Boxed.DotnetNewTest
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -52,22 +53,27 @@ namespace Boxed.DotnetNewTest
         /// Installs a template from the specified source.
         /// </summary>
         /// <param name="source">The source.</param>
-        /// <param name="timeout">The timeout.</param>
+        /// <param name="timeout">The timeout. Defaults to one minute.</param>
         /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A task representing the operation.</returns>
-        public static Task InstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
+        public static async Task InstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
         {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return ProcessExtensions.StartAsync(
-                DirectoryExtensions.GetCurrentDirectory(),
-                "dotnet",
-                $"new --install \"{source}\"",
-                showShellWindow,
-                CancellationTokenFactory.GetCancellationToken(timeout));
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            {
+                await ProcessExtensions
+                    .StartAsync(
+                        DirectoryExtensions.GetCurrentDirectory(),
+                        "dotnet",
+                        $"new --install \"{source}\"",
+                        showShellWindow,
+                        cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
+            }
         }
 
         private static string GetFilePath(Assembly assembly, string projectName)

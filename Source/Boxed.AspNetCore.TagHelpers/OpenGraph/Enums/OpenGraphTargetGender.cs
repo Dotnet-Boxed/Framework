@@ -18,6 +18,6 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// Both genders are being targeted.
         /// </summary>
-        Unisex
+        Unisex,
     }
 }

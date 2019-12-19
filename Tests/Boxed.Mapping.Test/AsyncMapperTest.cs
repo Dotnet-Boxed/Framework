@@ -48,7 +48,7 @@ namespace Boxed.Mapping.Test
                     new MapFrom[]
                     {
                         new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 }
+                        new MapFrom() { Property = 2 },
                     })
                 .ConfigureAwait(false);
 
@@ -79,7 +79,7 @@ namespace Boxed.Mapping.Test
                     new MapFrom[]
                     {
                         new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 }
+                        new MapFrom() { Property = 2 },
                     },
                     new List<MapTo>())
                 .ConfigureAwait(false);
@@ -111,7 +111,7 @@ namespace Boxed.Mapping.Test
                     new MapFrom[]
                     {
                         new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 }
+                        new MapFrom() { Property = 2 },
                     })
                 .ConfigureAwait(false);
 
@@ -142,7 +142,7 @@ namespace Boxed.Mapping.Test
                     new MapFrom[]
                     {
                         new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 }
+                        new MapFrom() { Property = 2 },
                     })
                 .ConfigureAwait(false);
 
@@ -175,7 +175,7 @@ namespace Boxed.Mapping.Test
                     new MapFrom[]
                     {
                         new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 }
+                        new MapFrom() { Property = 2 },
                     })
                 .ConfigureAwait(false);
 
@@ -193,7 +193,7 @@ namespace Boxed.Mapping.Test
                 new MapFrom[]
                 {
                     new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 }
+                    new MapFrom() { Property = 2 },
                 });
 
             var to = mapper.MapAsyncEnumerable(source);

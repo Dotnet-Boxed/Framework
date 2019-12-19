@@ -23,7 +23,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = string.Empty,
                 SiteUsername = TwitterCardAnswerKey.SiteIdValue,
-                Image = null
+                Image = null,
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -57,7 +57,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
-                Image = null
+                Image = null,
             };
 
             var context = new TagHelperContext(
@@ -90,7 +90,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
-                Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue)
+                Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue),
             };
 
             var context = new TagHelperContext(
@@ -124,7 +124,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = string.Empty,
-                Image = null
+                Image = null,
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -159,7 +159,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = string.Empty,
                 SiteId = TwitterCardAnswerKey.SiteIdValue,
-                Image = null
+                Image = null,
             };
 
             var context = new TagHelperContext(
@@ -195,7 +195,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Title = string.Empty,
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteIdValue,
-                Image = null
+                Image = null,
             };
             var context = new TagHelperContext(
                 new TagHelperAttributeList(),
@@ -226,7 +226,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
-                Image = null
+                Image = null,
             };
 
             var context = new TagHelperContext(
@@ -262,7 +262,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
                 CreatorUsername = TwitterCardAnswerKey.CreatorUsernameValue,
-                CreatorId = TwitterCardAnswerKey.CreatorId
+                CreatorId = TwitterCardAnswerKey.CreatorId,
             };
 
             var context = new TagHelperContext(
@@ -300,7 +300,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
-                Image = null
+                Image = null,
             };
 
             var context = new TagHelperContext(
@@ -334,7 +334,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
-                Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
+                Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
             };
 
             var context = new TagHelperContext(
@@ -374,7 +374,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.Twitter.Cards
                 Title = TwitterCardAnswerKey.TitleValue,
                 Description = TwitterCardAnswerKey.DescriptionValue,
                 SiteUsername = TwitterCardAnswerKey.SiteUsernameValue,
-                Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue)
+                Image = new TwitterImage(TwitterCardAnswerKey.ImageUrlValue, TwitterCardAnswerKey.ImageWidthValue, TwitterCardAnswerKey.ImageHeightValue),
             };
 
             var context = new TagHelperContext(
