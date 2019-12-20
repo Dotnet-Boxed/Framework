@@ -37,7 +37,7 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <returns>The temporary directory.</returns>
         public static TempDirectory NewShortTempDirectory() =>
-            new TempDirectory(DirectoryExtensions.GetTempDirectoryPath());
+            new TempDirectory(DirectoryExtensions.GetShortTempDirectoryPath());
 
         /// <summary>
         /// Disposes the managed resources implementing <see cref="IDisposable" />.
