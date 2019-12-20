@@ -89,7 +89,7 @@ namespace Boxed.DotnetNewTest
         /// <returns>A short temporary directory path.</returns>
         public static string GetShortTempDirectoryPath() =>
             Path.Combine(
-                DriveInfo.GetDrives().First().RootDirectory.FullName,
+                DriveInfo.GetDrives().First(x => x.DriveType == DriveType.Fixed).RootDirectory.FullName,
                 "Temp",
                 Guid.NewGuid().ToString().Replace("-", string.Empty, StringComparison.Ordinal));
 
