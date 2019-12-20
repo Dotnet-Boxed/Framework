@@ -80,7 +80,7 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <returns>The temporary directory path.</returns>
         public static string GetTempDirectoryPath() =>
-            Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+            Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString().Replace("-", string.Empty, StringComparison.Ordinal));
 
         /// <summary>
         /// Gets the current directory for the currently executing assembly.
