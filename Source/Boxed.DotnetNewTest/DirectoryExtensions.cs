@@ -2,6 +2,7 @@ namespace Boxed.DotnetNewTest
 {
     using System;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
 
@@ -81,6 +82,16 @@ namespace Boxed.DotnetNewTest
         /// <returns>The temporary directory path.</returns>
         public static string GetTempDirectoryPath() =>
             Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString().Replace("-", string.Empty, StringComparison.Ordinal));
+
+        /// <summary>
+        /// Gets a short temporary directory path to work around the MSBuild 256 character file path limit.
+        /// </summary>
+        /// <returns>A short temporary directory path.</returns>
+        public static string GetShortTempDirectoryPath() =>
+            Path.Combine(
+                DriveInfo.GetDrives().First().RootDirectory.FullName,
+                "Temp",
+                Guid.NewGuid().ToString().Replace("-", string.Empty, StringComparison.Ordinal));
 
         /// <summary>
         /// Gets the current directory for the currently executing assembly.
