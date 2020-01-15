@@ -44,7 +44,7 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" Version="1.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzer Package References">
