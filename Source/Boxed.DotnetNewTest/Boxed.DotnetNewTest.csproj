@@ -11,6 +11,7 @@
   <PropertyGroup Label="Package">
     <VersionPrefix>3.2.3</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
+    <Company>Muhammad Rehan Saeed (RehanSaeed.com)</Company>
     <Product>ASP.NET Core Dotnet New Test Boxed</Product>
     <Description>ASP.NET Core test framework for dotnet new project templates.</Description>
     <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>

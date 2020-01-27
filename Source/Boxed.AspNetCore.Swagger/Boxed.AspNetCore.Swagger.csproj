@@ -10,6 +10,7 @@
   <PropertyGroup Label="Package">
     <VersionPrefix>6.0.1</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
+    <Company>Muhammad Rehan Saeed (RehanSaeed.com)</Company>
     <Product>ASP.NET Core Swagger Framework Boxed</Product>
     <Description>Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project implementing Swagger (OpenAPI).</Description>
     <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>

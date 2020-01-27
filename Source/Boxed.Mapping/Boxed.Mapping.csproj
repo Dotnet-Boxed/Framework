@@ -10,6 +10,7 @@
   <PropertyGroup Label="Package">
     <VersionPrefix>3.0.0</VersionPrefix>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
+    <Company>Muhammad Rehan Saeed (RehanSaeed.com)</Company>
     <Product>Object Mapping Boxed</Product>
     <Description>An object to object mapper that does not use reflection.</Description>
     <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
