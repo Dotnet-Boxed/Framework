@@ -86,6 +86,99 @@ namespace Boxed.DotnetNewTest
         }
 
         /// <summary>
+        /// Runs 'dotnet test' on the specified project.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <param name="noRestore">Whether to restore the project.</param>
+        /// <param name="timeout">The timeout. Defaults to one minute.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
+        /// <returns>A task representing the operation.</returns>
+        public static async Task DotnetTestAsync(
+            this Project project,
+            bool? noRestore = true,
+            TimeSpan? timeout = null,
+            bool showShellWindow = false)
+        {
+            if (project is null)
+            {
+                throw new ArgumentNullException(nameof(project));
+            }
+
+            var noRestoreArgument = noRestore is null ? null : "--no-restore";
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            {
+                await AssertStartAsync(
+                        project.DirectoryPath,
+                        "dotnet",
+                        $"test {noRestoreArgument}",
+                        showShellWindow,
+                        cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Runs 'dotnet tool restore' on the specified project.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <param name="timeout">The timeout. Defaults to one minute.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
+        /// <returns>A task representing the operation.</returns>
+        public static async Task DotnetToolRestoreAsync(
+            this Project project,
+            TimeSpan? timeout = null,
+            bool showShellWindow = false)
+        {
+            if (project is null)
+            {
+                throw new ArgumentNullException(nameof(project));
+            }
+
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            {
+                await AssertStartAsync(
+                        project.DirectoryPath,
+                        "dotnet",
+                        $"tool restore",
+                        showShellWindow,
+                        cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Runs 'dotnet cake' on the specified project.
+        /// </summary>
+        /// <param name="project">The project.</param>
+        /// <param name="target">The target to run.</param>
+        /// <param name="timeout">The timeout. Defaults to one minute.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
+        /// <returns>A task representing the operation.</returns>
+        public static async Task DotnetCakeAsync(
+            this Project project,
+            string target = null,
+            TimeSpan? timeout = null,
+            bool showShellWindow = false)
+        {
+            if (project is null)
+            {
+                throw new ArgumentNullException(nameof(project));
+            }
+
+            var targetArgument = target is null ? null : $"--target={target}";
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            {
+                await AssertStartAsync(
+                        project.DirectoryPath,
+                        "dotnet",
+                        $"cake {targetArgument}",
+                        showShellWindow,
+                        cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
         /// Runs 'dotnet publish' on the specified project.
         /// </summary>
         /// <param name="project">The project.</param>
