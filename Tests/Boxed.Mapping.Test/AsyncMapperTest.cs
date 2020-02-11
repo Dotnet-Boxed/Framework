@@ -196,7 +196,7 @@ namespace Boxed.Mapping.Test
                     new MapFrom() { Property = 2 },
                 });
 
-            var to = mapper.MapAsyncEnumerable(source);
+            var to = mapper.MapEnumerableAsync(source);
 
             var list = await to.ToListAsync().ConfigureAwait(false);
             Assert.IsType<List<MapTo>>(list);

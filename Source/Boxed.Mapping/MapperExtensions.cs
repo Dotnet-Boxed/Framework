@@ -25,7 +25,7 @@ namespace Boxed.Mapping
         /// <returns>An <see cref="IAsyncEnumerable{TDestination}"/> collection.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
-        public static async IAsyncEnumerable<TDestination> MapAsyncEnumerable<TSource, TDestination>(
+        public static async IAsyncEnumerable<TDestination> MapEnumerableAsync<TSource, TDestination>(
             this IMapper<TSource, TDestination> mapper,
             IAsyncEnumerable<TSource> source,
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
