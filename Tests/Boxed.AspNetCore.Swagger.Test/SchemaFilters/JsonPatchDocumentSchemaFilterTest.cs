@@ -25,7 +25,7 @@ namespace Boxed.AspNetCore.Swagger.Test.SchemaFilters
                 this.schema,
                 new SchemaFilterContext(
                     typeof(JsonPatchDocument<Model>),
-                    new SchemaRepository(),
+                    null,
                     null));
 
         [Fact]
@@ -35,7 +35,7 @@ namespace Boxed.AspNetCore.Swagger.Test.SchemaFilters
                 this.schema,
                 new SchemaFilterContext(
                     typeof(JsonPatchDocument<Model>),
-                    new SchemaRepository(),
+                    null,
                     null));
 
             Assert.NotNull(this.schema.Default);
