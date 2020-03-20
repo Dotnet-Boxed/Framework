@@ -3,24 +3,12 @@
   <PropertyGroup Label="Build">
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <LangVersion>latest</LangVersion>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>7.0.0</VersionPrefix>
-    <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
-    <Company>Muhammad Rehan Saeed (RehanSaeed.com)</Company>
     <Product>ASP.NET Core Swagger Framework Boxed</Product>
     <Description>Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project implementing Swagger (OpenAPI).</Description>
-    <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Dotnet-Boxed/Framework</PackageProjectUrl>
-    <PackageIcon>Icon-256x256.png</PackageIcon>
-    <RepositoryUrl>https://github.com/Dotnet-Boxed/Framework.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
     <PackageTags>ASP.NET;ASP.NET Core;MVC;Boxed;Muhammad Rehan Saeed;Framework;Swagger;OpenAPI;Swashbuckle</PackageTags>
-    <PackageReleaseNotes>https://github.com/Dotnet-Boxed/Framework/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing">
@@ -43,14 +31,8 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" Version="1.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.1.0" />
-  </ItemGroup>
-
-  <ItemGroup Label="Analyzer Package References">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.8" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.5.132" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.118" />
   </ItemGroup>
 
   <ItemGroup Label="Files">
