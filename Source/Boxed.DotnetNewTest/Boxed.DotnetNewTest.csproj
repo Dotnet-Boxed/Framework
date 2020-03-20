@@ -3,25 +3,12 @@
   <PropertyGroup Label="Build">
     <TargetFrameworks>netstandard2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <LangVersion>latest</LangVersion>
-    <NeutralLanguage>en-gb</NeutralLanguage>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>3.4.0</VersionPrefix>
-    <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
-    <Company>Muhammad Rehan Saeed (RehanSaeed.com)</Company>
     <Product>ASP.NET Core Dotnet New Test Boxed</Product>
     <Description>ASP.NET Core test framework for dotnet new project templates.</Description>
-    <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Dotnet-Boxed/Framework</PackageProjectUrl>
-    <PackageIcon>Icon-256x256.png</PackageIcon>
-    <RepositoryUrl>https://github.com/Dotnet-Boxed/Framework.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
     <PackageTags>ASP.NET;ASP.NET Core;dotnet new;template;Boxed;Muhammad Rehan Saeed;Framework;</PackageTags>
-    <PackageReleaseNotes>https://github.com/Dotnet-Boxed/Framework/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing">
@@ -44,25 +31,13 @@
     <PackageReference Condition="'$(TargetFramework)' == 'netcoreapp3.1'" Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.0" />
   </ItemGroup>
 
-  <ItemGroup Label="Analyzer Package References">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.8" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.5.132" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.118" />
-  </ItemGroup>
-
   <ItemGroup Label="Files">
     <None Include="..\..\Images\Icon-256x256.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Update="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

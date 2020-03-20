@@ -3,24 +3,12 @@
   <PropertyGroup Label="Build">
     <TargetFrameworks>netstandard1.3;netstandard2.0;netstandard2.1</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <LangVersion>latest</LangVersion>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>4.0.0</VersionPrefix>
-    <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
-    <Company>Muhammad Rehan Saeed (RehanSaeed.com)</Company>
     <Product>Object Mapping Boxed</Product>
     <Description>An object to object mapper that does not use reflection.</Description>
-    <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Dotnet-Boxed/Framework</PackageProjectUrl>
-    <PackageIcon>Icon-256x256.png</PackageIcon>
-    <RepositoryUrl>https://github.com/Dotnet-Boxed/Framework.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
     <PackageTags>Mapper;Object Mapper;Automapper;Boxed;Muhammad Rehan Saeed;Framework</PackageTags>
-    <PackageReleaseNotes>https://github.com/Dotnet-Boxed/Framework/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing">
@@ -38,14 +26,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup Label="Analyzer Package References">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.8" />
-    <PackageReference Condition="'$(TargetFramework)' != 'netstandard1.3'" Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.5.132 " />
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.5.132" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.118" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="Files">
