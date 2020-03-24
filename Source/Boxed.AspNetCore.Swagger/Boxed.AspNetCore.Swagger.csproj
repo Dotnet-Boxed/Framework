@@ -32,7 +32,7 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.2.1" />
   </ItemGroup>
 
   <ItemGroup Label="Files">
