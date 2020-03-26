@@ -2,27 +2,12 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>netstandard2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
     <Product>ASP.NET Core Dotnet New Test Boxed</Product>
     <Description>ASP.NET Core test framework for dotnet new project templates.</Description>
     <PackageTags>ASP.NET;ASP.NET Core;dotnet new;template;Boxed;Muhammad Rehan Saeed;Framework;</PackageTags>
-  </PropertyGroup>
-
-  <PropertyGroup Label="Signing">
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../Key.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-
-  <PropertyGroup Label="Source Link">
-    <!-- Optional: Declare that the Repository URL can be published to NuSpec -->
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <!-- Optional: Include PDB in the built .nupkg -->
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
@@ -32,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup Label="Files">
-    <None Include="..\..\Images\Icon-256x256.png" Pack="true" PackagePath="\" />
     <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
