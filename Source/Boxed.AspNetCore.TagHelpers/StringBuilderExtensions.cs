@@ -36,7 +36,7 @@ namespace Boxed.AspNetCore
         /// <param name="content">The content value of the meta tag.</param>
         public static void AppendMetaNameContentIfNotNull<T>(this StringBuilder stringBuilder, string name, T content)
         {
-            if (content != null)
+            if (content is object)
             {
                 AppendMetaNameContent<T>(stringBuilder, name, content);
             }
@@ -114,7 +114,7 @@ namespace Boxed.AspNetCore
             string property,
             T content)
         {
-            if (content != null)
+            if (content is object)
             {
                 AppendMetaPropertyContent<T>(stringBuilder, property, content);
             }
@@ -133,7 +133,7 @@ namespace Boxed.AspNetCore
             string property,
             DateTime? content)
         {
-            if (content != null)
+            if (content is object)
             {
                 AppendMetaPropertyContent(stringBuilder, property, content.Value);
             }
@@ -152,7 +152,7 @@ namespace Boxed.AspNetCore
             string property,
             IEnumerable<T> content)
         {
-            if (content != null)
+            if (content is object)
             {
                 AppendMetaPropertyContent(stringBuilder, property, content);
             }

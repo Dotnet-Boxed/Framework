@@ -1,7 +1,7 @@
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
-    EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
+    EnvironmentVariable("Configuration") is object ? EnvironmentVariable("Configuration") :
     "Release";
 
 var artefactsDirectory = Directory("./Artefacts");

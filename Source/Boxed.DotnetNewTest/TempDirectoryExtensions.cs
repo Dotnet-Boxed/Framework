@@ -36,7 +36,7 @@ namespace Boxed.DotnetNewTest
             }
 
             var stringBuilder = new StringBuilder($"new {templateName} --name \"{name}\"");
-            if (arguments != null)
+            if (arguments is object)
             {
                 foreach (var argument in arguments)
                 {

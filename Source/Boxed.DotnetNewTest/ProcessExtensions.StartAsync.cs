@@ -94,8 +94,8 @@ namespace Boxed.DotnetNewTest
                 CreateNoWindow = showShellWindow,
                 Arguments = arguments,
                 FileName = filename,
-                RedirectStandardOutput = !showShellWindow && outputTextWriter != null,
-                RedirectStandardError = !showShellWindow && errorTextWriter != null,
+                RedirectStandardOutput = !showShellWindow && outputTextWriter is object,
+                RedirectStandardError = !showShellWindow && errorTextWriter is object,
                 UseShellExecute = showShellWindow,
                 WorkingDirectory = workingDirectory,
             };
@@ -107,7 +107,7 @@ namespace Boxed.DotnetNewTest
                     process.Start();
 
                     var tasks = new List<Task>(3) { process.WaitForExitAsync(cancellationToken) };
-                    if (!showShellWindow && outputTextWriter != null)
+                    if (!showShellWindow && outputTextWriter is object)
                     {
                         tasks.Add(ReadAsync(
                             x =>
@@ -120,7 +120,7 @@ namespace Boxed.DotnetNewTest
                             cancellationToken));
                     }
 
-                    if (!showShellWindow && errorTextWriter != null)
+                    if (!showShellWindow && errorTextWriter is object)
                     {
                         tasks.Add(ReadAsync(
                             x =>

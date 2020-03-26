@@ -112,7 +112,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
             stringBuilder.AppendMetaPropertyContentIfNotNull("books:language", this.Language);
             stringBuilder.AppendMetaPropertyContentIfNotNull("books:page_count", this.PageCount);
 
-            if (this.Rating != null)
+            if (this.Rating is object)
             {
                 stringBuilder.AppendMetaPropertyContent("books:rating:value", this.Rating.Value);
                 stringBuilder.AppendMetaPropertyContent("books:rating:scale", this.Rating.Scale);
