@@ -25,7 +25,7 @@ namespace Boxed.AspNetCore
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (request.Headers != null)
+            if (request.Headers is object)
             {
                 return request.Headers[RequestedWithHeader] == XmlHttpRequest;
             }
@@ -48,9 +48,9 @@ namespace Boxed.AspNetCore
             }
 
             var connection = request.HttpContext.Connection;
-            if (connection.RemoteIpAddress != null)
+            if (connection.RemoteIpAddress is object)
             {
-                if (connection.LocalIpAddress != null)
+                if (connection.LocalIpAddress is object)
                 {
                     return connection.RemoteIpAddress.Equals(connection.LocalIpAddress);
                 }

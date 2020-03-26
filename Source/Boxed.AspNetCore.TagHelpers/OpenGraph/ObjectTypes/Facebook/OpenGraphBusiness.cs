@@ -75,7 +75,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
             stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:fax_number", this.ContactData.Fax);
             stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:website", this.ContactData.Website);
 
-            if (this.OpeningHours != null)
+            if (this.OpeningHours is object)
             {
                 foreach (var hours in this.OpeningHours)
                 {

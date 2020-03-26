@@ -54,7 +54,7 @@ namespace Boxed.DotnetNewTest
                 string.Equals(runtime.Name, name.Name, StringComparison.OrdinalIgnoreCase);
 
             var library = this.dependencyContext.RuntimeLibraries.FirstOrDefault(NamesMatch);
-            if (library != null)
+            if (library is object)
             {
                 var wrapper = new CompilationLibrary(
                     library.Type,

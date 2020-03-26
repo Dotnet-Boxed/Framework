@@ -55,7 +55,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             base.ToString(stringBuilder);
 
-            if (this.ItemUrls != null)
+            if (this.ItemUrls is object)
             {
                 foreach (var itemUrl in this.ItemUrls)
                 {

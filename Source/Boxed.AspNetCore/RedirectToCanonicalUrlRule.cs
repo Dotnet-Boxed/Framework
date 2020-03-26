@@ -212,7 +212,7 @@ namespace Boxed.AspNetCore
             }
 
             var endpoint = context.HttpContext.GetEndpoint();
-            return endpoint.Metadata.GetMetadata<T>() != null;
+            return endpoint.Metadata.GetMetadata<T>() is object;
         }
     }
 }
