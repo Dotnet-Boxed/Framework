@@ -40,7 +40,7 @@ namespace Boxed.AspNetCore.Swagger.Test
             }
             finally
             {
-                this.EnsureFileDeleted(xmlFilePath);
+                EnsureFileDeleted(xmlFilePath);
             }
         }
 
@@ -62,11 +62,11 @@ namespace Boxed.AspNetCore.Swagger.Test
             }
             finally
             {
-                this.EnsureFileDeleted(xmlFilePath);
+                EnsureFileDeleted(xmlFilePath);
             }
         }
 
-        private void EnsureFileDeleted(string filePath)
+        private static void EnsureFileDeleted(string filePath)
         {
             if (File.Exists(filePath))
             {
