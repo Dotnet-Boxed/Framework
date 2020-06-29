@@ -25,7 +25,7 @@ namespace Boxed.DotnetNewTest
         public static async Task<Project> DotnetNewAsync(
             this TempDirectory tempDirectory,
             string templateName,
-            string name,
+            string name = null,
             IDictionary<string, string> arguments = null,
             TimeSpan? timeout = null,
             bool showShellWindow = false)
@@ -35,7 +35,13 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(tempDirectory));
             }
 
-            var stringBuilder = new StringBuilder($"new {templateName} --name \"{name}\"");
+            var stringBuilder = new StringBuilder($"new {templateName}");
+
+            if (name != null)
+            {
+                stringBuilder.Append($" --name \"{name}\"");
+            }
+
             if (arguments is object)
             {
                 foreach (var argument in arguments)
