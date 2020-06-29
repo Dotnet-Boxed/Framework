@@ -62,7 +62,7 @@ namespace Boxed.DotnetNewTest
                     .ConfigureAwait(false);
             }
 
-            var projectDirectoryPath = Path.Combine(tempDirectory.DirectoryPath, name);
+            var projectDirectoryPath = name == null ? tempDirectory.DirectoryPath : Path.Combine(tempDirectory.DirectoryPath, name);
             var publishDirectoryPath = Path.Combine(projectDirectoryPath, "Publish");
             return new Project(name, projectDirectoryPath, publishDirectoryPath);
         }
