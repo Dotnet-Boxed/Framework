@@ -1,5 +1,6 @@
 namespace Boxed.Mapping
 {
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -14,7 +15,8 @@ namespace Boxed.Mapping
         /// </summary>
         /// <param name="source">The source object to map from.</param>
         /// <param name="destination">The destination object to map to.</param>
-        /// <returns>A task representing the operation.</returns>
-        Task MapAsync(TSource source, TDestination destination);
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task MapAsync(TSource source, TDestination destination, CancellationToken cancellationToken);
     }
 }

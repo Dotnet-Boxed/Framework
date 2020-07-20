@@ -1,11 +1,14 @@
 namespace Boxed.Mapping.Test
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public class AsyncMapper : IAsyncMapper<MapFrom, MapTo>
     {
-        public Task MapAsync(MapFrom from, MapTo to)
+        public CancellationToken CancellationToken { get; private set; }
+
+        public Task MapAsync(MapFrom from, MapTo to, CancellationToken cancellationToken)
         {
             if (from is null)
             {
@@ -17,6 +20,7 @@ namespace Boxed.Mapping.Test
                 throw new ArgumentNullException(nameof(to));
             }
 
+            this.CancellationToken = cancellationToken;
             to.Property = from.Property;
             return Task.FromResult<object>(null);
         }

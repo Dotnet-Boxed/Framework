@@ -44,7 +44,7 @@ namespace Boxed.Mapping
             await foreach (var sourceItem in source.ConfigureAwait(false).WithCancellation(cancellationToken))
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
-                await mapper.MapAsync(sourceItem, destinationItem).ConfigureAwait(false);
+                await mapper.MapAsync(sourceItem, destinationItem, cancellationToken).ConfigureAwait(false);
                 yield return destinationItem;
             }
         }
@@ -57,12 +57,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination object.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source object.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The mapped object of type <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper" /> or <paramref name="source" /> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination> MapAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            TSource source)
+            TSource source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -76,7 +78,7 @@ namespace Boxed.Mapping
             }
 
             var destination = Factory<TDestination>.CreateInstance();
-            await mapper.MapAsync(source, destination).ConfigureAwait(false);
+            await mapper.MapAsync(source, destination, cancellationToken).ConfigureAwait(false);
             return destination;
         }
 
@@ -91,6 +93,7 @@ namespace Boxed.Mapping
         /// <param name="source">The source collection.</param>
         /// <param name="destination">The destination collection.</param>
         /// <param name="sourceCount">The number of items in the source collection.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
@@ -98,7 +101,8 @@ namespace Boxed.Mapping
             this IAsyncMapper<TSource, TDestination> mapper,
             TSourceCollection source,
             TDestination[] destination,
-            int? sourceCount = null)
+            int? sourceCount = null,
+            CancellationToken cancellationToken = default)
             where TSourceCollection : IEnumerable<TSource>
             where TDestination : new()
         {
@@ -123,7 +127,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination[i] = destinationItem;
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
 
                 ++i;
             }
@@ -141,12 +145,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination[]> MapArrayAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            List<TSource> source)
+            List<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -167,7 +173,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination[i] = destinationItem;
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -183,12 +189,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination[]> MapArrayAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            Collection<TSource> source)
+            Collection<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -209,7 +217,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination[i] = destinationItem;
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -225,12 +233,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination[]> MapArrayAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            TSource[] source)
+            TSource[] source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -251,7 +261,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination[i] = destinationItem;
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -267,12 +277,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An array of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<TDestination[]> MapArrayAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            IEnumerable<TSource> source)
+            IEnumerable<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -293,7 +305,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination[i] = destinationItem;
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
                 ++i;
             }
 
@@ -313,6 +325,7 @@ namespace Boxed.Mapping
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source collection.</param>
         /// <param name="destination">The destination collection.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A collection of type <typeparamref name="TDestinationCollection"/> containing objects of type
         /// <typeparamref name="TDestination" />.
         /// </returns>
@@ -321,7 +334,8 @@ namespace Boxed.Mapping
         public static async Task<TDestinationCollection> MapCollectionAsync<TSourceCollection, TSource, TDestinationCollection, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
             TSourceCollection source,
-            TDestinationCollection destination)
+            TDestinationCollection destination,
+            CancellationToken cancellationToken = default)
             where TSourceCollection : IEnumerable<TSource>
             where TDestinationCollection : ICollection<TDestination>
             where TDestination : new()
@@ -348,7 +362,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Add(destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
                 ++i;
             }
 
@@ -365,12 +379,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<Collection<TDestination>> MapCollectionAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            List<TSource> source)
+            List<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -391,7 +407,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -407,12 +423,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<Collection<TDestination>> MapCollectionAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            Collection<TSource> source)
+            Collection<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -433,7 +451,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -449,12 +467,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<Collection<TDestination>> MapCollectionAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            TSource[] source)
+            TSource[] source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -475,7 +495,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -491,12 +511,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<Collection<TDestination>> MapCollectionAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            IEnumerable<TSource> source)
+            IEnumerable<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -517,7 +539,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
                 ++i;
             }
 
@@ -534,12 +556,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<List<TDestination>> MapListAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            List<TSource> source)
+            List<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -560,7 +584,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -576,12 +600,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<List<TDestination>> MapListAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            Collection<TSource> source)
+            Collection<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -602,7 +628,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -618,12 +644,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<List<TDestination>> MapListAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            TSource[] source)
+            TSource[] source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -644,7 +672,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -660,12 +688,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<List<TDestination>> MapListAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            IEnumerable<TSource> source)
+            IEnumerable<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -686,7 +716,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
                 ++i;
             }
 
@@ -703,12 +733,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<ObservableCollection<TDestination>> MapObservableCollectionAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            List<TSource> source)
+            List<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -729,7 +761,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -745,12 +777,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<ObservableCollection<TDestination>> MapObservableCollectionAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            Collection<TSource> source)
+            Collection<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -771,7 +805,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -787,12 +821,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<ObservableCollection<TDestination>> MapObservableCollectionAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            TSource[] source)
+            TSource[] source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -813,7 +849,7 @@ namespace Boxed.Mapping
                 var sourceItem = source[i];
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -829,12 +865,14 @@ namespace Boxed.Mapping
         /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
         /// <param name="mapper">The mapper.</param>
         /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An observable collection of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
         public static async Task<ObservableCollection<TDestination>> MapObservableCollectionAsync<TSource, TDestination>(
             this IAsyncMapper<TSource, TDestination> mapper,
-            IEnumerable<TSource> source)
+            IEnumerable<TSource> source,
+            CancellationToken cancellationToken = default)
             where TDestination : new()
         {
             if (mapper is null)
@@ -855,7 +893,7 @@ namespace Boxed.Mapping
             {
                 var destinationItem = Factory<TDestination>.CreateInstance();
                 destination.Insert(i, destinationItem);
-                tasks[i] = mapper.MapAsync(sourceItem, destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
                 ++i;
             }
 
