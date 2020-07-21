@@ -69,7 +69,7 @@ public class UsageExample
     public List<MapTo> MapList(List<MapFrom> source) => this.mapper.MapList(source);
     
     public IAsyncEnumerable<MapTo> MapAsyncEnumerable(IAsyncEnumerable<MapFrom> source) =>
-        this.mapper.MapAsyncEnumerable(source);
+        this.mapper.MapEnumerableAsync(source);
 }
 ```
 
