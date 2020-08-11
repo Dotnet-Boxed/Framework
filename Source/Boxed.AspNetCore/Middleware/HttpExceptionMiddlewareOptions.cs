@@ -8,6 +8,6 @@ namespace Boxed.AspNetCore.Middleware
         /// <summary>
         /// Gets or sets a value indicating whether ReasonPhrase should be included in HttpResponseMessage.
         /// </summary>
-        public bool IncludeReasonPhraseInResponse { get; set; } = false;
+        public bool IncludeReasonPhraseInResponse { get; set; }
     }
 }
