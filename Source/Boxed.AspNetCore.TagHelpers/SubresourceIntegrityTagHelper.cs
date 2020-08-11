@@ -142,7 +142,7 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <returns>The files bytes.</returns>
         protected virtual byte[] ReadAllBytes(string filePath) => File.ReadAllBytes(filePath);
 
-        private static IEnumerable<SubresourceIntegrityHashAlgorithm> GetFlags(Enum enumeration)
+        private static IEnumerable<SubresourceIntegrityHashAlgorithm> GetFlags(SubresourceIntegrityHashAlgorithm enumeration)
         {
             foreach (var value in (IEnumerable<SubresourceIntegrityHashAlgorithm>)Enum.GetValues(enumeration.GetType()))
             {
@@ -219,7 +219,7 @@ namespace Boxed.AspNetCore.TagHelpers
             {
                 if (stringBuilder.Length > 0)
                 {
-                    stringBuilder.Append(" ");
+                    stringBuilder.Append(' ');
                 }
 
                 AppendSri(stringBuilder, bytes, hashAlgorithm);
