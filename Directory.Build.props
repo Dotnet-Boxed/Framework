@@ -2,6 +2,7 @@
 
   <PropertyGroup Label="Build">
     <LangVersion>latest</LangVersion>
+    <AnalysisLevel>latest</AnalysisLevel>
     <NeutralLanguage>en-GB</NeutralLanguage>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
