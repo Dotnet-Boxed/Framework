@@ -5,7 +5,6 @@ namespace Boxed.DotnetNewTest
     using System.Linq;
     using System.Net.Http;
     using System.Net.Security;
-    using System.Net.Sockets;
     using System.Security.Cryptography.X509Certificates;
     using System.Threading;
     using System.Threading.Tasks;
@@ -41,7 +40,7 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(project));
             }
 
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
                 await AssertStartAsync(
                         project.DirectoryPath,
@@ -73,7 +72,7 @@ namespace Boxed.DotnetNewTest
             }
 
             var noRestoreArgument = noRestore is null ? null : "--no-restore";
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
                 await AssertStartAsync(
                         project.DirectoryPath,
@@ -105,7 +104,7 @@ namespace Boxed.DotnetNewTest
             }
 
             var noRestoreArgument = noRestore is null ? null : "--no-restore";
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
                 await AssertStartAsync(
                         project.DirectoryPath,
@@ -134,7 +133,7 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(project));
             }
 
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
                 await AssertStartAsync(
                         project.DirectoryPath,
@@ -166,7 +165,7 @@ namespace Boxed.DotnetNewTest
             }
 
             var targetArgument = target is null ? null : $"--target={target}";
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
                 await AssertStartAsync(
                         project.DirectoryPath,
@@ -205,7 +204,7 @@ namespace Boxed.DotnetNewTest
             var runtimeArgument = runtime is null ? null : $"--self-contained --runtime {runtime}";
             var noRestoreArgument = noRestore is null ? null : "--no-restore";
             DirectoryExtensions.CheckCreate(project.PublishDirectoryPath);
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
                 await AssertStartAsync(
                         project.DirectoryPath,

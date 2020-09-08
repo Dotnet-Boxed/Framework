@@ -63,7 +63,7 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(source));
             }
 
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
                 await ProcessExtensions
                     .StartAsync(
@@ -84,7 +84,7 @@ namespace Boxed.DotnetNewTest
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ReinitialiseAsync(TimeSpan? timeout = null, bool showShellWindow = false)
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
                 await ProcessExtensions
                     .StartAsync(

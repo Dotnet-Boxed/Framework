@@ -10,6 +10,11 @@ namespace Boxed.DotnetNewTest
     public static class ConfigurationService
     {
         /// <summary>
+        /// Gets or sets the default timeout period.
+        /// </summary>
+        public static TimeSpan DefaultTimeout { get; set; } = TimeSpan.FromMinutes(2);
+
+        /// <summary>
         /// Gets the temporary directory path.
         /// </summary>
         /// <returns>The temporary directory path.</returns>
