@@ -50,7 +50,7 @@ namespace Boxed.DotnetNewTest
                 }
             }
 
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? TimeSpan.FromMinutes(1)))
+            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
                 await ProcessExtensions
                     .StartAsync(
