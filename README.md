@@ -1,4 +1,4 @@
-![.NET Boxed Banner](Images/Banner.png)
+![.NET Boxed Banner](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Banner.png)
 
 [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/RehanSaeedUK) [![Twitter Follow](https://img.shields.io/twitter/follow/rehansaeeduk.svg?style=social&label=Follow)](https://twitter.com/RehanSaeedUK)
  
