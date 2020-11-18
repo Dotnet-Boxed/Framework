@@ -14,8 +14,4 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
-  <ItemGroup Label="Files">
-    <None Include="..\..\Images\Icon-256x256.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
-
 </Project>
