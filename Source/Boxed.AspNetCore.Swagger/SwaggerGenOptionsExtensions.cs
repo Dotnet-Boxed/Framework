@@ -31,8 +31,11 @@ namespace Boxed.AspNetCore.Swagger
                 throw new ArgumentNullException(nameof(assembly));
             }
 
-            var filePath = Path.ChangeExtension(assembly.Location, ".xml");
-            IncludeXmlCommentsIfExists(options, filePath);
+            if (!string.IsNullOrEmpty(assembly.Location))
+            {
+                var filePath = Path.ChangeExtension(assembly.Location, ".xml");
+                IncludeXmlCommentsIfExists(options, filePath);
+            }
 
             return options;
         }
