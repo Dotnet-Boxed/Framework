@@ -8,20 +8,16 @@ namespace Boxed.DotnetNewTest
     using System.Security.Cryptography.X509Certificates;
     using System.Threading;
     using System.Threading.Tasks;
-#if NETCOREAPP3_0
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.TestHost;
     using Microsoft.Extensions.Hosting;
-#endif
 
     /// <summary>
     /// <see cref="Project"/> extension methods.
     /// </summary>
     public static class ProjectExtensions
     {
-#if NETCOREAPP3_0
         private static readonly string[] DefaultUrls = new string[] { "http://localhost", "https://localhost" };
-#endif
 
         /// <summary>
         /// Runs 'dotnet restore' on the specified project.
@@ -363,7 +359,6 @@ namespace Boxed.DotnetNewTest
             }
         }
 
-#if NETCOREAPP3_0
         /// <summary>
         /// Runs the project in-memory.
         /// </summary>
@@ -423,7 +418,6 @@ namespace Boxed.DotnetNewTest
                 }
             }
         }
-#endif
 
         private static async Task<IAsyncDisposable> DotnetRunInternalAsync(
             Func<HttpClient, HttpClient, Task<bool>> readinessCheck,

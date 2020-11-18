@@ -32,11 +32,7 @@ namespace Boxed.AspNetCore.Swagger
             }
 
             var filePath = Path.ChangeExtension(assembly.Location, ".xml");
-            if (!IncludeXmlCommentsIfExists(options, filePath) && (assembly.CodeBase is object))
-            {
-                filePath = Path.ChangeExtension(new Uri(assembly.CodeBase).AbsolutePath, ".xml");
-                IncludeXmlCommentsIfExists(options, filePath);
-            }
+            IncludeXmlCommentsIfExists(options, filePath);
 
             return options;
         }

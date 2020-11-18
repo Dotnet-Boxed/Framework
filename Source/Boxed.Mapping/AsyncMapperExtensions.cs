@@ -13,7 +13,7 @@ namespace Boxed.Mapping
     /// </summary>
     public static class AsyncMapperExtensions
     {
-#if NETSTANDARD2_1
+#if NET5_0 || NETSTANDARD2_1
         /// <summary>
         /// Maps the <see cref="IAsyncEnumerable{TSource}"/> into <see cref="IAsyncEnumerable{TDestination}"/>.
         /// </summary>

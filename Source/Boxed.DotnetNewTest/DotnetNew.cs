@@ -101,9 +101,7 @@ namespace Boxed.DotnetNewTest
         {
             string projectFilePath = null;
 
-            var dllPath = new Uri(assembly.CodeBase).AbsolutePath;
-
-            for (var directory = new DirectoryInfo(dllPath); directory.Parent is object; directory = directory.Parent)
+            for (var directory = new DirectoryInfo(assembly.Location); directory.Parent is not null; directory = directory.Parent)
             {
                 projectFilePath = directory
                     .Parent
@@ -111,7 +109,7 @@ namespace Boxed.DotnetNewTest
                     .Where(x => !IsInObjDirectory(x.Directory))
                     .FirstOrDefault()
                     ?.FullName;
-                if (projectFilePath is object)
+                if (projectFilePath is not null)
                 {
                     break;
                 }

@@ -313,7 +313,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             // Add image, video and audio tags.
             this.MainImage.ToString(stringBuilder);
-            if (this.Media is object)
+            if (this.Media is not null)
             {
                 foreach (var media in this.Media)
                 {
@@ -329,11 +329,11 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 stringBuilder.AppendMetaPropertyContent("og:determiner", this.Determiner.ToLowercaseString());
             }
 
-            if (this.Locale is object)
+            if (this.Locale is not null)
             {
                 stringBuilder.AppendMetaPropertyContent("og:locale", this.Locale);
 
-                if (this.AlternateLocales is object)
+                if (this.AlternateLocales is not null)
                 {
                     foreach (var locale in this.AlternateLocales)
                     {
@@ -342,7 +342,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 }
             }
 
-            if (this.SeeAlso is object)
+            if (this.SeeAlso is not null)
             {
                 foreach (var seeAlso in this.SeeAlso)
                 {
@@ -350,7 +350,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 }
             }
 
-            if (this.FacebookAdministrators is object)
+            if (this.FacebookAdministrators is not null)
             {
                 foreach (var facebookAdministrator in this.FacebookAdministrators)
                 {

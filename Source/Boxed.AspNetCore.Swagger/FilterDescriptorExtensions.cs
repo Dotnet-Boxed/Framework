@@ -30,7 +30,7 @@ namespace Boxed.AspNetCore.Swagger
 
                 if (filterDescriptor.Filter is AuthorizeFilter authorizeFilter)
                 {
-                    if (authorizeFilter.Policy is object)
+                    if (authorizeFilter.Policy is not null)
                     {
                         policyRequirements.AddRange(authorizeFilter.Policy.Requirements);
                     }

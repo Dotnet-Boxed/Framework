@@ -4,7 +4,6 @@ namespace Boxed.DotnetNewTest
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Runtime.InteropServices;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -13,51 +12,6 @@ namespace Boxed.DotnetNewTest
     /// </summary>
     public static partial class ProcessExtensions
     {
-#if NETSTANDARD2_1
-        private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
-        private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-
-        /// <summary>
-        /// Kills the process tree.
-        /// </summary>
-        /// <param name="process">The process.</param>
-        /// <remarks>Add process.Kill(true) when 3.0 comes out to kill the entire process tree.</remarks>
-        public static void KillTree(this Process process) => process.KillTree(DefaultTimeout);
-
-        /// <summary>
-        /// Kills the process tree.
-        /// </summary>
-        /// <param name="process">The process.</param>
-        /// <param name="timeout">The timeout to wait to try to kill the process tree.</param>
-        public static void KillTree(this Process process, TimeSpan timeout)
-        {
-            if (process is null)
-            {
-                throw new ArgumentNullException(nameof(process));
-            }
-
-            if (IsWindows)
-            {
-                _ = RunProcessAndWaitForExit(
-                    "taskkill",
-                    $"/T /F /PID {process.Id}",
-                    timeout,
-                    out _);
-            }
-            else
-            {
-                var children = new HashSet<int>();
-                GetAllChildIdsUnix(process.Id, children, timeout);
-                foreach (var childId in children)
-                {
-                    KillProcessUnix(childId, timeout);
-                }
-
-                KillProcessUnix(process.Id, timeout);
-            }
-        }
-#endif
-
         /// <summary>
         /// Starts the specified <see cref="Process"/> and then waits for exit asynchronously for the process to exit.
         /// </summary>
@@ -157,15 +111,6 @@ namespace Boxed.DotnetNewTest
                 }
             }
         }
-
-#if NETSTANDARD2_1
-        private static void KillProcessUnix(int processId, TimeSpan timeout) =>
-            RunProcessAndWaitForExit(
-                "kill",
-                $"-TERM {processId}",
-                timeout,
-                out _);
-#endif
 
         private static int RunProcessAndWaitForExit(string fileName, string arguments, TimeSpan timeout, out string stdout)
         {

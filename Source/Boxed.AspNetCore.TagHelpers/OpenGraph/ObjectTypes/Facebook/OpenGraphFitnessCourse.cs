@@ -105,19 +105,19 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             stringBuilder.AppendMetaPropertyContent("fitness:calories", this.Calories);
 
-            if (this.CustomUnitEnergy is object)
+            if (this.CustomUnitEnergy is not null)
             {
                 stringBuilder.AppendMetaPropertyContent("fitness:custom_unit_energy:value", this.CustomUnitEnergy.Value);
                 stringBuilder.AppendMetaPropertyContent("fitness:custom_unit_energy:units", this.CustomUnitEnergy.Units);
             }
 
-            if (this.Distance is object)
+            if (this.Distance is not null)
             {
                 stringBuilder.AppendMetaPropertyContent("fitness:distance:value", this.Distance.Value);
                 stringBuilder.AppendMetaPropertyContent("fitness:distance:units", this.Distance.Units);
             }
 
-            if (this.Duration is object)
+            if (this.Duration is not null)
             {
                 stringBuilder.AppendMetaPropertyContent("fitness:duration:value", this.Duration.Value);
                 stringBuilder.AppendMetaPropertyContent("fitness:duration:units", this.Duration.Units);
@@ -125,25 +125,25 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             stringBuilder.AppendMetaPropertyContentIfNotNull("fitness:live_text", this.LiveText);
 
-            if (this.Metrics is object)
+            if (this.Metrics is not null)
             {
                 foreach (var metric in this.Metrics)
                 {
                     stringBuilder.AppendMetaPropertyContentIfNotNull("fitness:metrics:calories", metric.Calories);
 
-                    if (metric.CustomUnitEnergy is object)
+                    if (metric.CustomUnitEnergy is not null)
                     {
                         stringBuilder.AppendMetaPropertyContent("fitness:metrics:custom_unit_energy:value", metric.CustomUnitEnergy.Value);
                         stringBuilder.AppendMetaPropertyContent("fitness:metrics:custom_unit_energy:units", metric.CustomUnitEnergy.Units);
                     }
 
-                    if (metric.Distance is object)
+                    if (metric.Distance is not null)
                     {
                         stringBuilder.AppendMetaPropertyContent("fitness:metrics:distance:value", metric.Distance.Value);
                         stringBuilder.AppendMetaPropertyContent("fitness:metrics:distance:units", metric.Distance.Units);
                     }
 
-                    if (metric.Location is object)
+                    if (metric.Location is not null)
                     {
                         stringBuilder.AppendMetaPropertyContent("fitness:metrics:location:latitude", metric.Location.Latitude);
                         stringBuilder.AppendMetaPropertyContent("fitness:metrics:location:longitude", metric.Location.Longitude);
@@ -152,7 +152,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
                     stringBuilder.AppendMetaPropertyContentIfNotNull("fitness:metrics:steps", metric.Steps);
 
-                    if (metric.Speed is object)
+                    if (metric.Speed is not null)
                     {
                         stringBuilder.AppendMetaPropertyContent("fitness:metrics:speed:value", metric.Speed.Value);
                         stringBuilder.AppendMetaPropertyContent("fitness:metrics:speed:units", metric.Speed.Units);
@@ -160,7 +160,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
                     stringBuilder.AppendMetaPropertyContentIfNotNull("fitness:metrics:timestamp", metric.Timestamp);
 
-                    if (metric.Pace is object)
+                    if (metric.Pace is not null)
                     {
                         stringBuilder.AppendMetaPropertyContent("fitness:metrics:pace:value", metric.Pace.Value);
                         stringBuilder.AppendMetaPropertyContent("fitness:metrics:pace:units", metric.Pace.Units);
@@ -168,19 +168,19 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 }
             }
 
-            if (this.Pace is object)
+            if (this.Pace is not null)
             {
                 stringBuilder.AppendMetaPropertyContent("fitness:pace:value", this.Pace.Value);
                 stringBuilder.AppendMetaPropertyContent("fitness:pace:units", this.Pace.Units);
             }
 
-            if (this.Speed is object)
+            if (this.Speed is not null)
             {
                 stringBuilder.AppendMetaPropertyContent("fitness:speed:value", this.Speed.Value);
                 stringBuilder.AppendMetaPropertyContent("fitness:speed:units", this.Speed.Units);
             }
 
-            if (this.Splits is object)
+            if (this.Splits is not null)
             {
                 foreach (var split in this.Splits)
                 {

@@ -42,7 +42,7 @@ namespace Boxed.DotnetNewTest
                 stringBuilder.Append($" --name \"{name}\"");
             }
 
-            if (arguments is object)
+            if (arguments is not null)
             {
                 foreach (var argument in arguments)
                 {

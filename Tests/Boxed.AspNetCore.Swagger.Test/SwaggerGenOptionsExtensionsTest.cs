@@ -44,28 +44,6 @@ namespace Boxed.AspNetCore.Swagger.Test
             }
         }
 
-        [Fact]
-        public void IncludeXmlCommentsIfExists_XmlFileExistsWithAssemblyCodeBase_XmlCommentsFileAdded()
-        {
-            var assembly = typeof(SwaggerGenOptionsExtensionsTest).GetTypeInfo().Assembly;
-            var xmlFilePath = Path.ChangeExtension(new Uri(assembly.CodeBase).AbsolutePath, ".xml");
-            File.WriteAllText(xmlFilePath, "<?xml version=\"1.0\"?><doc></doc>");
-            var options = new SwaggerGenOptions();
-
-            try
-            {
-                var actualOptions = SwaggerGenOptionsExtensions.IncludeXmlCommentsIfExists(
-                    options,
-                    assembly);
-
-                Assert.Same(options, actualOptions);
-            }
-            finally
-            {
-                EnsureFileDeleted(xmlFilePath);
-            }
-        }
-
         private static void EnsureFileDeleted(string filePath)
         {
             if (File.Exists(filePath))

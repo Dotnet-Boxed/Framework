@@ -57,7 +57,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             stringBuilder.AppendMetaPropertyContent("restaurant:section", this.SectionUrl);
 
-            if (this.Variations is object)
+            if (this.Variations is not null)
             {
                 foreach (var variation in this.Variations)
                 {

@@ -1,4 +1,4 @@
-#if NETCOREAPP3_0
+#if NET5_0
 namespace Boxed.DotnetNewTest
 {
     using System;
@@ -54,7 +54,7 @@ namespace Boxed.DotnetNewTest
                 string.Equals(runtime.Name, name.Name, StringComparison.OrdinalIgnoreCase);
 
             var library = this.dependencyContext.RuntimeLibraries.FirstOrDefault(NamesMatch);
-            if (library is object)
+            if (library is not null)
             {
                 var wrapper = new CompilationLibrary(
                     library.Type,
