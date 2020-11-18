@@ -86,7 +86,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         {
             base.ToString(stringBuilder);
 
-            if (this.Actors is object)
+            if (this.Actors is not null)
             {
                 foreach (var actor in this.Actors)
                 {

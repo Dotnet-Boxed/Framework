@@ -283,7 +283,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:material", this.Material);
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:mfr_part_no", this.ManufacturerPartNumber);
 
-            if (this.OriginalPrices is object)
+            if (this.OriginalPrices is not null)
             {
                 foreach (var originalPrice in this.OriginalPrices)
                 {
@@ -295,7 +295,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:pattern", this.Pattern);
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:plural_title", this.PluralTitle);
 
-            if (this.PretaxPrices is object)
+            if (this.PretaxPrices is not null)
             {
                 foreach (var pretaxPrice in this.PretaxPrices)
                 {
@@ -304,7 +304,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 }
             }
 
-            if (this.Prices is object)
+            if (this.Prices is not null)
             {
                 foreach (var price in this.Prices)
                 {
@@ -320,19 +320,19 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:retailer_part_no", this.RetailerPartNumber);
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:retailer_title", this.RetailerTitle);
 
-            if (this.SalePrice is object)
+            if (this.SalePrice is not null)
             {
                 stringBuilder.AppendMetaPropertyContent("product:sale_price:amount", this.SalePrice.Amount);
                 stringBuilder.AppendMetaPropertyContent("product:sale_price:currency", this.SalePrice.Currency);
             }
 
-            if (this.SalePriceDates is object)
+            if (this.SalePriceDates is not null)
             {
                 stringBuilder.AppendMetaPropertyContent("product:sale_price_dates:start", this.SalePriceDates.Start);
                 stringBuilder.AppendMetaPropertyContent("product:sale_price_dates:end", this.SalePriceDates.End);
             }
 
-            if (this.ShippingCost is object)
+            if (this.ShippingCost is not null)
             {
                 foreach (var shippingCost in this.ShippingCost)
                 {
@@ -341,7 +341,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 }
             }
 
-            if (this.ShippingWeight is object)
+            if (this.ShippingWeight is not null)
             {
                 stringBuilder.AppendMetaPropertyContent("product:shipping_weight:value", this.ShippingWeight.Value);
                 stringBuilder.AppendMetaPropertyContent("product:shipping_weight:units", this.ShippingWeight.Units);
@@ -356,7 +356,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:upc", this.UPC);
 
-            if (this.Weight is object)
+            if (this.Weight is not null)
             {
                 stringBuilder.AppendMetaPropertyContent("product:weight:value", this.Weight.Value);
                 stringBuilder.AppendMetaPropertyContent("product:weight:units", this.Weight.Units);

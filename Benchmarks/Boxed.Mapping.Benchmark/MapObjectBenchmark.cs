@@ -15,8 +15,9 @@ namespace Boxed.Mapping.Benchmark
     [HtmlExporter]
     [CsvMeasurementsExporter]
     [RPlotExporter]
-    [SimpleJob(RuntimeMoniker.Net472)]
+    [SimpleJob(RuntimeMoniker.NetCoreApp50)]
     [SimpleJob(RuntimeMoniker.NetCoreApp30)]
+    [SimpleJob(RuntimeMoniker.Net472)]
     public class MapObjectBenchmark
     {
         private readonly IMapper automapper;

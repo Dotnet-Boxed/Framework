@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.0" />
   </ItemGroup>
 

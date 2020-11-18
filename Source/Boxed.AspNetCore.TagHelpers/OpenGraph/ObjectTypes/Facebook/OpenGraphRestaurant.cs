@@ -79,7 +79,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
             stringBuilder.AppendMetaPropertyContent("place:location:longitude", this.Location.Longitude);
             stringBuilder.AppendMetaPropertyContentIfNotNull("place:location:altitude", this.Location.Altitude);
 
-            if (this.Categories is object)
+            if (this.Categories is not null)
             {
                 foreach (var category in this.Categories)
                 {
@@ -87,7 +87,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 }
             }
 
-            if (this.ContactInfo is object)
+            if (this.ContactInfo is not null)
             {
                 stringBuilder.AppendMetaPropertyContentIfNotNull("restaurant:contact_data:street_address", this.ContactInfo.StreetAddress);
                 stringBuilder.AppendMetaPropertyContentIfNotNull("restaurant:contact_data:locality", this.ContactInfo.Locality);
@@ -100,7 +100,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 stringBuilder.AppendMetaPropertyContentIfNotNull("restaurant:contact_data:website", this.ContactInfo.Website);
             }
 
-            if (this.MenuUrls is object)
+            if (this.MenuUrls is not null)
             {
                 foreach (var menuUrl in this.MenuUrls)
                 {

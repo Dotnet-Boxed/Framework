@@ -94,8 +94,8 @@ namespace Boxed.DotnetNewTest
                 CreateNoWindow = showShellWindow,
                 Arguments = arguments,
                 FileName = filename,
-                RedirectStandardOutput = !showShellWindow && outputTextWriter is object,
-                RedirectStandardError = !showShellWindow && errorTextWriter is object,
+                RedirectStandardOutput = !showShellWindow && outputTextWriter is not null,
+                RedirectStandardError = !showShellWindow && errorTextWriter is not null,
                 UseShellExecute = showShellWindow,
                 WorkingDirectory = workingDirectory,
             };
@@ -107,7 +107,7 @@ namespace Boxed.DotnetNewTest
                     process.Start();
 
                     var tasks = new List<Task>(3) { process.WaitForExitAsync(cancellationToken) };
-                    if (!showShellWindow && outputTextWriter is object)
+                    if (!showShellWindow && outputTextWriter is not null)
                     {
                         tasks.Add(ReadAsync(
                             x =>
@@ -120,7 +120,7 @@ namespace Boxed.DotnetNewTest
                             cancellationToken));
                     }
 
-                    if (!showShellWindow && errorTextWriter is object)
+                    if (!showShellWindow && errorTextWriter is not null)
                     {
                         tasks.Add(ReadAsync(
                             x =>
@@ -141,11 +141,7 @@ namespace Boxed.DotnetNewTest
                     {
                         if (!process.HasExited)
                         {
-#if NETCOREAPP3_0 || NETCOREAPP3_1
                             process.Kill(true);
-#else
-                            process.KillTree();
-#endif
                         }
 
                         throw;

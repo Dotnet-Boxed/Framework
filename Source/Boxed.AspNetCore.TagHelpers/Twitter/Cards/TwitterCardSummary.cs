@@ -75,7 +75,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:creator", this.CreatorUsername);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:creator:id", this.CreatorId);
 
-            if (this.Image is object)
+            if (this.Image is not null)
             {
                 stringBuilder.AppendMetaNameContent("twitter:image", this.Image.ImageUrl);
 
