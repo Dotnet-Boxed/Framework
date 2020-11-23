@@ -447,7 +447,7 @@ namespace Boxed.DotnetNewTest
                         readinessCheck,
                         httpClient,
                         httpsClient,
-                        timeout ?? TimeSpan.FromMinutes(1))
+                        timeout ?? ConfigurationService.DefaultTimeout)
                     .ConfigureAwait(false);
             }
             catch
