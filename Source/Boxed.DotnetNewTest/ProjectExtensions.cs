@@ -249,15 +249,12 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(action));
             }
 
-            var httpPort = PortHelper.GetFreeTcpPort();
-            var httpUrl = new Uri($"http://localhost:{httpPort}");
-
             var httpClientHandler = new HttpClientHandler()
             {
                 AllowAutoRedirect = false,
                 ServerCertificateCustomValidationCallback = validateCertificate ?? DefaultValidateCertificate,
             };
-            var httpClient = new HttpClient(httpClientHandler) { BaseAddress = httpUrl };
+            var httpClient = new HttpClient(httpClientHandler) { BaseAddress = project.HttpUrl };
 
             var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
             var dotnetRun = await DotnetRunInternalAsync(
@@ -267,8 +264,7 @@ namespace Boxed.DotnetNewTest
                     projectFilePath,
                     noRestore,
                     timeout,
-                    showShellWindow,
-                    httpUrl)
+                    showShellWindow)
                 .ConfigureAwait(false);
 
             try
@@ -320,18 +316,13 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(action));
             }
 
-            var httpPort = PortHelper.GetFreeTcpPort();
-            var httpsPort = PortHelper.GetFreeTcpPort();
-            var httpUrl = new Uri($"http://localhost:{httpPort}");
-            var httpsUrl = new Uri($"https://localhost:{httpsPort}");
-
             var httpClientHandler = new HttpClientHandler()
             {
                 AllowAutoRedirect = false,
                 ServerCertificateCustomValidationCallback = validateCertificate ?? DefaultValidateCertificate,
             };
-            var httpClient = new HttpClient(httpClientHandler) { BaseAddress = httpUrl };
-            var httpsClient = new HttpClient(httpClientHandler) { BaseAddress = httpsUrl };
+            var httpClient = new HttpClient(httpClientHandler) { BaseAddress = project.HttpUrl };
+            var httpsClient = new HttpClient(httpClientHandler) { BaseAddress = project.HttpsUrl };
 
             var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
             var dotnetRun = await DotnetRunInternalAsync(
@@ -341,9 +332,7 @@ namespace Boxed.DotnetNewTest
                     projectFilePath,
                     noRestore,
                     timeout,
-                    showShellWindow,
-                    httpUrl,
-                    httpsUrl)
+                    showShellWindow)
                 .ConfigureAwait(false);
 
             try
@@ -426,18 +415,16 @@ namespace Boxed.DotnetNewTest
             string directoryPath,
             bool? noRestore,
             TimeSpan? timeout,
-            bool showShellWindow,
-            params Uri[] urls)
+            bool showShellWindow)
         {
 #pragma warning disable CA2000 // Dispose objects before losing scope. Object disposed below.
             var cancellationTokenSource = new CancellationTokenSource();
 #pragma warning restore CA2000 // Dispose objects before losing scope. Object disposed below.
             var noRestoreArgument = noRestore is null ? null : "--no-restore";
-            var urlsParameter = string.Join(";", urls.Select(x => x.ToString()));
             var task = AssertStartAsync(
                 directoryPath,
                 "dotnet",
-                $"run {noRestoreArgument} --urls {urlsParameter}",
+                $"run {noRestoreArgument}",
                 showShellWindow,
                 cancellationTokenSource.Token);
 
