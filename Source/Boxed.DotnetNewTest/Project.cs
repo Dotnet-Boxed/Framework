@@ -1,5 +1,7 @@
 namespace Boxed.DotnetNewTest
 {
+    using System;
+
     /// <summary>
     /// A project created from a project template.
     /// </summary>
@@ -11,14 +13,20 @@ namespace Boxed.DotnetNewTest
         /// <param name="name">The name of the project.</param>
         /// <param name="directoryPath">The directory path to the project.</param>
         /// <param name="publishDirectoryPath">The publish directory path.</param>
+        /// <param name="httpsPort">The HTTPS port.</param>
+        /// <param name="httpPort">The HTTP port.</param>
         public Project(
             string name,
             string directoryPath,
-            string publishDirectoryPath)
+            string publishDirectoryPath,
+            int httpsPort,
+            int httpPort)
         {
             this.Name = name;
             this.DirectoryPath = directoryPath;
             this.PublishDirectoryPath = publishDirectoryPath;
+            this.HttpsPort = httpsPort;
+            this.HttpPort = httpPort;
         }
 
         /// <summary>
@@ -35,5 +43,25 @@ namespace Boxed.DotnetNewTest
         /// Gets the publish directory path to the project.
         /// </summary>
         public string PublishDirectoryPath { get; }
+
+        /// <summary>
+        /// Gets the HTTP port.
+        /// </summary>
+        public int HttpPort { get; }
+
+        /// <summary>
+        /// Gets the HTTPS port.
+        /// </summary>
+        public int HttpsPort { get; }
+
+        /// <summary>
+        /// Gets the HTTP URL.
+        /// </summary>
+        public Uri HttpUrl => new Uri($"http://localhost:{this.HttpPort}");
+
+        /// <summary>
+        /// Gets the HTTPS URL.
+        /// </summary>
+        public Uri HttpsUrl => new Uri($"https://localhost:{this.HttpsPort}");
     }
 }

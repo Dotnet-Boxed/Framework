@@ -42,11 +42,14 @@ namespace Boxed.DotnetNewTest
                 stringBuilder.Append($" --name \"{name}\"");
             }
 
+            var httpsPort = PortHelper.GetFreeTcpPort();
+            var httpPort = PortHelper.GetFreeTcpPort();
+
             if (arguments is not null)
             {
                 foreach (var argument in arguments)
                 {
-                    stringBuilder.Append($" --{argument.Key} \"{argument.Value}\"");
+                    stringBuilder.Append($" --{argument.Key} \"{Replace(argument.Value, httpsPort, httpPort)}\"");
                 }
             }
 
@@ -64,7 +67,12 @@ namespace Boxed.DotnetNewTest
 
             var projectDirectoryPath = name == null ? tempDirectory.DirectoryPath : Path.Combine(tempDirectory.DirectoryPath, name);
             var publishDirectoryPath = Path.Combine(projectDirectoryPath, "Publish");
-            return new Project(name, projectDirectoryPath, publishDirectoryPath);
+            return new Project(name, projectDirectoryPath, publishDirectoryPath, httpsPort, httpPort);
         }
+
+        private static string Replace(string value, int httpsPort, int httpPort) =>
+            value
+                .Replace("{HTTPS_PORT}", httpsPort.ToString())
+                .Replace("{HTTP_PORT}", httpPort.ToString());
     }
 }
