@@ -549,6 +549,179 @@ namespace Boxed.Mapping
         }
 
         /// <summary>
+        /// Maps the list of <typeparamref name="TSource"/> into a hash set of <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A hash set of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async Task<HashSet<TDestination>> MapHashSetAsync<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> mapper,
+            List<TSource> source,
+            CancellationToken cancellationToken = default)
+            where TDestination : new()
+        {
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task[sourceCount];
+            var destination = new HashSet<TDestination>();
+            for (var i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Add(destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
+            }
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            return destination;
+        }
+
+        /// <summary>
+        /// Maps the collection of <typeparamref name="TSource"/> into a hash set of <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A hash set of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async Task<HashSet<TDestination>> MapHashSetAsync<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> mapper,
+            Collection<TSource> source,
+            CancellationToken cancellationToken = default)
+            where TDestination : new()
+        {
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task[sourceCount];
+            var destination = new HashSet<TDestination>();
+            for (var i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Add(destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
+            }
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            return destination;
+        }
+
+        /// <summary>
+        /// Maps the array of <typeparamref name="TSource"/> into a hash set of <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A hash set of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async Task<HashSet<TDestination>> MapHashSetAsync<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> mapper,
+            TSource[] source,
+            CancellationToken cancellationToken = default)
+            where TDestination : new()
+        {
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Length;
+            var tasks = new Task[sourceCount];
+            var destination = new HashSet<TDestination>();
+            for (var i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Add(destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
+            }
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            return destination;
+        }
+
+        /// <summary>
+        /// Maps the enumerable of <typeparamref name="TSource"/> into a hash set of <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A hash set of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async Task<HashSet<TDestination>> MapHashSetAsync<TSource, TDestination>(
+            this IAsyncMapper<TSource, TDestination> mapper,
+            IEnumerable<TSource> source,
+            CancellationToken cancellationToken = default)
+            where TDestination : new()
+        {
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count();
+            var tasks = new Task[sourceCount];
+            var destination = new HashSet<TDestination>();
+            var i = 0;
+            foreach (var sourceItem in source)
+            {
+                var destinationItem = Factory<TDestination>.CreateInstance();
+                destination.Add(destinationItem);
+                tasks[i] = mapper.MapAsync(sourceItem, destinationItem, cancellationToken);
+                ++i;
+            }
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            return destination;
+        }
+
+        /// <summary>
         /// Maps the list of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
         /// </summary>

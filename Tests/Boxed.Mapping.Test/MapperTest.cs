@@ -118,6 +118,34 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
+        public void MapHashSet_Empty_Mapped()
+        {
+            var mapper = new Mapper();
+
+            var to = mapper.MapHashSet(Array.Empty<MapFrom>());
+
+            Assert.IsType<HashSet<MapTo>>(to);
+            Assert.Empty(to);
+        }
+
+        [Fact]
+        public void MapHashSet_ToNewObject_Mapped()
+        {
+            var mapper = new Mapper();
+
+            var to = mapper.MapHashSet(
+                new MapFrom[]
+                {
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 },
+                });
+
+            Assert.IsType<HashSet<MapTo>>(to);
+            Assert.Equal(2, to.Count);
+            Assert.Equal(new int[] { 1, 2 }, to.Select(x => x.Property));
+        }
+
+        [Fact]
         public void MapList_Empty_Mapped()
         {
             var mapper = new Mapper();

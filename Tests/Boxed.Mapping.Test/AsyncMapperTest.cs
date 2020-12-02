@@ -142,6 +142,40 @@ namespace Boxed.Mapping.Test
         }
 
         [Fact]
+        public async Task MapHashSetAsync_Empty_MappedAsync()
+        {
+            var mapper = new AsyncMapper();
+
+            var to = await mapper
+                .MapHashSetAsync(Array.Empty<MapFrom>(), this.cancellationTokenSource.Token)
+                .ConfigureAwait(false);
+
+            Assert.IsType<HashSet<MapTo>>(to);
+            Assert.Empty(to);
+        }
+
+        [Fact]
+        public async Task MapHashSetAsync_ToNewObject_MappedAsync()
+        {
+            var mapper = new AsyncMapper();
+
+            var to = await mapper
+                .MapHashSetAsync(
+                    new MapFrom[]
+                    {
+                        new MapFrom() { Property = 1 },
+                        new MapFrom() { Property = 2 },
+                    },
+                    this.cancellationTokenSource.Token)
+                .ConfigureAwait(false);
+
+            Assert.Equal(this.cancellationTokenSource.Token, mapper.CancellationToken);
+            Assert.IsType<HashSet<MapTo>>(to);
+            Assert.Equal(2, to.Count);
+            Assert.Equal(new int[] { 1, 2 }, to.Select(x => x.Property));
+        }
+
+        [Fact]
         public async Task MapListAsync_Empty_MappedAsync()
         {
             var mapper = new AsyncMapper();

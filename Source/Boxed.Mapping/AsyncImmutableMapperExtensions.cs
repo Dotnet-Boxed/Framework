@@ -597,6 +597,203 @@ namespace Boxed.Mapping
         }
 
         /// <summary>
+        /// Maps the list of <typeparamref name="TSource"/> into a hash set of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A hash set of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async Task<HashSet<TDestination>> MapHashSetAsync<TSource, TDestination>(
+            this IAsyncImmutableMapper<TSource, TDestination> mapper,
+            List<TSource> source,
+            CancellationToken cancellationToken = default)
+            where TDestination : new()
+        {
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task<TDestination>[sourceCount];
+            var destination = new HashSet<TDestination>();
+            for (var i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
+            }
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            foreach (var task in tasks)
+            {
+#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+                destination.Add(task.Result);
+#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+            }
+
+            return destination;
+        }
+
+        /// <summary>
+        /// Maps the collection of <typeparamref name="TSource"/> into a hash set of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A hash set of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async Task<HashSet<TDestination>> MapHashSetAsync<TSource, TDestination>(
+            this IAsyncImmutableMapper<TSource, TDestination> mapper,
+            Collection<TSource> source,
+            CancellationToken cancellationToken = default)
+            where TDestination : new()
+        {
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count;
+            var tasks = new Task<TDestination>[sourceCount];
+            var destination = new HashSet<TDestination>();
+            for (var i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
+            }
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            foreach (var task in tasks)
+            {
+#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+                destination.Add(task.Result);
+#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+            }
+
+            return destination;
+        }
+
+        /// <summary>
+        /// Maps the array of <typeparamref name="TSource"/> into a hash set of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A hash set of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async Task<HashSet<TDestination>> MapHashSetAsync<TSource, TDestination>(
+            this IAsyncImmutableMapper<TSource, TDestination> mapper,
+            TSource[] source,
+            CancellationToken cancellationToken = default)
+            where TDestination : new()
+        {
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Length;
+            var tasks = new Task<TDestination>[sourceCount];
+            var destination = new HashSet<TDestination>();
+            for (var i = 0; i < sourceCount; ++i)
+            {
+                var sourceItem = source[i];
+                tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
+            }
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            foreach (var task in tasks)
+            {
+#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+                destination.Add(task.Result);
+#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+            }
+
+            return destination;
+        }
+
+        /// <summary>
+        /// Maps the enumerable of <typeparamref name="TSource"/> into a hash set of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A hash set of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static async Task<HashSet<TDestination>> MapHashSetAsync<TSource, TDestination>(
+            this IAsyncImmutableMapper<TSource, TDestination> mapper,
+            IEnumerable<TSource> source,
+            CancellationToken cancellationToken = default)
+            where TDestination : new()
+        {
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var sourceCount = source.Count();
+            var tasks = new Task<TDestination>[sourceCount];
+            var destination = new HashSet<TDestination>();
+            var i = 0;
+            foreach (var sourceItem in source)
+            {
+                tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
+                ++i;
+            }
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            foreach (var task in tasks)
+            {
+#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+                destination.Add(task.Result);
+#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+            }
+
+            return destination;
+        }
+
+        /// <summary>
         /// Maps the list of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
         /// </summary>
