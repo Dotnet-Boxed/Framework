@@ -73,6 +73,19 @@ public class UsageExample
 }
 ```
 
+Also includes `IImmutableMapper<TSource, TDestination>` which is for mapping to immutable types like C# 9 `record`'s and can also be used for `enum` types.
+
+```c#
+public record MapFrom(bool BooleanFrom, int IntegerFrom);
+public record MapTo(bool BooleanTo, int IntegerTo);
+
+public class DemoImmutableMapper : IImmutableMapper<MapFrom, MapTo>
+{
+    public MapTo Map(MapFrom source) => 
+        new MapTo(source.BooleanFrom, source.IntegerFrom);
+}
+```
+
 ## Boxed.AspNetCore
 
 [![Boxed.AspNetCore](https://img.shields.io/nuget/v/Boxed.AspNetCore.svg)](https://www.nuget.org/packages/Boxed.AspNetCore/) [![Boxed.AspNetCore package in dotnet-boxed feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet-boxed/_apis/public/Packaging/Feeds/03bd56a4-9269-43f7-9f75-d82037c56a46/Packages/47bb453b-3fe4-44c1-8b82-3c64a2a9009a/Badge)](https://dev.azure.com/dotnet-boxed/Framework/_packaging?_a=package&feed=03bd56a4-9269-43f7-9f75-d82037c56a46&package=47bb453b-3fe4-44c1-8b82-3c64a2a9009a&preferRelease=true)
