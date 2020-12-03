@@ -2,6 +2,9 @@ namespace Boxed.Mapping.Test
 {
     using System;
     using System.Collections.Generic;
+#if NET5_0
+    using System.Collections.Immutable;
+#endif
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
@@ -144,6 +147,37 @@ namespace Boxed.Mapping.Test
             Assert.Equal(2, to.Count);
             Assert.Equal(new int[] { 1, 2 }, to.Select(x => x.Property));
         }
+
+#if NET5_0
+        [Fact]
+        public void MapImmutableArray_Empty_Mapped()
+        {
+            var mapper = new Mapper();
+
+            var to = mapper.MapImmutableArray(Array.Empty<MapFrom>());
+
+            Assert.IsType<ImmutableArray<MapTo>>(to);
+            Assert.Empty(to);
+        }
+
+        [Fact]
+        public void MapImmutableArray_ToNewObject_Mapped()
+        {
+            var mapper = new Mapper();
+
+            var to = mapper.MapImmutableArray(
+                new MapFrom[]
+                {
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 },
+                });
+
+            Assert.IsType<ImmutableArray<MapTo>>(to);
+            Assert.Equal(2, to.Length);
+            Assert.Equal(1, to[0].Property);
+            Assert.Equal(2, to[1].Property);
+        }
+#endif
 
         [Fact]
         public void MapList_Empty_Mapped()

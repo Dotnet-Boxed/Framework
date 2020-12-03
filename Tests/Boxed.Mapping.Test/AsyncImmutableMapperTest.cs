@@ -2,6 +2,9 @@ namespace Boxed.Mapping.Test
 {
     using System;
     using System.Collections.Generic;
+#if NET5_0
+    using System.Collections.Immutable;
+#endif
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading;
@@ -174,6 +177,78 @@ namespace Boxed.Mapping.Test
             Assert.Equal(2, to.Count);
             Assert.Equal(new int[] { 1, 2 }, to.Select(x => x.Property));
         }
+
+#if NET5_0
+        [Fact]
+        public async Task MapImmutableArrayAsync_Empty_MappedAsync()
+        {
+            var mapper = new AsyncImmutableMapper();
+
+            var to = await mapper
+                .MapImmutableArrayAsync(Array.Empty<MapFrom>(), this.cancellationTokenSource.Token)
+                .ConfigureAwait(false);
+
+            Assert.IsType<ImmutableArray<MapTo>>(to);
+            Assert.Empty(to);
+        }
+
+        [Fact]
+        public async Task MapImmutableArrayAsync_ToNewObject_MappedAsync()
+        {
+            var mapper = new AsyncImmutableMapper();
+
+            var to = await mapper
+                .MapImmutableArrayAsync(
+                    new MapFrom[]
+                    {
+                        new MapFrom() { Property = 1 },
+                        new MapFrom() { Property = 2 },
+                    },
+                    this.cancellationTokenSource.Token)
+                .ConfigureAwait(false);
+
+            Assert.Equal(this.cancellationTokenSource.Token, mapper.CancellationToken);
+            Assert.IsType<ImmutableArray<MapTo>>(to);
+            Assert.Equal(2, to.Length);
+            Assert.Equal(1, to[0].Property);
+            Assert.Equal(2, to[1].Property);
+        }
+
+        [Fact]
+        public async Task MapImmutableListAsync_Empty_MappedAsync()
+        {
+            var mapper = new AsyncImmutableMapper();
+
+            var to = await mapper
+                .MapImmutableListAsync(Array.Empty<MapFrom>(), this.cancellationTokenSource.Token)
+                .ConfigureAwait(false);
+
+            Assert.IsType<ImmutableList<MapTo>>(to);
+            Assert.Empty(to);
+        }
+
+        [Fact]
+        public async Task MapImmutableListAsync_ToNewObject_MappedAsync()
+        {
+            var mapper = new AsyncImmutableMapper();
+
+            var to = await mapper
+                .MapImmutableListAsync(
+                    new MapFrom[]
+                    {
+                        new MapFrom() { Property = 1 },
+                        new MapFrom() { Property = 2 },
+                    },
+                    this.cancellationTokenSource.Token)
+                .ConfigureAwait(false);
+
+            Assert.Equal(this.cancellationTokenSource.Token, mapper.CancellationToken);
+            Assert.IsType<ImmutableList<MapTo>>(to);
+            Assert.Equal(2, to.Count);
+            Assert.Equal(1, to[0].Property);
+            Assert.Equal(2, to[1].Property);
+        }
+#endif
 
         [Fact]
         public async Task MapListAsync_Empty_MappedAsync()
