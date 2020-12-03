@@ -2,6 +2,9 @@ namespace Boxed.Mapping
 {
     using System;
     using System.Collections.Generic;
+#if NET5_0
+    using System.Collections.Immutable;
+#endif
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Runtime.CompilerServices;
@@ -29,7 +32,6 @@ namespace Boxed.Mapping
             this IImmutableMapper<TSource, TDestination> mapper,
             IAsyncEnumerable<TSource> source,
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -62,7 +64,6 @@ namespace Boxed.Mapping
         public static TDestination Map<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             TSource source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -96,7 +97,6 @@ namespace Boxed.Mapping
             TSourceCollection sourceCollection,
             TDestination[] destinationCollection)
             where TSourceCollection : IEnumerable<TSource>
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -138,7 +138,6 @@ namespace Boxed.Mapping
         public static TDestination[] MapArray<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             List<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -175,7 +174,6 @@ namespace Boxed.Mapping
         public static TDestination[] MapArray<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -212,7 +210,6 @@ namespace Boxed.Mapping
         public static TDestination[] MapArray<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             TSource[] source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -249,7 +246,6 @@ namespace Boxed.Mapping
         public static TDestination[] MapArray<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -295,7 +291,6 @@ namespace Boxed.Mapping
             TDestinationCollection destinationCollection)
             where TSourceCollection : IEnumerable<TSource>
             where TDestinationCollection : ICollection<TDestination>
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -330,7 +325,6 @@ namespace Boxed.Mapping
         public static Collection<TDestination> MapCollection<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             List<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -367,7 +361,6 @@ namespace Boxed.Mapping
         public static Collection<TDestination> MapCollection<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -404,7 +397,6 @@ namespace Boxed.Mapping
         public static Collection<TDestination> MapCollection<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             TSource[] source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -441,7 +433,6 @@ namespace Boxed.Mapping
         public static Collection<TDestination> MapCollection<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -477,7 +468,6 @@ namespace Boxed.Mapping
         public static HashSet<TDestination> MapHashSet<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             List<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -513,7 +503,6 @@ namespace Boxed.Mapping
         public static HashSet<TDestination> MapHashSet<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -549,7 +538,6 @@ namespace Boxed.Mapping
         public static HashSet<TDestination> MapHashSet<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             TSource[] source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -585,7 +573,6 @@ namespace Boxed.Mapping
         public static HashSet<TDestination> MapHashSet<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -607,6 +594,136 @@ namespace Boxed.Mapping
             return destination;
         }
 
+#if NET5_0
+        /// <summary>
+        /// Maps the list of <typeparamref name="TSource"/> into an immutable array of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <returns>An immutable array of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static ImmutableArray<TDestination> MapImmutableArray<TSource, TDestination>(
+            this IImmutableMapper<TSource, TDestination> mapper,
+            List<TSource> source) =>
+            ImmutableArray.Create(mapper.MapArray(source));
+
+        /// <summary>
+        /// Maps the collection of <typeparamref name="TSource"/> into an immutable array of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <returns>An immutable array of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static ImmutableArray<TDestination> MapImmutableArray<TSource, TDestination>(
+            this IImmutableMapper<TSource, TDestination> mapper,
+            Collection<TSource> source) =>
+            ImmutableArray.Create(mapper.MapArray(source));
+
+        /// <summary>
+        /// Maps the array of <typeparamref name="TSource"/> into an immutable array of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <returns>An immutable array of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static ImmutableArray<TDestination> MapImmutableArray<TSource, TDestination>(
+            this IImmutableMapper<TSource, TDestination> mapper,
+            TSource[] source) =>
+            ImmutableArray.Create(mapper.MapArray(source));
+
+        /// <summary>
+        /// Maps the enumerable of <typeparamref name="TSource"/> into an immutable array of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <returns>An immutable array of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static ImmutableArray<TDestination> MapImmutableArray<TSource, TDestination>(
+            this IImmutableMapper<TSource, TDestination> mapper,
+            IEnumerable<TSource> source) =>
+            ImmutableArray.Create(mapper.MapArray(source));
+
+        /// <summary>
+        /// Maps the list of <typeparamref name="TSource"/> into an immutable list of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <returns>An immutable list of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static ImmutableList<TDestination> MapImmutableList<TSource, TDestination>(
+            this IImmutableMapper<TSource, TDestination> mapper,
+            List<TSource> source) =>
+            ImmutableList.Create(mapper.MapArray(source));
+
+        /// <summary>
+        /// Maps the collection of <typeparamref name="TSource"/> into an immutable list of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <returns>An immutable list of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static ImmutableList<TDestination> MapImmutableList<TSource, TDestination>(
+            this IImmutableMapper<TSource, TDestination> mapper,
+            Collection<TSource> source) =>
+            ImmutableList.Create(mapper.MapArray(source));
+
+        /// <summary>
+        /// Maps the array of <typeparamref name="TSource"/> into an immutable list of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <returns>An immutable list of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static ImmutableList<TDestination> MapImmutableList<TSource, TDestination>(
+            this IImmutableMapper<TSource, TDestination> mapper,
+            TSource[] source) =>
+            ImmutableList.Create(mapper.MapArray(source));
+
+        /// <summary>
+        /// Maps the enumerable of <typeparamref name="TSource"/> into an immutable list of
+        /// <typeparamref name="TDestination"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source objects.</typeparam>
+        /// <typeparam name="TDestination">The type of the destination objects.</typeparam>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="source">The source objects.</param>
+        /// <returns>An immutable list of <typeparamref name="TDestination"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
+        /// <c>null</c>.</exception>
+        public static ImmutableList<TDestination> MapImmutableList<TSource, TDestination>(
+            this IImmutableMapper<TSource, TDestination> mapper,
+            IEnumerable<TSource> source) =>
+            ImmutableList.Create(mapper.MapArray(source));
+#endif
+
         /// <summary>
         /// Maps the list of <typeparamref name="TSource"/> into a list of
         /// <typeparamref name="TDestination"/>.
@@ -621,7 +738,6 @@ namespace Boxed.Mapping
         public static List<TDestination> MapList<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             List<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -658,7 +774,6 @@ namespace Boxed.Mapping
         public static List<TDestination> MapList<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -695,7 +810,6 @@ namespace Boxed.Mapping
         public static List<TDestination> MapList<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             TSource[] source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -732,7 +846,6 @@ namespace Boxed.Mapping
         public static List<TDestination> MapList<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -768,7 +881,6 @@ namespace Boxed.Mapping
         public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             List<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -805,7 +917,6 @@ namespace Boxed.Mapping
         public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -842,7 +953,6 @@ namespace Boxed.Mapping
         public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             TSource[] source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
@@ -879,7 +989,6 @@ namespace Boxed.Mapping
         public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
-            where TDestination : new()
         {
             if (mapper is null)
             {
