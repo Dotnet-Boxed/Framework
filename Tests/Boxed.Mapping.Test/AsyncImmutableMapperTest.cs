@@ -21,7 +21,7 @@ namespace Boxed.Mapping.Test
             var mapper = new AsyncImmutableMapper();
 
             return Assert.ThrowsAsync<ArgumentNullException>(
-                "from",
+                "source",
                 () => mapper.MapAsync(null, this.cancellationTokenSource.Token));
         }
 

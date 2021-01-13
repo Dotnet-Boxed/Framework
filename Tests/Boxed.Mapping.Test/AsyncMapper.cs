@@ -8,20 +8,20 @@ namespace Boxed.Mapping.Test
     {
         public CancellationToken CancellationToken { get; private set; }
 
-        public Task MapAsync(MapFrom from, MapTo to, CancellationToken cancellationToken)
+        public Task MapAsync(MapFrom source, MapTo destination, CancellationToken cancellationToken)
         {
-            if (from is null)
+            if (source is null)
             {
-                throw new ArgumentNullException(nameof(from));
+                throw new ArgumentNullException(nameof(source));
             }
 
-            if (to is null)
+            if (destination is null)
             {
-                throw new ArgumentNullException(nameof(to));
+                throw new ArgumentNullException(nameof(destination));
             }
 
             this.CancellationToken = cancellationToken;
-            to.Property = from.Property;
+            destination.Property = source.Property;
             return Task.CompletedTask;
         }
     }

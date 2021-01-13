@@ -10,7 +10,9 @@ namespace Boxed.DotnetNewTest
     /// <summary>
     /// Runs 'dotnet new' commands.
     /// </summary>
+#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
     public static class DotnetNew
+#pragma warning restore CA1711 // Identifiers should not have incorrect suffix
     {
         /// <summary>
         /// Installs a template from the specified source.

@@ -6,7 +6,6 @@ namespace Boxed.AspNetCore.TagHelpers
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
-    using Microsoft.Extensions.Hosting;
 
     /// <inheritdoc />
     [HtmlTargetElement(Attributes = SrcAttributeName + "," + SubresourceIntegritySrcAttributeName)]

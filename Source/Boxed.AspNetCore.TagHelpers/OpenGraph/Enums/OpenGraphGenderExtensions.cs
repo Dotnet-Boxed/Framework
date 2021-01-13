@@ -12,17 +12,12 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <returns>
         /// The lower-case <see cref="string" /> representation of the <see cref="OpenGraphGender" />.
         /// </returns>
-        public static string ToLowercaseString(this OpenGraphGender gender)
-        {
-            switch (gender)
+        public static string ToLowercaseString(this OpenGraphGender gender) =>
+            gender switch
             {
-                case OpenGraphGender.Male:
-                    return "male";
-                case OpenGraphGender.Female:
-                    return "female";
-                default:
-                    return string.Empty;
-            }
-        }
+                OpenGraphGender.Male => "male",
+                OpenGraphGender.Female => "female",
+                _ => string.Empty,
+            };
     }
 }
