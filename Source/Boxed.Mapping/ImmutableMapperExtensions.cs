@@ -7,9 +7,11 @@ namespace Boxed.Mapping
 #endif
     using System.Collections.ObjectModel;
     using System.Linq;
+#if NET5_0 || NETSTANDARD2_1
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
+#endif
 
     /// <summary>
     /// <see cref="IImmutableMapper{TSource, TDestination}"/> extension methods.

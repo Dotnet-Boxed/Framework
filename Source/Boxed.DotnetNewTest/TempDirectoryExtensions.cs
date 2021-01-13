@@ -2,6 +2,7 @@ namespace Boxed.DotnetNewTest
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Text;
     using System.Threading;
@@ -72,7 +73,7 @@ namespace Boxed.DotnetNewTest
 
         private static string Replace(string value, int httpsPort, int httpPort) =>
             value
-                .Replace("{HTTPS_PORT}", httpsPort.ToString())
-                .Replace("{HTTP_PORT}", httpPort.ToString());
+                .Replace("{HTTPS_PORT}", httpsPort.ToString(CultureInfo.InvariantCulture))
+                .Replace("{HTTP_PORT}", httpPort.ToString(CultureInfo.InvariantCulture));
     }
 }

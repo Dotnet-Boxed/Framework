@@ -2,12 +2,13 @@ namespace Boxed.DotnetNewTest
 {
     using System;
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Creates a temporary directory at the specified directory path and deletes it when <see cref="IDisposable.Dispose"/> is called.
     /// </summary>
     /// <seealso cref="IDisposable" />
-    public class TempDirectory : Disposable
+    public class TempDirectory : IAsyncDisposable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TempDirectory"/> class.
@@ -42,16 +43,16 @@ namespace Boxed.DotnetNewTest
         /// <summary>
         /// Disposes the managed resources implementing <see cref="IDisposable" />.
         /// </summary>
-        protected override void DisposeManaged()
+        /// <returns>A <see cref="ValueTask"/> representing the asynchronous operation.</returns>
+        public async ValueTask DisposeAsync()
         {
-            var task = DirectoryExtensions.TryDeleteDirectoryAsync(this.DirectoryPath);
-#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits. TODO: Use IAsyncDisposable in .NET Core 3.0.
-            task.Wait();
-            if (!task.Result)
+            var isDeleted = await DirectoryExtensions
+                .TryDeleteDirectoryAsync(this.DirectoryPath)
+                .ConfigureAwait(false);
+            if (!isDeleted)
             {
                 Debug.WriteLine($"Failed to delete directory {this.DirectoryPath}");
             }
-#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits. TODO: Use IAsyncDisposable in .NET Core 3.0.
         }
     }
 }

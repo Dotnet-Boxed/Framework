@@ -12,23 +12,15 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <returns>
         /// The lower-case <see cref="string" /> representation of the <see cref="ReferrerMode" />.
         /// </returns>
-        public static string ToLowercaseString(this ReferrerMode referrerMode)
-        {
-            switch (referrerMode)
+        public static string ToLowercaseString(this ReferrerMode referrerMode) =>
+            referrerMode switch
             {
-                case ReferrerMode.None:
-                    return "none";
-                case ReferrerMode.NoneWhenDowngrade:
-                    return "none-when-downgrade";
-                case ReferrerMode.Origin:
-                    return "origin";
-                case ReferrerMode.OriginWhenCrossOrigin:
-                    return "origin-when-crossorigin";
-                case ReferrerMode.UnsafeUrl:
-                    return "unsafe-url";
-                default:
-                    return string.Empty;
-            }
-        }
+                ReferrerMode.None => "none",
+                ReferrerMode.NoneWhenDowngrade => "none-when-downgrade",
+                ReferrerMode.Origin => "origin",
+                ReferrerMode.OriginWhenCrossOrigin => "origin-when-crossorigin",
+                ReferrerMode.UnsafeUrl => "unsafe-url",
+                _ => string.Empty,
+            };
     }
 }

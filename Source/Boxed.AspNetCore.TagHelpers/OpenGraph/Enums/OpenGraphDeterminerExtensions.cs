@@ -12,22 +12,15 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <returns>
         /// The lower-case <see cref="string" /> representation of the <see cref="OpenGraphDeterminer" />.
         /// </returns>
-        public static string ToLowercaseString(this OpenGraphDeterminer determiner)
-        {
-            switch (determiner)
+        public static string ToLowercaseString(this OpenGraphDeterminer determiner) =>
+            determiner switch
             {
-                case OpenGraphDeterminer.A:
-                    return "a";
-                case OpenGraphDeterminer.An:
-                    return "an";
-                case OpenGraphDeterminer.Auto:
-                    return "auto";
-                case OpenGraphDeterminer.The:
-                    return "the";
-                case OpenGraphDeterminer.Blank:
-                default:
-                    return string.Empty;
-            }
-        }
+                OpenGraphDeterminer.A => "a",
+                OpenGraphDeterminer.An => "an",
+                OpenGraphDeterminer.Auto => "auto",
+                OpenGraphDeterminer.The => "the",
+                OpenGraphDeterminer.Blank => string.Empty,
+                _ => string.Empty,
+            };
     }
 }

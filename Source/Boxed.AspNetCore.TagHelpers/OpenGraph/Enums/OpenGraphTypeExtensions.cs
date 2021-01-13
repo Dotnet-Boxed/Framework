@@ -10,64 +10,36 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The lower-case <see cref="string"/> representation of the <see cref="OpenGraphType"/>.</returns>
-        public static string ToLowercaseString(this OpenGraphType type)
-        {
-            switch (type)
+        public static string ToLowercaseString(this OpenGraphType type) =>
+            type switch
             {
-                case OpenGraphType.Article:
-                    return "article";
-                case OpenGraphType.Book:
-                    return "book";
-                case OpenGraphType.BooksAuthor:
-                    return "books.author";
-                case OpenGraphType.BooksBook:
-                    return "books.book";
-                case OpenGraphType.BooksGenre:
-                    return "books.genre";
-                case OpenGraphType.Business:
-                    return "business.business";
-                case OpenGraphType.FitnessCourse:
-                    return "fitness.course";
-                case OpenGraphType.GameAchievement:
-                    return "game.achievement";
-                case OpenGraphType.MusicAlbum:
-                    return "music.album";
-                case OpenGraphType.MusicPlaylist:
-                    return "music.playlist";
-                case OpenGraphType.MusicRadioStation:
-                    return "music.radio_station";
-                case OpenGraphType.MusicSong:
-                    return "music.song";
-                case OpenGraphType.Place:
-                    return "place";
-                case OpenGraphType.Product:
-                    return "product";
-                case OpenGraphType.ProductGroup:
-                    return "product.group";
-                case OpenGraphType.ProductItem:
-                    return "product.item";
-                case OpenGraphType.Profile:
-                    return "profile";
-                case OpenGraphType.RestaurantMenu:
-                    return "restaurant.menu";
-                case OpenGraphType.RestaurantMenuItem:
-                    return "restaurant.menu_item";
-                case OpenGraphType.RestaurantMenuSection:
-                    return "restaurant.menu_section";
-                case OpenGraphType.Restaurant:
-                    return "restaurant.restaurant";
-                case OpenGraphType.VideoEpisode:
-                    return "video.episode";
-                case OpenGraphType.VideoMovie:
-                    return "video.movie";
-                case OpenGraphType.VideoOther:
-                    return "video.other";
-                case OpenGraphType.VideoTvShow:
-                    return "video.tv_show";
-                case OpenGraphType.Website:
-                default:
-                    return "website";
-            }
-        }
+                OpenGraphType.Article => "article",
+                OpenGraphType.Book => "book",
+                OpenGraphType.BooksAuthor => "books.author",
+                OpenGraphType.BooksBook => "books.book",
+                OpenGraphType.BooksGenre => "books.genre",
+                OpenGraphType.Business => "business.business",
+                OpenGraphType.FitnessCourse => "fitness.course",
+                OpenGraphType.GameAchievement => "game.achievement",
+                OpenGraphType.MusicAlbum => "music.album",
+                OpenGraphType.MusicPlaylist => "music.playlist",
+                OpenGraphType.MusicRadioStation => "music.radio_station",
+                OpenGraphType.MusicSong => "music.song",
+                OpenGraphType.Place => "place",
+                OpenGraphType.Product => "product",
+                OpenGraphType.ProductGroup => "product.group",
+                OpenGraphType.ProductItem => "product.item",
+                OpenGraphType.Profile => "profile",
+                OpenGraphType.RestaurantMenu => "restaurant.menu",
+                OpenGraphType.RestaurantMenuItem => "restaurant.menu_item",
+                OpenGraphType.RestaurantMenuSection => "restaurant.menu_section",
+                OpenGraphType.Restaurant => "restaurant.restaurant",
+                OpenGraphType.VideoEpisode => "video.episode",
+                OpenGraphType.VideoMovie => "video.movie",
+                OpenGraphType.VideoOther => "video.other",
+                OpenGraphType.VideoTvShow => "video.tv_show",
+                OpenGraphType.Website => "website",
+                _ => "website",
+            };
     }
 }

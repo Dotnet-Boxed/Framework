@@ -4,19 +4,19 @@ namespace Boxed.Mapping.Test
 
     public class Mapper : IMapper<MapFrom, MapTo>
     {
-        public void Map(MapFrom from, MapTo to)
+        public void Map(MapFrom source, MapTo destination)
         {
-            if (from is null)
+            if (source is null)
             {
-                throw new ArgumentNullException(nameof(from));
+                throw new ArgumentNullException(nameof(source));
             }
 
-            if (to is null)
+            if (destination is null)
             {
-                throw new ArgumentNullException(nameof(to));
+                throw new ArgumentNullException(nameof(destination));
             }
 
-            to.Property = from.Property;
+            destination.Property = source.Property;
         }
     }
 }

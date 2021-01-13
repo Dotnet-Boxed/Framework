@@ -14,27 +14,17 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <returns>
         /// The lower-case <see cref="string" /> representation of the <see cref="DayOfWeek" />.
         /// </returns>
-        public static string ToLowercaseString(this DayOfWeek dayOfWeek)
-        {
-            switch (dayOfWeek)
+        public static string ToLowercaseString(this DayOfWeek dayOfWeek) =>
+            dayOfWeek switch
             {
-                case DayOfWeek.Friday:
-                    return "friday";
-                case DayOfWeek.Monday:
-                    return "monday";
-                case DayOfWeek.Saturday:
-                    return "saturday";
-                case DayOfWeek.Sunday:
-                    return "sunday";
-                case DayOfWeek.Thursday:
-                    return "thursday";
-                case DayOfWeek.Tuesday:
-                    return "tuesday";
-                case DayOfWeek.Wednesday:
-                    return "wednesday";
-                default:
-                    return string.Empty;
-            }
-        }
+                DayOfWeek.Friday => "friday",
+                DayOfWeek.Monday => "monday",
+                DayOfWeek.Saturday => "saturday",
+                DayOfWeek.Sunday => "sunday",
+                DayOfWeek.Thursday => "thursday",
+                DayOfWeek.Tuesday => "tuesday",
+                DayOfWeek.Wednesday => "wednesday",
+                _ => string.Empty,
+            };
     }
 }

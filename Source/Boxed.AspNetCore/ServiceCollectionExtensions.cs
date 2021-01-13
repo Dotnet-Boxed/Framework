@@ -1,4 +1,4 @@
- namespace Boxed.AspNetCore
+namespace Boxed.AspNetCore
 {
     using System;
     using Boxed.AspNetCore.Middleware;

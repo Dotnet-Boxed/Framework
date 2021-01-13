@@ -4,16 +4,16 @@ namespace Boxed.Mapping.Test
 
     public class ImmutableMapper : IImmutableMapper<MapFrom, MapTo>
     {
-        public MapTo Map(MapFrom from)
+        public MapTo Map(MapFrom source)
         {
-            if (from is null)
+            if (source is null)
             {
-                throw new ArgumentNullException(nameof(from));
+                throw new ArgumentNullException(nameof(source));
             }
 
             return new MapTo()
             {
-                Property = from.Property,
+                Property = source.Property,
             };
         }
     }

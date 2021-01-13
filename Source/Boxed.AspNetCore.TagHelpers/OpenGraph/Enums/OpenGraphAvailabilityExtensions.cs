@@ -12,19 +12,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <returns>
         /// The lower-case <see cref="string" /> representation of the <see cref="OpenGraphAvailability" />.
         /// </returns>
-        public static string ToLowercaseString(this OpenGraphAvailability openGraphAvailability)
-        {
-            switch (openGraphAvailability)
+        public static string ToLowercaseString(this OpenGraphAvailability openGraphAvailability) =>
+            openGraphAvailability switch
             {
-                case OpenGraphAvailability.InStock:
-                    return "instock";
-                case OpenGraphAvailability.OutOfStock:
-                    return "oos";
-                case OpenGraphAvailability.Pending:
-                    return "pending";
-                default:
-                    return string.Empty;
-            }
-        }
+                OpenGraphAvailability.InStock => "instock",
+                OpenGraphAvailability.OutOfStock => "oos",
+                OpenGraphAvailability.Pending => "pending",
+                _ => string.Empty,
+            };
     }
 }

@@ -74,19 +74,20 @@ namespace Boxed.AspNetCore
             for (var i = 0; i < length; ++i)
             {
                 c = title[i];
-                if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
+#pragma warning disable SA1008 // Opening parenthesis should be spaced correctly. StyleCop bug.
+                if (c is (>= 'a' and <= 'z') or (>= '0' and <= '9'))
+#pragma warning restore SA1008 // Opening parenthesis should be spaced correctly. StyleCop bug.
                 {
                     stringBuilder.Append(c);
                     prevdash = false;
                 }
-                else if (c >= 'A' && c <= 'Z')
+                else if (c is >= 'A' and <= 'Z')
                 {
                     // tricky way to convert to lower-case
                     stringBuilder.Append((char)(c | 32));
                     prevdash = false;
                 }
-                else if ((c == ' ') || (c == ',') || (c == '.') || (c == '/') ||
-                    (c == '\\') || (c == '-') || (c == '_') || (c == '='))
+                else if (c is ' ' or ',' or '.' or '/' or '\\' or '-' or '_' or '=')
                 {
                     if (!prevdash && (stringBuilder.Length > 0))
                     {

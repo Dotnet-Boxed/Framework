@@ -12,19 +12,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <returns>
         /// The lower-case <see cref="string" /> representation of the <see cref="OpenGraphCondition" />.
         /// </returns>
-        public static string ToLowercaseString(this OpenGraphCondition openGraphCondition)
-        {
-            switch (openGraphCondition)
+        public static string ToLowercaseString(this OpenGraphCondition openGraphCondition) =>
+            openGraphCondition switch
             {
-                case OpenGraphCondition.New:
-                    return "new";
-                case OpenGraphCondition.Refurbished:
-                    return "refurbished";
-                case OpenGraphCondition.Used:
-                    return "used";
-                default:
-                    return string.Empty;
-            }
-        }
+                OpenGraphCondition.New => "new",
+                OpenGraphCondition.Refurbished => "refurbished",
+                OpenGraphCondition.Used => "used",
+                _ => string.Empty,
+            };
     }
 }

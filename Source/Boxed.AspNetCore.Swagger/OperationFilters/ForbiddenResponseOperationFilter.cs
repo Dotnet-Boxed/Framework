@@ -49,11 +49,11 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
         {
             foreach (var authorizationRequirement in authorizationRequirements)
             {
-                if (authorizationRequirement is ClaimsAuthorizationRequirement ||
-                    authorizationRequirement is NameAuthorizationRequirement ||
-                    authorizationRequirement is OperationAuthorizationRequirement ||
-                    authorizationRequirement is RolesAuthorizationRequirement ||
-                    authorizationRequirement is AssertionRequirement)
+                if (authorizationRequirement is ClaimsAuthorizationRequirement or
+                    NameAuthorizationRequirement or
+                    OperationAuthorizationRequirement or
+                    RolesAuthorizationRequirement or
+                    AssertionRequirement)
                 {
                     return true;
                 }

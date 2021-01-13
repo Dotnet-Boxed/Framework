@@ -391,7 +391,7 @@ namespace Boxed.DotnetNewTest
                         .FirstOrDefault(x => string.Equals(x.Name, startupTypeName, StringComparison.Ordinal));
                     if (startupType is null)
                     {
-                        throw new Exception($"Startup type '{startupTypeName}' not found.");
+                        throw new InvalidOperationException($"Startup type '{startupTypeName}' not found.");
                     }
 
                     var webHostBuilder = new WebHostBuilder()
@@ -536,7 +536,7 @@ namespace Boxed.DotnetNewTest
                 cancellationToken).ConfigureAwait(false);
             if (processResult != ProcessResult.Succeeded)
             {
-                throw new Exception(message);
+                throw new ProcessStartException(message);
             }
         }
     }

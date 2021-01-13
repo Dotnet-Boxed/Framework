@@ -12,17 +12,12 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <returns>
         /// The lower-case <see cref="string" /> representation of the <see cref="OpenGraphAgeGroup" />.
         /// </returns>
-        public static string ToLowercaseString(this OpenGraphAgeGroup openGraphAgeGroup)
-        {
-            switch (openGraphAgeGroup)
+        public static string ToLowercaseString(this OpenGraphAgeGroup openGraphAgeGroup) =>
+            openGraphAgeGroup switch
             {
-                case OpenGraphAgeGroup.Adult:
-                    return "adult";
-                case OpenGraphAgeGroup.Kids:
-                    return "kids";
-                default:
-                    return string.Empty;
-            }
-        }
+                OpenGraphAgeGroup.Adult => "adult",
+                OpenGraphAgeGroup.Kids => "kids",
+                _ => string.Empty,
+            };
     }
 }

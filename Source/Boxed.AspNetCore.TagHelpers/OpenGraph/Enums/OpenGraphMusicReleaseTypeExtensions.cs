@@ -12,19 +12,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <returns>
         /// The lower-case <see cref="string" /> representation of the <see cref="OpenGraphMusicReleaseType" />.
         /// </returns>
-        public static string ToLowercaseString(this OpenGraphMusicReleaseType musicReleaseType)
-        {
-            switch (musicReleaseType)
+        public static string ToLowercaseString(this OpenGraphMusicReleaseType musicReleaseType) =>
+            musicReleaseType switch
             {
-                case OpenGraphMusicReleaseType.OriginalRelease:
-                    return "original_release";
-                case OpenGraphMusicReleaseType.ReRelease:
-                    return "re_release";
-                case OpenGraphMusicReleaseType.Anthology:
-                    return "anthology";
-                default:
-                    return string.Empty;
-            }
-        }
+                OpenGraphMusicReleaseType.OriginalRelease => "original_release",
+                OpenGraphMusicReleaseType.ReRelease => "re_release",
+                OpenGraphMusicReleaseType.Anthology => "anthology",
+                _ => string.Empty,
+            };
     }
 }
