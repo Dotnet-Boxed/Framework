@@ -3,7 +3,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
     /// <summary>
     /// <see cref="CardType"/> extension methods.
     /// </summary>
-    internal static class TwitterCardTypeExtensions
+    internal static class CardTypeExtensions
     {
         /// <summary>
         /// Returns the Twitter specific <see cref="string"/> representation of the <see cref="CardType"/>.

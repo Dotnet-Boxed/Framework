@@ -13,7 +13,7 @@ namespace Boxed.Mapping.Test
 
     public class AsyncImmutableMapperTest : Disposable
     {
-        private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource cancellationTokenSource = new();
 
         [Fact]
         public Task MapAsync_Null_ThrowsArgumentNullExceptionAsync()

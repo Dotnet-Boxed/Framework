@@ -17,7 +17,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     public class ForbiddenResponseOperationFilter : IOperationFilter
     {
         private const string ForbiddenStatusCode = "403";
-        private static readonly OpenApiResponse ForbiddenResponse = new OpenApiResponse()
+        private static readonly OpenApiResponse ForbiddenResponse = new()
         {
             Description = "Forbidden - The user does not have the necessary permissions to access the resource.",
         };

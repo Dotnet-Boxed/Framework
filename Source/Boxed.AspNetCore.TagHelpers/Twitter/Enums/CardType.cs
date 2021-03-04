@@ -17,7 +17,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// Video clips and audio streams have a special place on the Twitter platform thanks to the Player Card. By
         /// implementing a few HTML meta tags to your website and following the Twitter Rules of the Road, you can
         /// deliver your rich media to users across the globe. Twitter must approve the use of the player card, find out
-        /// more below. See https://dev.twitter.com/cards/types/player
+        /// more below. See https://dev.twitter.com/cards/types/player.
         /// </summary>
         Player,
 

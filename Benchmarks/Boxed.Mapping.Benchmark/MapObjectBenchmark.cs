@@ -44,7 +44,7 @@ namespace Boxed.Mapping.Benchmark
             };
 
         [Benchmark(Baseline = true)]
-        public MapTo Baseline() => new MapTo()
+        public MapTo Baseline() => new()
         {
             BooleanTo = this.mapFrom.BooleanFrom,
             DateTimeOffsetTo = this.mapFrom.DateTimeOffsetFrom,

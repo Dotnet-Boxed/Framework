@@ -30,7 +30,7 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <returns>The temporary directory.</returns>
         public static TempDirectory NewTempDirectory() =>
-            new TempDirectory(DirectoryExtensions.GetTempDirectoryPath());
+            new(DirectoryExtensions.GetTempDirectoryPath());
 
         /// <summary>
         /// Creates a new <see cref="TempDirectory"/> using a shorter directory path to work around the MSBuild 256
@@ -38,7 +38,7 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <returns>The temporary directory.</returns>
         public static TempDirectory NewShortTempDirectory() =>
-            new TempDirectory(DirectoryExtensions.GetShortTempDirectoryPath());
+            new(DirectoryExtensions.GetShortTempDirectoryPath());
 
         /// <summary>
         /// Disposes the managed resources implementing <see cref="IDisposable" />.

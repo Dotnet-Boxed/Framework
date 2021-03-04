@@ -30,7 +30,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.TestData
         /// <summary>
         /// Image URL. Currently: "http://www.aspnetboilerplate.com/images/abp_logo.png".
         /// </summary>
-        public static readonly Uri ImageUrlValue = new Uri("http://www.aspnetboilerplate.com/images/abp_logo.png");
+        public static readonly Uri ImageUrlValue = new("http://www.aspnetboilerplate.com/images/abp_logo.png");
 
         /// <summary>
         /// Image width. Currently: 300.
@@ -45,7 +45,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test.TestData
         /// <summary>
         /// Player URL (HTTPS Req). Currently: "https://www.aspnetboilerplate.com/images/abp_logo.png".
         /// </summary>
-        public static readonly Uri PlayerUrlValue = new Uri("https://www.aspnetboilerplate.com/images/abp_logo.png");
+        public static readonly Uri PlayerUrlValue = new("https://www.aspnetboilerplate.com/images/abp_logo.png");
 
         /// <summary>
         /// Player width. Currently: 300.

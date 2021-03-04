@@ -36,7 +36,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
         }
 
         private static TagHelperContext GetContext() =>
-            new TagHelperContext(
+            new(
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
                 "test");
