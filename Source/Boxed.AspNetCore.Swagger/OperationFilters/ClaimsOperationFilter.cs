@@ -14,7 +14,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     public class ClaimsOperationFilter : IOperationFilter
     {
         private const string OAuth2OpenApiReferenceId = "oauth2";
-        private static readonly OpenApiSecurityScheme OAuth2OpenApiSecurityScheme = new OpenApiSecurityScheme()
+        private static readonly OpenApiSecurityScheme OAuth2OpenApiSecurityScheme = new()
         {
             Reference = new OpenApiReference()
             {

@@ -57,11 +57,11 @@ namespace Boxed.DotnetNewTest
         /// <summary>
         /// Gets the HTTP URL.
         /// </summary>
-        public Uri HttpUrl => new Uri($"http://localhost:{this.HttpPort}");
+        public Uri HttpUrl => new($"http://localhost:{this.HttpPort}");
 
         /// <summary>
         /// Gets the HTTPS URL.
         /// </summary>
-        public Uri HttpsUrl => new Uri($"https://localhost:{this.HttpsPort}");
+        public Uri HttpsUrl => new($"https://localhost:{this.HttpsPort}");
     }
 }

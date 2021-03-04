@@ -14,7 +14,7 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
     /// <seealso cref="ISchemaFilter" />
     public class JsonPatchDocumentSchemaFilter : ISchemaFilter
     {
-        private static readonly OpenApiArray Example = new OpenApiArray()
+        private static readonly OpenApiArray Example = new()
         {
             new OpenApiObject()
             {
@@ -71,7 +71,7 @@ namespace Boxed.AspNetCore.Swagger.SchemaFilters
             },
         };
 
-        private static readonly OpenApiExternalDocs ExternalDocs = new OpenApiExternalDocs()
+        private static readonly OpenApiExternalDocs ExternalDocs = new()
         {
             Description = "JSON Patch Documentation",
             Url = new Uri("http://jsonpatch.com/", UriKind.Absolute),

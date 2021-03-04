@@ -39,7 +39,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
         /// </summary>
         /// <returns>The Open API parameter for the X-Correlation-ID HTTP header.</returns>
         protected virtual OpenApiParameter GetCorrelationIdParameter() =>
-            new OpenApiParameter()
+            new()
             {
                 Description = "Used to uniquely identify the HTTP request. This ID is used to correlate the HTTP request between a client and server.",
                 In = ParameterLocation.Header,

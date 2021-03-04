@@ -24,7 +24,7 @@ namespace Boxed.DotnetNewTest
         /// <returns>
         /// The result and console output from executing the process.
         /// </returns>
-        public static async Task<(ProcessResult processResult, string message)> StartAsync(
+        public static async Task<(ProcessResult ProcessResult, string Message)> StartAsync(
             string workingDirectory,
             string fileName,
             string arguments,

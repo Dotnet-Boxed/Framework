@@ -54,7 +54,7 @@ namespace Boxed.AspNetCore
         /// <param name="getCursorProperty">The get cursor property.</param>
         /// <returns>The first and last cursor in the collection.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="getCursorProperty"/> is <c>null</c>.</exception>
-        public static (string firstCursor, string lastCursor) GetFirstAndLastCursor<TItem, TCursor>(
+        public static (string FirstCursor, string LastCursor) GetFirstAndLastCursor<TItem, TCursor>(
             IEnumerable<TItem> enumerable,
             Func<TItem, TCursor> getCursorProperty)
         {

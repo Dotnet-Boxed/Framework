@@ -14,7 +14,7 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
     public class UnauthorizedResponseOperationFilter : IOperationFilter
     {
         private const string UnauthorizedStatusCode = "401";
-        private static readonly OpenApiResponse UnauthorizedResponse = new OpenApiResponse()
+        private static readonly OpenApiResponse UnauthorizedResponse = new()
         {
             Description = "Unauthorized - The user has not supplied the necessary credentials to access the resource.",
         };

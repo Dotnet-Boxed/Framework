@@ -11,7 +11,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         InStock,
 
         /// <summary>
-        /// The availability of the item is out of stock
+        /// The availability of the item is out of stock.
         /// </summary>
         OutOfStock,
 
