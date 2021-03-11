@@ -42,7 +42,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the album the song comes from. This URL's must contain profile meta tags <see cref="OpenGraphMusicAlbum"/>.
         /// </summary>
         [HtmlAttributeName(AlbumUrlsAttributeName)]
-        public IEnumerable<string> AlbumUrls { get; set; }
+        public IEnumerable<string>? AlbumUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the duration of the song in seconds.
@@ -55,7 +55,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Open Graph standard.
         /// </summary>
         [HtmlAttributeName(ISRCAttributeName)]
-        public string ISRC { get; set; }
+        public string? ISRC { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -66,7 +66,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the musicians who wrote the song. This URL's must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(MusicianUrlsAttributeName)]
-        public IEnumerable<string> MusicianUrls { get; set; }
+        public IEnumerable<string>? MusicianUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the release date of the song. This is a Facebook specific property and is not specified in the Open Graph standard.

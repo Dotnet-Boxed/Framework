@@ -17,7 +17,7 @@ namespace Boxed.AspNetCore
         /// <typeparam name="T">The type of the cursor value.</typeparam>
         /// <param name="cursor">The cursor.</param>
         /// <returns>The cursor value.</returns>
-        public static T FromCursor<T>(string cursor)
+        public static T? FromCursor<T>(string cursor)
         {
             if (string.IsNullOrEmpty(cursor))
             {
@@ -54,7 +54,7 @@ namespace Boxed.AspNetCore
         /// <param name="getCursorProperty">The get cursor property.</param>
         /// <returns>The first and last cursor in the collection.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="getCursorProperty"/> is <c>null</c>.</exception>
-        public static (string FirstCursor, string LastCursor) GetFirstAndLastCursor<TItem, TCursor>(
+        public static (string? FirstCursor, string? LastCursor) GetFirstAndLastCursor<TItem, TCursor>(
             IEnumerable<TItem> enumerable,
             Func<TItem, TCursor> getCursorProperty)
         {
@@ -93,7 +93,7 @@ namespace Boxed.AspNetCore
                 return Base64Encode(dateTimeOffset.ToString("o", CultureInfo.InvariantCulture));
             }
 
-            return Base64Encode(value.ToString());
+            return Base64Encode(value.ToString()!);
         }
 
         private static string Base64Decode(string value) => Encoding.UTF8.GetString(Convert.FromBase64String(value));

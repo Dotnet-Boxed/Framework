@@ -26,25 +26,25 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets a collection of categories describing this restaurant's food.
         /// </summary>
         [HtmlAttributeName(CategoriesAttributeName)]
-        public IEnumerable<string> Categories { get; set; }
+        public IEnumerable<string>? Categories { get; set; }
 
         /// <summary>
         /// Gets or sets the contact information for the restaurant.
         /// </summary>
         [HtmlAttributeName(ContactInfoAttributeName)]
-        public OpenGraphContactData ContactInfo { get; set; }
+        public OpenGraphContactData? ContactInfo { get; set; }
 
         /// <summary>
         /// Gets or sets the location of the place.
         /// </summary>
         [HtmlAttributeName(LocationAttributeName)]
-        public OpenGraphLocation Location { get; set; }
+        public OpenGraphLocation? Location { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the menus. This URL must contain restaurant.menu meta tags <see cref="OpenGraphRestaurantMenu"/>.
         /// </summary>
         [HtmlAttributeName(MenuUrlsAttributeName)]
-        public IEnumerable<string> MenuUrls { get; set; }
+        public IEnumerable<string>? MenuUrls { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -75,9 +75,9 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMetaPropertyContent("place:location:latitude", this.Location.Latitude);
-            stringBuilder.AppendMetaPropertyContent("place:location:longitude", this.Location.Longitude);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("place:location:altitude", this.Location.Altitude);
+            stringBuilder.AppendMetaPropertyContent("place:location:latitude", this.Location?.Latitude);
+            stringBuilder.AppendMetaPropertyContent("place:location:longitude", this.Location?.Longitude);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("place:location:altitude", this.Location?.Altitude);
 
             if (this.Categories is not null)
             {

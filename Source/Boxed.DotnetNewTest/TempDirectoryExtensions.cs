@@ -26,8 +26,8 @@ namespace Boxed.DotnetNewTest
         public static async Task<Project> DotnetNewAsync(
             this TempDirectory tempDirectory,
             string templateName,
-            string name = null,
-            IDictionary<string, string> arguments = null,
+            string? name = null,
+            IDictionary<string, string>? arguments = null,
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {

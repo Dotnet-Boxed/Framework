@@ -89,7 +89,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// (MIME Type Registration for MP4).
         /// </summary>
         /// <value>The type of the stream content.</value>
-        public string StreamContentType { get; set; }
+        public string? StreamContentType { get; set; }
 
         /// <summary>
         /// Gets or sets the URL to a raw stream that will be rendered in Twitter’s mobile applications directly. If
@@ -98,7 +98,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// to 640 x 480 at 30 fps. Audio: AAC, Low Complexity Profile(LC).
         /// </summary>
         /// <value>The URL to a raw stream that will be rendered in Twitter’s mobile applications directly..</value>
-        public Uri StreamUrl { get; set; }
+        public Uri? StreamUrl { get; set; }
 
         /// <summary>
         /// Gets the width of the iFrame player in pixels.

@@ -151,7 +151,7 @@ namespace Boxed.DotnetNewTest
         /// <returns>A task representing the operation.</returns>
         public static async Task DotnetCakeAsync(
             this Project project,
-            string target = null,
+            string? target = null,
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
@@ -185,8 +185,8 @@ namespace Boxed.DotnetNewTest
         /// <returns>A task representing the operation.</returns>
         public static async Task DotnetPublishAsync(
             this Project project,
-            string framework = null,
-            string runtime = null,
+            string? framework = null,
+            string? runtime = null,
             bool? noRestore = true,
             TimeSpan? timeout = null,
             bool showShellWindow = false)
@@ -230,7 +230,7 @@ namespace Boxed.DotnetNewTest
             Func<HttpClient, Task<bool>> readinessCheck,
             Func<HttpClient, Task> action,
             bool? noRestore = true,
-            Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
+            Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool>? validateCertificate = null,
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
@@ -294,10 +294,10 @@ namespace Boxed.DotnetNewTest
         public static async Task DotnetRunAsync(
             this Project project,
             string projectRelativeDirectoryPath,
-            Func<HttpClient, HttpClient, Task<bool>> readinessCheck,
+            Func<HttpClient, HttpClient?, Task<bool>> readinessCheck,
             Func<HttpClient, HttpClient, Task> action,
             bool? noRestore = true,
-            Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
+            Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool>? validateCertificate = null,
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
@@ -409,9 +409,9 @@ namespace Boxed.DotnetNewTest
         }
 
         private static async Task<IAsyncDisposable> DotnetRunInternalAsync(
-            Func<HttpClient, HttpClient, Task<bool>> readinessCheck,
+            Func<HttpClient, HttpClient?, Task<bool>> readinessCheck,
             HttpClient httpClient,
-            HttpClient httpsClient,
+            HttpClient? httpsClient,
             string directoryPath,
             bool? noRestore,
             TimeSpan? timeout,
@@ -470,9 +470,9 @@ namespace Boxed.DotnetNewTest
         }
 
         private static async Task WaitForStartAsync(
-            Func<HttpClient, HttpClient, Task<bool>> readinessCheck,
+            Func<HttpClient, HttpClient?, Task<bool>> readinessCheck,
             HttpClient httpClient,
-            HttpClient httpsClient,
+            HttpClient? httpsClient,
             TimeSpan timeout)
         {
             const int intervalMilliseconds = 100;
@@ -517,8 +517,8 @@ namespace Boxed.DotnetNewTest
 
         private static bool DefaultValidateCertificate(
             HttpRequestMessage request,
-            X509Certificate2 certificate,
-            X509Chain chain,
+            X509Certificate2? certificate,
+            X509Chain? chain,
             SslPolicyErrors errors) => true;
 
         private static async Task AssertStartAsync(

@@ -28,7 +28,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the creator of the playlist. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(CreatorUrlAttributeName)]
-        public Uri CreatorUrl { get; set; }
+        public Uri? CreatorUrl { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -51,7 +51,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the songs on this playlist. This URL must contain profile meta tags <see cref="OpenGraphMusicSong"/>.
         /// </summary>
         [HtmlAttributeName(SongUrlsAttributeName)]
-        public IEnumerable<string> SongUrls { get; set; }
+        public IEnumerable<string>? SongUrls { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.
@@ -74,7 +74,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
             stringBuilder.AppendMetaPropertyContentIfNotNull("music:song", this.SongUrls);
 
             // The number of songs on the playlist. This is a Facebook specific property.
-            stringBuilder.AppendMetaPropertyContentIfNotNull("music:song_count", this.SongUrls.Count());
+            stringBuilder.AppendMetaPropertyContentIfNotNull("music:song_count", this.SongUrls?.Count());
 
             stringBuilder.AppendMetaPropertyContent("music:song:disc", this.SongDisc);
             stringBuilder.AppendMetaPropertyContent("music:song:track", this.SongTrack);

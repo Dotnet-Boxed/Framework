@@ -17,7 +17,7 @@ namespace Boxed.Mapping.Test
         {
             var mapper = new ImmutableMapper();
 
-            Assert.Throws<ArgumentNullException>("source", () => mapper.Map(null));
+            Assert.Throws<ArgumentNullException>("source", () => mapper.Map(null!));
         }
 
         [Fact]

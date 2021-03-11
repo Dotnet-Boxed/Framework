@@ -40,20 +40,20 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// </summary>
         /// <value>The Twitter user ID of content creator.</value>
         [HtmlAttributeName(CreatorIdAttributeName)]
-        public string CreatorId { get; set; }
+        public string? CreatorId { get; set; }
 
         /// <summary>
         /// Gets or sets the Twitter @username of content creator e.g. @RehanSaeedUK.
         /// </summary>
         [HtmlAttributeName(CreatorUsernameAttributeName)]
-        public string CreatorUsername { get; set; }
+        public string? CreatorUsername { get; set; }
 
         /// <summary>
         /// Gets or sets the Site's Twitter site Id. Either twitter:site or twitter:site:id is required.
         /// </summary>
         /// <value>The twitter Id for the site.</value>
         [HtmlAttributeName(SiteIdAttributName)]
-        public string SiteId { get; set; }
+        public string? SiteId { get; set; }
 
         /// <summary>
         /// Gets or sets the twitter site username. e.g. @Microsoft.
@@ -62,7 +62,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// The Site's Twitter @username the card should be attributed to. Required for Twitter Card analytics.
         /// </value>
         [HtmlAttributeName(SiteUsernameAttributeName)]
-        public string SiteUsername { get; set; }
+        public string? SiteUsername { get; set; }
 
         /// <summary>
         /// Gets the type of the Twitter card.

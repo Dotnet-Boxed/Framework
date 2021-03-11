@@ -99,9 +99,9 @@ namespace Boxed.DotnetNewTest
             }
         }
 
-        private static string GetFilePath(Assembly assembly, string projectName)
+        private static string? GetFilePath(Assembly assembly, string projectName)
         {
-            string projectFilePath = null;
+            string? projectFilePath = null;
 
             for (var directory = new DirectoryInfo(assembly.Location); directory.Parent is not null; directory = directory.Parent)
             {
@@ -120,7 +120,7 @@ namespace Boxed.DotnetNewTest
             return projectFilePath;
         }
 
-        private static bool IsInObjDirectory(DirectoryInfo directoryInfo)
+        private static bool IsInObjDirectory(DirectoryInfo? directoryInfo)
         {
             if (directoryInfo is null)
             {

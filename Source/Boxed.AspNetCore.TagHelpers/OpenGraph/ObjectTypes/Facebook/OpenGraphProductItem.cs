@@ -54,19 +54,19 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the brand of the item or its original manufacturer.
         /// </summary>
         [HtmlAttributeName(BrandAttributeName)]
-        public string Brand { get; set; }
+        public string? Brand { get; set; }
 
         /// <summary>
         /// Gets or sets the category for the item.
         /// </summary>
         [HtmlAttributeName(CategoryAttributeName)]
-        public string Category { get; set; }
+        public string? Category { get; set; }
 
         /// <summary>
         /// Gets or sets the colour of the item.
         /// </summary>
         [HtmlAttributeName(ColourAttributeName)]
-        public string Colour { get; set; }
+        public string? Colour { get; set; }
 
         /// <summary>
         /// Gets or sets the condition of the item, one of 'new', 'refurbished', or 'used'.
@@ -84,25 +84,25 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the product group. This URL must contain profile meta tags <see cref="OpenGraphProductGroup"/>.
         /// </summary>
         [HtmlAttributeName(GroupUrlAttributeName)]
-        public Uri GroupUrl { get; set; }
+        public Uri? GroupUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the Global Trade Item Number (GTIN), which encompasses UPC, EAN, JAN, and ISBN.
         /// </summary>
         [HtmlAttributeName(GTINAttributeName)]
-        public string GTIN { get; set; }
+        public string? GTIN { get; set; }
 
         /// <summary>
         /// Gets or sets the manufacturers part number for the item.
         /// </summary>
         [HtmlAttributeName(ManufacturerPartNumberAttributeName)]
-        public string ManufacturerPartNumber { get; set; }
+        public string? ManufacturerPartNumber { get; set; }
 
         /// <summary>
         /// Gets or sets a description of the material used to make the item.
         /// </summary>
         [HtmlAttributeName(MaterialAttributeName)]
-        public string Material { get; set; }
+        public string? Material { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -113,61 +113,61 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets a description of the pattern used on the item.
         /// </summary>
         [HtmlAttributeName(PatternAttributeName)]
-        public string Pattern { get; set; }
+        public string? Pattern { get; set; }
 
         /// <summary>
         /// Gets or sets the prices of the item.
         /// </summary>
         [HtmlAttributeName(PricesAttributeName)]
-        public IEnumerable<OpenGraphCurrency> Prices { get; set; }
+        public IEnumerable<OpenGraphCurrency>? Prices { get; set; }
 
         /// <summary>
         /// Gets or sets the retailer's category for the item.
         /// </summary>
         [HtmlAttributeName(RetailerCategoryAttributeName)]
-        public string RetailerCategory { get; set; }
+        public string? RetailerCategory { get; set; }
 
         /// <summary>
         /// Gets or sets the retailer product group ID for this item.
         /// </summary>
         [HtmlAttributeName(RetailerGroupIdAttributeName)]
-        public string RetailerGroupId { get; set; }
+        public string? RetailerGroupId { get; set; }
 
         /// <summary>
         /// Gets or sets the retailer's ID for the item.
         /// </summary>
         [HtmlAttributeName(RetailerItemIdAttributeName)]
-        public string RetailerItemId { get; set; }
+        public string? RetailerItemId { get; set; }
 
         /// <summary>
         /// Gets or sets the sale price of the item.
         /// </summary>
         [HtmlAttributeName(SalePriceAttributeName)]
-        public OpenGraphCurrency SalePrice { get; set; }
+        public OpenGraphCurrency? SalePrice { get; set; }
 
         /// <summary>
         /// Gets or sets the date range for which the sale price is valid.
         /// </summary>
         [HtmlAttributeName(SalePriceDatesAttributeName)]
-        public OpenGraphDateTimeRange SalePriceDates { get; set; }
+        public OpenGraphDateTimeRange? SalePriceDates { get; set; }
 
         /// <summary>
         /// Gets or sets the shipping cost of the item.
         /// </summary>
         [HtmlAttributeName(ShippingCostAttributeName)]
-        public IEnumerable<OpenGraphCurrency> ShippingCost { get; set; }
+        public IEnumerable<OpenGraphCurrency>? ShippingCost { get; set; }
 
         /// <summary>
         /// Gets or sets the shipping weight of the item.
         /// </summary>
         [HtmlAttributeName(ShippingWeightAttributeName)]
-        public OpenGraphQuantity ShippingWeight { get; set; }
+        public OpenGraphQuantity? ShippingWeight { get; set; }
 
         /// <summary>
         /// Gets or sets a size describing the item (such as 'S', 'M', 'L').
         /// </summary>
         [HtmlAttributeName(SizeAttributeName)]
-        public string Size { get; set; }
+        public string? Size { get; set; }
 
         /// <summary>
         /// Gets or sets the target gender for the item.
@@ -210,10 +210,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:material", this.Material);
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:pattern", this.Pattern);
 
-            foreach (var price in this.Prices)
+            if (this.Prices is not null)
             {
-                stringBuilder.AppendMetaPropertyContent("product:price:amount", price.Amount);
-                stringBuilder.AppendMetaPropertyContent("product:price:currency", price.Currency);
+                foreach (var price in this.Prices)
+                {
+                    stringBuilder.AppendMetaPropertyContent("product:price:amount", price.Amount);
+                    stringBuilder.AppendMetaPropertyContent("product:price:currency", price.Currency);
+                }
             }
 
             stringBuilder.AppendMetaPropertyContentIfNotNull("product:retailer_category", this.RetailerCategory);

@@ -35,7 +35,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             this.urlHelperMock = new Mock<IUrlHelper>(MockBehavior.Strict);
             this.htmlEncoderMock = new Mock<HtmlEncoder>(MockBehavior.Strict);
 
-            this.actionContextAccessor.SetupGet(x => x.ActionContext).Returns((ActionContext)null);
+            this.actionContextAccessor.SetupGet(x => x.ActionContext).Returns((ActionContext)null!);
             this.urlHelperFactoryMock.Setup(x => x.GetUrlHelper(this.actionContextAccessor.Object.ActionContext)).Returns(this.urlHelperMock.Object);
             this.htmlEncoderMock.Setup(x => x.Encode(It.IsAny<string>())).Returns((string s) => s);
 
@@ -83,7 +83,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
             this.distributedCacheMock
                 .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
-                .ReturnsAsync((byte[])null);
+                .ReturnsAsync((byte[])null!);
             this.webHostEnvironmentMock.SetupGet(x => x.ContentRootPath).Returns(@"C:\Foo\wwwroot");
             this.urlHelperMock.Setup(x => x.Content("/foo.js")).Returns(@"C:\Foo\wwwroot\foo.js");
             this.distributedCacheMock
@@ -122,7 +122,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
             this.distributedCacheMock
                 .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
-                .ReturnsAsync((byte[])null);
+                .ReturnsAsync((byte[])null!);
             this.webHostEnvironmentMock.SetupGet(x => x.ContentRootPath).Returns(@"C:\Foo\wwwroot");
             this.urlHelperMock.Setup(x => x.Content("/foo.js")).Returns(@"C:\Foo\wwwroot\foo.js");
             this.distributedCacheMock

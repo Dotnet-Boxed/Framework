@@ -28,13 +28,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the contact data for the business.
         /// </summary>
         [HtmlAttributeName(ContactDataAttributeName)]
-        public OpenGraphContactData ContactData { get; set; }
+        public OpenGraphContactData? ContactData { get; set; }
 
         /// <summary>
         /// Gets or sets the location of the business.
         /// </summary>
         [HtmlAttributeName(LocationAttributeName)]
-        public OpenGraphLocation Location { get; set; }
+        public OpenGraphLocation? Location { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -45,7 +45,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the opening hours of the business.
         /// </summary>
         [HtmlAttributeName(OpeningHoursAttributeName)]
-        public IEnumerable<OpenGraphHours> OpeningHours { get; set; }
+        public IEnumerable<OpenGraphHours>? OpeningHours { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.
@@ -65,15 +65,15 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:street_address", this.ContactData.StreetAddress);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:locality", this.ContactData.Locality);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:region", this.ContactData.Region);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:postal_code", this.ContactData.PostalCode);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:country_name", this.ContactData.Country);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:email", this.ContactData.Email);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:phone_number", this.ContactData.Phone);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:fax_number", this.ContactData.Fax);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:website", this.ContactData.Website);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:street_address", this.ContactData?.StreetAddress);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:locality", this.ContactData?.Locality);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:region", this.ContactData?.Region);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:postal_code", this.ContactData?.PostalCode);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:country_name", this.ContactData?.Country);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:email", this.ContactData?.Email);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:phone_number", this.ContactData?.Phone);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:fax_number", this.ContactData?.Fax);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("business:contact_data:website", this.ContactData?.Website);
 
             if (this.OpeningHours is not null)
             {
@@ -85,9 +85,9 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 }
             }
 
-            stringBuilder.AppendMetaPropertyContent("place:location:latitude", this.Location.Latitude);
-            stringBuilder.AppendMetaPropertyContent("place:location:longitude", this.Location.Longitude);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("place:location:altitude", this.Location.Altitude);
+            stringBuilder.AppendMetaPropertyContent("place:location:latitude", this.Location?.Latitude);
+            stringBuilder.AppendMetaPropertyContent("place:location:longitude", this.Location?.Longitude);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("place:location:altitude", this.Location?.Altitude);
         }
 
         /// <summary>

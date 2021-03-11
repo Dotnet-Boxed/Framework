@@ -14,7 +14,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="locality">The city (or locality) line of the postal address for this business.</param>
         /// <param name="postalCode">The postcode (or ZIP code) of the postal address for this business.</param>
         /// <param name="country">The country of the postal address for this business.</param>
-        /// <exception cref="System.ArgumentNullException">streetAddress or locality or postalCode or country is <c>null.</c>.</exception>
+        /// <exception cref="ArgumentNullException">streetAddress or locality or postalCode or country is <c>null.</c>.</exception>
         public OpenGraphContactData(string streetAddress, string locality, string postalCode, string country)
         {
             this.Country = country ?? throw new ArgumentNullException(nameof(country));
@@ -31,12 +31,12 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// Gets or sets the email address to contact this business.
         /// </summary>
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         /// <summary>
         /// Gets or sets a fax number to contact this business.
         /// </summary>
-        public string Fax { get; set; }
+        public string? Fax { get; set; }
 
         /// <summary>
         /// Gets the city (or locality) line of the postal address for this business.
@@ -46,7 +46,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// Gets or sets a telephone number to contact this business.
         /// </summary>
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         /// <summary>
         /// Gets the postcode (or ZIP code) of the postal address for this business.
@@ -56,7 +56,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// Gets or sets the state (or region) line of the postal address for this business.
         /// </summary>
-        public string Region { get; set; }
+        public string? Region { get; set; }
 
         /// <summary>
         /// Gets the number and street of the postal address for this business.
@@ -66,6 +66,6 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// Gets or sets a website for this business.
         /// </summary>
-        public string Website { get; set; }
+        public string? Website { get; set; }
     }
 }

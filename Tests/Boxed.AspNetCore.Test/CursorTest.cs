@@ -13,7 +13,7 @@ namespace Boxed.AspNetCore.Test
                 // If no-store is set, then location is ignored.
                 yield return new object[]
                 {
-                    null,
+                    null!,
                     string.Empty,
                 };
                 yield return new object[]
@@ -77,7 +77,7 @@ namespace Boxed.AspNetCore.Test
         [Fact]
         public void FromCursor_NullStringValue_ReturnsNull()
         {
-            var value = Cursor.FromCursor<string>(null);
+            var value = Cursor.FromCursor<string>(null!);
 
             Assert.Null(value);
         }
@@ -109,7 +109,7 @@ namespace Boxed.AspNetCore.Test
         [Fact]
         public void GetFirstAndLastCursor_NullCollection_ReturnsNullFirstAndLast()
         {
-            var (first, last) = Cursor.GetFirstAndLastCursor<Item, int>(null, x => x.Integer);
+            var (first, last) = Cursor.GetFirstAndLastCursor<Item, int>(null!, x => x.Integer);
 
             Assert.Null(first);
             Assert.Null(last);
@@ -117,7 +117,7 @@ namespace Boxed.AspNetCore.Test
 
         [Fact]
         public void GetFirstAndLastCursor_NullGetCursorDelegate_ThrowsArgumentNullException() =>
-            Assert.Throws<ArgumentNullException>(() => Cursor.GetFirstAndLastCursor<Item, int>(null, null));
+            Assert.Throws<ArgumentNullException>(() => Cursor.GetFirstAndLastCursor<Item, int>(null!, null!));
 
         [Fact]
         public void GetFirstAndLastCursor_EmptyCollection_ReturnsNullFirstAndLast()
@@ -161,7 +161,7 @@ namespace Boxed.AspNetCore.Test
 
         [Fact]
         public void ToCursor_Null_ThrowsArgumentNullException() =>
-            Assert.Throws<ArgumentNullException>(() => Cursor.ToCursor<string>(null));
+            Assert.Throws<ArgumentNullException>(() => Cursor.ToCursor<string>(null!));
 
         [Theory]
         [InlineData(0, "MA==")]

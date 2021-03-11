@@ -36,7 +36,7 @@ namespace Boxed.DotnetNewTest
                     new PackageCompilationAssemblyResolver(),
                 });
 
-            this.loadContext = AssemblyLoadContext.GetLoadContext(this.Assembly);
+            this.loadContext = AssemblyLoadContext.GetLoadContext(this.Assembly)!;
             this.loadContext.Resolving += this.OnResolving;
         }
 
@@ -48,7 +48,7 @@ namespace Boxed.DotnetNewTest
         /// <inheritdoc/>
         public void Dispose() => this.loadContext.Resolving -= this.OnResolving;
 
-        private Assembly OnResolving(AssemblyLoadContext context, AssemblyName name)
+        private Assembly? OnResolving(AssemblyLoadContext context, AssemblyName name)
         {
             bool NamesMatch(RuntimeLibrary runtime) =>
                 string.Equals(runtime.Name, name.Name, StringComparison.OrdinalIgnoreCase);

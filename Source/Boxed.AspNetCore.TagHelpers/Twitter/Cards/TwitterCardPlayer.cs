@@ -30,7 +30,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// Facebook's Open Graph og:description, do not use this unless you want a different description.
         /// </summary>
         [HtmlAttributeName(DescriptionAttributeName)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the image to be displayed in place of the player on platforms that don’t
@@ -39,14 +39,14 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// image) will cause the player card not to render. Image must be less than 1MB in size.
         /// </summary>
         [HtmlAttributeName(ImageAttributeName)]
-        public TwitterImage Image { get; set; }
+        public TwitterImage? Image { get; set; }
 
         /// <summary>
         /// Gets or sets the video player. If the iframe is wider than 435px, the iframe player will
         /// be resized to fit a max width of 435px, maintaining the original aspect ratio.
         /// </summary>
         [HtmlAttributeName(PlayerAttributeName)]
-        public TwitterPlayer Player { get; set; }
+        public TwitterPlayer? Player { get; set; }
 
         /// <summary>
         /// Gets or sets the title of the summary. Title should be concise and will be truncated at
@@ -54,7 +54,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// you want a different title.
         /// </summary>
         [HtmlAttributeName(TitleAttributeName)]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// Gets the type of the Twitter card.
@@ -78,13 +78,13 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:site:Id", this.SiteId);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:title", this.Title);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:description", this.Description);
-            stringBuilder.AppendMetaNameContent("twitter:image", this.Image.ImageUrl);
-            stringBuilder.AppendMetaNameContentIfNotNull("twitter:image:height", this.Image.Height);
-            stringBuilder.AppendMetaNameContentIfNotNull("twitter:image:width", this.Image.Width);
-            stringBuilder.AppendMetaNameContent("twitter:player", this.Player.PlayerUrl);
-            stringBuilder.AppendMetaNameContent("twitter:player:width", this.Player.Width);
-            stringBuilder.AppendMetaNameContent("twitter:player:height", this.Player.Height);
-            stringBuilder.AppendMetaNameContentIfNotNull("twitter:player:stream", this.Player.StreamUrl);
+            stringBuilder.AppendMetaNameContent("twitter:image", this.Image?.ImageUrl);
+            stringBuilder.AppendMetaNameContentIfNotNull("twitter:image:height", this.Image?.Height);
+            stringBuilder.AppendMetaNameContentIfNotNull("twitter:image:width", this.Image?.Width);
+            stringBuilder.AppendMetaNameContent("twitter:player", this.Player?.PlayerUrl);
+            stringBuilder.AppendMetaNameContent("twitter:player:width", this.Player?.Width);
+            stringBuilder.AppendMetaNameContent("twitter:player:height", this.Player?.Height);
+            stringBuilder.AppendMetaNameContentIfNotNull("twitter:player:stream", this.Player?.StreamUrl);
         }
 
         /// <summary>

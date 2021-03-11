@@ -171,16 +171,16 @@ namespace Boxed.DotnetNewTest
             TextWriter textWriter,
             CancellationToken cancellationToken = default)
         {
-            var taskCompletionSource = new TaskCompletionSource<object>();
+            var taskCompletionSource = new TaskCompletionSource();
 
-            DataReceivedEventHandler handler = null;
+            DataReceivedEventHandler handler = null!;
             handler = new DataReceivedEventHandler(
                 (sender, e) =>
                 {
                     if (e.Data is null)
                     {
                         removeHandler(handler);
-                        taskCompletionSource.TrySetResult(null);
+                        taskCompletionSource.SetResult();
                     }
                     else
                     {

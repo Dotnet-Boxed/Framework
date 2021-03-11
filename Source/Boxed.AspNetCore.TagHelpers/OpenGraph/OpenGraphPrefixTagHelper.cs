@@ -10,7 +10,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
     /// Adds the open graph prefix attribute to the head tag. The prefix is different depending on the type of open
     /// graph object being used.
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" />
+    /// <seealso cref="TagHelper" />
     [HtmlTargetElement("head", Attributes = EnabledAttributeName)]
     public class OpenGraphPrefixTagHelper : TagHelper
     {
@@ -36,7 +36,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// </value>
         [HtmlAttributeNotBound]
         [ViewContext]
-        public ViewContext ViewContext { get; set; }
+        public ViewContext ViewContext { get; set; } = default!;
 
         /// <summary>
         /// Asynchronously executes the <see cref="TagHelper" /> with the given <paramref name="context" /> and

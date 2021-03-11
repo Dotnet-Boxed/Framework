@@ -23,7 +23,7 @@ namespace Boxed.Mapping.Benchmark
         private readonly IMapper automapper;
         private readonly IMapper<MapFrom, MapTo> boilerplateMapper;
         private readonly Random random;
-        private MapFrom[] mapFrom;
+        private MapFrom[] mapFrom = default!;
 
         public MapArrayBenchmark()
         {

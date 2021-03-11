@@ -29,7 +29,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the author who wrote the article. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(AuthorUrlsAttributeName)]
-        public IEnumerable<string> AuthorUrls { get; set; }
+        public IEnumerable<string>? AuthorUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the expiration time, after which the article is out of date.
@@ -59,19 +59,19 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// This particular property is not part of the Open Graph standard but is documented by Facebook.
         /// </summary>
         [HtmlAttributeName(PublisherUrlAttributeName)]
-        public Uri PublisherUrl { get; set; }
+        public Uri? PublisherUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the high-level section or category name e.g. Technology.
         /// </summary>
         [HtmlAttributeName(SectionAttributeName)]
-        public string Section { get; set; }
+        public string? Section { get; set; }
 
         /// <summary>
         /// Gets or sets the tag words associated with the article.
         /// </summary>
         [HtmlAttributeName(TagsAttributeName)]
-        public IEnumerable<string> Tags { get; set; }
+        public IEnumerable<string>? Tags { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.

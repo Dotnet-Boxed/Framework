@@ -29,7 +29,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the section this menu item is from. This URL must contain profile meta tags <see cref="OpenGraphRestaurantMenuSection"/>.
         /// </summary>
         [HtmlAttributeName(SectionUrlAttributeName)]
-        public Uri SectionUrl { get; set; }
+        public Uri? SectionUrl { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.
@@ -40,7 +40,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the variations of this menu item.
         /// </summary>
         [HtmlAttributeName(VariationsAttributeName)]
-        public IEnumerable<OpenGraphMenuItemVariation> Variations { get; set; }
+        public IEnumerable<OpenGraphMenuItemVariation>? Variations { get; set; }
 
         /// <summary>
         /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.

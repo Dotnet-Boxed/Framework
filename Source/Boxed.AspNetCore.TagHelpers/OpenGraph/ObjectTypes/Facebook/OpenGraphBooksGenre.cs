@@ -25,19 +25,19 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the authors who wrote the books. This URL must contain books.book meta tags <see cref="OpenGraphBooksAuthor"/>.
         /// </summary>
         [HtmlAttributeName(AuthorUrlsAttributeName)]
-        public IEnumerable<string> AuthorUrls { get; set; }
+        public IEnumerable<string>? AuthorUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the books written by the author. This URL must contain books.book meta tags <see cref="OpenGraphBooksBook"/>.
         /// </summary>
         [HtmlAttributeName(BookUrlsAttributeName)]
-        public IEnumerable<string> BookUrls { get; set; }
+        public IEnumerable<string>? BookUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the canonical name of the genre. Only one of the following names is allowed Adventure, Children's Fiction, Drama, Erotica, Essays, Fantasy, Gay &amp; Lesbian, Graphic Novels, Historical Fiction, Horror, Fiction &amp; Literature, Mystery, Mythology &amp; Folklore, Poetry, Religious &amp; Inspiratonal, Rhetoric &amp; Critcism, Romance, Satire &amp; Humor, Science Fiction, Thrillers &amp; Suspense, Westerns, Women&#039;s Fiction, Young Adult Fiction, Biography &amp; Memoir, Current Affairs &amp; Politics, Genealogy, Geography, History, History of the Ancient World, History of Africa, History of Asia, History of Europe, History of North America, History of South America, Travel, Bibliographies, Children&#039;s Non-fiction, Computer Science, Encyclopedias, General Collections, Gift Books, Information Sciences, Journalism &amp; Publishing, Magazines &amp; Journals, Manuscripts &amp; Rare Books, Epistemology, Ethics, Logic, Metaphysics, Philosophy, Parapsychology &amp; Occultism, Psychology, Self-help, Bible, Comparative Religions, Natural Theory, Theology, Business, Customs &amp; Etiquette, Economics, Education, Finance, Gay &amp; Lesbian Non-Fiction, Gender Studies, Law, Political Science, Social Sciences, Social Services, Statistics, True Crime, English &amp; Old English, French, German, Greek, Italian, Language, Latin, Linguistics, Other Languages, Portugese, Spanish, Astronomy, Chemistry, Earth Sciences, Life Sciences, Mathematics, Paleontology &amp; Paleozoology, Physics, Plants Sciences, Zoology, Agriculture, Chemical Engineering, Engineering &amp; Opera?ons, Management, Manufacturing, Medical Sciences, Technology, Cooking &amp; Cookbooks, Gardening, Home Decorating, Home Economics, Parenting, Pets, Architecture, Design, Drawing, Fine Art, Gardening, Graphic Art, Music, Painting, Performing Arts, Photography, Sculpture, Games, Fitness, Health and Sports.
         /// </summary>
         [HtmlAttributeName(CanonicalNameAttributeName)]
-        public string CanonicalName { get; set; }
+        public string? CanonicalName { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.

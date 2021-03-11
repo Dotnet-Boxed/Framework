@@ -24,7 +24,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the retailer's ID for the product group.
         /// </summary>
         [HtmlAttributeName(RetailerGroupIdAttributeName)]
-        public string RetailerGroupId { get; set; }
+        public string? RetailerGroupId { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.

@@ -29,7 +29,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// must set this value to the two-letter country code for the App Store that contains your application.
         /// </summary>
         [HtmlAttributeName(CountryAttributeName)]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
         /// <summary>
         /// Gets or sets the description that concisely summarizes the content of the page, as
@@ -39,13 +39,13 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// Facebook's Open Graph og:description, do not use this unless you want a different description.
         /// </summary>
         [HtmlAttributeName(DescriptionAttributeName)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the numeric representation of your app ID in Google Play (.i.e. "com.android.app").
         /// </summary>
         [HtmlAttributeName(GooglePlayAttributeName)]
-        public string GooglePlay { get; set; }
+        public string? GooglePlay { get; set; }
 
         /// <summary>
         /// Gets or sets your google play app’s custom URL scheme (you must include "://" after your
@@ -53,28 +53,28 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// </summary>
         [HtmlAttributeName(GooglePlayCustomUrlSchemeAttributeName)]
 #pragma warning disable CA1056 // Uri properties should not be strings
-        public string GooglePlayCustomUrlScheme { get; set; }
+        public string? GooglePlayCustomUrlScheme { get; set; }
 #pragma warning restore CA1056 // Uri properties should not be strings
 
         /// <summary>
         /// Gets or sets numeric representation of your iPad app ID in the App Store (.i.e. "307234931").
         /// </summary>
         [HtmlAttributeName(IPadAttributeName)]
-        public string IPad { get; set; }
+        public string? IPad { get; set; }
 
         /// <summary>
         /// Gets or sets your iPad app’s custom URL scheme (you must include "://" after your scheme name).
         /// </summary>
         [HtmlAttributeName(IPadCustomUrlSchemeAttributeName)]
 #pragma warning disable CA1056 // Uri properties should not be strings
-        public string IPadCustomUrlScheme { get; set; }
+        public string? IPadCustomUrlScheme { get; set; }
 #pragma warning restore CA1056 // Uri properties should not be strings
 
         /// <summary>
         /// Gets or sets numeric representation of your iPhone app ID in the App Store (.i.e. “307234931”).
         /// </summary>
         [HtmlAttributeName(IPhoneAttributeName)]
-        public string IPhone { get; set; }
+        public string? IPhone { get; set; }
 
         /// <summary>
         /// Gets or sets your iPhone app’s custom URL scheme (you must include "://" after your
@@ -82,7 +82,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// </summary>
         [HtmlAttributeName(IPhoneCustomUrlSchemeAttributeName)]
 #pragma warning disable CA1056 // Uri properties should not be strings
-        public string IPhoneCustomUrlScheme { get; set; }
+        public string? IPhoneCustomUrlScheme { get; set; }
 #pragma warning restore CA1056 // Uri properties should not be strings
 
         /// <summary>

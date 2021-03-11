@@ -29,13 +29,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the restaurant who wrote the menu. This URL must contain profile meta tags <see cref="OpenGraphRestaurant"/>.
         /// </summary>
         [HtmlAttributeName(RestaurantUrlAttributeName)]
-        public Uri RestaurantUrl { get; set; }
+        public Uri? RestaurantUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the menu sections. This URL must contain restaurant.section meta tags <see cref="OpenGraphRestaurantMenuSection"/>.
         /// </summary>
         [HtmlAttributeName(SectionUrlsAttributeName)]
-        public IEnumerable<string> SectionUrls { get; set; }
+        public IEnumerable<string>? SectionUrls { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.
