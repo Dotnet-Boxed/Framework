@@ -20,11 +20,11 @@ namespace Boxed.AspNetCore.Test.Middleware
 
         [Fact]
         public void InvokeAsync_NullContext_ThrowsArgumentNullException() =>
-            Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(null, this.next));
+            Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(null!, this.next));
 
         [Fact]
         public void InvokeAsync_NullNext_ThrowsArgumentNullException() =>
-            Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(this.context, null));
+            Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(this.context, null!));
 
         [Fact]
         public async Task InvokeAsync_DoesntSupportTrailingHeaders_DontAddServerTimingHttpHeaderAsync()

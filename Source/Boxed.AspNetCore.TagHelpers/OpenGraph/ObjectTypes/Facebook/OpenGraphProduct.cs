@@ -64,19 +64,19 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the brand of the product or its original manufacturer.
         /// </summary>
         [HtmlAttributeName(BrandAttributeName)]
-        public string Brand { get; set; }
+        public string? Brand { get; set; }
 
         /// <summary>
         /// Gets or sets the category for the product.
         /// </summary>
         [HtmlAttributeName(CategoryAttributeName)]
-        public string Category { get; set; }
+        public string? Category { get; set; }
 
         /// <summary>
         /// Gets or sets the colour of the product.
         /// </summary>
         [HtmlAttributeName(ColourAttributeName)]
-        public string Colour { get; set; }
+        public string? Colour { get; set; }
 
         /// <summary>
         /// Gets or sets the condition of the item, one of 'new', 'refurbished', or 'used'.
@@ -88,7 +88,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets an International Article Number, or European Article Number (EAN), for the product.
         /// </summary>
         [HtmlAttributeName(EANAttributeName)]
-        public string EAN { get; set; }
+        public string? EAN { get; set; }
 
         /// <summary>
         /// Gets or sets a time representing when the product expired (or will expire).
@@ -106,19 +106,19 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets a International Standard Book Number (ISBN) for the product, intended for when it is a book.
         /// </summary>
         [HtmlAttributeName(ISBNAttributeName)]
-        public string ISBN { get; set; }
+        public string? ISBN { get; set; }
 
         /// <summary>
         /// Gets or sets the manufacturers part number for the product.
         /// </summary>
         [HtmlAttributeName(ManufacturerPartNumberAttributeName)]
-        public string ManufacturerPartNumber { get; set; }
+        public string? ManufacturerPartNumber { get; set; }
 
         /// <summary>
         /// Gets or sets a description of the material used to make the product.
         /// </summary>
         [HtmlAttributeName(MaterialAttributeName)]
-        public string Material { get; set; }
+        public string? Material { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -129,37 +129,37 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the original prices of the product.
         /// </summary>
         [HtmlAttributeName(OriginalPricesAttributeName)]
-        public IEnumerable<OpenGraphCurrency> OriginalPrices { get; set; }
+        public IEnumerable<OpenGraphCurrency>? OriginalPrices { get; set; }
 
         /// <summary>
         /// Gets or sets a description of the pattern used on the product.
         /// </summary>
         [HtmlAttributeName(PatternAttributeName)]
-        public string Pattern { get; set; }
+        public string? Pattern { get; set; }
 
         /// <summary>
         /// Gets or sets a title to be used to describe multiple items of this product.
         /// </summary>
         [HtmlAttributeName(PluralTitleAttributeName)]
-        public string PluralTitle { get; set; }
+        public string? PluralTitle { get; set; }
 
         /// <summary>
         /// Gets or sets the pre-tax prices of the product.
         /// </summary>
         [HtmlAttributeName(PretaxPricesAttributeName)]
-        public IEnumerable<OpenGraphCurrency> PretaxPrices { get; set; }
+        public IEnumerable<OpenGraphCurrency>? PretaxPrices { get; set; }
 
         /// <summary>
         /// Gets or sets the prices of the product.
         /// </summary>
         [HtmlAttributeName(PricesAttributeName)]
-        public IEnumerable<OpenGraphCurrency> Prices { get; set; }
+        public IEnumerable<OpenGraphCurrency>? Prices { get; set; }
 
         /// <summary>
         /// Gets or sets a URL link to find out more about the product.
         /// </summary>
         [HtmlAttributeName(ProductLinkUrlAttributeName)]
-        public Uri ProductLinkUrl { get; set; }
+        public Uri? ProductLinkUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum number of times a person can purchase the product.
@@ -171,55 +171,55 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the retailer of the product. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(RetailerUrlAttributeName)]
-        public Uri RetailerUrl { get; set; }
+        public Uri? RetailerUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the retailer's category for the product.
         /// </summary>
         [HtmlAttributeName(RetailerCategoryAttributeName)]
-        public string RetailerCategory { get; set; }
+        public string? RetailerCategory { get; set; }
 
         /// <summary>
         /// Gets or sets the retailer's part number for the product.
         /// </summary>
         [HtmlAttributeName(RetailerPartNumberAttributeName)]
-        public string RetailerPartNumber { get; set; }
+        public string? RetailerPartNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the retailer of the product.
         /// </summary>
         [HtmlAttributeName(RetailerTitleAttributeName)]
-        public string RetailerTitle { get; set; }
+        public string? RetailerTitle { get; set; }
 
         /// <summary>
         /// Gets or sets the sale price of the product.
         /// </summary>
         [HtmlAttributeName(SalePriceAttributeName)]
-        public OpenGraphCurrency SalePrice { get; set; }
+        public OpenGraphCurrency? SalePrice { get; set; }
 
         /// <summary>
         /// Gets or sets the date range for which the sale price is valid.
         /// </summary>
         [HtmlAttributeName(SalePriceDatesAttributeName)]
-        public OpenGraphDateTimeRange SalePriceDates { get; set; }
+        public OpenGraphDateTimeRange? SalePriceDates { get; set; }
 
         /// <summary>
         /// Gets or sets the shipping cost of the product.
         /// </summary>
         [HtmlAttributeName(ShippingCostAttributeName)]
-        public IEnumerable<OpenGraphCurrency> ShippingCost { get; set; }
+        public IEnumerable<OpenGraphCurrency>? ShippingCost { get; set; }
 
         /// <summary>
         /// Gets or sets the shipping weight of the product.
         /// </summary>
         [HtmlAttributeName(ShippingWeightAttributeName)]
-        public OpenGraphQuantity ShippingWeight { get; set; }
+        public OpenGraphQuantity? ShippingWeight { get; set; }
 
         /// <summary>
         /// Gets or sets a size describing the product(such as 'S', 'M', 'L').
         /// </summary>
         [HtmlAttributeName(SizeAttributeName)]
-        public string Size { get; set; }
+        public string? Size { get; set; }
 
         /// <summary>
         /// Gets or sets the target gender for the product.
@@ -236,13 +236,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets a Universal Product Code(UPC) for the product.
         /// </summary>
         [HtmlAttributeName(TargetGenderAttributeName)]
-        public string UPC { get; set; }
+        public string? UPC { get; set; }
 
         /// <summary>
         /// Gets or sets the weight of the product.
         /// </summary>
         [HtmlAttributeName(WeightAttributeName)]
-        public OpenGraphQuantity Weight { get; set; }
+        public OpenGraphQuantity? Weight { get; set; }
 
         /// <summary>
         /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.

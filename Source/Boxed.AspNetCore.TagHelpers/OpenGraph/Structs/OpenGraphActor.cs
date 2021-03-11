@@ -33,6 +33,6 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// Gets or sets the role the actor played.
         /// </summary>
-        public string Role { get; set; }
+        public string? Role { get; set; }
     }
 }

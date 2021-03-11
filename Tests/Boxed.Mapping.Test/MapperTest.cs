@@ -17,7 +17,7 @@ namespace Boxed.Mapping.Test
         {
             var mapper = new Mapper();
 
-            Assert.Throws<ArgumentNullException>("source", () => mapper.Map(null));
+            Assert.Throws<ArgumentNullException>("source", () => mapper.Map(null!));
         }
 
         [Fact]

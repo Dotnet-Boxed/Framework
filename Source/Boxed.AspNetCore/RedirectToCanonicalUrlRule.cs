@@ -1,6 +1,7 @@
 namespace Boxed.AspNetCore
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Boxed.AspNetCore.Filters;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Http.Extensions;
@@ -90,7 +91,7 @@ namespace Boxed.AspNetCore
         /// <param name="context">The <see cref="RewriteContext" />.</param>
         /// <param name="canonicalUrl">The canonical URL.</param>
         /// <returns><c>true</c> if the URL is canonical, otherwise <c>false</c>.</returns>
-        protected virtual bool TryGetCanonicalUrl(RewriteContext context, out Uri canonicalUrl)
+        protected virtual bool TryGetCanonicalUrl(RewriteContext context, [NotNullWhen(false)] out Uri? canonicalUrl)
         {
             if (context is null)
             {
@@ -100,13 +101,13 @@ namespace Boxed.AspNetCore
             var isCanonical = true;
 
             var request = context.HttpContext.Request;
-            var hasPath = request.Path.HasValue && (request.Path.Value.Length > 1);
+            var hasPath = request.Path.HasValue && (request.Path.Value!.Length > 1);
 
             // If we are not dealing with the home page. Note, the home page is a special case and it doesn't matter
             // if there is a trailing slash or not. Both will be treated as the same by search engines.
             if (hasPath)
             {
-                var hasTrailingSlash = request.Path.Value[^1] == SlashCharacter;
+                var hasTrailingSlash = request.Path.Value![^1] == SlashCharacter;
 
                 if (this.AppendTrailingSlash)
                 {
@@ -132,7 +133,7 @@ namespace Boxed.AspNetCore
             {
                 if (this.LowercaseUrls && !this.HasAttribute<NoTrailingSlashAttribute>(context))
                 {
-                    foreach (var character in request.Path.Value)
+                    foreach (var character in request.Path.Value!)
                     {
                         if (char.IsUpper(character))
                         {
@@ -146,7 +147,7 @@ namespace Boxed.AspNetCore
 
                     if (request.QueryString.HasValue && !this.HasAttribute<NoLowercaseQueryStringAttribute>(context))
                     {
-                        foreach (var character in request.QueryString.Value)
+                        foreach (var character in request.QueryString.Value!)
                         {
                             if (char.IsUpper(character))
                             {
@@ -212,7 +213,7 @@ namespace Boxed.AspNetCore
             }
 
             var endpoint = context.HttpContext.GetEndpoint();
-            return endpoint.Metadata.GetMetadata<T>() is not null;
+            return endpoint?.Metadata?.GetMetadata<T>() is not null;
         }
     }
 }

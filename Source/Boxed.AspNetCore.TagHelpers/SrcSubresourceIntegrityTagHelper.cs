@@ -34,7 +34,7 @@ namespace Boxed.AspNetCore.TagHelpers
 
         /// <inheritdoc />
         [HtmlAttributeName(SubresourceIntegritySrcAttributeName)]
-        public override string Source { get; set; }
+        public override string? Source { get; set; }
 
         /// <inheritdoc />
         protected override string UrlAttributeName => SrcAttributeName;

@@ -25,13 +25,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the author who wrote the book. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(AuthorUrlAttributeName)]
-        public Uri AuthorUrl { get; set; }
+        public Uri? AuthorUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the books unique ISBN number.
         /// </summary>
         [HtmlAttributeName(ISBNAttributeName)]
-        public string ISBN { get; set; }
+        public string? ISBN { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -48,7 +48,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the tag words associated with the book.
         /// </summary>
         [HtmlAttributeName(TagsAttributeName)]
-        public IEnumerable<string> Tags { get; set; }
+        public IEnumerable<string>? Tags { get; set; }
 
         /// <summary>
         /// Gets the type of your object, e.g. "video.movie". Depending on the type you specify, other properties may also be required.

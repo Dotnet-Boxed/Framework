@@ -25,7 +25,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the name normally given to an individual by a parent or self-chosen.
         /// </summary>
         [HtmlAttributeName(FirstNameAttributeName)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the gender.
@@ -37,7 +37,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the name inherited from a family or marriage and by which the individual is commonly known.
         /// </summary>
         [HtmlAttributeName(LastNameAttributeName)]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -53,7 +53,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the short unique string to identify them.
         /// </summary>
         [HtmlAttributeName(UsernameAttributeName)]
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         /// <summary>
         /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.

@@ -12,7 +12,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Initializes a new instance of the <see cref="OpenGraphMedia"/> class.
         /// </summary>
         /// <param name="mediaUrl">The media URL.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="mediaUrl"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="mediaUrl"/> is <c>null</c>.</exception>
         public OpenGraphMedia(Uri mediaUrl)
         {
             if (mediaUrl is null)
@@ -39,7 +39,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the MIME type of the media e.g. media/jpeg. This is optional if your media URL ends with a file extension,
         /// otherwise it is recommended.
         /// </summary>
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// Gets the absolute HTTP media URL which should represent your object within the graph.
@@ -49,7 +49,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <summary>
         /// Gets the absolute HTTPS media URL which should represent your object within the graph.
         /// </summary>
-        public Uri UrlSecure { get; }
+        public Uri? UrlSecure { get; }
 
         /// <summary>
         /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.

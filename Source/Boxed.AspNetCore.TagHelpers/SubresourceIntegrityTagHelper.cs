@@ -80,7 +80,7 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <value>
         /// The source file.
         /// </value>
-        public virtual string Source { get; set; }
+        public virtual string? Source { get; set; }
 
         /// <summary>
         /// Gets the name of the attribute which contains the URL to the resource.
@@ -246,7 +246,7 @@ namespace Boxed.AspNetCore.TagHelpers
         {
             var filePath = Path.Combine(
                 this.webHostEnvironment.ContentRootPath,
-                this.urlHelper.Content(contentPath).TrimStart('/'));
+                this.urlHelper.Content(contentPath)?.TrimStart('/') ?? string.Empty);
             var bytes = this.ReadAllBytes(filePath);
             return GetSpaceDelimetedSri(bytes, hashAlgorithms);
         }
@@ -280,7 +280,7 @@ namespace Boxed.AspNetCore.TagHelpers
                 }
             }
 
-            return attributeValue.ToString();
+            return attributeValue.ToString()!;
         }
     }
 }

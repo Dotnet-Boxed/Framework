@@ -23,7 +23,7 @@ namespace Boxed.AspNetCore.Test
 
         [Fact]
         public void UseServerTiming_NullApplication_ThrowsArgumentNullException() =>
-            Assert.Throws<ArgumentNullException>(() => Boxed.AspNetCore.ApplicationBuilderExtensions.UseServerTiming(null));
+            Assert.Throws<ArgumentNullException>(() => AspNetCore.ApplicationBuilderExtensions.UseServerTiming(null!));
 
         [Fact]
         public async Task UseIf_TrueCondition_ActionCalledAsync()

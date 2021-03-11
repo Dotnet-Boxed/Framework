@@ -12,6 +12,6 @@ namespace Boxed.Mapping.Benchmark.Models
 
         public long LongFrom { get; set; }
 
-        public string StringFrom { get; set; }
+        public string? StringFrom { get; set; }
     }
 }

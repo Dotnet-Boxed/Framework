@@ -22,7 +22,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to the page about the creator of the radio station. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(CreatorUrlAttributeName)]
-        public Uri CreatorUrl { get; set; }
+        public Uri? CreatorUrl { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.

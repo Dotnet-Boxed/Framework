@@ -24,7 +24,7 @@ namespace Boxed.Mapping.Benchmark
         private readonly IMapper automapper;
         private readonly IMapper<MapFrom, MapTo> boilerplateMapper;
         private readonly Random random;
-        private List<MapFrom> mapFrom;
+        private List<MapFrom> mapFrom = default!;
 
         public MapListBenchmark()
         {

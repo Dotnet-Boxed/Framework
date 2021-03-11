@@ -11,7 +11,8 @@ namespace Boxed.AspNetCore.Test
     {
         [Fact]
         public void ApplyRule_NullContext_ThrowsArgumentNullException() =>
-            Assert.Throws<ArgumentNullException>(() => new RedirectToCanonicalUrlRule(true, true).ApplyRule(null));
+            Assert.Throws<ArgumentNullException>(
+                () => new RedirectToCanonicalUrlRule(true, true).ApplyRule(null!));
 
         [Theory]
         [InlineData("CONNECT")]

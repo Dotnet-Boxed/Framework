@@ -98,7 +98,7 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <returns>The directory for the currently executing assembly.</returns>
         public static string GetCurrentDirectory() =>
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
 
         /// <summary>
         /// Tries to delete the specified directory.

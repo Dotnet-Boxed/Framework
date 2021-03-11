@@ -24,13 +24,13 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(process));
             }
 
-            var taskCompletionSource = new TaskCompletionSource<object>();
+            var taskCompletionSource = new TaskCompletionSource();
 
             process.EnableRaisingEvents = true;
 
             process.Exited += (s, a) =>
             {
-                taskCompletionSource.SetResult(null);
+                taskCompletionSource.SetResult();
 
                 process.Dispose();
             };
@@ -56,7 +56,7 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(process));
             }
 
-            var taskCompletionSource = new TaskCompletionSource<object>();
+            var taskCompletionSource = new TaskCompletionSource();
 
             process.EnableRaisingEvents = true;
 
@@ -73,10 +73,10 @@ namespace Boxed.DotnetNewTest
 
             return taskCompletionSource.Task;
 
-            void OnExited(object sender, EventArgs e)
+            void OnExited(object? sender, EventArgs e)
             {
                 process.Exited -= OnExited;
-                taskCompletionSource.TrySetResult(null);
+                taskCompletionSource.TrySetResult();
             }
         }
 
@@ -112,7 +112,7 @@ namespace Boxed.DotnetNewTest
             }
         }
 
-        private static int RunProcessAndWaitForExit(string fileName, string arguments, TimeSpan timeout, out string stdout)
+        private static int RunProcessAndWaitForExit(string fileName, string arguments, TimeSpan timeout, out string? stdout)
         {
             var startInfo = new ProcessStartInfo
             {
@@ -122,7 +122,7 @@ namespace Boxed.DotnetNewTest
                 UseShellExecute = false,
             };
 
-            var process = Process.Start(startInfo);
+            var process = Process.Start(startInfo)!;
 
             stdout = null;
             if (process.WaitForExit((int)timeout.TotalMilliseconds))

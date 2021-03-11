@@ -22,7 +22,7 @@ namespace Boxed.Mapping.Test
 
             return Assert.ThrowsAsync<ArgumentNullException>(
                 "source",
-                () => mapper.MapAsync(null, this.cancellationTokenSource.Token));
+                () => mapper.MapAsync(null!, this.cancellationTokenSource.Token));
         }
 
         [Fact]

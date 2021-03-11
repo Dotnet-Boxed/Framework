@@ -19,11 +19,11 @@ namespace Boxed.AspNetCore.Test
 
         [Fact]
         public Task GetAsJsonAsync_NullDistributedCache_ThrowsArgumentNullExceptionAsync() =>
-            Assert.ThrowsAsync<ArgumentNullException>(() => ((IDistributedCache)null).GetAsJsonAsync<TestClass>("Key"));
+            Assert.ThrowsAsync<ArgumentNullException>(() => ((IDistributedCache)null!).GetAsJsonAsync<TestClass>("Key"));
 
         [Fact]
         public Task GetAsJsonAsync_NullKey_ThrowsArgumentNullExceptionAsync() =>
-            Assert.ThrowsAsync<ArgumentNullException>(() => this.distributedCacheMock.Object.GetAsJsonAsync<TestClass>(null));
+            Assert.ThrowsAsync<ArgumentNullException>(() => this.distributedCacheMock.Object.GetAsJsonAsync<TestClass>(null!));
 
         [Fact]
         public async Task GetAsJsonAsync_ValidValue_ReturnsDeserializedObjectAsync()
@@ -39,17 +39,19 @@ namespace Boxed.AspNetCore.Test
                     .ConfigureAwait(false);
 
                 Assert.NotNull(testClass);
-                Assert.Equal(1, testClass.Value);
+                Assert.Equal(1, testClass!.Value);
             }
         }
 
         [Fact]
         public Task SetAsJsonAsync_NullDistributedCache_ThrowsArgumentNullExceptionAsync() =>
-            Assert.ThrowsAsync<ArgumentNullException>(() => ((IDistributedCache)null).SetAsJsonAsync("Key", new TestClass()));
+            Assert.ThrowsAsync<ArgumentNullException>(
+                () => ((IDistributedCache)null!).SetAsJsonAsync("Key", new TestClass()));
 
         [Fact]
         public Task SetAsJsonAsync_NullKey_ThrowsArgumentNullExceptionAsync() =>
-            Assert.ThrowsAsync<ArgumentNullException>(() => this.distributedCacheMock.Object.SetAsJsonAsync(null, new TestClass()));
+            Assert.ThrowsAsync<ArgumentNullException>(
+                () => this.distributedCacheMock.Object.SetAsJsonAsync(null!, new TestClass()));
 
         [Fact]
         public async Task SetAsJsonAsync_ValidValue_SavesSerializedValueAsync()

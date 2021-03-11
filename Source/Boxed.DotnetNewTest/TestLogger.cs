@@ -18,7 +18,7 @@ namespace Boxed.DotnetNewTest
         /// <summary>
         /// Gets or sets the write message function which defaults to writing to the debug output and console.
         /// </summary>
-        public static Action<string> WriteMessage { get; set; }
+        public static Action<string>? WriteMessage { get; set; }
 
         /// <summary>
         /// Writes the specified message.

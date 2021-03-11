@@ -23,7 +23,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the location of the place.
         /// </summary>
         [HtmlAttributeName(LocationAttributeName)]
-        public OpenGraphLocation Location { get; set; }
+        public OpenGraphLocation? Location { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -48,9 +48,9 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMetaPropertyContent("place:location:latitude", this.Location.Latitude);
-            stringBuilder.AppendMetaPropertyContent("place:location:longitude", this.Location.Longitude);
-            stringBuilder.AppendMetaPropertyContentIfNotNull("place:location:altitude", this.Location.Altitude);
+            stringBuilder.AppendMetaPropertyContent("place:location:latitude", this.Location?.Latitude);
+            stringBuilder.AppendMetaPropertyContent("place:location:longitude", this.Location?.Longitude);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("place:location:altitude", this.Location?.Altitude);
         }
 
         /// <summary>

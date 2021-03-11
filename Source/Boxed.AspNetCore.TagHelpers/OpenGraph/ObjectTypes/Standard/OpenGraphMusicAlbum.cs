@@ -34,7 +34,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the musicians who wrote the song. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(MusicianUrlsAttributeName)]
-        public IEnumerable<string> MusicianUrls { get; set; }
+        public IEnumerable<string>? MusicianUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the release date of the album.
@@ -64,7 +64,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the songs on this album. This URL must contain profile meta tags <see cref="OpenGraphMusicSong"/>.
         /// </summary>
         [HtmlAttributeName(SongUrlsAttributeName)]
-        public IEnumerable<string> SongUrls { get; set; }
+        public IEnumerable<string>? SongUrls { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.

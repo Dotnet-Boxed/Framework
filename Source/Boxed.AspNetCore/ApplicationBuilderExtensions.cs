@@ -25,7 +25,7 @@ namespace Boxed.AspNetCore
         /// <returns>The same application builder.</returns>
         public static IApplicationBuilder UseHttpException(
             this IApplicationBuilder application,
-            Action<HttpExceptionMiddlewareOptions> configureOptions)
+            Action<HttpExceptionMiddlewareOptions>? configureOptions)
         {
             if (application is null)
             {

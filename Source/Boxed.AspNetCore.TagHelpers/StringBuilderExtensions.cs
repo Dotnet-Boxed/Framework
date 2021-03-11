@@ -34,11 +34,11 @@ namespace Boxed.AspNetCore
         /// <param name="stringBuilder">The string builder.</param>
         /// <param name="name">The name value of the meta tag.</param>
         /// <param name="content">The content value of the meta tag.</param>
-        public static void AppendMetaNameContentIfNotNull<T>(this StringBuilder stringBuilder, string name, T content)
+        public static void AppendMetaNameContentIfNotNull<T>(this StringBuilder stringBuilder, string name, T? content)
         {
             if (content is not null)
             {
-                AppendMetaNameContent<T>(stringBuilder, name, content);
+                AppendMetaNameContent(stringBuilder, name, content);
             }
         }
 
@@ -112,11 +112,11 @@ namespace Boxed.AspNetCore
         public static void AppendMetaPropertyContentIfNotNull<T>(
             this StringBuilder stringBuilder,
             string property,
-            T content)
+            T? content)
         {
             if (content is not null)
             {
-                AppendMetaPropertyContent<T>(stringBuilder, property, content);
+                AppendMetaPropertyContent(stringBuilder, property, content);
             }
         }
 
@@ -150,7 +150,7 @@ namespace Boxed.AspNetCore
         public static void AppendMetaPropertyContentIfNotNull<T>(
             this StringBuilder stringBuilder,
             string property,
-            IEnumerable<T> content)
+            IEnumerable<T>? content)
         {
             if (content is not null)
             {

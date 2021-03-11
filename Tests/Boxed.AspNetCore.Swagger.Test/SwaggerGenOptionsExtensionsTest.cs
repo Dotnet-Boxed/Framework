@@ -12,7 +12,7 @@ namespace Boxed.AspNetCore.Swagger.Test
         public void IncludeXmlCommentsIfExists_NullOptions_ThrowsArgumentNullException() =>
             Assert.Throws<ArgumentNullException>(() =>
                 SwaggerGenOptionsExtensions.IncludeXmlCommentsIfExists(
-                    null,
+                    null!,
                     typeof(SwaggerGenOptionsExtensionsTest).GetTypeInfo().Assembly));
 
         [Fact]
@@ -20,7 +20,7 @@ namespace Boxed.AspNetCore.Swagger.Test
             Assert.Throws<ArgumentNullException>(() =>
                 SwaggerGenOptionsExtensions.IncludeXmlCommentsIfExists(
                     new SwaggerGenOptions(),
-                    (Assembly)null));
+                    (Assembly)null!));
 
         [Fact]
         public void IncludeXmlCommentsIfExists_XmlFileExistsWithAssemblyLocation_XmlCommentsFileAdded()

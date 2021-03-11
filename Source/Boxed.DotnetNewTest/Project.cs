@@ -16,7 +16,7 @@ namespace Boxed.DotnetNewTest
         /// <param name="httpsPort">The HTTPS port.</param>
         /// <param name="httpPort">The HTTP port.</param>
         public Project(
-            string name,
+            string? name,
             string directoryPath,
             string publishDirectoryPath,
             int httpsPort,
@@ -37,7 +37,7 @@ namespace Boxed.DotnetNewTest
         /// <summary>
         /// Gets the name of the project.
         /// </summary>
-        public string Name { get; }
+        public string? Name { get; }
 
         /// <summary>
         /// Gets the publish directory path to the project.

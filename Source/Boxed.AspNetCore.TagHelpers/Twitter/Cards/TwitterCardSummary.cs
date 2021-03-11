@@ -27,7 +27,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// Facebook's Open Graph og:description, do not use this unless you want a different description.
         /// </summary>
         [HtmlAttributeName(DescriptionAttributeName)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the URL to a unique image representing the content of the page. Do not use a
@@ -40,7 +40,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// is recommended to get supply a smaller image that fits Twitters needs.
         /// </summary>
         [HtmlAttributeName(ImageAttributeName)]
-        public TwitterImage Image { get; set; }
+        public TwitterImage? Image { get; set; }
 
         /// <summary>
         /// Gets or sets the title of the summary. Title should be concise and will be truncated at
@@ -48,7 +48,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// you want a different title.
         /// </summary>
         [HtmlAttributeName(TitleAttributeName)]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// Gets the type of the Twitter card.

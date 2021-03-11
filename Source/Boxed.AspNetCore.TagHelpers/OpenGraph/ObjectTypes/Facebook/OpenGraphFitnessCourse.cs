@@ -36,31 +36,31 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the energy used during the course.
         /// </summary>
         [HtmlAttributeName(CustomUnitEnergyAttributeName)]
-        public OpenGraphQuantity CustomUnitEnergy { get; set; }
+        public OpenGraphQuantity? CustomUnitEnergy { get; set; }
 
         /// <summary>
         /// Gets or sets the distance of the course.
         /// </summary>
         [HtmlAttributeName(DistanceAttributeName)]
-        public OpenGraphQuantity Distance { get; set; }
+        public OpenGraphQuantity? Distance { get; set; }
 
         /// <summary>
         /// Gets or sets the duration taken on the course.
         /// </summary>
         [HtmlAttributeName(DurationAttributeName)]
-        public OpenGraphQuantity Duration { get; set; }
+        public OpenGraphQuantity? Duration { get; set; }
 
         /// <summary>
         /// Gets or sets a string value displayed in stories if the associated action's end_time has not passed, such as an encouragement to friends to cheer the user on. The value is not rendered once the course has been completed.
         /// </summary>
         [HtmlAttributeName(LiveTextAttributeName)]
-        public string LiveText { get; set; }
+        public string? LiveText { get; set; }
 
         /// <summary>
         /// Gets or sets the metrics about the course.
         /// </summary>
         [HtmlAttributeName(MetricsAttributeName)]
-        public IEnumerable<OpenGraphFitnessActivityDataPoint> Metrics { get; set; }
+        public IEnumerable<OpenGraphFitnessActivityDataPoint>? Metrics { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -71,19 +71,19 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the pace achieved on the course.
         /// </summary>
         [HtmlAttributeName(PaceAttributeName)]
-        public OpenGraphQuantity Pace { get; set; }
+        public OpenGraphQuantity? Pace { get; set; }
 
         /// <summary>
         /// Gets or sets the split times during the course.
         /// </summary>
         [HtmlAttributeName(SplitsAttributeName)]
-        public IEnumerable<OpenGraphSplit> Splits { get; set; }
+        public IEnumerable<OpenGraphSplit>? Splits { get; set; }
 
         /// <summary>
         /// Gets or sets the speed achieved on the course.
         /// </summary>
         [HtmlAttributeName(SpeedAttributeName)]
-        public OpenGraphQuantity Speed { get; set; }
+        public OpenGraphQuantity? Speed { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.

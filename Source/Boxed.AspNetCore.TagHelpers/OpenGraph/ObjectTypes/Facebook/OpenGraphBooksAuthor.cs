@@ -25,7 +25,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the books written by the author. This URL must contain books.book meta tags <see cref="OpenGraphBooksBook"/>.
         /// </summary>
         [HtmlAttributeName(BookUrlsAttributeName)]
-        public IEnumerable<string> BookUrls { get; set; }
+        public IEnumerable<string>? BookUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the authors gender.
@@ -37,7 +37,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the genres of books the author typically writes. This URL must contain books.genre meta tags <see cref="OpenGraphBooksGenre"/>.
         /// </summary>
         [HtmlAttributeName(GenreUrlsAttributeName)]
-        public IEnumerable<string> GenreUrls { get; set; }
+        public IEnumerable<string>? GenreUrls { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -48,7 +48,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the official site URL of the author.
         /// </summary>
         [HtmlAttributeName(OfficialSiteUrlAttributeName)]
-        public Uri OfficialSiteUrl { get; set; }
+        public Uri? OfficialSiteUrl { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.

@@ -32,13 +32,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the authors of the book. This URL must contain books.author meta tags <see cref="OpenGraphBooksAuthor"/>.
         /// </summary>
         [HtmlAttributeName(AuthorUrlsAttributeName)]
-        public IEnumerable<string> AuthorUrls { get; set; }
+        public IEnumerable<string>? AuthorUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the genres of the book. This URL must contain books.genre meta tags <see cref="OpenGraphBooksGenre"/>.
         /// </summary>
         [HtmlAttributeName(GenreUrlsAttributeName)]
-        public IEnumerable<string> GenreUrls { get; set; }
+        public IEnumerable<string>? GenreUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the initial release date of the book.
@@ -50,13 +50,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the books unique ISBN number.
         /// </summary>
         [HtmlAttributeName(ISBNAttributeName)]
-        public string ISBN { get; set; }
+        public string? ISBN { get; set; }
 
         /// <summary>
         /// Gets or sets the language of the book in the format language_TERRITORY.
         /// </summary>
         [HtmlAttributeName(LanguageAttributeName)]
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
         /// <summary>
         /// Gets the namespace of this open graph type.
@@ -73,7 +73,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the rating of the book.
         /// </summary>
         [HtmlAttributeName(RatingAttributeName)]
-        public OpenGraphRating Rating { get; set; }
+        public OpenGraphRating? Rating { get; set; }
 
         /// <summary>
         /// Gets or sets the release date of the book.
@@ -85,7 +85,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL to a sample of the book.
         /// </summary>
         [HtmlAttributeName(SampleUrlAttributeName)]
-        public Uri SampleUrl { get; set; }
+        public Uri? SampleUrl { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.

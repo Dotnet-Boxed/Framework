@@ -29,13 +29,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the actors in the television show.
         /// </summary>
         [HtmlAttributeName(ActorsAttributeName)]
-        public IEnumerable<OpenGraphActor> Actors { get; set; }
+        public IEnumerable<OpenGraphActor>? Actors { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the directors. This URL's must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(DirectorUrlsAttributeName)]
-        public IEnumerable<string> DirectorUrls { get; set; }
+        public IEnumerable<string>? DirectorUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the duration of the television show in seconds.
@@ -58,7 +58,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the tag words associated with the television show.
         /// </summary>
         [HtmlAttributeName(TagsAttributeName)]
-        public IEnumerable<string> Tags { get; set; }
+        public IEnumerable<string>? Tags { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.
@@ -69,7 +69,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// Gets or sets the URL's to the pages about the writers. This URL's must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
         [HtmlAttributeName(WriterUrlsAttributeName)]
-        public IEnumerable<string> WriterUrls { get; set; }
+        public IEnumerable<string>? WriterUrls { get; set; }
 
         /// <summary>
         /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
