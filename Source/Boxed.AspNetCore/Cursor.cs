@@ -17,7 +17,7 @@ namespace Boxed.AspNetCore
         /// <typeparam name="T">The type of the cursor value.</typeparam>
         /// <param name="cursor">The cursor.</param>
         /// <returns>The cursor value.</returns>
-        public static T? FromCursor<T>(string cursor)
+        public static T? FromCursor<T>(string? cursor)
         {
             if (string.IsNullOrEmpty(cursor))
             {

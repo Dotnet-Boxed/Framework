@@ -294,7 +294,7 @@ namespace Boxed.DotnetNewTest
         public static async Task DotnetRunAsync(
             this Project project,
             string projectRelativeDirectoryPath,
-            Func<HttpClient, HttpClient?, Task<bool>> readinessCheck,
+            Func<HttpClient, HttpClient, Task<bool>> readinessCheck,
             Func<HttpClient, HttpClient, Task> action,
             bool? noRestore = true,
             Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool>? validateCertificate = null,
@@ -326,7 +326,7 @@ namespace Boxed.DotnetNewTest
 
             var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
             var dotnetRun = await DotnetRunInternalAsync(
-                    readinessCheck,
+                    readinessCheck!,
                     httpClient,
                     httpsClient,
                     projectFilePath,
