@@ -73,7 +73,7 @@ jobs:
         run: dotnet nuget add source https://nuget.pkg.github.com/Dotnet-Boxed/index.json --name GitHub --username RehanSaeed --password ${{secrets.GITHUB_TOKEN}}
         shell: pwsh
       - name: 'Dotnet NuGet Push'
-        run: dotnet nuget push .\windows-latest\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
+        run: dotnet nuget push .\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
         shell: pwsh
 
   push-nuget:
@@ -91,7 +91,7 @@ jobs:
           name: 'windows-latest'
       - name: 'Dotnet NuGet Push'
         run: |
-          Get-ChildItem .\windows-latest -Filter *.nupkg |
+          Get-ChildItem .\ -Filter *.nupkg |
           Where-Object { !$_.Name.Contains('preview') } |
           ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
         shell: pwsh
