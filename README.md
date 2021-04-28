@@ -96,10 +96,10 @@ Provides ASP.NET Core middleware, MVC filters, extension methods and helper code
 
 - [ASP.NET Core Fluent Interface Extensions](https://rehansaeed.com/asp-net-core-fluent-interface-extensions/)
 
-**ILoggerFactory Extensions**
+**ILoggingBuilder Extensions**
 
 ```c#
-loggerfactory
+loggingBuilder
     .AddIfElse(
         hostingEnvironment.IsDevelopment(),
         x => x.AddConsole(...).AddDebug(),
