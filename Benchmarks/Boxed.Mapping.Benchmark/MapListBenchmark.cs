@@ -16,7 +16,7 @@ namespace Boxed.Mapping.Benchmark
     [HtmlExporter]
     [CsvMeasurementsExporter]
     [RPlotExporter]
-    [SimpleJob(RuntimeMoniker.NetCoreApp50)]
+    [SimpleJob(RuntimeMoniker.Net50)]
     [SimpleJob(RuntimeMoniker.NetCoreApp30)]
     [SimpleJob(RuntimeMoniker.Net472)]
     public class MapListBenchmark
