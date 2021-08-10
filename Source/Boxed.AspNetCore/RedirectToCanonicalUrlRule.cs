@@ -107,7 +107,9 @@ namespace Boxed.AspNetCore
             // if there is a trailing slash or not. Both will be treated as the same by search engines.
             if (hasPath)
             {
+#pragma warning disable CA1508 // Workaround bug in warning. Delete this once on .NET 6.
                 var hasTrailingSlash = request.Path.Value![^1] == SlashCharacter;
+#pragma warning restore CA1508 // Workaround bug in warning. Delete this once on .NET 6.
 
                 if (this.AppendTrailingSlash)
                 {
