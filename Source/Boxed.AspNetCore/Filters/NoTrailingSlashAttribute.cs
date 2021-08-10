@@ -39,7 +39,9 @@ namespace Boxed.AspNetCore.Filters
             var path = context.HttpContext.Request.Path;
             if (path.HasValue)
             {
+#pragma warning disable CA1508 // Workaround bug in warning. Delete this once on .NET 6.
                 if (path.Value![^1] == SlashCharacter)
+#pragma warning restore CA1508 // Workaround bug in warning. Delete this once on .NET 6.
                 {
                     HandleTrailingSlashRequest(context);
                 }
