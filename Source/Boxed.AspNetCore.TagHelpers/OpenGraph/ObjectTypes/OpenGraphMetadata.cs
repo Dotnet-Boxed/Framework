@@ -171,6 +171,33 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 #pragma warning restore CA1716 // Identifiers should not match keywords
 
         /// <summary>
+        /// Gets the space delimited namespaces to be added to the prefix attribute of the head element in the HTML
+        /// document. It contains the namespaces for the Open Graph object type used on the page, as well as the
+        /// Facebook namespaces if Facebook Administrators, Application ID's or Profile ID's are supplied.
+        /// </summary>
+        /// <returns>A <see cref="string"/> containing Open Graph namespaces.</returns>
+        public string Namespaces
+        {
+            get
+            {
+                string namespaces;
+
+                if ((this.FacebookAdministrators is null) &&
+                    (this.FacebookApplicationId is null) &&
+                    (this.FacebookProfileId is null))
+                {
+                    namespaces = OgNamespace + this.Namespace;
+                }
+                else
+                {
+                    namespaces = OgNamespace + FacebookNamespace + this.Namespace;
+                }
+
+                return namespaces;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the list of URL's used to supply an additional link that shows related content to the object. This property is not part of the
         /// Open Graph standard but is used by Facebook.
         /// </summary>
@@ -220,30 +247,6 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         public ViewContext ViewContext { get; set; } = default!;
 
         /// <summary>
-        /// Gets the space delimited namespaces to be added to the prefix attribute of the head element in the HTML
-        /// document. It contains the namespaces for the Open Graph object type used on the page, as well as the
-        /// Facebook namespaces if Facebook Administrators, Application ID's or Profile ID's are supplied.
-        /// </summary>
-        /// <returns>A <see cref="string"/> containing Open Graph namespaces.</returns>
-        public string GetNamespaces()
-        {
-            string namespaces;
-
-            if ((this.FacebookAdministrators is null) &&
-                (this.FacebookApplicationId is null) &&
-                (this.FacebookProfileId is null))
-            {
-                namespaces = OgNamespace + this.Namespace;
-            }
-            else
-            {
-                namespaces = OgNamespace + FacebookNamespace + this.Namespace;
-            }
-
-            return namespaces;
-        }
-
-        /// <summary>
         /// Synchronously executes the <see cref="TagHelper"/> with the given <paramref name="context"/> and
         /// <paramref name="output"/>.
         /// </summary>
@@ -263,7 +266,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
 
             // Workaround for context.Items not working across _Layout.cshtml and Index.cshtml using ViewContext.
             // https://github.com/aspnet/Mvc/issues/3233 and https://github.com/aspnet/Razor/issues/564
-            this.ViewContext.ViewData[nameof(OpenGraphPrefixTagHelper)] = this.GetNamespaces();
+            this.ViewContext.ViewData[nameof(OpenGraphPrefixTagHelper)] = this.Namespaces;
 
             // context.Items[typeof(OpenGraphMetadata)] = this.GetNamespaces();
             output.Content.SetHtmlContent(this.ToString());

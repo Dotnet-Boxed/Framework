@@ -12,7 +12,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// </summary>
         /// <param name="mediaUrl">The media URL.</param>
         /// <exception cref="ArgumentNullException">Thrown if mediaUrl is <c>null</c>.</exception>
-        public OpenGraphSizedMedia(Uri mediaUrl)
+        protected OpenGraphSizedMedia(Uri mediaUrl)
             : base(mediaUrl)
         {
         }

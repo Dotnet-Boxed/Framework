@@ -8,7 +8,7 @@ namespace Boxed.AspNetCore.Filters
     /// characters.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-    public class NoLowercaseQueryStringAttribute : Attribute, IFilterMetadata
+    public sealed class NoLowercaseQueryStringAttribute : Attribute, IFilterMetadata
     {
     }
 }

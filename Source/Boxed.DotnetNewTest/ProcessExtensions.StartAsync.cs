@@ -66,9 +66,7 @@ namespace Boxed.DotnetNewTest
             var stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine($"Result: {result}");
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
             TestLogger.Write("Result: ");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
             TestLogger.WriteLine(result.ToString(), result == ProcessResult.Succeeded ? ConsoleColor.Green : ConsoleColor.Red);
 
             stringBuilder

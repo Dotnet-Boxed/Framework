@@ -38,9 +38,7 @@ namespace Boxed.AspNetCore.Middleware
             {
                 var factory = context.RequestServices.GetRequiredService<ILoggerFactory>();
                 var logger = factory.CreateLogger<HttpExceptionMiddleware>();
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
                 logger.LogInformation(httpException, InfoMessage, httpException.StatusCode);
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
 
                 context.Response.StatusCode = httpException.StatusCode;
                 if (this.options.IncludeReasonPhraseInResponse)

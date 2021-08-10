@@ -43,7 +43,7 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <param name="actionContextAccessor">The MVC action context accessor.</param>
         /// <param name="urlHelperFactory">The URL helper factory.</param>
         /// <param name="htmlEncoder">The <see cref="HtmlEncoder"/>.</param>
-        public SubresourceIntegrityTagHelper(
+        protected SubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
             IWebHostEnvironment webHostEnvironment,
             IActionContextAccessor actionContextAccessor,

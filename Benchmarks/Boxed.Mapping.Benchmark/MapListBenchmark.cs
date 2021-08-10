@@ -9,6 +9,7 @@ namespace Boxed.Mapping.Benchmark
     using Boxed.Mapping.Benchmark.Mapping;
     using Boxed.Mapping.Benchmark.Models;
 
+#pragma warning disable CA1002 // Do not expose generic lists
     [KeepBenchmarkFiles]
     [MemoryDiagnoser]
     [MinColumn]
@@ -42,11 +43,13 @@ namespace Boxed.Mapping.Benchmark
                 this.mapFrom.Add(
                     new MapFrom()
                     {
+#pragma warning disable CA5394 // Do not use insecure randomness
                         BooleanFrom = this.random.NextDouble() > 0.5D,
                         DateTimeOffsetFrom = DateTimeOffset.UtcNow,
                         IntegerFrom = this.random.Next(),
                         LongFrom = this.random.Next(),
                         StringFrom = this.random.Next().ToString(CultureInfo.InvariantCulture),
+#pragma warning restore CA5394 // Do not use insecure randomness
                     });
             }
         }
@@ -76,4 +79,5 @@ namespace Boxed.Mapping.Benchmark
         [Benchmark]
         public List<MapTo> Automapper() => this.automapper.Map<List<MapTo>>(this.mapFrom);
     }
+#pragma warning restore CA1002 // Do not expose generic lists
 }
