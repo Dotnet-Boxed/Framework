@@ -44,7 +44,9 @@ namespace Boxed.DotnetNewTest
         /// Disposes the managed resources implementing <see cref="IDisposable" />.
         /// </summary>
         /// <returns>A <see cref="ValueTask"/> representing the asynchronous operation.</returns>
+#pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
         public async ValueTask DisposeAsync()
+#pragma warning restore CA1816 // Dispose methods should call SuppressFinalize
         {
             var isDeleted = await DirectoryExtensions
                 .TryDeleteDirectoryAsync(this.DirectoryPath)

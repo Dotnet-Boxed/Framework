@@ -116,9 +116,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
                 throw new ValidationException(FormattableString.Invariant($"{nameof(this.Player)} cannot be null."));
             }
 
-#pragma warning disable CA1308 // Normalize strings to uppercase
             if (!string.Equals(this.Player.PlayerUrl.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
-#pragma warning restore CA1308 // Normalize strings to uppercase
             {
                 throw new ValidationException(FormattableString.Invariant(
                     $"The {nameof(this.Player.PlayerUrl)} must be a HTTPS URL which does not generate active mixed content warnings in a web browser."));

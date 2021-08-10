@@ -11,7 +11,7 @@ namespace Boxed.AspNetCore.Filters
     /// it is upper-case or lower-case in this instance.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-    public class NoTrailingSlashAttribute : Attribute, IResourceFilter
+    public sealed class NoTrailingSlashAttribute : Attribute, IResourceFilter
     {
         private const char SlashCharacter = '/';
 
@@ -41,7 +41,7 @@ namespace Boxed.AspNetCore.Filters
             {
                 if (path.Value![^1] == SlashCharacter)
                 {
-                    this.HandleTrailingSlashRequest(context);
+                    HandleTrailingSlashRequest(context);
                 }
             }
         }
@@ -50,7 +50,7 @@ namespace Boxed.AspNetCore.Filters
         /// Handles HTTP requests that have a trailing slash but are not meant to.
         /// </summary>
         /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
-        protected virtual void HandleTrailingSlashRequest(ResourceExecutingContext context)
+        private static void HandleTrailingSlashRequest(ResourceExecutingContext context)
         {
             if (context is null)
             {

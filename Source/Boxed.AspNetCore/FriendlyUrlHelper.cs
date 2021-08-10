@@ -74,9 +74,7 @@ namespace Boxed.AspNetCore
             for (var i = 0; i < length; ++i)
             {
                 c = title[i];
-#pragma warning disable SA1008 // Opening parenthesis should be spaced correctly. StyleCop bug.
                 if (c is (>= 'a' and <= 'z') or (>= '0' and <= '9'))
-#pragma warning restore SA1008 // Opening parenthesis should be spaced correctly. StyleCop bug.
                 {
                     stringBuilder.Append(c);
                     prevdash = false;

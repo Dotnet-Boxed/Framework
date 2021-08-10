@@ -73,7 +73,7 @@ namespace Boxed.DotnetNewTest
 
         private static string Replace(string value, int httpsPort, int httpPort) =>
             value
-                .Replace("{HTTPS_PORT}", httpsPort.ToString(CultureInfo.InvariantCulture))
-                .Replace("{HTTP_PORT}", httpPort.ToString(CultureInfo.InvariantCulture));
+                .Replace("{HTTPS_PORT}", httpsPort.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal)
+                .Replace("{HTTP_PORT}", httpPort.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal);
     }
 }

@@ -139,7 +139,9 @@ namespace Boxed.Mapping
         /// <c>null</c>.</exception>
         public static TDestination[] MapArray<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
             List<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
         {
             if (mapper is null)
             {
@@ -326,7 +328,9 @@ namespace Boxed.Mapping
         /// <c>null</c>.</exception>
         public static Collection<TDestination> MapCollection<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
             List<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
         {
             if (mapper is null)
             {
@@ -469,7 +473,9 @@ namespace Boxed.Mapping
         /// <c>null</c>.</exception>
         public static HashSet<TDestination> MapHashSet<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
             List<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
         {
             if (mapper is null)
             {
@@ -610,7 +616,9 @@ namespace Boxed.Mapping
         /// <c>null</c>.</exception>
         public static ImmutableArray<TDestination> MapImmutableArray<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
             List<TSource> source) =>
+#pragma warning restore CA1002 // Do not expose generic lists
             ImmutableArray.Create(mapper.MapArray(source));
 
         /// <summary>
@@ -674,7 +682,9 @@ namespace Boxed.Mapping
         /// <c>null</c>.</exception>
         public static ImmutableList<TDestination> MapImmutableList<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
             List<TSource> source) =>
+#pragma warning restore CA1002 // Do not expose generic lists
             ImmutableList.Create(mapper.MapArray(source));
 
         /// <summary>
@@ -737,9 +747,11 @@ namespace Boxed.Mapping
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
+#pragma warning disable CA1002 // Do not expose generic lists
         public static List<TDestination> MapList<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             List<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
         {
             if (mapper is null)
             {
@@ -773,9 +785,11 @@ namespace Boxed.Mapping
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
+#pragma warning disable CA1002 // Do not expose generic lists
         public static List<TDestination> MapList<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             Collection<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
         {
             if (mapper is null)
             {
@@ -809,9 +823,11 @@ namespace Boxed.Mapping
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
+#pragma warning disable CA1002 // Do not expose generic lists
         public static List<TDestination> MapList<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             TSource[] source)
+#pragma warning restore CA1002 // Do not expose generic lists
         {
             if (mapper is null)
             {
@@ -845,9 +861,11 @@ namespace Boxed.Mapping
         /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
         /// <c>null</c>.</exception>
+#pragma warning disable CA1002 // Do not expose generic lists
         public static List<TDestination> MapList<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
             IEnumerable<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
         {
             if (mapper is null)
             {
@@ -882,7 +900,9 @@ namespace Boxed.Mapping
         /// <c>null</c>.</exception>
         public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
             this IImmutableMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
             List<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
         {
             if (mapper is null)
             {

@@ -48,7 +48,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 throw new ArgumentNullException(nameof(openGraphMetadata));
             }
 
-            return new HtmlString("prefix=\"" + openGraphMetadata.GetNamespaces() + "\"");
+            return new HtmlString("prefix=\"" + openGraphMetadata.Namespaces + "\"");
         }
     }
 }
