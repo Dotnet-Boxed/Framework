@@ -29,6 +29,7 @@ namespace Boxed.DotnetNewTest
         /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">The provided assembly was null.</exception>
         /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
         public static Task InstallAsync(Assembly assembly, string fileName)
         {
@@ -58,24 +59,15 @@ namespace Boxed.DotnetNewTest
         /// <param name="timeout">The timeout. Defaults to one minute.</param>
         /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <exception cref="ArgumentException">The provided source was null or empty.</exception>
         public static async Task InstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
         {
-            if (source is null)
+            if (string.IsNullOrWhiteSpace(source))
             {
-                throw new ArgumentNullException(nameof(source));
+                throw new ArgumentException("Empty or null.", nameof(source));
             }
 
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
-            {
-                await ProcessExtensions
-                    .StartAsync(
-                        DirectoryExtensions.GetCurrentDirectory(),
-                        "dotnet",
-                        $"new --install \"{source}\"",
-                        showShellWindow,
-                        cancellationTokenSource.Token)
-                    .ConfigureAwait(false);
-            }
+            await RunDotnetCommandAsync($"new --install \"{source}\"", timeout, showShellWindow).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -86,17 +78,63 @@ namespace Boxed.DotnetNewTest
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ReinitialiseAsync(TimeSpan? timeout = null, bool showShellWindow = false)
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
+            await RunDotnetCommandAsync($"new --debug:reinit", timeout, showShellWindow).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Uninstalls a template from the specified source.
+        /// </summary>
+        /// <typeparam name="T">A type from the assembly used to find the directory path of the project to install.</typeparam>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public static Task UninstallAsync<T>(string fileName) =>
+            UninstallAsync(typeof(T).GetTypeInfo().Assembly, fileName);
+
+        /// <summary>
+        /// Uninstalls a template from the specified source.
+        /// </summary>
+        /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">The provided assembly was null.</exception>
+        /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
+        public static Task UninstallAsync(Assembly assembly, string fileName)
+        {
+            if (assembly is null)
             {
-                await ProcessExtensions
-                    .StartAsync(
-                        DirectoryExtensions.GetCurrentDirectory(),
-                        "dotnet",
-                        $"new --debug:reinit",
-                        showShellWindow,
-                        cancellationTokenSource.Token)
-                    .ConfigureAwait(false);
+                throw new ArgumentNullException(nameof(assembly));
             }
+
+            if (fileName is null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
+            var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
+            if (projectFilePath is null)
+            {
+                throw new FileNotFoundException($"{fileName} not found.");
+            }
+
+            return UninstallAsync(projectFilePath);
+        }
+
+        /// <summary>
+        /// Uninstalls a template from the specified source.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="timeout">The timeout. Defaults to one minute.</param>
+        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <exception cref="ArgumentException">The provided source was null or empty.</exception>
+        public static async Task UninstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
+        {
+            if (string.IsNullOrWhiteSpace(source))
+            {
+                throw new ArgumentException("Empty or null.", nameof(source));
+            }
+
+            await RunDotnetCommandAsync($"new --uninstall \"{source}\"", timeout, showShellWindow).ConfigureAwait(false);
         }
 
         private static string? GetFilePath(Assembly assembly, string projectName)
@@ -108,8 +146,7 @@ namespace Boxed.DotnetNewTest
                 projectFilePath = directory
                     .Parent
                     .GetFiles(projectName, SearchOption.AllDirectories)
-                    .Where(x => !IsInObjDirectory(x.Directory))
-                    .FirstOrDefault()
+                    .FirstOrDefault(x => !IsInObjDirectory(x.Directory))
                     ?.FullName;
                 if (projectFilePath is not null)
                 {
@@ -132,6 +169,19 @@ namespace Boxed.DotnetNewTest
             }
 
             return IsInObjDirectory(directoryInfo.Parent);
+        }
+
+        private static async Task<(ProcessResult ProcessResult, string Message)> RunDotnetCommandAsync(string arguments, TimeSpan? timeout, bool showShellWindow)
+        {
+            using var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout);
+            return await ProcessExtensions
+                    .StartAsync(
+                        DirectoryExtensions.GetCurrentDirectory(),
+                        "dotnet",
+                        arguments,
+                        showShellWindow,
+                        cancellationTokenSource.Token)
+                    .ConfigureAwait(false);
         }
     }
 }
