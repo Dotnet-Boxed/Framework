@@ -49,7 +49,7 @@ namespace Boxed.DotnetNewTest
 
             if (fileName.Length == 0)
             {
-                throw new ArgumentException(nameof(fileName), $"{nameof(fileName)} must not be empty.");
+                throw new ArgumentException($"{nameof(fileName)} must not be empty.", nameof(fileName));
             }
 
             var projectFilePath = GetProjectFilePath(assembly, fileName);
@@ -75,7 +75,7 @@ namespace Boxed.DotnetNewTest
 
             if (source.Length == 0)
             {
-                throw new ArgumentException(nameof(source), $"{nameof(source)} must not be empty.");
+                throw new ArgumentException($"{nameof(source)} must not be empty.", nameof(source));
             }
 
             await RunDotnetCommandAsync($"new --install \"{source}\"", timeout, showShellWindow).ConfigureAwait(false);
@@ -127,7 +127,7 @@ namespace Boxed.DotnetNewTest
 
             if (fileName.Length == 0)
             {
-                throw new ArgumentException(nameof(fileName), $"{nameof(fileName)} must not be empty.");
+                throw new ArgumentException( $"{nameof(fileName)} must not be empty.", nameof(fileName));
             }
 
             var projectFilePath = GetProjectFilePath(assembly, fileName);
@@ -153,7 +153,7 @@ namespace Boxed.DotnetNewTest
 
             if (source.Length == 0)
             {
-                throw new ArgumentException(nameof(source), $"{nameof(source)} must not be empty.");
+                throw new ArgumentException($"{nameof(source)} must not be empty.", nameof(source));
             }
 
             await RunDotnetCommandAsync($"new --uninstall \"{source}\"", timeout, showShellWindow).ConfigureAwait(false);
