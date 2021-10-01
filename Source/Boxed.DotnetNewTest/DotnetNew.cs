@@ -29,7 +29,11 @@ namespace Boxed.DotnetNewTest
         /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException">The provided assembly was null.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     <para><paramref name="assembly"/> is null. </para>
+        ///     <para>- or - </para>
+        ///     <para><paramref name="fileName"/> is null. </para>
+        /// </exception>
         /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
         public static Task InstallAsync(Assembly assembly, string fileName)
         {
@@ -43,11 +47,12 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(fileName));
             }
 
-            var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
-            if (projectFilePath is null)
+            if (fileName.Length == 0)
             {
-                throw new FileNotFoundException($"{fileName} not found.");
+                throw new ArgumentException(nameof(fileName), $"{nameof(fileName)} must not be empty.");
             }
+
+            var projectFilePath = GetProjectFilePath(assembly, fileName);
 
             return InstallAsync(projectFilePath);
         }
@@ -59,12 +64,18 @@ namespace Boxed.DotnetNewTest
         /// <param name="timeout">The timeout. Defaults to one minute.</param>
         /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <exception cref="ArgumentException">The provided source was null or empty.</exception>
+        /// <exception cref="ArgumentNullException">The provided <paramref name="source"/> was null.</exception>
+        /// <exception cref="ArgumentException">The provided <paramref name="source"/> was empty.</exception>
         public static async Task InstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
         {
-            if (string.IsNullOrWhiteSpace(source))
+            if (source is null)
             {
-                throw new ArgumentException("Empty or null.", nameof(source));
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (source.Length == 0)
+            {
+                throw new ArgumentException(nameof(source), $"{nameof(source)} must not be empty.");
             }
 
             await RunDotnetCommandAsync($"new --install \"{source}\"", timeout, showShellWindow).ConfigureAwait(false);
@@ -96,7 +107,11 @@ namespace Boxed.DotnetNewTest
         /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException">The provided assembly was null.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     <para><paramref name="assembly"/> is null. </para>
+        ///     <para>- or - </para>
+        ///     <para><paramref name="fileName"/> is null. </para>
+        /// </exception>
         /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
         public static Task UninstallAsync(Assembly assembly, string fileName)
         {
@@ -110,11 +125,12 @@ namespace Boxed.DotnetNewTest
                 throw new ArgumentNullException(nameof(fileName));
             }
 
-            var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
-            if (projectFilePath is null)
+            if (fileName.Length == 0)
             {
-                throw new FileNotFoundException($"{fileName} not found.");
+                throw new ArgumentException(nameof(fileName), $"{nameof(fileName)} must not be empty.");
             }
+
+            var projectFilePath = GetProjectFilePath(assembly, fileName);
 
             return UninstallAsync(projectFilePath);
         }
@@ -126,15 +142,32 @@ namespace Boxed.DotnetNewTest
         /// <param name="timeout">The timeout. Defaults to one minute.</param>
         /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <exception cref="ArgumentException">The provided source was null or empty.</exception>
+        /// <exception cref="ArgumentNullException">The provided <paramref name="source"/> was null.</exception>
+        /// <exception cref="ArgumentException">The provided <paramref name="source"/> was empty.</exception>
         public static async Task UninstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
         {
-            if (string.IsNullOrWhiteSpace(source))
+            if (source is null)
             {
-                throw new ArgumentException("Empty or null.", nameof(source));
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (source.Length == 0)
+            {
+                throw new ArgumentException(nameof(source), $"{nameof(source)} must not be empty.");
             }
 
             await RunDotnetCommandAsync($"new --uninstall \"{source}\"", timeout, showShellWindow).ConfigureAwait(false);
+        }
+
+        private static string GetProjectFilePath(Assembly assembly, string fileName)
+        {
+            var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
+            if (projectFilePath is null)
+            {
+                throw new FileNotFoundException($"{fileName} not found.");
+            }
+
+            return projectFilePath;
         }
 
         private static string? GetFilePath(Assembly assembly, string projectName)
