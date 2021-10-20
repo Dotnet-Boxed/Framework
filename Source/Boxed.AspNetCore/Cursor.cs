@@ -41,6 +41,10 @@ namespace Boxed.AspNetCore
             {
                 return (T)(object)DateTimeOffset.ParseExact(decodedValue, "o", CultureInfo.InvariantCulture);
             }
+            else if (type == typeof(DateOnly))
+            {
+                return (T)(object)DateOnly.ParseExact(decodedValue, "o", CultureInfo.InvariantCulture);
+            }
 
             return (T)Convert.ChangeType(decodedValue, type, CultureInfo.InvariantCulture);
         }
@@ -85,6 +89,10 @@ namespace Boxed.AspNetCore
             if (value is DateTimeOffset dateTimeOffset)
             {
                 return Base64Encode(dateTimeOffset.ToString("o", CultureInfo.InvariantCulture));
+            }
+            else if (value is DateOnly dateOnly)
+            {
+                return Base64Encode(dateOnly.ToString("o", CultureInfo.InvariantCulture));
             }
 
             return Base64Encode(value.ToString()!);

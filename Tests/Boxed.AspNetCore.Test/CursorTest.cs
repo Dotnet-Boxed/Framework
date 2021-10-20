@@ -75,6 +75,22 @@ namespace Boxed.AspNetCore.Test
         }
 
         [Fact]
+        public void FromCursor_DateOnlyValue_ReturnsPrefixedBase64Cursor()
+        {
+            var value = Cursor.FromCursor<DateOnly>("MjAwMC0wMS0wMQ==");
+
+            Assert.Equal(new DateOnly(2000, 1, 1), value);
+        }
+
+        [Fact]
+        public void FromCursor_NullableDateOnlyValue_ReturnsPrefixedBase64Cursor()
+        {
+            var value = Cursor.FromCursor<DateOnly?>("MjAwMC0wMS0wMQ==");
+
+            Assert.Equal(new DateOnly(2000, 1, 1), value);
+        }
+
+        [Fact]
         public void FromCursor_NullStringValue_ReturnsNull()
         {
             var value = Cursor.FromCursor<string>(null!);
@@ -208,6 +224,22 @@ namespace Boxed.AspNetCore.Test
             var cursor = Cursor.ToCursor(new DateTimeOffset?(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero)));
 
             Assert.Equal("MjAwMC0wMS0wMVQwMDowMDowMC4wMDAwMDAwKzAwOjAw", cursor);
+        }
+
+        [Fact]
+        public void ToCursor_DateOnlyValue_ReturnsPrefixedBase64Cursor()
+        {
+            var cursor = Cursor.ToCursor(new DateOnly(2000, 1, 1));
+
+            Assert.Equal("MjAwMC0wMS0wMQ==", cursor);
+        }
+
+        [Fact]
+        public void ToCursor_NullableDateOnlyValue_ReturnsPrefixedBase64Cursor()
+        {
+            var cursor = Cursor.ToCursor(new DateOnly?(new DateOnly(2000, 1, 1)));
+
+            Assert.Equal("MjAwMC0wMS0wMQ==", cursor);
         }
 
         private class Item
