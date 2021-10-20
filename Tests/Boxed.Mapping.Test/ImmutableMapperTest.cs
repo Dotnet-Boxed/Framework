@@ -2,12 +2,14 @@ namespace Boxed.Mapping.Test
 {
     using System;
     using System.Collections.Generic;
-#if NET5_0
+#if NET5_0_OR_GREATER
     using System.Collections.Immutable;
 #endif
     using System.Collections.ObjectModel;
     using System.Linq;
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
     using System.Threading.Tasks;
+#endif
     using Xunit;
 
     public class ImmutableMapperTest
@@ -148,7 +150,7 @@ namespace Boxed.Mapping.Test
             Assert.Equal(new int[] { 1, 2 }, to.Select(x => x.Property));
         }
 
-#if NET5_0
+#if NET5_0_OR_GREATER
         [Fact]
         public void MapImmutableArray_Empty_Mapped()
         {
@@ -237,6 +239,7 @@ namespace Boxed.Mapping.Test
             Assert.Equal(2, to[1].Property);
         }
 
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
         [Fact]
         public async Task MapAsyncEnumerable_ToNewObject_MappedAsync()
         {
@@ -256,5 +259,6 @@ namespace Boxed.Mapping.Test
             Assert.Equal(1, list[0].Property);
             Assert.Equal(2, list[1].Property);
         }
+#endif
     }
 }

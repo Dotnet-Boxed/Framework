@@ -1,4 +1,4 @@
-#if NET5_0
+#if NET6_0_OR_GREATER
 namespace Boxed.DotnetNewTest
 {
     using System;

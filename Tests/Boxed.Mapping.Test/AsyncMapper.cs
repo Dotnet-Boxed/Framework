@@ -10,6 +10,10 @@ namespace Boxed.Mapping.Test
 
         public Task MapAsync(MapFrom source, MapTo destination, CancellationToken cancellationToken)
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(destination);
+#else
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -19,6 +23,7 @@ namespace Boxed.Mapping.Test
             {
                 throw new ArgumentNullException(nameof(destination));
             }
+#endif
 
             this.CancellationToken = cancellationToken;
             destination.Property = source.Property;

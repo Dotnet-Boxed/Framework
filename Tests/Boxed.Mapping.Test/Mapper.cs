@@ -6,6 +6,10 @@ namespace Boxed.Mapping.Test
     {
         public void Map(MapFrom source, MapTo destination)
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(destination);
+#else
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -15,6 +19,7 @@ namespace Boxed.Mapping.Test
             {
                 throw new ArgumentNullException(nameof(destination));
             }
+#endif
 
             destination.Property = source.Property;
         }

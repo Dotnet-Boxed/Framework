@@ -7,6 +7,10 @@ namespace Boxed.Mapping.Benchmark.Mapping
     {
         public void Map(MapFrom source, MapTo destination)
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(destination);
+#else
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -16,6 +20,7 @@ namespace Boxed.Mapping.Benchmark.Mapping
             {
                 throw new ArgumentNullException(nameof(destination));
             }
+#endif
 
             destination.BooleanTo = source.BooleanFrom;
             destination.DateTimeOffsetTo = source.DateTimeOffsetFrom;

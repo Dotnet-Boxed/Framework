@@ -21,15 +21,8 @@ namespace Boxed.AspNetCore
             bool condition,
             Func<IHealthChecksBuilder, IHealthChecksBuilder> action)
         {
-            if (healthChecksBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(healthChecksBuilder));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(healthChecksBuilder);
+            ArgumentNullException.ThrowIfNull(action);
 
             if (condition)
             {
@@ -56,20 +49,9 @@ namespace Boxed.AspNetCore
             Func<IHealthChecksBuilder, IHealthChecksBuilder> ifAction,
             Func<IHealthChecksBuilder, IHealthChecksBuilder> elseAction)
         {
-            if (healthChecksBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(healthChecksBuilder));
-            }
-
-            if (ifAction is null)
-            {
-                throw new ArgumentNullException(nameof(ifAction));
-            }
-
-            if (elseAction is null)
-            {
-                throw new ArgumentNullException(nameof(elseAction));
-            }
+            ArgumentNullException.ThrowIfNull(healthChecksBuilder);
+            ArgumentNullException.ThrowIfNull(ifAction);
+            ArgumentNullException.ThrowIfNull(elseAction);
 
             if (condition)
             {

@@ -2,12 +2,12 @@ namespace Boxed.Mapping
 {
     using System;
     using System.Collections.Generic;
-#if NET5_0
+#if NET5_0_OR_GREATER
     using System.Collections.Immutable;
 #endif
     using System.Collections.ObjectModel;
     using System.Linq;
-#if NET5_0 || NETSTANDARD2_1
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
     using System.Runtime.CompilerServices;
 #endif
     using System.Threading;
@@ -18,7 +18,7 @@ namespace Boxed.Mapping
     /// </summary>
     public static class AsyncImmutableMapperExtensions
     {
-#if NET5_0 || NETSTANDARD2_1
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
         /// <summary>
         /// Maps the <see cref="IAsyncEnumerable{TSource}"/> into <see cref="IAsyncEnumerable{TDestination}"/>.
         /// </summary>
@@ -36,6 +36,10 @@ namespace Boxed.Mapping
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -45,6 +49,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             await foreach (var sourceItem in source.ConfigureAwait(false).WithCancellation(cancellationToken))
             {
@@ -71,6 +76,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -80,6 +89,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = await mapper.MapAsync(source, cancellationToken).ConfigureAwait(false);
             return destination;
@@ -109,6 +119,11 @@ namespace Boxed.Mapping
             where TSourceCollection : IEnumerable<TSource>
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(destination);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -123,6 +138,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(destination));
             }
+#endif
 
             var tasks = new Task<TDestination>[sourceCount ?? source.Count()];
             var i = 0;
@@ -137,9 +153,9 @@ namespace Boxed.Mapping
 
             for (var j = 0; j < tasks.Length; ++j)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination[j] = tasks[j].Result;
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -165,6 +181,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -174,6 +194,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count;
             var tasks = new Task<TDestination>[sourceCount];
@@ -188,9 +209,9 @@ namespace Boxed.Mapping
 
             for (var j = 0; j < tasks.Length; ++j)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination[j] = tasks[j].Result;
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -214,6 +235,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -223,6 +248,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count;
             var tasks = new Task<TDestination>[sourceCount];
@@ -237,9 +263,9 @@ namespace Boxed.Mapping
 
             for (var j = 0; j < tasks.Length; ++j)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination[j] = tasks[j].Result;
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -263,6 +289,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -272,6 +302,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Length;
             var tasks = new Task<TDestination>[sourceCount];
@@ -286,9 +317,9 @@ namespace Boxed.Mapping
 
             for (var j = 0; j < tasks.Length; ++j)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination[j] = tasks[j].Result;
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -312,6 +343,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -321,6 +356,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count();
             var tasks = new Task<TDestination>[sourceCount];
@@ -336,9 +372,9 @@ namespace Boxed.Mapping
 
             for (var j = 0; j < tasks.Length; ++j)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination[j] = tasks[j].Result;
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -370,6 +406,11 @@ namespace Boxed.Mapping
             where TDestinationCollection : ICollection<TDestination>
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(destination);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -384,6 +425,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(destination));
             }
+#endif
 
             var sourceCount = source.Count();
             var tasks = new Task<TDestination>[sourceCount];
@@ -398,9 +440,9 @@ namespace Boxed.Mapping
 
             foreach (var task in tasks)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Add(task.Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -426,6 +468,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -435,6 +481,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count;
             var tasks = new Task<TDestination>[sourceCount];
@@ -449,9 +496,9 @@ namespace Boxed.Mapping
 
             for (var i = 0; i < tasks.Length; ++i)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(i, tasks[i].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -475,6 +522,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -484,6 +535,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count;
             var tasks = new Task<TDestination>[sourceCount];
@@ -498,9 +550,9 @@ namespace Boxed.Mapping
 
             for (var i = 0; i < tasks.Length; ++i)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(i, tasks[i].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -524,6 +576,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -533,6 +589,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Length;
             var tasks = new Task<TDestination>[sourceCount];
@@ -547,9 +604,9 @@ namespace Boxed.Mapping
 
             for (var i = 0; i < tasks.Length; ++i)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(i, tasks[i].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -573,6 +630,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -582,6 +643,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count();
             var tasks = new Task<TDestination>[sourceCount];
@@ -597,9 +659,9 @@ namespace Boxed.Mapping
 
             for (var j = 0; j < tasks.Length; ++j)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(j, tasks[j].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -625,6 +687,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -634,6 +700,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count;
             var tasks = new Task<TDestination>[sourceCount];
@@ -648,9 +715,9 @@ namespace Boxed.Mapping
 
             foreach (var task in tasks)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Add(task.Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -674,6 +741,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -683,6 +754,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count;
             var tasks = new Task<TDestination>[sourceCount];
@@ -697,9 +769,9 @@ namespace Boxed.Mapping
 
             foreach (var task in tasks)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Add(task.Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -723,6 +795,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -732,6 +808,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Length;
             var tasks = new Task<TDestination>[sourceCount];
@@ -746,9 +823,9 @@ namespace Boxed.Mapping
 
             foreach (var task in tasks)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Add(task.Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -772,6 +849,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -781,6 +862,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count();
             var tasks = new Task<TDestination>[sourceCount];
@@ -796,15 +878,15 @@ namespace Boxed.Mapping
 
             foreach (var task in tasks)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Add(task.Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
         }
 
-#if NET5_0
+#if NET5_0_OR_GREATER
         /// <summary>
         /// Maps the list of <typeparamref name="TSource"/> into an immutable array of
         /// <typeparamref name="TDestination"/>.
@@ -982,6 +1064,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -991,6 +1077,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count;
             var tasks = new Task<TDestination>[sourceCount];
@@ -1005,9 +1092,9 @@ namespace Boxed.Mapping
 
             for (var i = 0; i < tasks.Length; ++i)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(i, tasks[i].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -1031,6 +1118,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -1040,6 +1131,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count;
             var tasks = new Task<TDestination>[sourceCount];
@@ -1054,9 +1146,9 @@ namespace Boxed.Mapping
 
             for (var i = 0; i < tasks.Length; ++i)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(i, tasks[i].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -1080,6 +1172,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -1089,6 +1185,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Length;
             var tasks = new Task<TDestination>[sourceCount];
@@ -1103,9 +1200,9 @@ namespace Boxed.Mapping
 
             for (var i = 0; i < tasks.Length; ++i)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(i, tasks[i].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -1129,6 +1226,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -1138,6 +1239,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count();
             var tasks = new Task<TDestination>[sourceCount];
@@ -1153,9 +1255,9 @@ namespace Boxed.Mapping
 
             for (var j = 0; j < tasks.Length; ++j)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(j, tasks[j].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -1181,6 +1283,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -1190,6 +1296,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count;
             var tasks = new Task<TDestination>[sourceCount];
@@ -1204,9 +1311,9 @@ namespace Boxed.Mapping
 
             for (var i = 0; i < tasks.Length; ++i)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(i, tasks[i].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -1230,6 +1337,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -1239,6 +1350,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count;
             var tasks = new Task<TDestination>[sourceCount];
@@ -1253,9 +1365,9 @@ namespace Boxed.Mapping
 
             for (var i = 0; i < tasks.Length; ++i)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(i, tasks[i].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -1279,6 +1391,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -1288,6 +1404,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Length;
             var tasks = new Task<TDestination>[sourceCount];
@@ -1302,9 +1419,9 @@ namespace Boxed.Mapping
 
             for (var i = 0; i < tasks.Length; ++i)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(i, tasks[i].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;
@@ -1328,6 +1445,10 @@ namespace Boxed.Mapping
             CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -1337,6 +1458,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var sourceCount = source.Count();
             var tasks = new Task<TDestination>[sourceCount];
@@ -1352,9 +1474,9 @@ namespace Boxed.Mapping
 
             for (var j = 0; j < tasks.Length; ++j)
             {
-#pragma warning disable VSTHRD103 // Call async methods when in an async method.
+#pragma warning disable CA1849, VSTHRD103 // Call async methods when in an async method.
                 destination.Insert(j, tasks[j].Result);
-#pragma warning restore VSTHRD103 // Call async methods when in an async method.
+#pragma warning restore CA1849, VSTHRD103 // Call async methods when in an async method.
             }
 
             return destination;

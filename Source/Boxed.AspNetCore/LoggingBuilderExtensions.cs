@@ -21,15 +21,8 @@ namespace Boxed.AspNetCore
             bool condition,
             Func<ILoggingBuilder, ILoggingBuilder> action)
         {
-            if (loggingBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(loggingBuilder));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(loggingBuilder);
+            ArgumentNullException.ThrowIfNull(action);
 
             if (condition)
             {
@@ -56,20 +49,9 @@ namespace Boxed.AspNetCore
             Func<ILoggingBuilder, ILoggingBuilder> ifAction,
             Func<ILoggingBuilder, ILoggingBuilder> elseAction)
         {
-            if (loggingBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(loggingBuilder));
-            }
-
-            if (ifAction is null)
-            {
-                throw new ArgumentNullException(nameof(ifAction));
-            }
-
-            if (elseAction is null)
-            {
-                throw new ArgumentNullException(nameof(elseAction));
-            }
+            ArgumentNullException.ThrowIfNull(loggingBuilder);
+            ArgumentNullException.ThrowIfNull(ifAction);
+            ArgumentNullException.ThrowIfNull(elseAction);
 
             if (condition)
             {

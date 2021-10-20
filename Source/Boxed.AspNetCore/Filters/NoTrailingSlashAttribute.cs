@@ -31,10 +31,7 @@ namespace Boxed.AspNetCore.Filters
         /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             var path = context.HttpContext.Request.Path;
             if (path.HasValue)
@@ -54,10 +51,7 @@ namespace Boxed.AspNetCore.Filters
         /// <param name="context">The <see cref="ResourceExecutingContext" />.</param>
         private static void HandleTrailingSlashRequest(ResourceExecutingContext context)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             context.Result = new NotFoundResult();
         }

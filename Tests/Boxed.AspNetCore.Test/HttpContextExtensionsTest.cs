@@ -3,7 +3,6 @@ namespace Boxed.AspNetCore.Test
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Net.Http.Headers;
     using Xunit;
 
     public class HttpContextExtensionsTest
@@ -285,7 +284,7 @@ namespace Boxed.AspNetCore.Test
 
             context.ApplyCacheProfile(cacheProfile);
 
-            Assert.Equal(output, context.Response.Headers[HeaderNames.CacheControl]);
+            Assert.Equal(output, context.Response.Headers.CacheControl);
         }
 
         [Theory]
@@ -298,7 +297,7 @@ namespace Boxed.AspNetCore.Test
 
             context.ApplyCacheProfile(cacheProfile);
 
-            Assert.Equal(output, context.Response.Headers[HeaderNames.CacheControl]);
+            Assert.Equal(output, context.Response.Headers.CacheControl);
         }
 
         [Theory]
@@ -312,8 +311,8 @@ namespace Boxed.AspNetCore.Test
 
             context.ApplyCacheProfile(cacheProfile);
 
-            Assert.Equal(varyOutput, context.Response.Headers[HeaderNames.Vary]);
-            Assert.Equal(cacheControlOutput, context.Response.Headers[HeaderNames.CacheControl]);
+            Assert.Equal(varyOutput, context.Response.Headers.Vary);
+            Assert.Equal(cacheControlOutput, context.Response.Headers.CacheControl);
         }
 
         [Fact]
@@ -330,8 +329,8 @@ namespace Boxed.AspNetCore.Test
 
             context.ApplyCacheProfile(cacheProfile);
 
-            Assert.Equal("no-store,no-cache", context.Response.Headers[HeaderNames.CacheControl]);
-            Assert.Equal("no-cache", context.Response.Headers[HeaderNames.Pragma]);
+            Assert.Equal("no-store,no-cache", context.Response.Headers.CacheControl);
+            Assert.Equal("no-cache", context.Response.Headers.Pragma);
         }
     }
 }

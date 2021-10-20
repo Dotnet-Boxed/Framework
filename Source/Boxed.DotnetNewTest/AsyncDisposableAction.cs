@@ -16,8 +16,12 @@ namespace Boxed.DotnetNewTest
         /// </summary>
         /// <param name="action">The action.</param>
         /// <exception cref="ArgumentNullException"><paramref name="action"/> is <c>null</c>.</exception>
-        public AsyncDisposableAction(Func<ValueTask> action) =>
-            this.action = action ?? throw new ArgumentNullException(nameof(action));
+        public AsyncDisposableAction(Func<ValueTask> action)
+        {
+            ArgumentNullException.ThrowIfNull(action);
+
+            this.action = action;
+        }
 
         /// <summary>
         /// Executes the asynchronous operation.

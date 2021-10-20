@@ -8,7 +8,6 @@ namespace Boxed.AspNetCore
     using Microsoft.AspNetCore.Rewrite;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Options;
-    using Microsoft.Net.Http.Headers;
 
     /// <summary>
     /// To improve Search Engine Optimization SEO, there should only be a single URL for each resource. Case
@@ -29,10 +28,7 @@ namespace Boxed.AspNetCore
         /// <param name="options">The route options.</param>
         public RedirectToCanonicalUrlRule(IOptions<RouteOptions> options)
         {
-            if (options is null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            ArgumentNullException.ThrowIfNull(options);
 
             this.AppendTrailingSlash = options.Value.AppendTrailingSlash;
             this.LowercaseUrls = options.Value.LowercaseUrls;
@@ -71,10 +67,7 @@ namespace Boxed.AspNetCore
         /// <inheritdoc/>
         public void ApplyRule(RewriteContext context)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             if (HttpMethods.IsGet(context.HttpContext.Request.Method))
             {
@@ -93,10 +86,7 @@ namespace Boxed.AspNetCore
         /// <returns><c>true</c> if the URL is canonical, otherwise <c>false</c>.</returns>
         protected virtual bool TryGetCanonicalUrl(RewriteContext context, [NotNullWhen(false)] out Uri? canonicalUrl)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             var isCanonical = true;
 
@@ -183,20 +173,13 @@ namespace Boxed.AspNetCore
         /// <param name="canonicalUrl">The canonical URL.</param>
         protected virtual void HandleNonCanonicalRequest(RewriteContext context, Uri canonicalUrl)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (canonicalUrl is null)
-            {
-                throw new ArgumentNullException(nameof(canonicalUrl));
-            }
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(canonicalUrl);
 
             var response = context.HttpContext.Response;
             response.StatusCode = StatusCodes.Status301MovedPermanently;
             context.Result = RuleResult.EndResponse;
-            response.Headers[HeaderNames.Location] = canonicalUrl.ToString();
+            response.Headers.Location = canonicalUrl.ToString();
         }
 
         /// <summary>
@@ -209,10 +192,7 @@ namespace Boxed.AspNetCore
         protected virtual bool HasAttribute<T>(RewriteContext context)
             where T : class
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             var endpoint = context.HttpContext.GetEndpoint();
             return endpoint?.Metadata?.GetMetadata<T>() is not null;

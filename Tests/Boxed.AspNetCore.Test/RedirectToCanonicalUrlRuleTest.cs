@@ -4,7 +4,6 @@ namespace Boxed.AspNetCore.Test
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Rewrite;
-    using Microsoft.Net.Http.Headers;
     using Xunit;
 
     public class RedirectToCanonicalUrlRuleTest
@@ -109,7 +108,7 @@ namespace Boxed.AspNetCore.Test
 
             Assert.Equal(RuleResult.EndResponse, context.Result);
             Assert.Equal(StatusCodes.Status301MovedPermanently, response.StatusCode);
-            Assert.Equal(canonicalUrl, response.Headers[HeaderNames.Location].ToString());
+            Assert.Equal(canonicalUrl, response.Headers.Location.ToString());
         }
 
         private static void SetUrl(string url, HttpRequest request)

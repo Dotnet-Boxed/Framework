@@ -12,11 +12,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// </summary>
         /// <param name="amount">The actual currency amount.</param>
         /// <param name="currency">The currency type.</param>
-        /// <exception cref="System.ArgumentNullException">currency is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">currency is <c>null</c>.</exception>
         public OpenGraphCurrency(double amount, string currency)
         {
+            ArgumentNullException.ThrowIfNull(currency);
+
             this.Amount = amount;
-            this.Currency = currency ?? throw new ArgumentNullException(nameof(currency));
+            this.Currency = currency;
         }
 
         /// <summary>

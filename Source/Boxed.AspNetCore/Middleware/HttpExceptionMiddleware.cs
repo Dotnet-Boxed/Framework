@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.Middleware
 {
+    using System;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Http.Features;
@@ -12,7 +13,6 @@ namespace Boxed.AspNetCore.Middleware
     /// <seealso cref="IMiddleware" />
     internal class HttpExceptionMiddleware : IMiddleware
     {
-        private const string InfoMessage = "Executing HttpExceptionMiddleware, setting HTTP status code {0}.";
         private readonly RequestDelegate next;
         private readonly HttpExceptionMiddlewareOptions options;
 
@@ -30,6 +30,9 @@ namespace Boxed.AspNetCore.Middleware
         /// <inheritdoc/>
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(next);
+
             try
             {
                 await this.next.Invoke(context).ConfigureAwait(false);
@@ -38,13 +41,16 @@ namespace Boxed.AspNetCore.Middleware
             {
                 var factory = context.RequestServices.GetRequiredService<ILoggerFactory>();
                 var logger = factory.CreateLogger<HttpExceptionMiddleware>();
-                logger.LogInformation(httpException, InfoMessage, httpException.StatusCode);
+                Log.SettingHttpStatusCode(logger, httpException, httpException.StatusCode);
 
                 context.Response.StatusCode = httpException.StatusCode;
                 if (this.options.IncludeReasonPhraseInResponse)
                 {
                     var responseFeature = context.Features.Get<IHttpResponseFeature>();
-                    responseFeature.ReasonPhrase = httpException.Message;
+                    if (responseFeature is not null)
+                    {
+                        responseFeature.ReasonPhrase = httpException.Message;
+                    }
                 }
             }
         }

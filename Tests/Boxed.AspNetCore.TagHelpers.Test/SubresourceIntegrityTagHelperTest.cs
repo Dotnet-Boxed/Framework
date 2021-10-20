@@ -36,7 +36,7 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             this.htmlEncoderMock = new Mock<HtmlEncoder>(MockBehavior.Strict);
 
             this.actionContextAccessor.SetupGet(x => x.ActionContext).Returns((ActionContext)null!);
-            this.urlHelperFactoryMock.Setup(x => x.GetUrlHelper(this.actionContextAccessor.Object.ActionContext)).Returns(this.urlHelperMock.Object);
+            this.urlHelperFactoryMock.Setup(x => x.GetUrlHelper(this.actionContextAccessor.Object.ActionContext!)).Returns(this.urlHelperMock.Object);
             this.htmlEncoderMock.Setup(x => x.Encode(It.IsAny<string>())).Returns((string s) => s);
 
             this.tagHelper = new TestSubresourceIntegrityTagHelper(

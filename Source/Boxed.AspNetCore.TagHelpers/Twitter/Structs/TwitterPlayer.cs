@@ -23,7 +23,9 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter
         /// </exception>
         public TwitterPlayer(Uri playerUrl, int width, int height)
         {
-            this.PlayerUrl = playerUrl ?? throw new ArgumentNullException(nameof(playerUrl));
+            ArgumentNullException.ThrowIfNull(playerUrl);
+
+            this.PlayerUrl = playerUrl;
 
             if (width <= 0)
             {

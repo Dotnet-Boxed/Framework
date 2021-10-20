@@ -19,10 +19,7 @@ namespace Boxed.DotnetNewTest
         /// <returns>A task representing the operation.</returns>
         public static Task StartAndWaitForExitAsync(this Process process)
         {
-            if (process is null)
-            {
-                throw new ArgumentNullException(nameof(process));
-            }
+            ArgumentNullException.ThrowIfNull(process);
 
             var taskCompletionSource = new TaskCompletionSource();
 
@@ -51,10 +48,7 @@ namespace Boxed.DotnetNewTest
             this Process process,
             CancellationToken cancellationToken = default)
         {
-            if (process is null)
-            {
-                throw new ArgumentNullException(nameof(process));
-            }
+            ArgumentNullException.ThrowIfNull(process);
 
             var taskCompletionSource = new TaskCompletionSource();
 

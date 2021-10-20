@@ -40,7 +40,7 @@ namespace Boxed.AspNetCore.Test.Middleware
         public async Task InvokeAsync_SupportsTrailingHeaders_AddsServerTimingHttpHeaderAsync()
         {
             this.context.Features.Set<IHttpResponseTrailersFeature>(new ResponseTrailersFeature());
-            var responseTrailersFeature = this.context.Features.Get<IHttpResponseTrailersFeature>();
+            var responseTrailersFeature = this.context.Features.Get<IHttpResponseTrailersFeature>()!;
 
             await new ServerTimingMiddleware().InvokeAsync(this.context, this.next).ConfigureAwait(false);
 

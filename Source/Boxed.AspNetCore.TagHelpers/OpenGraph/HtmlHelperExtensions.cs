@@ -17,15 +17,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <returns>The meta tags.</returns>
         public static HtmlString OpenGraph(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
         {
-            if (htmlHelper is null)
-            {
-                throw new ArgumentNullException(nameof(htmlHelper));
-            }
-
-            if (openGraphMetadata is null)
-            {
-                throw new ArgumentNullException(nameof(openGraphMetadata));
-            }
+            ArgumentNullException.ThrowIfNull(htmlHelper);
+            ArgumentNullException.ThrowIfNull(openGraphMetadata);
 
             return new HtmlString(openGraphMetadata.ToString());
         }
@@ -38,15 +31,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <returns>The Open Graph namespaces.</returns>
         public static HtmlString OpenGraphNamespace(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
         {
-            if (htmlHelper is null)
-            {
-                throw new ArgumentNullException(nameof(htmlHelper));
-            }
-
-            if (openGraphMetadata is null)
-            {
-                throw new ArgumentNullException(nameof(openGraphMetadata));
-            }
+            ArgumentNullException.ThrowIfNull(htmlHelper);
+            ArgumentNullException.ThrowIfNull(openGraphMetadata);
 
             return new HtmlString("prefix=\"" + openGraphMetadata.Namespaces + "\"");
         }

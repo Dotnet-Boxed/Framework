@@ -18,15 +18,8 @@ namespace Boxed.AspNetCore.Middleware
         /// <inheritdoc/>
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (next == null)
-            {
-                throw new ArgumentNullException(nameof(next));
-            }
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(next);
 
             if (context.Response.SupportsTrailers())
             {

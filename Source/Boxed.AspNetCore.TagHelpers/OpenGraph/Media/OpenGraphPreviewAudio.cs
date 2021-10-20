@@ -35,10 +35,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
-            if (stringBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(stringBuilder));
-            }
+            ArgumentNullException.ThrowIfNull(stringBuilder);
 
             stringBuilder.AppendMetaPropertyContent("music:preview_url:url", this.Url);
             stringBuilder.AppendMetaPropertyContentIfNotNull("music:preview_url:secure_url", this.UrlSecure);

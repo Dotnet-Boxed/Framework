@@ -53,15 +53,8 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// .
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (output is null)
-            {
-                throw new ArgumentNullException(nameof(output));
-            }
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(output);
 
             if (this.Enabled)
             {
@@ -71,7 +64,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
                 // https://github.com/aspnet/Mvc/issues/3233 and https://github.com/aspnet/Razor/issues/564
                 if (this.ViewContext.ViewData.ContainsKey(nameof(OpenGraphPrefixTagHelper)))
                 {
-                    var namespaces = (string)this.ViewContext.ViewData[nameof(OpenGraphPrefixTagHelper)];
+                    var namespaces = (string?)this.ViewContext.ViewData[nameof(OpenGraphPrefixTagHelper)];
                     output.Attributes.Add(PrefixAttributeName, namespaces);
                 }
 

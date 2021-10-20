@@ -20,15 +20,8 @@ namespace Boxed.DotnetNewTest
         /// <paramref name="destinationDirectoryPath"/> are <c>null</c>.</exception>
         public static void Copy(string sourceDirectoryPath, string destinationDirectoryPath)
         {
-            if (sourceDirectoryPath is null)
-            {
-                throw new ArgumentNullException(nameof(sourceDirectoryPath));
-            }
-
-            if (destinationDirectoryPath is null)
-            {
-                throw new ArgumentNullException(nameof(destinationDirectoryPath));
-            }
+            ArgumentNullException.ThrowIfNull(sourceDirectoryPath);
+            ArgumentNullException.ThrowIfNull(destinationDirectoryPath);
 
             sourceDirectoryPath = sourceDirectoryPath.TrimEnd('\\');
 
@@ -64,10 +57,7 @@ namespace Boxed.DotnetNewTest
         /// <exception cref="ArgumentNullException"><paramref name="directoryPath"/> is <c>null</c>.</exception>
         public static void CheckCreate(string directoryPath)
         {
-            if (directoryPath is null)
-            {
-                throw new ArgumentNullException(nameof(directoryPath));
-            }
+            ArgumentNullException.ThrowIfNull(directoryPath);
 
             var destinationSubDirectory = new DirectoryInfo(directoryPath);
             if (!destinationSubDirectory.Exists)
@@ -115,10 +105,7 @@ namespace Boxed.DotnetNewTest
            int maxRetries = 10,
            int millisecondsDelay = 30)
         {
-            if (directoryPath is null)
-            {
-                throw new ArgumentNullException(directoryPath);
-            }
+            ArgumentNullException.ThrowIfNull(directoryPath);
 
             if (maxRetries < 1)
             {

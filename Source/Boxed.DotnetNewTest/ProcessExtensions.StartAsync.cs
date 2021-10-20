@@ -3,6 +3,7 @@ namespace Boxed.DotnetNewTest
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Text;
     using System.Threading;
@@ -65,13 +66,13 @@ namespace Boxed.DotnetNewTest
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.AppendLine($"Result: {result}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"Result: {result}");
             TestLogger.Write("Result: ");
             TestLogger.WriteLine(result.ToString(), result == ProcessResult.Succeeded ? ConsoleColor.Green : ConsoleColor.Red);
 
             stringBuilder
                 .AppendLine()
-                .AppendLine($"Output: {output}");
+                .AppendLine(CultureInfo.InvariantCulture, $"Output: {output}");
             TestLogger.WriteLine();
             TestLogger.WriteLine($"Output: {output}");
 

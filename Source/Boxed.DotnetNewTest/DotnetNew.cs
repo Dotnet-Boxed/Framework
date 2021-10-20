@@ -29,23 +29,12 @@ namespace Boxed.DotnetNewTest
         /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException">
-        ///     <para><paramref name="assembly"/> is null. </para>
-        ///     <para>- or - </para>
-        ///     <para><paramref name="fileName"/> is null. </para>
-        /// </exception>
+        /// <exception cref="ArgumentNullException"><paramref name="assembly"/> or <paramref name="fileName"/> is null.</exception>
         /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
         public static Task InstallAsync(Assembly assembly, string fileName)
         {
-            if (assembly is null)
-            {
-                throw new ArgumentNullException(nameof(assembly));
-            }
-
-            if (fileName is null)
-            {
-                throw new ArgumentNullException(nameof(fileName));
-            }
+            ArgumentNullException.ThrowIfNull(assembly);
+            ArgumentNullException.ThrowIfNull(fileName);
 
             if (fileName.Length == 0)
             {
@@ -68,10 +57,7 @@ namespace Boxed.DotnetNewTest
         /// <exception cref="ArgumentException">The provided <paramref name="source"/> was empty.</exception>
         public static async Task InstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
+            ArgumentNullException.ThrowIfNull(source);
 
             if (source.Length == 0)
             {
@@ -87,10 +73,8 @@ namespace Boxed.DotnetNewTest
         /// <param name="timeout">The timeout. Defaults to one minute.</param>
         /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ReinitialiseAsync(TimeSpan? timeout = null, bool showShellWindow = false)
-        {
+        public static async Task ReinitialiseAsync(TimeSpan? timeout = null, bool showShellWindow = false) =>
             await RunDotnetCommandAsync($"new --debug:reinit", timeout, showShellWindow).ConfigureAwait(false);
-        }
 
         /// <summary>
         /// Uninstalls a template from the specified source.
@@ -107,27 +91,16 @@ namespace Boxed.DotnetNewTest
         /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException">
-        ///     <para><paramref name="assembly"/> is null. </para>
-        ///     <para>- or - </para>
-        ///     <para><paramref name="fileName"/> is null. </para>
-        /// </exception>
+        /// <exception cref="ArgumentNullException"><paramref name="assembly"/> or <paramref name="fileName"/> is null.</exception>
         /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
         public static Task UninstallAsync(Assembly assembly, string fileName)
         {
-            if (assembly is null)
-            {
-                throw new ArgumentNullException(nameof(assembly));
-            }
-
-            if (fileName is null)
-            {
-                throw new ArgumentNullException(nameof(fileName));
-            }
+            ArgumentNullException.ThrowIfNull(assembly);
+            ArgumentNullException.ThrowIfNull(fileName);
 
             if (fileName.Length == 0)
             {
-                throw new ArgumentException( $"{nameof(fileName)} must not be empty.", nameof(fileName));
+                throw new ArgumentException($"{nameof(fileName)} must not be empty.", nameof(fileName));
             }
 
             var projectFilePath = GetProjectFilePath(assembly, fileName);
@@ -146,10 +119,7 @@ namespace Boxed.DotnetNewTest
         /// <exception cref="ArgumentException">The provided <paramref name="source"/> was empty.</exception>
         public static async Task UninstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
+            ArgumentNullException.ThrowIfNull(source);
 
             if (source.Length == 0)
             {
@@ -208,13 +178,13 @@ namespace Boxed.DotnetNewTest
         {
             using var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout);
             return await ProcessExtensions
-                    .StartAsync(
-                        DirectoryExtensions.GetCurrentDirectory(),
-                        "dotnet",
-                        arguments,
-                        showShellWindow,
-                        cancellationTokenSource.Token)
-                    .ConfigureAwait(false);
+                .StartAsync(
+                    DirectoryExtensions.GetCurrentDirectory(),
+                    "dotnet",
+                    arguments,
+                    showShellWindow,
+                    cancellationTokenSource.Token)
+                .ConfigureAwait(false);
         }
     }
 }

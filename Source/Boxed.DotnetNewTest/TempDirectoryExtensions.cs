@@ -31,16 +31,13 @@ namespace Boxed.DotnetNewTest
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
-            if (tempDirectory is null)
-            {
-                throw new ArgumentNullException(nameof(tempDirectory));
-            }
+            ArgumentNullException.ThrowIfNull(tempDirectory);
 
             var stringBuilder = new StringBuilder($"new {templateName}");
 
             if (name != null)
             {
-                stringBuilder.Append($" --name \"{name}\"");
+                stringBuilder.Append(CultureInfo.InvariantCulture, $" --name \"{name}\"");
             }
 
             var httpsPort = PortHelper.GetFreeTcpPort();
@@ -50,7 +47,7 @@ namespace Boxed.DotnetNewTest
             {
                 foreach (var argument in arguments)
                 {
-                    stringBuilder.Append($" --{argument.Key} \"{Replace(argument.Value, httpsPort, httpPort)}\"");
+                    stringBuilder.Append(CultureInfo.InvariantCulture, $" --{argument.Key} \"{Replace(argument.Value, httpsPort, httpPort)}\"");
                 }
             }
 

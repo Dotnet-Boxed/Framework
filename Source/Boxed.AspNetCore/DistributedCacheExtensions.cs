@@ -29,15 +29,8 @@ namespace Boxed.AspNetCore
             JsonSerializerOptions? jsonSerializerOptions = null,
             CancellationToken cancellationToken = default)
         {
-            if (cache is null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
-
-            if (key is null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
             var bytes = await cache.GetAsync(key, cancellationToken).ConfigureAwait(false);
             return Deserialize<T>(bytes, jsonSerializerOptions);
@@ -66,15 +59,8 @@ namespace Boxed.AspNetCore
             CancellationToken cancellationToken = default)
             where T : class
         {
-            if (cache is null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
-
-            if (key is null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
             var bytes = JsonSerializer.SerializeToUtf8Bytes(value, jsonSerializerOptions);
             return cache.SetAsync(key, bytes, options, cancellationToken);
