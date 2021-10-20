@@ -142,7 +142,21 @@ namespace Boxed.Mapping
             }
 #endif
 
+#if NET6_0_OR_GREATER
+            int count;
+            if (sourceCount.HasValue)
+            {
+                count = sourceCount.Value;
+            }
+            else if (!source.TryGetNonEnumeratedCount(out count))
+            {
+                count = source.Count();
+            }
+
+            var tasks = new Task[count];
+#else
             var tasks = new Task[sourceCount ?? source.Count()];
+#endif
             var i = 0;
             foreach (var sourceItem in source)
             {
@@ -340,9 +354,18 @@ namespace Boxed.Mapping
             }
 #endif
 
-            var sourceCount = source.Count();
-            var tasks = new Task[sourceCount];
-            var destination = new TDestination[sourceCount];
+#if NET6_0_OR_GREATER
+            if (!source.TryGetNonEnumeratedCount(out var count))
+            {
+                count = source.Count();
+            }
+
+            var tasks = new Task[count];
+#else
+            var count = source.Count();
+            var tasks = new Task[count];
+#endif
+            var destination = new TDestination[count];
             var i = 0;
             foreach (var sourceItem in source)
             {
@@ -404,8 +427,16 @@ namespace Boxed.Mapping
             }
 #endif
 
-            var sourceCount = source.Count();
-            var tasks = new Task[sourceCount];
+#if NET6_0_OR_GREATER
+            if (!source.TryGetNonEnumeratedCount(out var count))
+            {
+                count = source.Count();
+            }
+
+            var tasks = new Task[count];
+#else
+            var tasks = new Task[source.Count()];
+#endif
             var i = 0;
             foreach (var sourceItem in source)
             {
@@ -602,8 +633,16 @@ namespace Boxed.Mapping
             }
 #endif
 
-            var sourceCount = source.Count();
-            var tasks = new Task[sourceCount];
+#if NET6_0_OR_GREATER
+            if (!source.TryGetNonEnumeratedCount(out var count))
+            {
+                count = source.Count();
+            }
+
+            var tasks = new Task[count];
+#else
+            var tasks = new Task[source.Count()];
+#endif
             var destination = new Collection<TDestination>();
             var i = 0;
             foreach (var sourceItem in source)
@@ -797,8 +836,16 @@ namespace Boxed.Mapping
             }
 #endif
 
-            var sourceCount = source.Count();
-            var tasks = new Task[sourceCount];
+#if NET6_0_OR_GREATER
+            if (!source.TryGetNonEnumeratedCount(out var count))
+            {
+                count = source.Count();
+            }
+
+            var tasks = new Task[count];
+#else
+            var tasks = new Task[source.Count()];
+#endif
             var destination = new HashSet<TDestination>();
             var i = 0;
             foreach (var sourceItem in source)
@@ -1154,9 +1201,18 @@ namespace Boxed.Mapping
             }
 #endif
 
-            var sourceCount = source.Count();
-            var tasks = new Task[sourceCount];
-            var destination = new List<TDestination>(sourceCount);
+#if NET6_0_OR_GREATER
+            if (!source.TryGetNonEnumeratedCount(out var count))
+            {
+                count = source.Count();
+            }
+
+            var tasks = new Task[count];
+#else
+            var count = source.Count();
+            var tasks = new Task[count];
+#endif
+            var destination = new List<TDestination>(count);
             var i = 0;
             foreach (var sourceItem in source)
             {
@@ -1353,8 +1409,16 @@ namespace Boxed.Mapping
             }
 #endif
 
-            var sourceCount = source.Count();
-            var tasks = new Task[sourceCount];
+#if NET6_0_OR_GREATER
+            if (!source.TryGetNonEnumeratedCount(out var count))
+            {
+                count = source.Count();
+            }
+
+            var tasks = new Task[count];
+#else
+            var tasks = new Task[source.Count()];
+#endif
             var destination = new ObservableCollection<TDestination>();
             var i = 0;
             foreach (var sourceItem in source)

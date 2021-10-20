@@ -297,7 +297,16 @@ namespace Boxed.Mapping
             }
 #endif
 
+#if NET6_0_OR_GREATER
+            if (!source.TryGetNonEnumeratedCount(out var count))
+            {
+                count = source.Count();
+            }
+
+            var destination = new TDestination[count];
+#else
             var destination = new TDestination[source.Count()];
+#endif
             var i = 0;
             foreach (var sourceItem in source)
             {
@@ -978,7 +987,16 @@ namespace Boxed.Mapping
             }
 #endif
 
+#if NET6_0_OR_GREATER
+            if (!source.TryGetNonEnumeratedCount(out var count))
+            {
+                count = source.Count();
+            }
+
+            var destination = new List<TDestination>(count);
+#else
             var destination = new List<TDestination>(source.Count());
+#endif
             foreach (var sourceItem in source)
             {
                 var destinationItem = mapper.Map(sourceItem);
