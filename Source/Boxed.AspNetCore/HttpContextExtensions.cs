@@ -5,7 +5,6 @@ namespace Boxed.AspNetCore
     using System.Globalization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Net.Http.Headers;
 
     /// <summary>
     /// <see cref="HttpContext"/> extension methods.
@@ -25,24 +24,17 @@ namespace Boxed.AspNetCore
         /// <param name="context">The HTTP context.</param>
         /// <param name="cacheProfile">The cache profile.</param>
         /// <returns>The same HTTP context.</returns>
-        /// <exception cref="System.ArgumentNullException">context or cacheProfile.</exception>
+        /// <exception cref="ArgumentNullException">context or cacheProfile.</exception>
         public static HttpContext ApplyCacheProfile(this HttpContext context, CacheProfile cacheProfile)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (cacheProfile is null)
-            {
-                throw new ArgumentNullException(nameof(cacheProfile));
-            }
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(cacheProfile);
 
             var headers = context.Response.Headers;
 
             if (!string.IsNullOrEmpty(cacheProfile.VaryByHeader))
             {
-                headers[HeaderNames.Vary] = cacheProfile.VaryByHeader;
+                headers.Vary = cacheProfile.VaryByHeader;
             }
 
             if (cacheProfile.NoStore == true)
@@ -50,12 +42,12 @@ namespace Boxed.AspNetCore
                 // Cache-control: no-store, no-cache is valid.
                 if (cacheProfile.Location == ResponseCacheLocation.None)
                 {
-                    headers[HeaderNames.CacheControl] = NoStoreNoCache;
-                    headers[HeaderNames.Pragma] = NoCache;
+                    headers.CacheControl = NoStoreNoCache;
+                    headers.Pragma = NoCache;
                 }
                 else
                 {
-                    headers[HeaderNames.CacheControl] = NoStore;
+                    headers.CacheControl = NoStore;
                 }
             }
             else
@@ -72,15 +64,16 @@ namespace Boxed.AspNetCore
                         break;
                     case ResponseCacheLocation.None:
                         cacheControlValue = NoCacheMaxAge + duration;
-                        headers[HeaderNames.Pragma] = NoCache;
+                        headers.Pragma = NoCache;
                         break;
                     default:
-                        var exception = new NotImplementedException(FormattableString.Invariant($"Unknown {nameof(ResponseCacheLocation)}: {cacheProfile.Location}"));
+                        var exception = new NotImplementedException(
+                            FormattableString.Invariant($"Unknown {nameof(ResponseCacheLocation)}: {cacheProfile.Location}"));
                         Debug.Fail(exception.ToString());
                         throw exception;
                 }
 
-                headers[HeaderNames.CacheControl] = cacheControlValue;
+                headers.CacheControl = cacheControlValue;
             }
 
             return context;

@@ -2,7 +2,7 @@ namespace Boxed.Mapping.Test
 {
     using System;
     using System.Collections.Generic;
-#if NET5_0
+#if NET5_0_OR_GREATER
     using System.Collections.Immutable;
 #endif
     using System.Collections.ObjectModel;
@@ -178,7 +178,7 @@ namespace Boxed.Mapping.Test
             Assert.Equal(new int[] { 1, 2 }, to.Select(x => x.Property));
         }
 
-#if NET5_0
+#if NET5_0_OR_GREATER
         [Fact]
         public async Task MapImmutableArrayAsync_Empty_MappedAsync()
         {
@@ -320,6 +320,7 @@ namespace Boxed.Mapping.Test
             Assert.Equal(2, to[1].Property);
         }
 
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
         [Fact]
         public async Task MapEnumerableAsync_ToNewObject_MappedAsync()
         {
@@ -340,6 +341,7 @@ namespace Boxed.Mapping.Test
             Assert.Equal(1, list[0].Property);
             Assert.Equal(2, list[1].Property);
         }
+#endif
 
         protected override void DisposeManaged() => this.cancellationTokenSource.Dispose();
     }

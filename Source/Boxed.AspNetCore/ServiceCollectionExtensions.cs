@@ -40,15 +40,8 @@ namespace Boxed.AspNetCore
             bool condition,
             Func<IServiceCollection, IServiceCollection> action)
         {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(action);
 
             if (condition)
             {
@@ -75,20 +68,9 @@ namespace Boxed.AspNetCore
             Func<IServiceCollection, IServiceCollection> ifAction,
             Func<IServiceCollection, IServiceCollection> elseAction)
         {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (ifAction is null)
-            {
-                throw new ArgumentNullException(nameof(ifAction));
-            }
-
-            if (elseAction is null)
-            {
-                throw new ArgumentNullException(nameof(elseAction));
-            }
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(ifAction);
+            ArgumentNullException.ThrowIfNull(elseAction);
 
             if (condition)
             {
@@ -114,15 +96,8 @@ namespace Boxed.AspNetCore
             IConfiguration configuration)
             where TOptions : class, new()
         {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (configuration is null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configuration);
 
             return services
                 .Configure<TOptions>(configuration)
@@ -143,15 +118,8 @@ namespace Boxed.AspNetCore
             Action<BinderOptions> configureBinder)
             where TOptions : class, new()
         {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (configuration is null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configuration);
 
             return services
                 .Configure<TOptions>(configuration, configureBinder)
@@ -160,7 +128,7 @@ namespace Boxed.AspNetCore
 
         /// <summary>
         /// Registers <see cref="IOptions{TOptions}"/> and <typeparamref name="TOptions"/> to the services container.
-        /// Also runs data annotation validation.
+        /// Also runs data annotation validation on application startup.
         /// </summary>
         /// <typeparam name="TOptions">The type of the options.</typeparam>
         /// <param name="services">The services collection.</param>
@@ -171,26 +139,20 @@ namespace Boxed.AspNetCore
             IConfiguration configuration)
             where TOptions : class, new()
         {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (configuration is null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configuration);
 
             services
                 .AddOptions<TOptions>()
                 .Bind(configuration)
-                .ValidateDataAnnotations();
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
             return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
         }
 
         /// <summary>
         /// Registers <see cref="IOptions{TOptions}"/> and <typeparamref name="TOptions"/> to the services container.
-        /// Also runs data annotation validation.
+        /// Also runs data annotation validation on application startup.
         /// </summary>
         /// <typeparam name="TOptions">The type of the options.</typeparam>
         /// <param name="services">The services collection.</param>
@@ -203,26 +165,20 @@ namespace Boxed.AspNetCore
             Action<BinderOptions> configureBinder)
             where TOptions : class, new()
         {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (configuration is null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configuration);
 
             services
                 .AddOptions<TOptions>()
                 .Bind(configuration, configureBinder)
-                .ValidateDataAnnotations();
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
             return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
         }
 
         /// <summary>
         /// Registers <see cref="IOptions{TOptions}"/> and <typeparamref name="TOptions"/> to the services container.
-        /// Also runs data annotation validation and custom validation using the default failure message.
+        /// Also runs data annotation validation and custom validation using the default failure message on application startup.
         /// </summary>
         /// <typeparam name="TOptions">The type of the options.</typeparam>
         /// <param name="services">The services collection.</param>
@@ -235,32 +191,22 @@ namespace Boxed.AspNetCore
             Func<TOptions, bool> validation)
             where TOptions : class, new()
         {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (configuration is null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
-            if (validation is null)
-            {
-                throw new ArgumentNullException(nameof(validation));
-            }
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configuration);
+            ArgumentNullException.ThrowIfNull(validation);
 
             services
                 .AddOptions<TOptions>()
                 .Bind(configuration)
                 .ValidateDataAnnotations()
-                .Validate(validation);
+                .Validate(validation)
+                .ValidateOnStart();
             return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
         }
 
         /// <summary>
         /// Registers <see cref="IOptions{TOptions}"/> and <typeparamref name="TOptions"/> to the services container.
-        /// Also runs data annotation validation and custom validation using the default failure message.
+        /// Also runs data annotation validation and custom validation using the default failure message on application startup.
         /// </summary>
         /// <typeparam name="TOptions">The type of the options.</typeparam>
         /// <param name="services">The services collection.</param>
@@ -275,32 +221,22 @@ namespace Boxed.AspNetCore
             Action<BinderOptions> configureBinder)
             where TOptions : class, new()
         {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (configuration is null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
-            if (validation is null)
-            {
-                throw new ArgumentNullException(nameof(validation));
-            }
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configuration);
+            ArgumentNullException.ThrowIfNull(validation);
 
             services
                 .AddOptions<TOptions>()
                 .Bind(configuration, configureBinder)
                 .ValidateDataAnnotations()
-                .Validate(validation);
+                .Validate(validation)
+                .ValidateOnStart();
             return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
         }
 
         /// <summary>
         /// Registers <see cref="IOptions{TOptions}"/> and <typeparamref name="TOptions"/> to the services container.
-        /// Also runs data annotation validation and custom validation.
+        /// Also runs data annotation validation and custom validation on application startup.
         /// </summary>
         /// <typeparam name="TOptions">The type of the options.</typeparam>
         /// <param name="services">The services collection.</param>
@@ -315,37 +251,23 @@ namespace Boxed.AspNetCore
             string failureMessage)
             where TOptions : class, new()
         {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (configuration is null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
-            if (validation is null)
-            {
-                throw new ArgumentNullException(nameof(validation));
-            }
-
-            if (failureMessage is null)
-            {
-                throw new ArgumentNullException(nameof(failureMessage));
-            }
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configuration);
+            ArgumentNullException.ThrowIfNull(validation);
+            ArgumentNullException.ThrowIfNull(failureMessage);
 
             services
                 .AddOptions<TOptions>()
                 .Bind(configuration)
                 .ValidateDataAnnotations()
-                .Validate(validation, failureMessage);
+                .Validate(validation, failureMessage)
+                .ValidateOnStart();
             return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
         }
 
         /// <summary>
         /// Registers <see cref="IOptions{TOptions}"/> and <typeparamref name="TOptions"/> to the services container.
-        /// Also runs data annotation validation and custom validation.
+        /// Also runs data annotation validation and custom validation on application startup.
         /// </summary>
         /// <typeparam name="TOptions">The type of the options.</typeparam>
         /// <param name="services">The services collection.</param>
@@ -362,31 +284,17 @@ namespace Boxed.AspNetCore
             Action<BinderOptions> configureBinder)
             where TOptions : class, new()
         {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (configuration is null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
-            if (validation is null)
-            {
-                throw new ArgumentNullException(nameof(validation));
-            }
-
-            if (failureMessage is null)
-            {
-                throw new ArgumentNullException(nameof(failureMessage));
-            }
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configuration);
+            ArgumentNullException.ThrowIfNull(validation);
+            ArgumentNullException.ThrowIfNull(failureMessage);
 
             services
                 .AddOptions<TOptions>()
                 .Bind(configuration, configureBinder)
                 .ValidateDataAnnotations()
-                .Validate(validation, failureMessage);
+                .Validate(validation, failureMessage)
+                .ValidateOnStart();
             return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
         }
     }

@@ -1,5 +1,6 @@
 namespace Boxed.AspNetCore.Swagger
 {
+    using System;
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc.Authorization;
@@ -18,6 +19,8 @@ namespace Boxed.AspNetCore.Swagger
         public static IList<IAuthorizationRequirement> GetPolicyRequirements(
             this IList<FilterDescriptor> filterDescriptors)
         {
+            ArgumentNullException.ThrowIfNull(filterDescriptors);
+
             var policyRequirements = new List<IAuthorizationRequirement>();
 
             for (var i = filterDescriptors.Count - 1; i >= 0; --i)

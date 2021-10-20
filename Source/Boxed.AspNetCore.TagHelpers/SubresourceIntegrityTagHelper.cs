@@ -50,21 +50,24 @@ namespace Boxed.AspNetCore.TagHelpers
             IUrlHelperFactory urlHelperFactory,
             HtmlEncoder htmlEncoder)
         {
-            this.distributedCache = distributedCache ?? throw new ArgumentNullException(nameof(distributedCache));
-            this.webHostEnvironment = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
-            this.htmlEncoder = htmlEncoder ?? throw new ArgumentNullException(nameof(htmlEncoder));
+            ArgumentNullException.ThrowIfNull(distributedCache);
+            ArgumentNullException.ThrowIfNull(webHostEnvironment);
+            ArgumentNullException.ThrowIfNull(htmlEncoder);
+            ArgumentNullException.ThrowIfNull(actionContextAccessor);
+            ArgumentNullException.ThrowIfNull(urlHelperFactory);
 
-            if (actionContextAccessor is null)
+            this.distributedCache = distributedCache;
+            this.webHostEnvironment = webHostEnvironment;
+            this.htmlEncoder = htmlEncoder;
+
+            var actionContext = actionContextAccessor.ActionContext;
+            if (actionContext is null)
             {
-                throw new ArgumentNullException(nameof(actionContextAccessor));
+                throw new InvalidOperationException(
+                    "ActionContext is null. Attempted to retrieve the ActionContext outside of a request.");
             }
 
-            if (urlHelperFactory is null)
-            {
-                throw new ArgumentNullException(nameof(urlHelperFactory));
-            }
-
-            this.urlHelper = urlHelperFactory.GetUrlHelper(actionContextAccessor.ActionContext);
+            this.urlHelper = urlHelperFactory.GetUrlHelper(actionContext);
         }
 
         /// <summary>
@@ -100,15 +103,8 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <returns>A task representing the operation.</returns>
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (output is null)
-            {
-                throw new ArgumentNullException(nameof(output));
-            }
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(output);
 
             var url = this.GetEncodedStringValue(output.Attributes[this.UrlAttributeName].Value);
 

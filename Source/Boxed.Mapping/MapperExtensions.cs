@@ -2,12 +2,12 @@ namespace Boxed.Mapping
 {
     using System;
     using System.Collections.Generic;
-#if NET5_0
+#if NET5_0_OR_GREATER
     using System.Collections.Immutable;
 #endif
     using System.Collections.ObjectModel;
     using System.Linq;
-#if NET5_0 || NETSTANDARD2_1
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
@@ -18,7 +18,7 @@ namespace Boxed.Mapping
     /// </summary>
     public static class MapperExtensions
     {
-#if NET5_0 || NETSTANDARD2_1
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
         /// <summary>
         /// Maps the <see cref="IAsyncEnumerable{TSource}"/> into <see cref="IAsyncEnumerable{TDestination}"/>.
         /// </summary>
@@ -36,6 +36,10 @@ namespace Boxed.Mapping
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -45,6 +49,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             await foreach (var sourceItem in source.ConfigureAwait(false).WithCancellation(cancellationToken))
             {
@@ -70,6 +75,10 @@ namespace Boxed.Mapping
             TSource source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -79,6 +88,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = Factory<TDestination>.CreateInstance();
             mapper.Map(source, destination);
@@ -105,6 +115,11 @@ namespace Boxed.Mapping
             where TSourceCollection : IEnumerable<TSource>
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(sourceCollection);
+            ArgumentNullException.ThrowIfNull(destinationCollection);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -119,6 +134,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(destinationCollection));
             }
+#endif
 
             var i = 0;
             foreach (var item in sourceCollection)
@@ -150,6 +166,10 @@ namespace Boxed.Mapping
 #pragma warning restore CA1002 // Do not expose generic lists
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -159,6 +179,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new TDestination[source.Count];
             for (var i = 0; i < source.Count; ++i)
@@ -188,6 +209,10 @@ namespace Boxed.Mapping
             Collection<TSource> source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -197,6 +222,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new TDestination[source.Count];
             for (var i = 0; i < source.Count; ++i)
@@ -226,6 +252,10 @@ namespace Boxed.Mapping
             TSource[] source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -235,6 +265,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new TDestination[source.Length];
             for (var i = 0; i < source.Length; ++i)
@@ -264,6 +295,10 @@ namespace Boxed.Mapping
             IEnumerable<TSource> source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -273,6 +308,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new TDestination[source.Count()];
             var i = 0;
@@ -311,6 +347,10 @@ namespace Boxed.Mapping
             where TDestinationCollection : ICollection<TDestination>
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(sourceCollection);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -320,6 +360,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(sourceCollection));
             }
+#endif
 
             foreach (var item in sourceCollection)
             {
@@ -349,6 +390,10 @@ namespace Boxed.Mapping
 #pragma warning restore CA1002 // Do not expose generic lists
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -358,6 +403,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new Collection<TDestination>();
             for (var i = 0; i < source.Count; ++i)
@@ -387,6 +433,10 @@ namespace Boxed.Mapping
             Collection<TSource> source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -396,6 +446,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new Collection<TDestination>();
             for (var i = 0; i < source.Count; ++i)
@@ -425,6 +476,10 @@ namespace Boxed.Mapping
             TSource[] source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -434,6 +489,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new Collection<TDestination>();
             for (var i = 0; i < source.Length; ++i)
@@ -463,6 +519,10 @@ namespace Boxed.Mapping
             IEnumerable<TSource> source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -472,6 +532,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new Collection<TDestination>();
             foreach (var sourceItem in source)
@@ -501,6 +562,10 @@ namespace Boxed.Mapping
 #pragma warning restore CA1002 // Do not expose generic lists
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -510,6 +575,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new HashSet<TDestination>();
             foreach (var sourceItem in source)
@@ -537,6 +603,10 @@ namespace Boxed.Mapping
             Collection<TSource> source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -546,6 +616,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new HashSet<TDestination>();
             foreach (var sourceItem in source)
@@ -573,6 +644,10 @@ namespace Boxed.Mapping
             TSource[] source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -582,6 +657,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new HashSet<TDestination>();
             foreach (var sourceItem in source)
@@ -609,6 +685,10 @@ namespace Boxed.Mapping
             IEnumerable<TSource> source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -618,6 +698,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new HashSet<TDestination>();
             foreach (var sourceItem in source)
@@ -630,7 +711,7 @@ namespace Boxed.Mapping
             return destination;
         }
 
-#if NET5_0
+#if NET5_0_OR_GREATER
         /// <summary>
         /// Maps the list of <typeparamref name="TSource"/> into an immutable array of
         /// <typeparamref name="TDestination"/>.
@@ -790,6 +871,10 @@ namespace Boxed.Mapping
 #pragma warning restore CA1002 // Do not expose generic lists
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -799,6 +884,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new List<TDestination>(source.Count);
             for (var i = 0; i < source.Count; ++i)
@@ -830,6 +916,10 @@ namespace Boxed.Mapping
 #pragma warning restore CA1002 // Do not expose generic lists
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -839,6 +929,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new List<TDestination>(source.Count);
             for (var i = 0; i < source.Count; ++i)
@@ -870,6 +961,10 @@ namespace Boxed.Mapping
 #pragma warning restore CA1002 // Do not expose generic lists
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -879,6 +974,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new List<TDestination>(source.Length);
             for (var i = 0; i < source.Length; ++i)
@@ -910,6 +1006,10 @@ namespace Boxed.Mapping
 #pragma warning restore CA1002 // Do not expose generic lists
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -919,6 +1019,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new List<TDestination>(source.Count());
             foreach (var sourceItem in source)
@@ -949,6 +1050,10 @@ namespace Boxed.Mapping
 #pragma warning restore CA1002 // Do not expose generic lists
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -958,6 +1063,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new ObservableCollection<TDestination>();
             for (var i = 0; i < source.Count; ++i)
@@ -987,6 +1093,10 @@ namespace Boxed.Mapping
             Collection<TSource> source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -996,6 +1106,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new ObservableCollection<TDestination>();
             for (var i = 0; i < source.Count; ++i)
@@ -1025,6 +1136,10 @@ namespace Boxed.Mapping
             TSource[] source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -1034,6 +1149,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new ObservableCollection<TDestination>();
             for (var i = 0; i < source.Length; ++i)
@@ -1063,6 +1179,10 @@ namespace Boxed.Mapping
             IEnumerable<TSource> source)
             where TDestination : new()
         {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(source);
+#else
             if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
@@ -1072,6 +1192,7 @@ namespace Boxed.Mapping
             {
                 throw new ArgumentNullException(nameof(source));
             }
+#endif
 
             var destination = new ObservableCollection<TDestination>();
             foreach (var sourceItem in source)

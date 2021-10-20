@@ -120,7 +120,7 @@ namespace Boxed.AspNetCore
 
             if (prevdash || stringBuilder.Length > maxlength)
             {
-                return stringBuilder.ToString().Substring(0, stringBuilder.Length - 1);
+                return stringBuilder.ToString()[..(stringBuilder.Length - 1)];
             }
             else
             {

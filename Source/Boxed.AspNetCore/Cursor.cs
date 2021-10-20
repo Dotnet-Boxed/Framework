@@ -58,10 +58,7 @@ namespace Boxed.AspNetCore
             IEnumerable<TItem> enumerable,
             Func<TItem, TCursor> getCursorProperty)
         {
-            if (getCursorProperty is null)
-            {
-                throw new ArgumentNullException(nameof(getCursorProperty));
-            }
+            ArgumentNullException.ThrowIfNull(getCursorProperty);
 
             if (enumerable is null || !enumerable.Any())
             {
@@ -83,10 +80,7 @@ namespace Boxed.AspNetCore
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is <c>null</c>.</exception>
         public static string ToCursor<T>(T value)
         {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            ArgumentNullException.ThrowIfNull(value);
 
             if (value is DateTimeOffset dateTimeOffset)
             {

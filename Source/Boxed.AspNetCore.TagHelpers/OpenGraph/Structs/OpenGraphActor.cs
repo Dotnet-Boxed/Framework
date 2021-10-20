@@ -12,8 +12,12 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// </summary>
         /// <param name="actorUrl">The URL to the page about the actor. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="actorUrl"/> is <c>null</c>.</exception>
-        public OpenGraphActor(Uri actorUrl) =>
-            this.ActorUrl = actorUrl ?? throw new ArgumentNullException(nameof(actorUrl));
+        public OpenGraphActor(Uri actorUrl)
+        {
+            ArgumentNullException.ThrowIfNull(actorUrl);
+
+            this.ActorUrl = actorUrl;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphActor"/> class.

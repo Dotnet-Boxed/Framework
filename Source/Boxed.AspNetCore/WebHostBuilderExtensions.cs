@@ -21,15 +21,8 @@ namespace Boxed.AspNetCore
             bool condition,
             Func<IWebHostBuilder, IWebHostBuilder> action)
         {
-            if (webHostBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(webHostBuilder));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(webHostBuilder);
+            ArgumentNullException.ThrowIfNull(action);
 
             if (condition)
             {
@@ -52,20 +45,9 @@ namespace Boxed.AspNetCore
             Func<IWebHostBuilder, bool> condition,
             Func<IWebHostBuilder, IWebHostBuilder> action)
         {
-            if (webHostBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(webHostBuilder));
-            }
-
-            if (condition is null)
-            {
-                throw new ArgumentNullException(nameof(condition));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(webHostBuilder);
+            ArgumentNullException.ThrowIfNull(condition);
+            ArgumentNullException.ThrowIfNull(action);
 
             if (condition(webHostBuilder))
             {
@@ -92,20 +74,9 @@ namespace Boxed.AspNetCore
             Func<IWebHostBuilder, IWebHostBuilder> ifAction,
             Func<IWebHostBuilder, IWebHostBuilder> elseAction)
         {
-            if (webHostBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(webHostBuilder));
-            }
-
-            if (ifAction is null)
-            {
-                throw new ArgumentNullException(nameof(ifAction));
-            }
-
-            if (elseAction is null)
-            {
-                throw new ArgumentNullException(nameof(elseAction));
-            }
+            ArgumentNullException.ThrowIfNull(webHostBuilder);
+            ArgumentNullException.ThrowIfNull(ifAction);
+            ArgumentNullException.ThrowIfNull(elseAction);
 
             if (condition)
             {
@@ -136,25 +107,10 @@ namespace Boxed.AspNetCore
             Func<IWebHostBuilder, IWebHostBuilder> ifAction,
             Func<IWebHostBuilder, IWebHostBuilder> elseAction)
         {
-            if (webHostBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(webHostBuilder));
-            }
-
-            if (condition is null)
-            {
-                throw new ArgumentNullException(nameof(condition));
-            }
-
-            if (ifAction is null)
-            {
-                throw new ArgumentNullException(nameof(ifAction));
-            }
-
-            if (elseAction is null)
-            {
-                throw new ArgumentNullException(nameof(elseAction));
-            }
+            ArgumentNullException.ThrowIfNull(webHostBuilder);
+            ArgumentNullException.ThrowIfNull(condition);
+            ArgumentNullException.ThrowIfNull(ifAction);
+            ArgumentNullException.ThrowIfNull(elseAction);
 
             if (condition(webHostBuilder))
             {

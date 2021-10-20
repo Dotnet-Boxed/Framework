@@ -9,7 +9,6 @@ namespace Boxed.AspNetCore
     /// </summary>
     public static class HttpRequestExtensions
     {
-        private const string RequestedWithHeader = "X-Requested-With";
         private const string XmlHttpRequest = "XMLHttpRequest";
 
         /// <summary>
@@ -20,14 +19,11 @@ namespace Boxed.AspNetCore
         /// <exception cref="ArgumentNullException">The <paramref name="request"/> parameter is <c>null</c>.</exception>
         public static bool IsAjaxRequest(this HttpRequest request)
         {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
+            ArgumentNullException.ThrowIfNull(request);
 
             if (request.Headers is not null)
             {
-                return request.Headers[RequestedWithHeader] == XmlHttpRequest;
+                return request.Headers.XRequestedWith == XmlHttpRequest;
             }
 
             return false;
@@ -42,10 +38,7 @@ namespace Boxed.AspNetCore
         /// <exception cref="ArgumentNullException">The <paramref name="request"/> parameter is <c>null</c>.</exception>
         public static bool IsLocalRequest(this HttpRequest request)
         {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
+            ArgumentNullException.ThrowIfNull(request);
 
             var connection = request.HttpContext.Connection;
             if (connection.RemoteIpAddress is not null)

@@ -25,15 +25,8 @@ namespace Boxed.AspNetCore.Swagger.OperationFilters
         /// <inheritdoc/>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            if (operation is null)
-            {
-                throw new ArgumentNullException(nameof(operation));
-            }
-
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(operation);
+            ArgumentNullException.ThrowIfNull(context);
 
             var filterDescriptors = context.ApiDescription.ActionDescriptor.FilterDescriptors;
             var authorizationRequirements = filterDescriptors.GetPolicyRequirements();

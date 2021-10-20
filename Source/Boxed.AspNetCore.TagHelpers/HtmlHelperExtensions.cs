@@ -17,10 +17,7 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <returns>The referrer meta tag.</returns>
         public static HtmlString? ReferrerMeta(this IHtmlHelper htmlHelper, ReferrerMode referrerMode)
         {
-            if (htmlHelper is null)
-            {
-                throw new ArgumentNullException(nameof(htmlHelper));
-            }
+            ArgumentNullException.ThrowIfNull(htmlHelper);
 
             if (referrerMode == ReferrerMode.NoneWhenDowngrade)
             {

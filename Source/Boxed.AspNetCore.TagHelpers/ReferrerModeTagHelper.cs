@@ -28,15 +28,8 @@ namespace Boxed.AspNetCore.TagHelpers
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (output is null)
-            {
-                throw new ArgumentNullException(nameof(output));
-            }
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(output);
 
             output.Attributes.SetAttribute(NameAttributeName, "referrer");
             output.Attributes.SetAttribute(ContentAttributeName, this.Referrer.ToLowercaseString());

@@ -12,11 +12,14 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="price">The price.</param>
-        /// <exception cref="System.ArgumentNullException">name or price is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">name or price is <c>null</c>.</exception>
         public OpenGraphMenuItemVariation(string name, OpenGraphCurrency price)
         {
-            this.Name = name ?? throw new ArgumentNullException(nameof(name));
-            this.Price = price ?? throw new ArgumentNullException(nameof(price));
+            ArgumentNullException.ThrowIfNull(name);
+            ArgumentNullException.ThrowIfNull(price);
+
+            this.Name = name;
+            this.Price = price;
         }
 
         /// <summary>

@@ -17,10 +17,15 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <exception cref="ArgumentNullException">streetAddress or locality or postalCode or country is <c>null.</c>.</exception>
         public OpenGraphContactData(string streetAddress, string locality, string postalCode, string country)
         {
-            this.Country = country ?? throw new ArgumentNullException(nameof(country));
-            this.Locality = locality ?? throw new ArgumentNullException(nameof(locality));
-            this.PostalCode = postalCode ?? throw new ArgumentNullException(nameof(postalCode));
-            this.StreetAddress = streetAddress ?? throw new ArgumentNullException(nameof(streetAddress));
+            ArgumentNullException.ThrowIfNull(streetAddress);
+            ArgumentNullException.ThrowIfNull(locality);
+            ArgumentNullException.ThrowIfNull(postalCode);
+            ArgumentNullException.ThrowIfNull(country);
+
+            this.Country = country;
+            this.Locality = locality;
+            this.PostalCode = postalCode;
+            this.StreetAddress = streetAddress;
         }
 
         /// <summary>

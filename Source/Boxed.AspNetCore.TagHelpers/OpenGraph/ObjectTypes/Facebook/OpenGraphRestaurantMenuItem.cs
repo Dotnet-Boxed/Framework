@@ -48,10 +48,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
-            if (stringBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(stringBuilder));
-            }
+            ArgumentNullException.ThrowIfNull(stringBuilder);
 
             base.ToString(stringBuilder);
 

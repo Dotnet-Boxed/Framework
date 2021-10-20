@@ -18,18 +18,11 @@ namespace Boxed.AspNetCore.Swagger
         /// <param name="options">The Swagger options.</param>
         /// <param name="assembly">The assembly.</param>
         /// <returns><c>true</c> if the comment file exists and was added, otherwise <c>false</c>.</returns>
-        /// <exception cref="System.ArgumentNullException">options or assembly.</exception>
+        /// <exception cref="ArgumentNullException">options or assembly.</exception>
         public static SwaggerGenOptions IncludeXmlCommentsIfExists(this SwaggerGenOptions options, Assembly assembly)
         {
-            if (options is null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
-            if (assembly is null)
-            {
-                throw new ArgumentNullException(nameof(assembly));
-            }
+            ArgumentNullException.ThrowIfNull(options);
+            ArgumentNullException.ThrowIfNull(assembly);
 
             if (!string.IsNullOrEmpty(assembly.Location))
             {
@@ -46,18 +39,11 @@ namespace Boxed.AspNetCore.Swagger
         /// <param name="options">The Swagger options.</param>
         /// <param name="filePath">The XML comment file path.</param>
         /// <returns><c>true</c> if the comment file exists and was added, otherwise <c>false</c>.</returns>
-        /// <exception cref="System.ArgumentNullException">options or filePath.</exception>
+        /// <exception cref="ArgumentNullException">options or filePath.</exception>
         public static bool IncludeXmlCommentsIfExists(this SwaggerGenOptions options, string filePath)
         {
-            if (options is null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
-            if (filePath is null)
-            {
-                throw new ArgumentNullException(nameof(filePath));
-            }
+            ArgumentNullException.ThrowIfNull(options);
+            ArgumentNullException.ThrowIfNull(filePath);
 
             if (File.Exists(filePath))
             {

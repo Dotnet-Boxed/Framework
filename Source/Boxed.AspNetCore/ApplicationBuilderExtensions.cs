@@ -27,10 +27,7 @@ namespace Boxed.AspNetCore
             this IApplicationBuilder application,
             Action<HttpExceptionMiddlewareOptions>? configureOptions)
         {
-            if (application is null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
+            ArgumentNullException.ThrowIfNull(application);
 
             var options = new HttpExceptionMiddlewareOptions();
             configureOptions?.Invoke(options);
@@ -46,10 +43,7 @@ namespace Boxed.AspNetCore
         /// <returns>The same application builder.</returns>
         public static IApplicationBuilder UseServerTiming(this IApplicationBuilder application)
         {
-            if (application is null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
+            ArgumentNullException.ThrowIfNull(application);
 
             return application.UseMiddleware<ServerTimingMiddleware>();
         }
@@ -67,15 +61,8 @@ namespace Boxed.AspNetCore
             bool condition,
             Func<IApplicationBuilder, IApplicationBuilder> action)
         {
-            if (application is null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(application);
+            ArgumentNullException.ThrowIfNull(action);
 
             if (condition)
             {
@@ -104,20 +91,9 @@ namespace Boxed.AspNetCore
             Func<IApplicationBuilder, IApplicationBuilder> ifAction,
             Func<IApplicationBuilder, IApplicationBuilder> elseAction)
         {
-            if (application is null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
-
-            if (ifAction is null)
-            {
-                throw new ArgumentNullException(nameof(ifAction));
-            }
-
-            if (elseAction is null)
-            {
-                throw new ArgumentNullException(nameof(elseAction));
-            }
+            ArgumentNullException.ThrowIfNull(application);
+            ArgumentNullException.ThrowIfNull(ifAction);
+            ArgumentNullException.ThrowIfNull(elseAction);
 
             if (condition)
             {

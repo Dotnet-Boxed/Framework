@@ -13,11 +13,13 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph
         /// </summary>
         /// <param name="isMiles">if set to <c>true</c> distance is measured in miles, otherwise kilometres.</param>
         /// <param name="values">The values.</param>
-        /// <exception cref="System.ArgumentNullException">values.</exception>
+        /// <exception cref="ArgumentNullException">values.</exception>
         public OpenGraphSplit(bool isMiles, IEnumerable<OpenGraphQuantity> values)
         {
+            ArgumentNullException.ThrowIfNull(values);
+
             this.IsMiles = isMiles;
-            this.Values = values ?? throw new ArgumentNullException(nameof(values));
+            this.Values = values;
         }
 
         /// <summary>

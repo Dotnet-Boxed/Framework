@@ -31,10 +31,7 @@ namespace Boxed.DotnetNewTest
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
-            if (project is null)
-            {
-                throw new ArgumentNullException(nameof(project));
-            }
+            ArgumentNullException.ThrowIfNull(project);
 
             using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
@@ -62,10 +59,7 @@ namespace Boxed.DotnetNewTest
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
-            if (project is null)
-            {
-                throw new ArgumentNullException(nameof(project));
-            }
+            ArgumentNullException.ThrowIfNull(project);
 
             var noRestoreArgument = noRestore is null ? null : "--no-restore";
             using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
@@ -94,10 +88,7 @@ namespace Boxed.DotnetNewTest
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
-            if (project is null)
-            {
-                throw new ArgumentNullException(nameof(project));
-            }
+            ArgumentNullException.ThrowIfNull(project);
 
             var noRestoreArgument = noRestore is null ? null : "--no-restore";
             using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
@@ -124,10 +115,7 @@ namespace Boxed.DotnetNewTest
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
-            if (project is null)
-            {
-                throw new ArgumentNullException(nameof(project));
-            }
+            ArgumentNullException.ThrowIfNull(project);
 
             using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
             {
@@ -155,10 +143,7 @@ namespace Boxed.DotnetNewTest
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
-            if (project is null)
-            {
-                throw new ArgumentNullException(nameof(project));
-            }
+            ArgumentNullException.ThrowIfNull(project);
 
             var targetArgument = target is null ? null : $"--target={target}";
             using (var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout))
@@ -191,10 +176,7 @@ namespace Boxed.DotnetNewTest
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
-            if (project is null)
-            {
-                throw new ArgumentNullException(nameof(project));
-            }
+            ArgumentNullException.ThrowIfNull(project);
 
             var frameworkArgument = framework is null ? null : $"--framework {framework}";
             var runtimeArgument = runtime is null ? null : $"--self-contained --runtime {runtime}";
@@ -234,20 +216,9 @@ namespace Boxed.DotnetNewTest
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
-            if (project is null)
-            {
-                throw new ArgumentNullException(nameof(project));
-            }
-
-            if (projectRelativeDirectoryPath is null)
-            {
-                throw new ArgumentNullException(nameof(projectRelativeDirectoryPath));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(project);
+            ArgumentNullException.ThrowIfNull(projectRelativeDirectoryPath);
+            ArgumentNullException.ThrowIfNull(action);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -301,20 +272,9 @@ namespace Boxed.DotnetNewTest
             TimeSpan? timeout = null,
             bool showShellWindow = false)
         {
-            if (project is null)
-            {
-                throw new ArgumentNullException(nameof(project));
-            }
-
-            if (projectRelativeDirectoryPath is null)
-            {
-                throw new ArgumentNullException(nameof(projectRelativeDirectoryPath));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(project);
+            ArgumentNullException.ThrowIfNull(projectRelativeDirectoryPath);
+            ArgumentNullException.ThrowIfNull(action);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -363,15 +323,8 @@ namespace Boxed.DotnetNewTest
             string environmentName = "Development",
             string startupTypeName = "Startup")
         {
-            if (project is null)
-            {
-                throw new ArgumentNullException(nameof(project));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(project);
+            ArgumentNullException.ThrowIfNull(action);
 
             var projectName = Path.GetFileName(project.DirectoryPath);
             var directoryPath = project.PublishDirectoryPath;
