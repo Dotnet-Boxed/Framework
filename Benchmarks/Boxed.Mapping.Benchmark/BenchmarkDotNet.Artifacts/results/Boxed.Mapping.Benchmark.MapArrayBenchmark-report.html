@@ -2,35 +2,42 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Boxed.Mapping.Benchmark.MapArrayBenchmark</title>
+<title>Boxed.Mapping.Benchmark.MapArrayBenchmark-20211020-160137</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
-	td, th { padding: 6px 13px; border: 1px solid #ddd; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
 	tr { background-color: #fff; border-top: 1px solid #ccc; }
 	tr:nth-child(even) { background: #f8f8f8; }
 </style>
 </head>
 <body>
 <pre><code>
-BenchmarkDotNet=v0.11.3, OS=Windows 10.0.17134.472 (1803/April2018Update/Redstone4)
-Intel Core i7-6700HQ CPU 2.60GHz (Skylake), 1 CPU, 8 logical and 4 physical cores
-.NET Core SDK=2.2.100
-  [Host] : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
-  Clr    : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3260.0
-  Core   : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.22000
+Intel Xeon W-2155 CPU 3.30GHz, 1 CPU, 20 logical and 10 physical cores
+.NET SDK=6.0.100-rc.2.21505.57
+  [Host]               : .NET 6.0.0 (6.0.21.48005), X64 RyuJIT
+  .NET 5.0             : .NET 5.0.11 (5.0.1121.47308), X64 RyuJIT
+  .NET 6.0             : .NET 6.0.0 (6.0.21.48005), X64 RyuJIT
+  .NET Framework 4.7.2 : .NET Framework 4.8 (4.8.4420.0), X64 RyuJIT
 </code></pre>
 <pre><code></code></pre>
 
 <table>
-<thead><tr><th>Method</th><th>Job</th><th>Runtime</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Min</th><th>Max</th><th>Ratio</th><th>RatioSD</th><th>Gen 0/1k Op</th><th>Gen 1/1k Op</th><th>Gen 2/1k Op</th><th>Allocated Memory/Op</th>
+<thead><tr><th>Method</th><th>           Job</th><th>       Runtime</th><th>Mean</th><th>Error</th><th>StdDev</th><th> Min</th><th> Max</th><th>Ratio</th><th>RatioSD</th><th>Gen 0</th><th>Gen 1</th><th>Allocated</th>
 </tr>
-</thead><tbody><tr><td>Baseline</td><td>Clr</td><td>Clr</td><td>1.204 us</td><td>0.0195 us</td><td>0.0183 us</td><td>1.163 us</td><td>1.229 us</td><td>1.00</td><td>0.00</td><td>2.0409</td><td>-</td><td>-</td><td>6.27 KB</td>
-</tr><tr><td>BoxedMapper</td><td>Clr</td><td>Clr</td><td>2.637 us</td><td>0.0394 us</td><td>0.0369 us</td><td>2.587 us</td><td>2.695 us</td><td>2.19</td><td>0.05</td><td>2.0409</td><td>-</td><td>-</td><td>6.27 KB</td>
-</tr><tr><td>Automapper</td><td>Clr</td><td>Clr</td><td>10.009 us</td><td>0.1876 us</td><td>0.1755 us</td><td>9.720 us</td><td>10.216 us</td><td>8.31</td><td>0.20</td><td>2.0447</td><td>-</td><td>-</td><td>6.3 KB</td>
-</tr><tr><td>Baseline</td><td>Core</td><td>Core</td><td>1.281 us</td><td>0.0229 us</td><td>0.0203 us</td><td>1.249 us</td><td>1.316 us</td><td>1.00</td><td>0.00</td><td>2.0409</td><td>-</td><td>-</td><td>6.27 KB</td>
-</tr><tr><td>BoxedMapper</td><td>Core</td><td>Core</td><td>1.986 us</td><td>0.0255 us</td><td>0.0239 us</td><td>1.936 us</td><td>2.013 us</td><td>1.55</td><td>0.03</td><td>2.0409</td><td>-</td><td>-</td><td>6.27 KB</td>
-</tr><tr><td>Automapper</td><td>Core</td><td>Core</td><td>2.492 us</td><td>0.0478 us</td><td>0.0550 us</td><td>2.395 us</td><td>2.630 us</td><td>1.95</td><td>0.05</td><td>2.0485</td><td>-</td><td>-</td><td>6.3 KB</td>
+</thead><tbody><tr><td>Baseline</td><td>.NET 5.0</td><td>.NET 5.0</td><td>868.9 ns</td><td>13.56 ns</td><td>12.02 ns</td><td>850.9 ns</td><td>889.9 ns</td><td>1.00</td><td>0.00</td><td>0.8936</td><td>0.0401</td><td>6,424 B</td>
+</tr><tr><td>BoxedMapper</td><td>.NET 5.0</td><td>.NET 5.0</td><td>1,419.0 ns</td><td>27.37 ns</td><td>32.58 ns</td><td>1,376.4 ns</td><td>1,487.8 ns</td><td>1.63</td><td>0.05</td><td>0.8926</td><td>0.0401</td><td>6,424 B</td>
+</tr><tr><td>Automapper</td><td>.NET 5.0</td><td>.NET 5.0</td><td>1,654.2 ns</td><td>32.84 ns</td><td>33.72 ns</td><td>1,606.8 ns</td><td>1,735.2 ns</td><td>1.90</td><td>0.04</td><td>0.8926</td><td>0.0401</td><td>6,424 B</td>
+</tr><tr><td>Baseline</td><td>.NET 6.0</td><td>.NET 6.0</td><td>994.6 ns</td><td>19.54 ns</td><td>31.56 ns</td><td>958.2 ns</td><td>1,058.2 ns</td><td>1.00</td><td>0.00</td><td>0.8926</td><td>0.0401</td><td>6,424 B</td>
+</tr><tr><td>BoxedMapper</td><td>.NET 6.0</td><td>.NET 6.0</td><td>1,483.3 ns</td><td>17.53 ns</td><td>15.54 ns</td><td>1,465.1 ns</td><td>1,517.6 ns</td><td>1.48</td><td>0.05</td><td>0.8926</td><td>0.0401</td><td>6,424 B</td>
+</tr><tr><td>Automapper</td><td>.NET 6.0</td><td>.NET 6.0</td><td>1,613.8 ns</td><td>31.32 ns</td><td>27.76 ns</td><td>1,583.0 ns</td><td>1,666.1 ns</td><td>1.61</td><td>0.06</td><td>0.8926</td><td>0.0401</td><td>6,424 B</td>
+</tr><tr><td>Baseline</td><td>.NET Core 3.0</td><td>.NET Core 3.0</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>?</td><td>?</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>BoxedMapper</td><td>.NET Core 3.0</td><td>.NET Core 3.0</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>?</td><td>?</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>Automapper</td><td>.NET Core 3.0</td><td>.NET Core 3.0</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>?</td><td>?</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>Baseline</td><td>.NET Framework 4.7.2</td><td>.NET Framework 4.7.2</td><td>848.6 ns</td><td>16.69 ns</td><td>15.62 ns</td><td>830.4 ns</td><td>875.2 ns</td><td>1.00</td><td>0.00</td><td>1.0233</td><td>0.0420</td><td>6,443 B</td>
+</tr><tr><td>BoxedMapper</td><td>.NET Framework 4.7.2</td><td>.NET Framework 4.7.2</td><td>1,953.0 ns</td><td>21.18 ns</td><td>18.77 ns</td><td>1,929.8 ns</td><td>1,985.1 ns</td><td>2.31</td><td>0.04</td><td>1.0223</td><td>0.0420</td><td>6,443 B</td>
+</tr><tr><td>Automapper</td><td>.NET Framework 4.7.2</td><td>.NET Framework 4.7.2</td><td>6,993.6 ns</td><td>139.22 ns</td><td>160.32 ns</td><td>6,820.6 ns</td><td>7,413.7 ns</td><td>8.26</td><td>0.20</td><td>1.0223</td><td>0.0381</td><td>6,443 B</td>
 </tr></tbody></table>
 </body>
 </html>

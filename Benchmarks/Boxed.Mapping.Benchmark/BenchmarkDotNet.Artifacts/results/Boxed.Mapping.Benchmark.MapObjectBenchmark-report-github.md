@@ -1,20 +1,34 @@
 ``` ini
 
-BenchmarkDotNet=v0.11.3, OS=Windows 10.0.17134.472 (1803/April2018Update/Redstone4)
-Intel Core i7-6700HQ CPU 2.60GHz (Skylake), 1 CPU, 8 logical and 4 physical cores
-.NET Core SDK=2.2.100
-  [Host] : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
-  Clr    : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3260.0
-  Core   : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.22000
+Intel Xeon W-2155 CPU 3.30GHz, 1 CPU, 20 logical and 10 physical cores
+.NET SDK=6.0.100-rc.2.21505.57
+  [Host]               : .NET 6.0.0 (6.0.21.48005), X64 RyuJIT
+  .NET 5.0             : .NET 5.0.11 (5.0.1121.47308), X64 RyuJIT
+  .NET 6.0             : .NET 6.0.0 (6.0.21.48005), X64 RyuJIT
+  .NET Framework 4.7.2 : .NET Framework 4.8 (4.8.4420.0), X64 RyuJIT
 
 
 ```
-|      Method |  Job | Runtime |       Mean |     Error |    StdDev |        Min |        Max | Ratio | RatioSD | Gen 0/1k Op | Gen 1/1k Op | Gen 2/1k Op | Allocated Memory/Op |
-|------------ |----- |-------- |-----------:|----------:|----------:|-----------:|-----------:|------:|--------:|------------:|------------:|------------:|--------------------:|
-|    Baseline |  Clr |     Clr |   7.877 ns | 0.3434 ns | 0.7244 ns |   7.062 ns |   9.937 ns |  1.00 |    0.00 |      0.0178 |           - |           - |                56 B |
-| BoxedMapper |  Clr |     Clr |  25.431 ns | 0.4690 ns | 0.4387 ns |  24.923 ns |  26.270 ns |  3.07 |    0.32 |      0.0178 |           - |           - |                56 B |
-|  Automapper |  Clr |     Clr | 264.934 ns | 3.9174 ns | 3.6644 ns | 259.375 ns | 271.946 ns | 31.97 |    3.24 |      0.0277 |           - |           - |                88 B |
-|             |      |         |            |           |           |            |            |       |         |             |             |             |                     |
-|    Baseline | Core |    Core |   9.327 ns | 0.1651 ns | 0.1544 ns |   8.884 ns |   9.521 ns |  1.00 |    0.00 |      0.0178 |           - |           - |                56 B |
-| BoxedMapper | Core |    Core |  17.174 ns | 0.3719 ns | 0.3479 ns |  16.412 ns |  17.462 ns |  1.84 |    0.05 |      0.0178 |           - |           - |                56 B |
-|  Automapper | Core |    Core | 158.218 ns | 2.9366 ns | 2.7469 ns | 153.464 ns | 162.450 ns | 16.97 |    0.47 |      0.0279 |           - |           - |                88 B |
+|      Method |                  Job |              Runtime |       Mean |     Error |    StdDev |        Min |        Max | Ratio | RatioSD |  Gen 0 | Allocated |
+|------------ |--------------------- |--------------------- |-----------:|----------:|----------:|-----------:|-----------:|------:|--------:|-------:|----------:|
+|    Baseline |             .NET 5.0 |             .NET 5.0 |   5.918 ns | 0.1840 ns | 0.2191 ns |   5.500 ns |   6.368 ns |  1.00 |    0.00 | 0.0078 |      56 B |
+| BoxedMapper |             .NET 5.0 |             .NET 5.0 |  12.239 ns | 0.2974 ns | 0.3183 ns |  11.819 ns |  12.914 ns |  2.08 |    0.08 | 0.0078 |      56 B |
+|  Automapper |             .NET 5.0 |             .NET 5.0 | 100.739 ns | 1.8557 ns | 1.7358 ns |  98.590 ns | 104.068 ns | 17.09 |    0.86 | 0.0077 |      56 B |
+|             |                      |                      |            |           |           |            |            |       |         |        |           |
+|    Baseline |             .NET 6.0 |             .NET 6.0 |   5.847 ns | 0.1912 ns | 0.2680 ns |   5.524 ns |   6.500 ns |  1.00 |    0.00 | 0.0078 |      56 B |
+| BoxedMapper |             .NET 6.0 |             .NET 6.0 |  12.930 ns | 0.3269 ns | 0.4475 ns |  12.331 ns |  13.847 ns |  2.22 |    0.12 | 0.0078 |      56 B |
+|  Automapper |             .NET 6.0 |             .NET 6.0 |  91.578 ns | 1.1442 ns | 1.0143 ns |  90.415 ns |  93.638 ns | 15.59 |    0.82 | 0.0077 |      56 B |
+|             |                      |                      |            |           |           |            |            |       |         |        |           |
+|    Baseline |        .NET Core 3.0 |        .NET Core 3.0 |         NA |        NA |        NA |         NA |         NA |     ? |       ? |      - |         - |
+| BoxedMapper |        .NET Core 3.0 |        .NET Core 3.0 |         NA |        NA |        NA |         NA |         NA |     ? |       ? |      - |         - |
+|  Automapper |        .NET Core 3.0 |        .NET Core 3.0 |         NA |        NA |        NA |         NA |         NA |     ? |       ? |      - |         - |
+|             |                      |                      |            |           |           |            |            |       |         |        |           |
+|    Baseline | .NET Framework 4.7.2 | .NET Framework 4.7.2 |   5.368 ns | 0.1759 ns | 0.1883 ns |   5.065 ns |   5.766 ns |  1.00 |    0.00 | 0.0089 |      56 B |
+| BoxedMapper | .NET Framework 4.7.2 | .NET Framework 4.7.2 |  17.583 ns | 0.3819 ns | 0.3573 ns |  17.093 ns |  18.326 ns |  3.29 |    0.16 | 0.0089 |      56 B |
+|  Automapper | .NET Framework 4.7.2 | .NET Framework 4.7.2 | 205.491 ns | 3.9671 ns | 4.4094 ns | 199.965 ns | 214.627 ns | 38.31 |    1.55 | 0.0088 |      56 B |
+
+Benchmarks with issues:
+  MapObjectBenchmark.Baseline: .NET Core 3.0(Runtime=.NET Core 3.0)
+  MapObjectBenchmark.BoxedMapper: .NET Core 3.0(Runtime=.NET Core 3.0)
+  MapObjectBenchmark.Automapper: .NET Core 3.0(Runtime=.NET Core 3.0)
