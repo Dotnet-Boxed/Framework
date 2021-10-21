@@ -27,6 +27,7 @@
 
   <ItemGroup Label="Files">
     <None Include="..\..\Images\Icon-256x256.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
