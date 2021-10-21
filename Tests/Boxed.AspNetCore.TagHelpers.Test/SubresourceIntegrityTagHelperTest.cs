@@ -8,10 +8,14 @@ namespace Boxed.AspNetCore.TagHelpers.Test
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Html;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Abstractions;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Caching.Distributed;
     using Moq;
     using Xunit;
@@ -35,7 +39,12 @@ namespace Boxed.AspNetCore.TagHelpers.Test
             this.urlHelperMock = new Mock<IUrlHelper>(MockBehavior.Strict);
             this.htmlEncoderMock = new Mock<HtmlEncoder>(MockBehavior.Strict);
 
-            this.actionContextAccessor.SetupGet(x => x.ActionContext).Returns((ActionContext)null!);
+            var actionContext = new ActionContext(
+                Mock.Of<HttpContext>(),
+                Mock.Of<RouteData>(),
+                Mock.Of<ActionDescriptor>(),
+                new ModelStateDictionary());
+            this.actionContextAccessor.SetupGet(x => x.ActionContext).Returns(actionContext);
             this.urlHelperFactoryMock.Setup(x => x.GetUrlHelper(this.actionContextAccessor.Object.ActionContext!)).Returns(this.urlHelperMock.Object);
             this.htmlEncoderMock.Setup(x => x.Encode(It.IsAny<string>())).Returns((string s) => s);
 
