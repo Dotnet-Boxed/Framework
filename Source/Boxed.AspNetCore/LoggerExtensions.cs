@@ -9,7 +9,7 @@ namespace Boxed.AspNetCore
     internal static partial class LoggerExtensions
     {
         [LoggerMessage(
-            EventId = 5000,
+            EventId = 4000,
             Level = LogLevel.Information,
             Message = "Executing HttpExceptionMiddleware, setting HTTP status code {StatusCode}.")]
         public static partial void SettingHttpStatusCode(this ILogger logger, Exception exception, int statusCode);
