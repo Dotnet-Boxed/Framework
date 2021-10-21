@@ -41,7 +41,7 @@ namespace Boxed.AspNetCore.Middleware
             {
                 var factory = context.RequestServices.GetRequiredService<ILoggerFactory>();
                 var logger = factory.CreateLogger<HttpExceptionMiddleware>();
-                Log.SettingHttpStatusCode(logger, httpException, httpException.StatusCode);
+                logger.SettingHttpStatusCode(httpException, httpException.StatusCode);
 
                 context.Response.StatusCode = httpException.StatusCode;
                 if (this.options.IncludeReasonPhraseInResponse)
