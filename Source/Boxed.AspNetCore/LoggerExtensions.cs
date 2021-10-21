@@ -4,9 +4,9 @@ namespace Boxed.AspNetCore
     using Microsoft.Extensions.Logging;
 
     /// <summary>
-    /// Logs messages using strongly typing and source generators.
+    /// <see cref="ILogger"/> extension methods. Helps log messages using strongly typing and source generators.
     /// </summary>
-    internal static partial class Log
+    internal static partial class LoggerExtensions
     {
         [LoggerMessage(
             EventId = 5000,
