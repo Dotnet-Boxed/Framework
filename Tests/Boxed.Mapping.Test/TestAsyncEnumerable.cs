@@ -1,22 +1,21 @@
-namespace Boxed.Mapping.Test
+namespace Boxed.Mapping.Test;
+
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>
 {
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
+    private readonly IEnumerable<T> items;
 
-    public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>
+    public TestAsyncEnumerable(IEnumerable<T> items) => this.items = items;
+
+    public async IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
     {
-        private readonly IEnumerable<T> items;
-
-        public TestAsyncEnumerable(IEnumerable<T> items) => this.items = items;
-
-        public async IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+        foreach (var item in this.items)
         {
-            foreach (var item in this.items)
-            {
-                await Task.Delay(0, cancellationToken).ConfigureAwait(false);
-                yield return item;
-            }
+            await Task.Delay(0, cancellationToken).ConfigureAwait(false);
+            yield return item;
         }
     }
 }

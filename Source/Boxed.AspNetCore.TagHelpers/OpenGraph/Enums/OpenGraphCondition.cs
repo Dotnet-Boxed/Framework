@@ -1,23 +1,22 @@
-namespace Boxed.AspNetCore.TagHelpers.OpenGraph
+namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
+
+/// <summary>
+/// The condition of an item.
+/// </summary>
+public enum OpenGraphCondition
 {
     /// <summary>
-    /// The condition of an item.
+    /// The item is brand new.
     /// </summary>
-    public enum OpenGraphCondition
-    {
-        /// <summary>
-        /// The item is brand new.
-        /// </summary>
-        New,
+    New,
 
-        /// <summary>
-        /// The item is refurbished.
-        /// </summary>
-        Refurbished,
+    /// <summary>
+    /// The item is refurbished.
+    /// </summary>
+    Refurbished,
 
-        /// <summary>
-        /// The item is used.
-        /// </summary>
-        Used,
-    }
+    /// <summary>
+    /// The item is used.
+    /// </summary>
+    Used,
 }

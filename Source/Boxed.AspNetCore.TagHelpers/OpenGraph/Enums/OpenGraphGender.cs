@@ -1,18 +1,17 @@
-namespace Boxed.AspNetCore.TagHelpers.OpenGraph
+namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
+
+/// <summary>
+/// The gender or sex.
+/// </summary>
+public enum OpenGraphGender
 {
     /// <summary>
-    /// The gender or sex.
+    /// The male gender.
     /// </summary>
-    public enum OpenGraphGender
-    {
-        /// <summary>
-        /// The male gender.
-        /// </summary>
-        Male,
+    Male,
 
-        /// <summary>
-        /// The female gender.
-        /// </summary>
-        Female,
-    }
+    /// <summary>
+    /// The female gender.
+    /// </summary>
+    Female,
 }

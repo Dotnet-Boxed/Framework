@@ -1,171 +1,170 @@
-namespace Boxed.AspNetCore.TagHelpers.Test
+namespace Boxed.AspNetCore.TagHelpers.Test;
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Caching.Distributed;
+using Moq;
+using Xunit;
+
+public class SubresourceIntegrityTagHelperTest
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Text.Encodings.Web;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Html;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Abstractions;
-    using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
-    using Microsoft.AspNetCore.Mvc.Routing;
-    using Microsoft.AspNetCore.Razor.TagHelpers;
-    using Microsoft.AspNetCore.Routing;
-    using Microsoft.Extensions.Caching.Distributed;
-    using Moq;
-    using Xunit;
+    private readonly Mock<IDistributedCache> distributedCacheMock;
+    private readonly Mock<IWebHostEnvironment> webHostEnvironmentMock;
+    private readonly Mock<IActionContextAccessor> actionContextAccessor;
+    private readonly Mock<IUrlHelperFactory> urlHelperFactoryMock;
+    private readonly Mock<IUrlHelper> urlHelperMock;
+    private readonly Mock<HtmlEncoder> htmlEncoderMock;
+    private readonly SubresourceIntegrityTagHelper tagHelper;
 
-    public class SubresourceIntegrityTagHelperTest
+    public SubresourceIntegrityTagHelperTest()
     {
-        private readonly Mock<IDistributedCache> distributedCacheMock;
-        private readonly Mock<IWebHostEnvironment> webHostEnvironmentMock;
-        private readonly Mock<IActionContextAccessor> actionContextAccessor;
-        private readonly Mock<IUrlHelperFactory> urlHelperFactoryMock;
-        private readonly Mock<IUrlHelper> urlHelperMock;
-        private readonly Mock<HtmlEncoder> htmlEncoderMock;
-        private readonly SubresourceIntegrityTagHelper tagHelper;
+        this.distributedCacheMock = new Mock<IDistributedCache>(MockBehavior.Strict);
+        this.webHostEnvironmentMock = new Mock<IWebHostEnvironment>(MockBehavior.Strict);
+        this.actionContextAccessor = new Mock<IActionContextAccessor>(MockBehavior.Strict);
+        this.urlHelperFactoryMock = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
+        this.urlHelperMock = new Mock<IUrlHelper>(MockBehavior.Strict);
+        this.htmlEncoderMock = new Mock<HtmlEncoder>(MockBehavior.Strict);
 
-        public SubresourceIntegrityTagHelperTest()
-        {
-            this.distributedCacheMock = new Mock<IDistributedCache>(MockBehavior.Strict);
-            this.webHostEnvironmentMock = new Mock<IWebHostEnvironment>(MockBehavior.Strict);
-            this.actionContextAccessor = new Mock<IActionContextAccessor>(MockBehavior.Strict);
-            this.urlHelperFactoryMock = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
-            this.urlHelperMock = new Mock<IUrlHelper>(MockBehavior.Strict);
-            this.htmlEncoderMock = new Mock<HtmlEncoder>(MockBehavior.Strict);
+        var actionContext = new ActionContext(
+            Mock.Of<HttpContext>(),
+            Mock.Of<RouteData>(),
+            Mock.Of<ActionDescriptor>(),
+            new ModelStateDictionary());
+        this.actionContextAccessor.SetupGet(x => x.ActionContext).Returns(actionContext);
+        this.urlHelperFactoryMock.Setup(x => x.GetUrlHelper(this.actionContextAccessor.Object.ActionContext!)).Returns(this.urlHelperMock.Object);
+        this.htmlEncoderMock.Setup(x => x.Encode(It.IsAny<string>())).Returns((string s) => s);
 
-            var actionContext = new ActionContext(
-                Mock.Of<HttpContext>(),
-                Mock.Of<RouteData>(),
-                Mock.Of<ActionDescriptor>(),
-                new ModelStateDictionary());
-            this.actionContextAccessor.SetupGet(x => x.ActionContext).Returns(actionContext);
-            this.urlHelperFactoryMock.Setup(x => x.GetUrlHelper(this.actionContextAccessor.Object.ActionContext!)).Returns(this.urlHelperMock.Object);
-            this.htmlEncoderMock.Setup(x => x.Encode(It.IsAny<string>())).Returns((string s) => s);
+        this.tagHelper = new TestSubresourceIntegrityTagHelper(
+            this.distributedCacheMock.Object,
+            this.webHostEnvironmentMock.Object,
+            this.actionContextAccessor.Object,
+            this.urlHelperFactoryMock.Object,
+            this.htmlEncoderMock.Object);
+    }
 
-            this.tagHelper = new TestSubresourceIntegrityTagHelper(
-                this.distributedCacheMock.Object,
-                this.webHostEnvironmentMock.Object,
-                this.actionContextAccessor.Object,
-                this.urlHelperFactoryMock.Object,
-                this.htmlEncoderMock.Object);
-        }
-
-        [Fact]
-        public async Task ProcessAsync_SriAlreadyCached_ReturnsCachedSriAsync()
-        {
-            this.tagHelper.Source = "/foo.js";
-            var attributes = new TagHelperAttributeList
+    [Fact]
+    public async Task ProcessAsync_SriAlreadyCached_ReturnsCachedSriAsync()
+    {
+        this.tagHelper.Source = "/foo.js";
+        var attributes = new TagHelperAttributeList
             {
                 { "src", "/foo.js" },
             };
-            var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
-            var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
-            this.distributedCacheMock
-                .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
-                .ReturnsAsync(Encoding.UTF8.GetBytes("SRI Value"));
+        var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
+        var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
+        this.distributedCacheMock
+            .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
+            .ReturnsAsync(Encoding.UTF8.GetBytes("SRI Value"));
 
-            await this.tagHelper.ProcessAsync(context, output).ConfigureAwait(false);
+        await this.tagHelper.ProcessAsync(context, output).ConfigureAwait(false);
 
-            Assert.True(attributes.ContainsName("crossorigin"));
-            Assert.Equal("anonymous", attributes["crossorigin"].Value);
-            Assert.True(attributes.ContainsName("integrity"));
-            var htmlString = Assert.IsType<HtmlString>(attributes["integrity"].Value);
-            Assert.Equal("SRI Value", htmlString.Value);
-        }
+        Assert.True(attributes.ContainsName("crossorigin"));
+        Assert.Equal("anonymous", attributes["crossorigin"].Value);
+        Assert.True(attributes.ContainsName("integrity"));
+        var htmlString = Assert.IsType<HtmlString>(attributes["integrity"].Value);
+        Assert.Equal("SRI Value", htmlString.Value);
+    }
 
-        [Fact]
-        public async Task ProcessAsync_Sha512SriNotCached_CachesSriAndReturnsItAsync()
-        {
-            var expectedSri = "sha512-NhX4DJ0pPtdAJof5SyLVjlKbjMeRb4+sf933+9WvTPd309eVp6AKFr9+fz+5Vh7puq5IDan+ehh2nnGIawPzFQ==";
-            this.tagHelper.Source = "/foo.js";
-            var attributes = new TagHelperAttributeList
+    [Fact]
+    public async Task ProcessAsync_Sha512SriNotCached_CachesSriAndReturnsItAsync()
+    {
+        var expectedSri = "sha512-NhX4DJ0pPtdAJof5SyLVjlKbjMeRb4+sf933+9WvTPd309eVp6AKFr9+fz+5Vh7puq5IDan+ehh2nnGIawPzFQ==";
+        this.tagHelper.Source = "/foo.js";
+        var attributes = new TagHelperAttributeList
             {
                 { "src", "/foo.js" },
             };
-            var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
-            var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
-            this.distributedCacheMock
-                .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
-                .ReturnsAsync((byte[])null!);
-            this.webHostEnvironmentMock.SetupGet(x => x.ContentRootPath).Returns(@"C:\Foo\wwwroot");
-            this.urlHelperMock.Setup(x => x.Content("/foo.js")).Returns(@"C:\Foo\wwwroot\foo.js");
-            this.distributedCacheMock
-                .Setup(x => x.SetAsync(
-                    "SRI:/foo.js",
-                    It.Is<byte[]>(y => string.Equals(Encoding.UTF8.GetString(y), expectedSri, StringComparison.Ordinal)),
-                    It.IsAny<DistributedCacheEntryOptions>(),
-                    CancellationToken.None))
-                .Returns(Task.CompletedTask);
+        var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
+        var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
+        this.distributedCacheMock
+            .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
+            .ReturnsAsync((byte[])null!);
+        this.webHostEnvironmentMock.SetupGet(x => x.ContentRootPath).Returns(@"C:\Foo\wwwroot");
+        this.urlHelperMock.Setup(x => x.Content("/foo.js")).Returns(@"C:\Foo\wwwroot\foo.js");
+        this.distributedCacheMock
+            .Setup(x => x.SetAsync(
+                "SRI:/foo.js",
+                It.Is<byte[]>(y => string.Equals(Encoding.UTF8.GetString(y), expectedSri, StringComparison.Ordinal)),
+                It.IsAny<DistributedCacheEntryOptions>(),
+                CancellationToken.None))
+            .Returns(Task.CompletedTask);
 
-            await this.tagHelper.ProcessAsync(context, output).ConfigureAwait(false);
+        await this.tagHelper.ProcessAsync(context, output).ConfigureAwait(false);
 
-            Assert.True(attributes.ContainsName("crossorigin"));
-            Assert.Equal("anonymous", attributes["crossorigin"].Value);
-            Assert.True(attributes.ContainsName("integrity"));
-            var htmlString = Assert.IsType<HtmlString>(attributes["integrity"].Value);
-            Assert.Equal(expectedSri, htmlString.Value);
-        }
+        Assert.True(attributes.ContainsName("crossorigin"));
+        Assert.Equal("anonymous", attributes["crossorigin"].Value);
+        Assert.True(attributes.ContainsName("integrity"));
+        var htmlString = Assert.IsType<HtmlString>(attributes["integrity"].Value);
+        Assert.Equal(expectedSri, htmlString.Value);
+    }
 
-        [Fact]
-        public async Task ProcessAsync_Sha256And384And512SriNotCached_CachesSriAndReturnsItAsync()
-        {
-            var expectedSri = "sha256-GF+NsyJx/iX1Yab8k4suJkMG7DBO2lGAB9F2SCY4GWk= " +
-                "sha384-NRn+WtLFlu/j4nam81G4/AsD24YXgkkNRfdZjr0Ktf1VIO0QLzjEpeyDTphmgDX8 " +
-                "sha512-NhX4DJ0pPtdAJof5SyLVjlKbjMeRb4+sf933+9WvTPd309eVp6AKFr9+fz+5Vh7puq5IDan+ehh2nnGIawPzFQ==";
-            this.tagHelper.HashAlgorithms =
-                SubresourceIntegrityHashAlgorithm.SHA256 |
-                SubresourceIntegrityHashAlgorithm.SHA384 |
-                SubresourceIntegrityHashAlgorithm.SHA512;
-            this.tagHelper.Source = "/foo.js";
-            var attributes = new TagHelperAttributeList
+    [Fact]
+    public async Task ProcessAsync_Sha256And384And512SriNotCached_CachesSriAndReturnsItAsync()
+    {
+        var expectedSri = "sha256-GF+NsyJx/iX1Yab8k4suJkMG7DBO2lGAB9F2SCY4GWk= " +
+            "sha384-NRn+WtLFlu/j4nam81G4/AsD24YXgkkNRfdZjr0Ktf1VIO0QLzjEpeyDTphmgDX8 " +
+            "sha512-NhX4DJ0pPtdAJof5SyLVjlKbjMeRb4+sf933+9WvTPd309eVp6AKFr9+fz+5Vh7puq5IDan+ehh2nnGIawPzFQ==";
+        this.tagHelper.HashAlgorithms =
+            SubresourceIntegrityHashAlgorithm.SHA256 |
+            SubresourceIntegrityHashAlgorithm.SHA384 |
+            SubresourceIntegrityHashAlgorithm.SHA512;
+        this.tagHelper.Source = "/foo.js";
+        var attributes = new TagHelperAttributeList
             {
                 { "src", "/foo.js" },
             };
-            var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
-            var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
-            this.distributedCacheMock
-                .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
-                .ReturnsAsync((byte[])null!);
-            this.webHostEnvironmentMock.SetupGet(x => x.ContentRootPath).Returns(@"C:\Foo\wwwroot");
-            this.urlHelperMock.Setup(x => x.Content("/foo.js")).Returns(@"C:\Foo\wwwroot\foo.js");
-            this.distributedCacheMock
-                .Setup(x => x.SetAsync(
-                    "SRI:/foo.js",
-                    It.Is<byte[]>(y => string.Equals(Encoding.UTF8.GetString(y), expectedSri, StringComparison.Ordinal)),
-                    It.IsAny<DistributedCacheEntryOptions>(),
-                    CancellationToken.None))
-                .Returns(Task.CompletedTask);
+        var context = new TagHelperContext(attributes, new Dictionary<object, object>(), Guid.NewGuid().ToString());
+        var output = new TagHelperOutput("script", attributes, (x, y) => throw new ArgumentException("message"));
+        this.distributedCacheMock
+            .Setup(x => x.GetAsync("SRI:/foo.js", CancellationToken.None))
+            .ReturnsAsync((byte[])null!);
+        this.webHostEnvironmentMock.SetupGet(x => x.ContentRootPath).Returns(@"C:\Foo\wwwroot");
+        this.urlHelperMock.Setup(x => x.Content("/foo.js")).Returns(@"C:\Foo\wwwroot\foo.js");
+        this.distributedCacheMock
+            .Setup(x => x.SetAsync(
+                "SRI:/foo.js",
+                It.Is<byte[]>(y => string.Equals(Encoding.UTF8.GetString(y), expectedSri, StringComparison.Ordinal)),
+                It.IsAny<DistributedCacheEntryOptions>(),
+                CancellationToken.None))
+            .Returns(Task.CompletedTask);
 
-            await this.tagHelper.ProcessAsync(context, output).ConfigureAwait(false);
+        await this.tagHelper.ProcessAsync(context, output).ConfigureAwait(false);
 
-            Assert.True(attributes.ContainsName("crossorigin"));
-            Assert.Equal("anonymous", attributes["crossorigin"].Value);
-            Assert.True(attributes.ContainsName("integrity"));
-            var htmlString = Assert.IsType<HtmlString>(attributes["integrity"].Value);
-            Assert.Equal(expectedSri, htmlString.Value);
-        }
+        Assert.True(attributes.ContainsName("crossorigin"));
+        Assert.Equal("anonymous", attributes["crossorigin"].Value);
+        Assert.True(attributes.ContainsName("integrity"));
+        var htmlString = Assert.IsType<HtmlString>(attributes["integrity"].Value);
+        Assert.Equal(expectedSri, htmlString.Value);
+    }
 
-        internal class TestSubresourceIntegrityTagHelper : SubresourceIntegrityTagHelper
+    internal class TestSubresourceIntegrityTagHelper : SubresourceIntegrityTagHelper
+    {
+        public TestSubresourceIntegrityTagHelper(
+            IDistributedCache distributedCache,
+            IWebHostEnvironment webHostEnvironment,
+            IActionContextAccessor actionContextAccessor,
+            IUrlHelperFactory urlHelperFactory,
+            HtmlEncoder htmlEncoder)
+            : base(distributedCache, webHostEnvironment, actionContextAccessor, urlHelperFactory, htmlEncoder)
         {
-            public TestSubresourceIntegrityTagHelper(
-                IDistributedCache distributedCache,
-                IWebHostEnvironment webHostEnvironment,
-                IActionContextAccessor actionContextAccessor,
-                IUrlHelperFactory urlHelperFactory,
-                HtmlEncoder htmlEncoder)
-                : base(distributedCache, webHostEnvironment, actionContextAccessor, urlHelperFactory, htmlEncoder)
-            {
-            }
-
-            protected override string UrlAttributeName => "src";
-
-            protected override byte[] ReadAllBytes(string filePath) => Encoding.UTF8.GetBytes("Hello");
         }
+
+        protected override string UrlAttributeName => "src";
+
+        protected override byte[] ReadAllBytes(string filePath) => Encoding.UTF8.GetBytes("Hello");
     }
 }

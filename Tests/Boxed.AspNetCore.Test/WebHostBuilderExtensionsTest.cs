@@ -1,56 +1,55 @@
-namespace Boxed.AspNetCore.Test
+namespace Boxed.AspNetCore.Test;
+
+using Boxed.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Xunit;
+
+public class WebHostBuilderExtensionsTest
 {
-    using Boxed.AspNetCore;
-    using Microsoft.AspNetCore.Hosting;
-    using Xunit;
+    private readonly WebHostBuilder webHostBuilder;
 
-    public class WebHostBuilderExtensionsTest
+    public WebHostBuilderExtensionsTest() => this.webHostBuilder = new WebHostBuilder();
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void UseIf_TrueCondition_ActionCalled(bool condition)
     {
-        private readonly WebHostBuilder webHostBuilder;
+        var actionCalled = false;
 
-        public WebHostBuilderExtensionsTest() => this.webHostBuilder = new WebHostBuilder();
+        this.webHostBuilder.UseIf(
+            condition,
+            x =>
+            {
+                actionCalled = true;
+                return x;
+            });
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void UseIf_TrueCondition_ActionCalled(bool condition)
-        {
-            var actionCalled = false;
+        Assert.Equal(actionCalled, condition);
+    }
 
-            this.webHostBuilder.UseIf(
-                condition,
-                x =>
-                {
-                    actionCalled = true;
-                    return x;
-                });
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void UseIfElse_TrueCondition_ActionCalled(bool condition)
+    {
+        var ifActionCalled = false;
+        var elseActionCalled = false;
 
-            Assert.Equal(actionCalled, condition);
-        }
+        this.webHostBuilder.UseIfElse(
+            condition,
+            x =>
+            {
+                ifActionCalled = true;
+                return x;
+            },
+            x =>
+            {
+                elseActionCalled = true;
+                return x;
+            });
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void UseIfElse_TrueCondition_ActionCalled(bool condition)
-        {
-            var ifActionCalled = false;
-            var elseActionCalled = false;
-
-            this.webHostBuilder.UseIfElse(
-                condition,
-                x =>
-                {
-                    ifActionCalled = true;
-                    return x;
-                },
-                x =>
-                {
-                    elseActionCalled = true;
-                    return x;
-                });
-
-            Assert.Equal(ifActionCalled, condition);
-            Assert.NotEqual(elseActionCalled, condition);
-        }
+        Assert.Equal(ifActionCalled, condition);
+        Assert.NotEqual(elseActionCalled, condition);
     }
 }

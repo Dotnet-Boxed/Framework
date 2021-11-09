@@ -1,23 +1,22 @@
-namespace Boxed.Mapping.Test
-{
-    using System;
+namespace Boxed.Mapping.Test;
 
-    public class ImmutableMapper : IImmutableMapper<MapFrom, MapTo>
+using System;
+
+public class ImmutableMapper : IImmutableMapper<MapFrom, MapTo>
+{
+    public MapTo Map(MapFrom source)
     {
-        public MapTo Map(MapFrom source)
-        {
 #if NET6_0_OR_GREATER
-            ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(source);
 #else
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-#endif
-            return new MapTo()
-            {
-                Property = source.Property,
-            };
+        if (source is null)
+        {
+            throw new ArgumentNullException(nameof(source));
         }
+#endif
+        return new MapTo()
+        {
+            Property = source.Property,
+        };
     }
 }

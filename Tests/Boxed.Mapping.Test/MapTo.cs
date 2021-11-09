@@ -1,7 +1,6 @@
-namespace Boxed.Mapping.Test
+namespace Boxed.Mapping.Test;
+
+public class MapTo
 {
-    public class MapTo
-    {
-        public int Property { get; set; }
-    }
+    public int Property { get; set; }
 }

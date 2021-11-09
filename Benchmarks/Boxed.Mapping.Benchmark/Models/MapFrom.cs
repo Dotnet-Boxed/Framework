@@ -1,17 +1,16 @@
-namespace Boxed.Mapping.Benchmark.Models
+namespace Boxed.Mapping.Benchmark.Models;
+
+using System;
+
+public class MapFrom
 {
-    using System;
+    public bool BooleanFrom { get; set; }
 
-    public class MapFrom
-    {
-        public bool BooleanFrom { get; set; }
+    public DateTimeOffset DateTimeOffsetFrom { get; set; }
 
-        public DateTimeOffset DateTimeOffsetFrom { get; set; }
+    public int IntegerFrom { get; set; }
 
-        public int IntegerFrom { get; set; }
+    public long LongFrom { get; set; }
 
-        public long LongFrom { get; set; }
-
-        public string? StringFrom { get; set; }
-    }
+    public string? StringFrom { get; set; }
 }
