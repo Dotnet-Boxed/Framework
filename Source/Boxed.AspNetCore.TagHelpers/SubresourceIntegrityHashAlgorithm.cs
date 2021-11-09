@@ -1,26 +1,25 @@
-namespace Boxed.AspNetCore.TagHelpers
+namespace Boxed.AspNetCore.TagHelpers;
+
+using System;
+
+/// <summary>
+/// Cryptographic hashing algorithms available for use with Sub-resource Integrity (SRI).
+/// </summary>
+[Flags]
+public enum SubresourceIntegrityHashAlgorithm
 {
-    using System;
+    /// <summary>
+    /// The SHA256 cryptographic hashing algorithm.
+    /// </summary>
+    SHA256 = 1,
 
     /// <summary>
-    /// Cryptographic hashing algorithms available for use with Sub-resource Integrity (SRI).
+    /// The SHA384 cryptographic hashing algorithm.
     /// </summary>
-    [Flags]
-    public enum SubresourceIntegrityHashAlgorithm
-    {
-        /// <summary>
-        /// The SHA256 cryptographic hashing algorithm.
-        /// </summary>
-        SHA256 = 1,
+    SHA384 = 2,
 
-        /// <summary>
-        /// The SHA384 cryptographic hashing algorithm.
-        /// </summary>
-        SHA384 = 2,
-
-        /// <summary>
-        /// The SHA512 cryptographic hashing algorithm.
-        /// </summary>
-        SHA512 = 4,
-    }
+    /// <summary>
+    /// The SHA512 cryptographic hashing algorithm.
+    /// </summary>
+    SHA512 = 4,
 }

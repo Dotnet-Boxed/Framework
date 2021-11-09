@@ -1,14 +1,13 @@
-namespace Boxed.Mapping.Benchmark
-{
-    using BenchmarkDotNet.Running;
+namespace Boxed.Mapping.Benchmark;
 
-    public static class Program
+using BenchmarkDotNet.Running;
+
+public static class Program
+{
+    public static void Main()
     {
-        public static void Main()
-        {
-            BenchmarkRunner.Run<MapObjectBenchmark>();
-            BenchmarkRunner.Run<MapArrayBenchmark>();
-            BenchmarkRunner.Run<MapListBenchmark>();
-        }
+        BenchmarkRunner.Run<MapObjectBenchmark>();
+        BenchmarkRunner.Run<MapArrayBenchmark>();
+        BenchmarkRunner.Run<MapListBenchmark>();
     }
 }

@@ -1,56 +1,55 @@
-namespace Boxed.AspNetCore.Test
+namespace Boxed.AspNetCore.Test;
+
+using Boxed.AspNetCore;
+using Microsoft.Extensions.Hosting;
+using Xunit;
+
+public class HostBuilderExtensionsTest
 {
-    using Boxed.AspNetCore;
-    using Microsoft.Extensions.Hosting;
-    using Xunit;
+    private readonly HostBuilder hostBuilder;
 
-    public class HostBuilderExtensionsTest
+    public HostBuilderExtensionsTest() => this.hostBuilder = new HostBuilder();
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void UseIf_TrueCondition_ActionCalled(bool condition)
     {
-        private readonly HostBuilder hostBuilder;
+        var actionCalled = false;
 
-        public HostBuilderExtensionsTest() => this.hostBuilder = new HostBuilder();
+        this.hostBuilder.UseIf(
+            condition,
+            x =>
+            {
+                actionCalled = true;
+                return x;
+            });
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void UseIf_TrueCondition_ActionCalled(bool condition)
-        {
-            var actionCalled = false;
+        Assert.Equal(actionCalled, condition);
+    }
 
-            this.hostBuilder.UseIf(
-                condition,
-                x =>
-                {
-                    actionCalled = true;
-                    return x;
-                });
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void UseIfElse_TrueCondition_ActionCalled(bool condition)
+    {
+        var ifActionCalled = false;
+        var elseActionCalled = false;
 
-            Assert.Equal(actionCalled, condition);
-        }
+        this.hostBuilder.UseIfElse(
+            condition,
+            x =>
+            {
+                ifActionCalled = true;
+                return x;
+            },
+            x =>
+            {
+                elseActionCalled = true;
+                return x;
+            });
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void UseIfElse_TrueCondition_ActionCalled(bool condition)
-        {
-            var ifActionCalled = false;
-            var elseActionCalled = false;
-
-            this.hostBuilder.UseIfElse(
-                condition,
-                x =>
-                {
-                    ifActionCalled = true;
-                    return x;
-                },
-                x =>
-                {
-                    elseActionCalled = true;
-                    return x;
-                });
-
-            Assert.Equal(ifActionCalled, condition);
-            Assert.NotEqual(elseActionCalled, condition);
-        }
+        Assert.Equal(ifActionCalled, condition);
+        Assert.NotEqual(elseActionCalled, condition);
     }
 }

@@ -1,23 +1,22 @@
-namespace Boxed.AspNetCore.TagHelpers.OpenGraph
+namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
+
+/// <summary>
+/// How the music is released.
+/// </summary>
+public enum OpenGraphMusicReleaseType
 {
     /// <summary>
-    /// How the music is released.
+    /// This is the first original release.
     /// </summary>
-    public enum OpenGraphMusicReleaseType
-    {
-        /// <summary>
-        /// This is the first original release.
-        /// </summary>
-        OriginalRelease,
+    OriginalRelease,
 
-        /// <summary>
-        /// This is a re-release of the music.
-        /// </summary>
-        ReRelease,
+    /// <summary>
+    /// This is a re-release of the music.
+    /// </summary>
+    ReRelease,
 
-        /// <summary>
-        /// This is an anthology.
-        /// </summary>
-        Anthology,
-    }
+    /// <summary>
+    /// This is an anthology.
+    /// </summary>
+    Anthology,
 }

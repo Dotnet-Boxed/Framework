@@ -1,18 +1,17 @@
-namespace Boxed.AspNetCore.TagHelpers.OpenGraph
+namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
+
+/// <summary>
+/// An Open Graph age group.
+/// </summary>
+public enum OpenGraphAgeGroup
 {
     /// <summary>
-    /// An Open Graph age group.
+    /// The adult age group.
     /// </summary>
-    public enum OpenGraphAgeGroup
-    {
-        /// <summary>
-        /// The adult age group.
-        /// </summary>
-        Adult,
+    Adult,
 
-        /// <summary>
-        /// The kids age group.
-        /// </summary>
-        Kids,
-    }
+    /// <summary>
+    /// The kids age group.
+    /// </summary>
+    Kids,
 }

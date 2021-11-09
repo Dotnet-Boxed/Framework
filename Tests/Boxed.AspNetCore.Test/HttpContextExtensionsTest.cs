@@ -1,18 +1,18 @@
-namespace Boxed.AspNetCore.Test
-{
-    using System.Collections.Generic;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Xunit;
+namespace Boxed.AspNetCore.Test;
 
-    public class HttpContextExtensionsTest
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Xunit;
+
+public class HttpContextExtensionsTest
+{
+    public static IEnumerable<object[]> CacheControlData
     {
-        public static IEnumerable<object[]> CacheControlData
+        get
         {
-            get
+            yield return new object[]
             {
-                yield return new object[]
-                {
                     new CacheProfile
                     {
                         Duration = 0,
@@ -21,11 +21,11 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "no-store",
-                };
+            };
 
-                // If no-store is set, then location is ignored.
-                yield return new object[]
-                {
+            // If no-store is set, then location is ignored.
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 0,
@@ -34,9 +34,9 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "no-store",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 0,
@@ -45,11 +45,11 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "no-store",
-                };
+            };
 
-                // If no-store is set, then duration is ignored.
-                yield return new object[]
-                {
+            // If no-store is set, then duration is ignored.
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 100,
@@ -58,10 +58,10 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "no-store",
-                };
+            };
 
-                yield return new object[]
-                {
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 10,
@@ -70,9 +70,9 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "private,max-age=10",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 10,
@@ -81,9 +81,9 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "public,max-age=10",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 10,
@@ -92,9 +92,9 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "no-cache,max-age=10",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 365,
@@ -103,9 +103,9 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "public,max-age=365",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 20,
@@ -114,9 +114,9 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "public,max-age=20",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 1400,
@@ -125,9 +125,9 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "public,max-age=1400",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 1600,
@@ -136,17 +136,17 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "public,max-age=1600",
-                };
-            }
+            };
         }
+    }
 
-        public static IEnumerable<object[]> NoStoreData
+    public static IEnumerable<object[]> NoStoreData
+    {
+        get
         {
-            get
+            // If no-store is set, then location is ignored.
+            yield return new object[]
             {
-                // If no-store is set, then location is ignored.
-                yield return new object[]
-                {
                     new CacheProfile
                     {
                         Duration = 0,
@@ -155,9 +155,9 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "no-store",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 0,
@@ -166,11 +166,11 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "no-store",
-                };
+            };
 
-                // If no-store is set, then duration is ignored.
-                yield return new object[]
-                {
+            // If no-store is set, then duration is ignored.
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 100,
@@ -179,16 +179,16 @@ namespace Boxed.AspNetCore.Test
                         VaryByHeader = null,
                     },
                     "no-store",
-                };
-            }
+            };
         }
+    }
 
-        public static IEnumerable<object[]> VaryData
+    public static IEnumerable<object[]> VaryData
+    {
+        get
         {
-            get
+            yield return new object[]
             {
-                yield return new object[]
-                {
                     new CacheProfile
                     {
                         Duration = 10,
@@ -198,9 +198,9 @@ namespace Boxed.AspNetCore.Test
                     },
                     "Accept",
                     "public,max-age=10",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 0,
@@ -210,9 +210,9 @@ namespace Boxed.AspNetCore.Test
                     },
                     "Accept",
                     "no-store",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 10,
@@ -222,9 +222,9 @@ namespace Boxed.AspNetCore.Test
                     },
                     "Accept",
                     "private,max-age=10",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 10,
@@ -234,9 +234,9 @@ namespace Boxed.AspNetCore.Test
                     },
                     "Test",
                     "private,max-age=10",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 365,
@@ -246,9 +246,9 @@ namespace Boxed.AspNetCore.Test
                     },
                     "Test",
                     "public,max-age=365",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 1400,
@@ -258,9 +258,9 @@ namespace Boxed.AspNetCore.Test
                     },
                     "Test",
                     "public,max-age=1400",
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new CacheProfile
                     {
                         Duration = 1600,
@@ -270,67 +270,66 @@ namespace Boxed.AspNetCore.Test
                     },
                     "Test",
                     "public,max-age=1600",
-                };
-            }
-        }
-
-        [Theory]
-        [MemberData(nameof(CacheControlData))]
-        public void ApplyCacheProfile_CanSetCacheControlHeaders_CacheControlAndPragmaSetToOutput(
-            CacheProfile cacheProfile,
-            string output)
-        {
-            var context = new DefaultHttpContext();
-
-            context.ApplyCacheProfile(cacheProfile);
-
-            Assert.Equal(output, context.Response.Headers.CacheControl);
-        }
-
-        [Theory]
-        [MemberData(nameof(NoStoreData))]
-        public void ApplyCacheProfile_DoesNotSetLocationOrDuration_IfNoStoreIsSet(
-            CacheProfile cacheProfile,
-            string output)
-        {
-            var context = new DefaultHttpContext();
-
-            context.ApplyCacheProfile(cacheProfile);
-
-            Assert.Equal(output, context.Response.Headers.CacheControl);
-        }
-
-        [Theory]
-        [MemberData(nameof(VaryData))]
-        public void ApplyCacheProfile_ResponseCacheCanSetVary_CacheControlAndPragmaSetToOutput(
-            CacheProfile cacheProfile,
-            string varyOutput,
-            string cacheControlOutput)
-        {
-            var context = new DefaultHttpContext();
-
-            context.ApplyCacheProfile(cacheProfile);
-
-            Assert.Equal(varyOutput, context.Response.Headers.Vary);
-            Assert.Equal(cacheControlOutput, context.Response.Headers.CacheControl);
-        }
-
-        [Fact]
-        public void ApplyCacheProfile_SetsPragmaOnNoCache_CacheControlSetTonoStoreNoCachePragmaSetToNoCache()
-        {
-            var cacheProfile = new CacheProfile
-            {
-                Duration = 0,
-                Location = ResponseCacheLocation.None,
-                NoStore = true,
-                VaryByHeader = null,
             };
-            var context = new DefaultHttpContext();
-
-            context.ApplyCacheProfile(cacheProfile);
-
-            Assert.Equal("no-store,no-cache", context.Response.Headers.CacheControl);
-            Assert.Equal("no-cache", context.Response.Headers.Pragma);
         }
+    }
+
+    [Theory]
+    [MemberData(nameof(CacheControlData))]
+    public void ApplyCacheProfile_CanSetCacheControlHeaders_CacheControlAndPragmaSetToOutput(
+        CacheProfile cacheProfile,
+        string output)
+    {
+        var context = new DefaultHttpContext();
+
+        context.ApplyCacheProfile(cacheProfile);
+
+        Assert.Equal(output, context.Response.Headers.CacheControl);
+    }
+
+    [Theory]
+    [MemberData(nameof(NoStoreData))]
+    public void ApplyCacheProfile_DoesNotSetLocationOrDuration_IfNoStoreIsSet(
+        CacheProfile cacheProfile,
+        string output)
+    {
+        var context = new DefaultHttpContext();
+
+        context.ApplyCacheProfile(cacheProfile);
+
+        Assert.Equal(output, context.Response.Headers.CacheControl);
+    }
+
+    [Theory]
+    [MemberData(nameof(VaryData))]
+    public void ApplyCacheProfile_ResponseCacheCanSetVary_CacheControlAndPragmaSetToOutput(
+        CacheProfile cacheProfile,
+        string varyOutput,
+        string cacheControlOutput)
+    {
+        var context = new DefaultHttpContext();
+
+        context.ApplyCacheProfile(cacheProfile);
+
+        Assert.Equal(varyOutput, context.Response.Headers.Vary);
+        Assert.Equal(cacheControlOutput, context.Response.Headers.CacheControl);
+    }
+
+    [Fact]
+    public void ApplyCacheProfile_SetsPragmaOnNoCache_CacheControlSetTonoStoreNoCachePragmaSetToNoCache()
+    {
+        var cacheProfile = new CacheProfile
+        {
+            Duration = 0,
+            Location = ResponseCacheLocation.None,
+            NoStore = true,
+            VaryByHeader = null,
+        };
+        var context = new DefaultHttpContext();
+
+        context.ApplyCacheProfile(cacheProfile);
+
+        Assert.Equal("no-store,no-cache", context.Response.Headers.CacheControl);
+        Assert.Equal("no-cache", context.Response.Headers.Pragma);
     }
 }

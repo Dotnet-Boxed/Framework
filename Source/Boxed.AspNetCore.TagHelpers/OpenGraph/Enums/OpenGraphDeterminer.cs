@@ -1,33 +1,32 @@
-namespace Boxed.AspNetCore.TagHelpers.OpenGraph
+namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
+
+/// <summary>
+/// The word that appears before the title.
+/// </summary>
+public enum OpenGraphDeterminer
 {
     /// <summary>
-    /// The word that appears before the title.
+    /// There is no word, it is blank.
     /// </summary>
-    public enum OpenGraphDeterminer
-    {
-        /// <summary>
-        /// There is no word, it is blank.
-        /// </summary>
-        Blank,
+    Blank,
 
-        /// <summary>
-        /// Use the word 'A'.
-        /// </summary>
-        A,
+    /// <summary>
+    /// Use the word 'A'.
+    /// </summary>
+    A,
 
-        /// <summary>
-        /// Use the word 'An'.
-        /// </summary>
-        An,
+    /// <summary>
+    /// Use the word 'An'.
+    /// </summary>
+    An,
 
-        /// <summary>
-        /// Use the word 'The'.
-        /// </summary>
-        The,
+    /// <summary>
+    /// Use the word 'The'.
+    /// </summary>
+    The,
 
-        /// <summary>
-        /// Automatically select the word for you.
-        /// </summary>
-        Auto,
-    }
+    /// <summary>
+    /// Automatically select the word for you.
+    /// </summary>
+    Auto,
 }

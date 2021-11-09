@@ -1,23 +1,22 @@
-namespace Boxed.AspNetCore.TagHelpers.OpenGraph
+namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
+
+/// <summary>
+/// The stock availability of the item.
+/// </summary>
+public enum OpenGraphAvailability
 {
     /// <summary>
-    /// The stock availability of the item.
+    /// The availability of the item is in stock.
     /// </summary>
-    public enum OpenGraphAvailability
-    {
-        /// <summary>
-        /// The availability of the item is in stock.
-        /// </summary>
-        InStock,
+    InStock,
 
-        /// <summary>
-        /// The availability of the item is out of stock.
-        /// </summary>
-        OutOfStock,
+    /// <summary>
+    /// The availability of the item is out of stock.
+    /// </summary>
+    OutOfStock,
 
-        /// <summary>
-        /// The availability of the item is pending or unknown.
-        /// </summary>
-        Pending,
-    }
+    /// <summary>
+    /// The availability of the item is pending or unknown.
+    /// </summary>
+    Pending,
 }

@@ -1,56 +1,55 @@
-namespace Boxed.AspNetCore.Middleware
+namespace Boxed.AspNetCore.Middleware;
+
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
+/// <summary>
+/// The <see cref="HttpException"/> handling middleware.
+/// </summary>
+/// <seealso cref="IMiddleware" />
+internal class HttpExceptionMiddleware : IMiddleware
 {
-    using System;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Http.Features;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
+    private readonly RequestDelegate next;
+    private readonly HttpExceptionMiddlewareOptions options;
 
     /// <summary>
-    /// The <see cref="HttpException"/> handling middleware.
+    /// Initializes a new instance of the <see cref="HttpExceptionMiddleware"/> class.
     /// </summary>
-    /// <seealso cref="IMiddleware" />
-    internal class HttpExceptionMiddleware : IMiddleware
+    /// <param name="next">The next.</param>
+    /// <param name="options">The options.</param>
+    public HttpExceptionMiddleware(RequestDelegate next, HttpExceptionMiddlewareOptions options)
     {
-        private readonly RequestDelegate next;
-        private readonly HttpExceptionMiddlewareOptions options;
+        this.next = next;
+        this.options = options;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HttpExceptionMiddleware"/> class.
-        /// </summary>
-        /// <param name="next">The next.</param>
-        /// <param name="options">The options.</param>
-        public HttpExceptionMiddleware(RequestDelegate next, HttpExceptionMiddlewareOptions options)
+    /// <inheritdoc/>
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(next);
+
+        try
         {
-            this.next = next;
-            this.options = options;
+            await this.next.Invoke(context).ConfigureAwait(false);
         }
-
-        /// <inheritdoc/>
-        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+        catch (HttpException httpException)
         {
-            ArgumentNullException.ThrowIfNull(context);
-            ArgumentNullException.ThrowIfNull(next);
+            var factory = context.RequestServices.GetRequiredService<ILoggerFactory>();
+            var logger = factory.CreateLogger<HttpExceptionMiddleware>();
+            logger.SettingHttpStatusCode(httpException, httpException.StatusCode);
 
-            try
+            context.Response.StatusCode = httpException.StatusCode;
+            if (this.options.IncludeReasonPhraseInResponse)
             {
-                await this.next.Invoke(context).ConfigureAwait(false);
-            }
-            catch (HttpException httpException)
-            {
-                var factory = context.RequestServices.GetRequiredService<ILoggerFactory>();
-                var logger = factory.CreateLogger<HttpExceptionMiddleware>();
-                logger.SettingHttpStatusCode(httpException, httpException.StatusCode);
-
-                context.Response.StatusCode = httpException.StatusCode;
-                if (this.options.IncludeReasonPhraseInResponse)
+                var responseFeature = context.Features.Get<IHttpResponseFeature>();
+                if (responseFeature is not null)
                 {
-                    var responseFeature = context.Features.Get<IHttpResponseFeature>();
-                    if (responseFeature is not null)
-                    {
-                        responseFeature.ReasonPhrase = httpException.Message;
-                    }
+                    responseFeature.ReasonPhrase = httpException.Message;
                 }
             }
         }

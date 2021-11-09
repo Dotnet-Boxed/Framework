@@ -1,24 +1,23 @@
-namespace Boxed.DotnetNewTest
-{
-    using System.Net;
-    using System.Net.Sockets;
+namespace Boxed.DotnetNewTest;
 
+using System.Net;
+using System.Net.Sockets;
+
+/// <summary>
+/// Port helper methods.
+/// </summary>
+internal static class PortHelper
+{
     /// <summary>
-    /// Port helper methods.
+    /// Gets a free TCP port.
     /// </summary>
-    internal static class PortHelper
+    /// <returns>The free TCP port number.</returns>
+    public static int GetFreeTcpPort()
     {
-        /// <summary>
-        /// Gets a free TCP port.
-        /// </summary>
-        /// <returns>The free TCP port number.</returns>
-        public static int GetFreeTcpPort()
-        {
-            var listener = new TcpListener(IPAddress.Loopback, 0);
-            listener.Start();
-            var port = ((IPEndPoint)listener.LocalEndpoint).Port;
-            listener.Stop();
-            return port;
-        }
+        var listener = new TcpListener(IPAddress.Loopback, 0);
+        listener.Start();
+        var port = ((IPEndPoint)listener.LocalEndpoint).Port;
+        listener.Stop();
+        return port;
     }
 }

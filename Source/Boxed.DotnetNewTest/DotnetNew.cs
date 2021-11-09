@@ -1,190 +1,189 @@
-namespace Boxed.DotnetNewTest
+namespace Boxed.DotnetNewTest;
+
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
+
+/// <summary>
+/// Runs 'dotnet new' commands.
+/// </summary>
+#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
+public static class DotnetNew
+#pragma warning restore CA1711 // Identifiers should not have incorrect suffix
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
-    using System.Threading;
-    using System.Threading.Tasks;
+    /// <summary>
+    /// Installs a template from the specified source.
+    /// </summary>
+    /// <typeparam name="T">A type from the assembly used to find the directory path of the project to install.</typeparam>
+    /// <param name="fileName">Name of the file.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public static Task InstallAsync<T>(string fileName) =>
+        InstallAsync(typeof(T).GetTypeInfo().Assembly, fileName);
 
     /// <summary>
-    /// Runs 'dotnet new' commands.
+    /// Installs a template from the specified source.
     /// </summary>
-#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
-    public static class DotnetNew
-#pragma warning restore CA1711 // Identifiers should not have incorrect suffix
+    /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
+    /// <param name="fileName">Name of the file.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="assembly"/> or <paramref name="fileName"/> is null.</exception>
+    /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
+    public static Task InstallAsync(Assembly assembly, string fileName)
     {
-        /// <summary>
-        /// Installs a template from the specified source.
-        /// </summary>
-        /// <typeparam name="T">A type from the assembly used to find the directory path of the project to install.</typeparam>
-        /// <param name="fileName">Name of the file.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static Task InstallAsync<T>(string fileName) =>
-            InstallAsync(typeof(T).GetTypeInfo().Assembly, fileName);
+        ArgumentNullException.ThrowIfNull(assembly);
+        ArgumentNullException.ThrowIfNull(fileName);
 
-        /// <summary>
-        /// Installs a template from the specified source.
-        /// </summary>
-        /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
-        /// <param name="fileName">Name of the file.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="assembly"/> or <paramref name="fileName"/> is null.</exception>
-        /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
-        public static Task InstallAsync(Assembly assembly, string fileName)
+        if (fileName.Length == 0)
         {
-            ArgumentNullException.ThrowIfNull(assembly);
-            ArgumentNullException.ThrowIfNull(fileName);
-
-            if (fileName.Length == 0)
-            {
-                throw new ArgumentException($"{nameof(fileName)} must not be empty.", nameof(fileName));
-            }
-
-            var projectFilePath = GetProjectFilePath(assembly, fileName);
-
-            return InstallAsync(projectFilePath);
+            throw new ArgumentException($"{nameof(fileName)} must not be empty.", nameof(fileName));
         }
 
-        /// <summary>
-        /// Installs a template from the specified source.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="timeout">The timeout. Defaults to one minute.</param>
-        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException">The provided <paramref name="source"/> was null.</exception>
-        /// <exception cref="ArgumentException">The provided <paramref name="source"/> was empty.</exception>
-        public static async Task InstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
+        var projectFilePath = GetProjectFilePath(assembly, fileName);
+
+        return InstallAsync(projectFilePath);
+    }
+
+    /// <summary>
+    /// Installs a template from the specified source.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="timeout">The timeout. Defaults to one minute.</param>
+    /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    /// <exception cref="ArgumentNullException">The provided <paramref name="source"/> was null.</exception>
+    /// <exception cref="ArgumentException">The provided <paramref name="source"/> was empty.</exception>
+    public static async Task InstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        if (source.Length == 0)
         {
-            ArgumentNullException.ThrowIfNull(source);
-
-            if (source.Length == 0)
-            {
-                throw new ArgumentException($"{nameof(source)} must not be empty.", nameof(source));
-            }
-
-            await RunDotnetCommandAsync($"new --install \"{source}\"", timeout, showShellWindow).ConfigureAwait(false);
+            throw new ArgumentException($"{nameof(source)} must not be empty.", nameof(source));
         }
 
-        /// <summary>
-        /// Reinitialises the dotnet new command.
-        /// </summary>
-        /// <param name="timeout">The timeout. Defaults to one minute.</param>
-        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ReinitialiseAsync(TimeSpan? timeout = null, bool showShellWindow = false) =>
-            await RunDotnetCommandAsync($"new --debug:reinit", timeout, showShellWindow).ConfigureAwait(false);
+        await RunDotnetCommandAsync($"new --install \"{source}\"", timeout, showShellWindow).ConfigureAwait(false);
+    }
 
-        /// <summary>
-        /// Uninstalls a template from the specified source.
-        /// </summary>
-        /// <typeparam name="T">A type from the assembly used to find the directory path of the project to install.</typeparam>
-        /// <param name="fileName">Name of the file.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static Task UninstallAsync<T>(string fileName) =>
-            UninstallAsync(typeof(T).GetTypeInfo().Assembly, fileName);
+    /// <summary>
+    /// Reinitialises the dotnet new command.
+    /// </summary>
+    /// <param name="timeout">The timeout. Defaults to one minute.</param>
+    /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public static async Task ReinitialiseAsync(TimeSpan? timeout = null, bool showShellWindow = false) =>
+        await RunDotnetCommandAsync($"new --debug:reinit", timeout, showShellWindow).ConfigureAwait(false);
 
-        /// <summary>
-        /// Uninstalls a template from the specified source.
-        /// </summary>
-        /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
-        /// <param name="fileName">Name of the file.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="assembly"/> or <paramref name="fileName"/> is null.</exception>
-        /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
-        public static Task UninstallAsync(Assembly assembly, string fileName)
+    /// <summary>
+    /// Uninstalls a template from the specified source.
+    /// </summary>
+    /// <typeparam name="T">A type from the assembly used to find the directory path of the project to install.</typeparam>
+    /// <param name="fileName">Name of the file.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public static Task UninstallAsync<T>(string fileName) =>
+        UninstallAsync(typeof(T).GetTypeInfo().Assembly, fileName);
+
+    /// <summary>
+    /// Uninstalls a template from the specified source.
+    /// </summary>
+    /// <param name="assembly">The assembly used to find the directory path of the project to install.</param>
+    /// <param name="fileName">Name of the file.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="assembly"/> or <paramref name="fileName"/> is null.</exception>
+    /// <exception cref="FileNotFoundException">A file with the specified file name was not found.</exception>
+    public static Task UninstallAsync(Assembly assembly, string fileName)
+    {
+        ArgumentNullException.ThrowIfNull(assembly);
+        ArgumentNullException.ThrowIfNull(fileName);
+
+        if (fileName.Length == 0)
         {
-            ArgumentNullException.ThrowIfNull(assembly);
-            ArgumentNullException.ThrowIfNull(fileName);
-
-            if (fileName.Length == 0)
-            {
-                throw new ArgumentException($"{nameof(fileName)} must not be empty.", nameof(fileName));
-            }
-
-            var projectFilePath = GetProjectFilePath(assembly, fileName);
-
-            return UninstallAsync(projectFilePath);
+            throw new ArgumentException($"{nameof(fileName)} must not be empty.", nameof(fileName));
         }
 
-        /// <summary>
-        /// Uninstalls a template from the specified source.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="timeout">The timeout. Defaults to one minute.</param>
-        /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException">The provided <paramref name="source"/> was null.</exception>
-        /// <exception cref="ArgumentException">The provided <paramref name="source"/> was empty.</exception>
-        public static async Task UninstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
+        var projectFilePath = GetProjectFilePath(assembly, fileName);
+
+        return UninstallAsync(projectFilePath);
+    }
+
+    /// <summary>
+    /// Uninstalls a template from the specified source.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="timeout">The timeout. Defaults to one minute.</param>
+    /// <param name="showShellWindow">if set to <c>true</c> show the shell window instead of logging to output.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    /// <exception cref="ArgumentNullException">The provided <paramref name="source"/> was null.</exception>
+    /// <exception cref="ArgumentException">The provided <paramref name="source"/> was empty.</exception>
+    public static async Task UninstallAsync(string source, TimeSpan? timeout = null, bool showShellWindow = false)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        if (source.Length == 0)
         {
-            ArgumentNullException.ThrowIfNull(source);
-
-            if (source.Length == 0)
-            {
-                throw new ArgumentException($"{nameof(source)} must not be empty.", nameof(source));
-            }
-
-            await RunDotnetCommandAsync($"new --uninstall \"{source}\"", timeout, showShellWindow).ConfigureAwait(false);
+            throw new ArgumentException($"{nameof(source)} must not be empty.", nameof(source));
         }
 
-        private static string GetProjectFilePath(Assembly assembly, string fileName)
-        {
-            var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
-            if (projectFilePath is null)
-            {
-                throw new FileNotFoundException($"{fileName} not found.");
-            }
+        await RunDotnetCommandAsync($"new --uninstall \"{source}\"", timeout, showShellWindow).ConfigureAwait(false);
+    }
 
-            return projectFilePath;
+    private static string GetProjectFilePath(Assembly assembly, string fileName)
+    {
+        var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
+        if (projectFilePath is null)
+        {
+            throw new FileNotFoundException($"{fileName} not found.");
         }
 
-        private static string? GetFilePath(Assembly assembly, string projectName)
+        return projectFilePath;
+    }
+
+    private static string? GetFilePath(Assembly assembly, string projectName)
+    {
+        string? projectFilePath = null;
+
+        for (var directory = new DirectoryInfo(assembly.Location); directory.Parent is not null; directory = directory.Parent)
         {
-            string? projectFilePath = null;
-
-            for (var directory = new DirectoryInfo(assembly.Location); directory.Parent is not null; directory = directory.Parent)
+            projectFilePath = directory
+                .Parent
+                .GetFiles(projectName, SearchOption.AllDirectories)
+                .FirstOrDefault(x => !IsInObjDirectory(x.Directory))
+                ?.FullName;
+            if (projectFilePath is not null)
             {
-                projectFilePath = directory
-                    .Parent
-                    .GetFiles(projectName, SearchOption.AllDirectories)
-                    .FirstOrDefault(x => !IsInObjDirectory(x.Directory))
-                    ?.FullName;
-                if (projectFilePath is not null)
-                {
-                    break;
-                }
+                break;
             }
-
-            return projectFilePath;
         }
 
-        private static bool IsInObjDirectory(DirectoryInfo? directoryInfo)
-        {
-            if (directoryInfo is null)
-            {
-                return false;
-            }
-            else if (string.Equals(directoryInfo.Name, "obj", StringComparison.OrdinalIgnoreCase))
-            {
-                return true;
-            }
+        return projectFilePath;
+    }
 
-            return IsInObjDirectory(directoryInfo.Parent);
+    private static bool IsInObjDirectory(DirectoryInfo? directoryInfo)
+    {
+        if (directoryInfo is null)
+        {
+            return false;
+        }
+        else if (string.Equals(directoryInfo.Name, "obj", StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
         }
 
-        private static async Task<(ProcessResult ProcessResult, string Message)> RunDotnetCommandAsync(string arguments, TimeSpan? timeout, bool showShellWindow)
-        {
-            using var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout);
-            return await ProcessExtensions
-                .StartAsync(
-                    DirectoryExtensions.GetCurrentDirectory(),
-                    "dotnet",
-                    arguments,
-                    showShellWindow,
-                    cancellationTokenSource.Token)
-                .ConfigureAwait(false);
-        }
+        return IsInObjDirectory(directoryInfo.Parent);
+    }
+
+    private static async Task<(ProcessResult ProcessResult, string Message)> RunDotnetCommandAsync(string arguments, TimeSpan? timeout, bool showShellWindow)
+    {
+        using var cancellationTokenSource = new CancellationTokenSource(timeout ?? ConfigurationService.DefaultTimeout);
+        return await ProcessExtensions
+            .StartAsync(
+                DirectoryExtensions.GetCurrentDirectory(),
+                "dotnet",
+                arguments,
+                showShellWindow,
+                cancellationTokenSource.Token)
+            .ConfigureAwait(false);
     }
 }
