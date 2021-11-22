@@ -8,10 +8,15 @@
     <Product>ASP.NET Core Framework Boxed</Product>
     <Description>Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project.</Description>
     <PackageTags>ASP.NET;ASP.NET Core;MVC;Boxed;Muhammad Rehan Saeed;Framework;Middleware;Filters</PackageTags>
+    <PackageReadmeFile>Boxed.AspNetCore.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup Label="Files">
+    <None Include="..\..\Documentation\Boxed.AspNetCore.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
