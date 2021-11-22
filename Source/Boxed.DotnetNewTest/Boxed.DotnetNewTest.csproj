@@ -8,6 +8,7 @@
     <Product>ASP.NET Core Dotnet New Test Boxed</Product>
     <Description>ASP.NET Core test framework for dotnet new project templates.</Description>
     <PackageTags>ASP.NET;ASP.NET Core;dotnet new;template;Boxed;Muhammad Rehan Saeed;Framework;</PackageTags>
+    <PackageReadmeFile>Boxed.DotnetNewTest.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
@@ -16,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Files">
+    <None Include="..\..\Documentation\Boxed.DotnetNewTest.md" Pack="true" PackagePath="\" />
     <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

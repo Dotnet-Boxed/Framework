@@ -9,6 +9,11 @@
     <Product>Object Mapping Boxed</Product>
     <Description>An object to object mapper that does not use reflection.</Description>
     <PackageTags>Mapper;Object Mapper;Automapper;Boxed;Muhammad Rehan Saeed;Framework</PackageTags>
+    <PackageReadmeFile>Boxed.Mapping.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup Label="Files">
+    <None Include="..\..\Documentation\Boxed.Mapping.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>

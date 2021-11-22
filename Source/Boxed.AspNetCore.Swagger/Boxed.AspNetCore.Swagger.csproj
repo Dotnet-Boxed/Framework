@@ -8,6 +8,7 @@
     <Product>ASP.NET Core Swagger Framework Boxed</Product>
     <Description>Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project implementing Swagger (OpenAPI).</Description>
     <PackageTags>ASP.NET;ASP.NET Core;MVC;Boxed;Muhammad Rehan Saeed;Framework;Swagger;OpenAPI;Swashbuckle</PackageTags>
+    <PackageReadmeFile>Boxed.AspNetCore.Swagger.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup Label="Project References">
@@ -17,6 +18,10 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="6.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Label="Files">
+    <None Include="..\..\Documentation\Boxed.AspNetCore.Swagger.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

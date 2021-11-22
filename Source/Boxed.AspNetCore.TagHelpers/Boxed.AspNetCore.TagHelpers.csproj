@@ -8,10 +8,15 @@
     <Product>ASP.NET Core Tag Helpers Boxed</Product>
     <Description>ASP.NET Core tag helpers for Subresource Integrity (SRI), Referrer meta tags, OpenGraph (Facebook) and Twitter social network meta tags.</Description>
     <PackageTags>ASP.NET;ASP.NET Core;MVC;Boxed;Muhammad Rehan Saeed;Framework;TagHelper;Tag Helper;HTML</PackageTags>
+    <PackageReadmeFile>Boxed.AspNetCore.TagHelpers.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup Label="Files">
+    <None Include="..\..\Documentation\Boxed.AspNetCore.TagHelpers.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
