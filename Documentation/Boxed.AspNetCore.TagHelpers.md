@@ -23,7 +23,7 @@ ASP.NET Core tag helpers for Subresource Integrity (SRI), Referrer meta tags, Op
 **Twitter Cards**
 
 ```html
-<twitter-card-summary-large-image username="@@RehanSaeedUK">
+<twitter-card-summary-large-image username="@@RehanSaeedUK" />
 ```
 
 **Open Graph (Facebook)**
@@ -36,5 +36,5 @@ ASP.NET Core tag helpers for Subresource Integrity (SRI), Referrer meta tags, Op
                         ContentType.Png,
                         1200,
                         630))"
-                    determiner="OpenGraphDeterminer.Blank">
+                    determiner="OpenGraphDeterminer.Blank" />
 ```
