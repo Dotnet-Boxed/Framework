@@ -20,7 +20,6 @@ using Boxed.Mapping.Benchmark.Models;
 [SimpleJob(RuntimeMoniker.Net60)]
 [SimpleJob(RuntimeMoniker.Net50)]
 [SimpleJob(RuntimeMoniker.NetCoreApp30)]
-[SimpleJob(RuntimeMoniker.Net472)]
 public class MapListBenchmark
 {
     private readonly IMapper automapper;
