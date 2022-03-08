@@ -2,6 +2,9 @@
 
   <PropertyGroup Label="Build">
     <TargetFramework>net6.0</TargetFramework>
+    <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
+    <MinVerTagPrefix>Boxed.AspNetCore.</MinVerTagPrefix>
+    <MinVerVerbosity>normal</MinVerVerbosity>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
