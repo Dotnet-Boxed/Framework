@@ -16,6 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		dotnet-tools.json = dotnet-tools.json
 		global.json = global.json
 		Key.snk = Key.snk
+		.github\release-drafter-Boxed.AspNetCore.yml = .github\release-drafter-Boxed.AspNetCore.yml
+		.github\release-drafter-Boxed.DotnetNewTest.yml = .github\release-drafter-Boxed.DotnetNewTest.yml
+		.github\release-drafter-Boxed.Mapping.yml = .github\release-drafter-Boxed.Mapping.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{D37BD4B2-A87B-4FA1-A1E0-01F1CAD19F0D}"

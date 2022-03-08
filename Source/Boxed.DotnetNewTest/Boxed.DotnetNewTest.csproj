@@ -2,6 +2,9 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>net6.0</TargetFrameworks>
+    <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
+    <MinVerTagPrefix>$(PackageId).</MinVerTagPrefix>
+    <MinVerVerbosity>normal</MinVerVerbosity>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
