@@ -40,13 +40,11 @@ public class MapArrayBenchmark
         {
             this.mapFrom[i] = new MapFrom()
             {
-#pragma warning disable CA5394 // Do not use insecure randomness
                 BooleanFrom = this.random.NextDouble() > 0.5D,
                 DateTimeOffsetFrom = DateTimeOffset.UtcNow,
                 IntegerFrom = this.random.Next(),
                 LongFrom = this.random.Next(),
                 StringFrom = this.random.Next().ToString(CultureInfo.InvariantCulture),
-#pragma warning restore CA5394 // Do not use insecure randomness
             };
         }
     }

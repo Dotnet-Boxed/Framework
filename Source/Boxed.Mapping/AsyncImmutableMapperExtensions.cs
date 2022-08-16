@@ -189,9 +189,7 @@ public static class AsyncImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<TDestination[]> MapArrayAsync<TSource, TDestination>(
         this IAsyncImmutableMapper<TSource, TDestination> mapper,
-#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
-#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new()
     {
@@ -493,9 +491,7 @@ public static class AsyncImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<Collection<TDestination>> MapCollectionAsync<TSource, TDestination>(
         this IAsyncImmutableMapper<TSource, TDestination> mapper,
-#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
-#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new()
     {
@@ -720,9 +716,7 @@ public static class AsyncImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<HashSet<TDestination>> MapHashSetAsync<TSource, TDestination>(
         this IAsyncImmutableMapper<TSource, TDestination> mapper,
-#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
-#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new()
     {
@@ -948,9 +942,7 @@ public static class AsyncImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<ImmutableArray<TDestination>> MapImmutableArrayAsync<TSource, TDestination>(
         this IAsyncImmutableMapper<TSource, TDestination> mapper,
-#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
-#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new() =>
         ImmutableArray.Create(await mapper.MapArrayAsync(source, cancellationToken).ConfigureAwait(false));
@@ -1026,9 +1018,7 @@ public static class AsyncImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<ImmutableList<TDestination>> MapImmutableListAsync<TSource, TDestination>(
         this IAsyncImmutableMapper<TSource, TDestination> mapper,
-#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
-#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new() =>
         ImmutableList.Create(await mapper.MapArrayAsync(source, cancellationToken).ConfigureAwait(false));
@@ -1105,9 +1095,7 @@ public static class AsyncImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<List<TDestination>> MapListAsync<TSource, TDestination>(
         this IAsyncImmutableMapper<TSource, TDestination> mapper,
-#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
-#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new()
     {
@@ -1333,9 +1321,7 @@ public static class AsyncImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<ObservableCollection<TDestination>> MapObservableCollectionAsync<TSource, TDestination>(
         this IAsyncImmutableMapper<TSource, TDestination> mapper,
-#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
-#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new()
     {

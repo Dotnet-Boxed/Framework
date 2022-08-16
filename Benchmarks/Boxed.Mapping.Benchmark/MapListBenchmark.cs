@@ -9,7 +9,6 @@ using BenchmarkDotNet.Jobs;
 using Boxed.Mapping.Benchmark.Mapping;
 using Boxed.Mapping.Benchmark.Models;
 
-#pragma warning disable CA1002 // Do not expose generic lists
 [KeepBenchmarkFiles]
 [MemoryDiagnoser]
 [MinColumn]
@@ -43,13 +42,11 @@ public class MapListBenchmark
             this.mapFrom.Add(
                 new MapFrom()
                 {
-#pragma warning disable CA5394 // Do not use insecure randomness
                     BooleanFrom = this.random.NextDouble() > 0.5D,
                     DateTimeOffsetFrom = DateTimeOffset.UtcNow,
                     IntegerFrom = this.random.Next(),
                     LongFrom = this.random.Next(),
                     StringFrom = this.random.Next().ToString(CultureInfo.InvariantCulture),
-#pragma warning restore CA5394 // Do not use insecure randomness
                 });
         }
     }

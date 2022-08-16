@@ -38,7 +38,7 @@ jobs:
         with:
           dotnet-version: |
             3.1.x
-            5.0.x
+            6.0.x
           global-json-file: "./global.json"
       - name: "Dotnet Tool Restore"
         run: dotnet tool restore

@@ -26,14 +26,20 @@ internal sealed class AssemblyResolver : IDisposable
     public AssemblyResolver(string path)
     {
         this.Assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(path);
-        this.dependencyContext = DependencyContext.Load(this.Assembly);
+        this.dependencyContext = DependencyContext.Load(this.Assembly)!;
+
+        var directoryName = Path.GetDirectoryName(path);
+        if (directoryName is null)
+        {
+            throw new ArgumentException("Path must end in directory.", nameof(path));
+        }
 
         this.assemblyResolver = new CompositeCompilationAssemblyResolver(
             new ICompilationAssemblyResolver[]
             {
-                    new AppBaseCompilationAssemblyResolver(Path.GetDirectoryName(path)),
-                    new ReferenceAssemblyPathResolver(),
-                    new PackageCompilationAssemblyResolver(),
+                new AppBaseCompilationAssemblyResolver(directoryName),
+                new ReferenceAssemblyPathResolver(),
+                new PackageCompilationAssemblyResolver(),
             });
 
         this.loadContext = AssemblyLoadContext.GetLoadContext(this.Assembly)!;

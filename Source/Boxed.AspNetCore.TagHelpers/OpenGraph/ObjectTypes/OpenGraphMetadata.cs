@@ -160,9 +160,7 @@ public abstract class OpenGraphMetadata : TagHelper
     /// Gets or sets the images, videos or audio which should represent your object within the graph.
     /// </summary>
     [HtmlAttributeName(MediaAttributeName)]
-#pragma warning disable CA2227 // Collection properties should be read only
     public ICollection<OpenGraphMedia>? Media { get; set; }
-#pragma warning restore CA2227 // Collection properties should be read only
 
     /// <summary>
     /// Gets the namespace of this open graph type.

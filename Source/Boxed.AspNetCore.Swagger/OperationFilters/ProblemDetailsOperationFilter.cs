@@ -38,7 +38,7 @@ public class ProblemDetailsOperationFilter : IOperationFilter
             {
                 ["exampleProperty1"] = new OpenApiArray()
                 {
-                        new OpenApiString("The property field is required"),
+                    new OpenApiString("The property field is required"),
                 },
             },
         };

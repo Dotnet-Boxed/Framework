@@ -136,9 +136,7 @@ public static class FriendlyUrlHelper
     /// <returns>The remapped character.</returns>
     private static string RemapInternationalCharToAscii(char character)
     {
-#pragma warning disable CA1308 // Normalize strings to uppercase
         var s = new string(character, 1).ToLowerInvariant();
-#pragma warning restore CA1308 // Normalize strings to uppercase
         if ("àåáâäãåąā".Contains(s, StringComparison.Ordinal))
         {
             return "a";

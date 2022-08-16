@@ -69,9 +69,7 @@ public abstract class Disposable : IDisposable
     /// <c>false</c> to release only unmanaged resources, called from the finalizer only.</param>
     /// <remarks>We suppress CA1063 which requires that this method be protected virtual because we want to hide
     /// the internal implementation.</remarks>
-#pragma warning disable CA1063 // Implement IDisposable Correctly
     private void Dispose(bool disposing)
-#pragma warning restore CA1063 // Implement IDisposable Correctly
     {
         // Check to see if Dispose has already been called.
         if (!this.IsDisposed)
