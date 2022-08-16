@@ -7,9 +7,7 @@ using System.Net;
 /// Describes an exception that occurred during the processing of HTTP requests.
 /// </summary>
 /// <seealso cref="Exception" />
-#pragma warning disable CA1032 // Implement standard exception constructors
 public class HttpException : Exception
-#pragma warning restore CA1032 // Implement standard exception constructors
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="HttpException" /> class.

@@ -5,10 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Boxed.AspNetCore;
-using Microsoft.Extensions.Caching.Distributed;
-using Moq;
-using Xunit;
 
 public sealed class DistributedCacheExtensionsTest : IDisposable
 {
@@ -32,7 +28,7 @@ public sealed class DistributedCacheExtensionsTest : IDisposable
         {
             this.distributedCacheMock
                 .Setup(x => x.GetAsync("Key", cancellationTokenSource.Token))
-                .ReturnsAsync(Encoding.UTF8.GetBytes(/*lang=json,strict*/ "{\"Value\":1}"));
+                .ReturnsAsync(Encoding.UTF8.GetBytes(/*lang=json,strict*/ """{"Value":1}"""));
 
             var testClass = await this.distributedCacheMock.Object
                 .GetAsJsonAsync<TestClass>("Key", null, cancellationTokenSource.Token)
@@ -46,12 +42,12 @@ public sealed class DistributedCacheExtensionsTest : IDisposable
     [Fact]
     public Task SetAsJsonAsync_NullDistributedCache_ThrowsArgumentNullExceptionAsync() =>
         Assert.ThrowsAsync<ArgumentNullException>(
-            () => ((IDistributedCache)null!).SetAsJsonAsync("Key", new TestClass()));
+            () => ((IDistributedCache)null!).SetAsJsonAsync("Key", new TestClass(), new DistributedCacheEntryOptions()));
 
     [Fact]
     public Task SetAsJsonAsync_NullKey_ThrowsArgumentNullExceptionAsync() =>
         Assert.ThrowsAsync<ArgumentNullException>(
-            () => this.distributedCacheMock.Object.SetAsJsonAsync(null!, new TestClass()));
+            () => this.distributedCacheMock.Object.SetAsJsonAsync(null!, new TestClass(), new DistributedCacheEntryOptions()));
 
     [Fact]
     public async Task SetAsJsonAsync_ValidValue_SavesSerializedValueAsync()
@@ -61,13 +57,13 @@ public sealed class DistributedCacheExtensionsTest : IDisposable
             this.distributedCacheMock
                 .Setup(x => x.SetAsync(
                     "Key",
-                    It.Is<byte[]>(y => y.SequenceEqual(Encoding.UTF8.GetBytes(/*lang=json,strict*/ "{\"Value\":1}"))),
-                    null,
+                    It.Is<byte[]>(y => y.SequenceEqual(Encoding.UTF8.GetBytes(/*lang=json,strict*/ """{"Value":1}"""))),
+                    It.IsAny<DistributedCacheEntryOptions>(),
                     cancellationTokenSource.Token))
                 .Returns(Task.CompletedTask);
 
             await this.distributedCacheMock.Object
-                .SetAsJsonAsync("Key", new TestClass() { Value = 1 }, null, null, cancellationTokenSource.Token)
+                .SetAsJsonAsync("Key", new TestClass() { Value = 1 }, new DistributedCacheEntryOptions(), null, cancellationTokenSource.Token)
                 .ConfigureAwait(false);
         }
     }

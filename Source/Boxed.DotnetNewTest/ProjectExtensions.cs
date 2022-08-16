@@ -370,9 +370,7 @@ public static class ProjectExtensions
         TimeSpan? timeout,
         bool showShellWindow)
     {
-#pragma warning disable CA2000 // Dispose objects before losing scope. Object disposed below.
         var cancellationTokenSource = new CancellationTokenSource();
-#pragma warning restore CA2000 // Dispose objects before losing scope. Object disposed below.
         var noRestoreArgument = noRestore is null ? null : "--no-restore";
         var task = AssertStartAsync(
             directoryPath,
@@ -456,9 +454,7 @@ public static class ProjectExtensions
                         TestLogger.WriteLine(Resources.WaitingForAppToStartReadinessCheckFailed);
                     }
                 }
-#pragma warning disable CA1031 // Do not catch general exception types
                 catch
-#pragma warning restore CA1031 // Do not catch general exception types
                 {
                     TestLogger.WriteLine(Resources.WaitingForAppToStartReadinessCheckThrewException);
                 }

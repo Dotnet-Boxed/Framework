@@ -92,9 +92,7 @@ public abstract class SubresourceIntegrityTagHelper : TagHelper
     /// <value>
     /// The name of the attribute containing the URL to the resource.
     /// </value>
-#pragma warning disable CA1056 // Uri properties should not be strings
     protected abstract string UrlAttributeName { get; }
-#pragma warning restore CA1056 // Uri properties should not be strings
 
     /// <summary>
     /// Asynchronously executes the <see cref="TagHelper" /> with the given context and output.
@@ -128,9 +126,7 @@ public abstract class SubresourceIntegrityTagHelper : TagHelper
     /// </summary>
     /// <param name="url">The URL to the resource.</param>
     /// <returns>A key value for the URL.</returns>
-#pragma warning disable CA1054 // Uri parameters should not be strings
     protected virtual string GetSriKey(string url) => "SRI:" + url;
-#pragma warning restore CA1054 // Uri parameters should not be strings
 
     /// <summary>
     /// Reads all bytes from the file with the specified path.
@@ -225,7 +221,7 @@ public abstract class SubresourceIntegrityTagHelper : TagHelper
         return stringBuilder.ToString();
     }
 
-    private Task<string> GetCachedSriAsync(string url)
+    private Task<string?> GetCachedSriAsync(string url)
     {
         var key = this.GetSriKey(url);
         return this.distributedCache.GetStringAsync(key);

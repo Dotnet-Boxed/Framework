@@ -33,6 +33,11 @@ public static class DistributedCacheExtensions
         ArgumentNullException.ThrowIfNull(key);
 
         var bytes = await cache.GetAsync(key, cancellationToken).ConfigureAwait(false);
+        if (bytes is null)
+        {
+            return default;
+        }
+
         return Deserialize<T>(bytes, jsonSerializerOptions);
     }
 
@@ -54,7 +59,7 @@ public static class DistributedCacheExtensions
         this IDistributedCache cache,
         string key,
         T value,
-        DistributedCacheEntryOptions? options = null,
+        DistributedCacheEntryOptions options,
         JsonSerializerOptions? jsonSerializerOptions = null,
         CancellationToken cancellationToken = default)
         where T : class

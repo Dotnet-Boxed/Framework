@@ -127,9 +127,7 @@ public class RedirectToCanonicalUrlRule : IRule
                 {
                     if (char.IsUpper(character))
                     {
-#pragma warning disable CA1308 // Normalize strings to uppercase
                         request.Path = new PathString(request.Path.Value.ToLowerInvariant());
-#pragma warning restore CA1308 // Normalize strings to uppercase
                         isCanonical = false;
                         break;
                     }
@@ -141,9 +139,7 @@ public class RedirectToCanonicalUrlRule : IRule
                     {
                         if (char.IsUpper(character))
                         {
-#pragma warning disable CA1308 // Normalize strings to uppercase
                             request.QueryString = new QueryString(request.QueryString.Value.ToLowerInvariant());
-#pragma warning restore CA1308 // Normalize strings to uppercase
                             isCanonical = false;
                             break;
                         }
