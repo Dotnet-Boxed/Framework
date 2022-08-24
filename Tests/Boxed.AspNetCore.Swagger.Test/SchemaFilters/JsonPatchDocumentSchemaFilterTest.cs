@@ -50,7 +50,7 @@ public class JsonPatchDocumentSchemaFilterTest
     }
 
 #pragma warning disable CA1812 // Never instantiated
-    internal class Model
+    internal sealed class Model
 #pragma warning restore CA1812 // Never instantiated
     {
     }

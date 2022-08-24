@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 /// Executes an asynchronous operation when disposed.
 /// </summary>
 /// <seealso cref="IAsyncDisposable" />
-internal class AsyncDisposableAction : IAsyncDisposable
+internal sealed class AsyncDisposableAction : IAsyncDisposable
 {
     private readonly Func<ValueTask> action;
 

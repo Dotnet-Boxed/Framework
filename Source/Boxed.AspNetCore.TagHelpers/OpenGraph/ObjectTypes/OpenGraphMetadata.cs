@@ -297,10 +297,7 @@ public abstract class OpenGraphMetadata : TagHelper
             stringBuilder.AppendMetaPropertyContent("og:type", this.Type.ToLowercaseString());
         }
 
-        if (this.Url is null)
-        {
-            this.Url = this.GetRequestUrl();
-        }
+        this.Url ??= this.GetRequestUrl();
 
         stringBuilder.AppendMetaPropertyContent("og:url", this.Url);
 
