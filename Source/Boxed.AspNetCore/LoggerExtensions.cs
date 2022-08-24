@@ -17,6 +17,6 @@ internal static partial class LoggerExtensions
     [LoggerMessage(
         EventId = 4001,
         Level = LogLevel.Information,
-        Message = "Request was cancelled.")]
-    public static partial void RequestCancelled(this ILogger logger);
+        Message = "Request was canceled.")]
+    public static partial void RequestCanceled(this ILogger logger);
 }
