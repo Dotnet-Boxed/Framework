@@ -13,4 +13,10 @@ internal static partial class LoggerExtensions
         Level = LogLevel.Information,
         Message = "Executing HttpExceptionMiddleware, setting HTTP status code {StatusCode}.")]
     public static partial void SettingHttpStatusCode(this ILogger logger, Exception exception, int statusCode);
+
+    [LoggerMessage(
+        EventId = 4001,
+        Level = LogLevel.Information,
+        Message = "Request was cancelled.")]
+    public static partial void RequestCancelled(this ILogger logger);
 }
