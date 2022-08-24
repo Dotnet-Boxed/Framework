@@ -35,6 +35,35 @@ public static class ApplicationBuilderExtensions
     }
 
     /// <summary>
+    /// Handles <see cref="OperationCanceledException"/> caused by the HTTP request being aborted, then shortcuts and
+    /// returns an error status code.
+    /// See https://andrewlock.net/using-cancellationtokens-in-asp-net-core-minimal-apis/.
+    /// </summary>
+    /// <param name="application">The application builder.</param>
+    /// <returns>The same application builder.</returns>
+    public static IApplicationBuilder UseRequestCancelled(this IApplicationBuilder application) =>
+        UseRequestCancelled(application, null);
+
+    /// <summary>
+    /// Handles <see cref="OperationCanceledException"/> caused by the HTTP request being aborted, then shortcuts and
+    /// returns an error status code.
+    /// See https://andrewlock.net/using-cancellationtokens-in-asp-net-core-minimal-apis/.
+    /// </summary>
+    /// <param name="application">The application builder.</param>
+    /// <param name="configureOptions">The middleware options.</param>
+    /// <returns>The same application builder.</returns>
+    public static IApplicationBuilder UseRequestCancelled(
+        this IApplicationBuilder application,
+        Action<RequestCanceledMiddlewareOptions>? configureOptions)
+    {
+        ArgumentNullException.ThrowIfNull(application);
+
+        var options = new RequestCanceledMiddlewareOptions();
+        configureOptions?.Invoke(options);
+        return application.UseMiddleware<RequestCanceledMiddleware>(options);
+    }
+
+    /// <summary>
     /// Measures the time the request takes to process and returns this in a Server-Timing trailing HTTP header.
     /// It is used to surface any back-end server timing metrics (e.g. database read/write, CPU time, file system
     /// access, etc.) to the developer tools in the user's browser.

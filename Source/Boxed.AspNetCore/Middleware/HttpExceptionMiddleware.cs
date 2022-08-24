@@ -13,19 +13,14 @@ using Microsoft.Extensions.Logging;
 /// <seealso cref="IMiddleware" />
 public class HttpExceptionMiddleware : IMiddleware
 {
-    private readonly RequestDelegate next;
     private readonly HttpExceptionMiddlewareOptions options;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HttpExceptionMiddleware"/> class.
     /// </summary>
-    /// <param name="next">The next.</param>
     /// <param name="options">The options.</param>
-    public HttpExceptionMiddleware(RequestDelegate next, HttpExceptionMiddlewareOptions options)
-    {
-        this.next = next;
+    public HttpExceptionMiddleware(HttpExceptionMiddlewareOptions options) =>
         this.options = options;
-    }
 
     /// <inheritdoc/>
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -35,7 +30,7 @@ public class HttpExceptionMiddleware : IMiddleware
 
         try
         {
-            await this.next.Invoke(context).ConfigureAwait(false);
+            await next.Invoke(context).ConfigureAwait(false);
         }
         catch (HttpException httpException)
         {
