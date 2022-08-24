@@ -8,6 +8,11 @@ using Microsoft.Extensions.Logging;
 /// </summary>
 internal static partial class LoggerExtensions
 {
+    /// <summary>
+    /// The request cancelled message.
+    /// </summary>
+    public const string RequestCanceledMessage = "Client cancelled the request.";
+
     [LoggerMessage(
         EventId = 4000,
         Level = LogLevel.Information,
@@ -17,6 +22,6 @@ internal static partial class LoggerExtensions
     [LoggerMessage(
         EventId = 4001,
         Level = LogLevel.Information,
-        Message = "Request was canceled.")]
+        Message = RequestCanceledMessage)]
     public static partial void RequestCanceled(this ILogger logger);
 }
