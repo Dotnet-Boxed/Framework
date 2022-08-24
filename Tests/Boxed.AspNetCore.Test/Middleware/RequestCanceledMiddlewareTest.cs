@@ -32,9 +32,10 @@ public class RequestCanceledMiddlewareTest
     public async Task InvokeAsync_RequestNotCanceled_RunsNextMiddlewareAsync()
     {
         await new RequestCanceledMiddleware(
+            this.next,
             new RequestCanceledMiddlewareOptions(),
             new Mock<ILogger<RequestCanceledMiddleware>>().Object)
-            .InvokeAsync(this.context, this.next)
+            .InvokeAsync(this.context)
             .ConfigureAwait(false);
 
         Assert.Equal(200, this.context.Response.StatusCode);
@@ -52,9 +53,10 @@ public class RequestCanceledMiddlewareTest
         await Assert
             .ThrowsAsync<OperationCanceledException>(() =>
                 new RequestCanceledMiddleware(
+                    this.next,
                     new RequestCanceledMiddlewareOptions(),
                     new Mock<ILogger<RequestCanceledMiddleware>>().Object)
-                    .InvokeAsync(this.context, this.next))
+                    .InvokeAsync(this.context))
             .ConfigureAwait(false);
     }
 
@@ -67,9 +69,10 @@ public class RequestCanceledMiddlewareTest
         this.next = x => Task.FromCanceled(cancellationTokenSource.Token);
 
         await new RequestCanceledMiddleware(
+            this.next,
             new RequestCanceledMiddlewareOptions(),
             new Mock<ILogger<RequestCanceledMiddleware>>().Object)
-            .InvokeAsync(this.context, this.next)
+            .InvokeAsync(this.context)
             .ConfigureAwait(false);
 
         Assert.Equal(RequestCanceledMiddlewareOptions.ClientClosedRequest, this.context.Response.StatusCode);
