@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 /// The <see cref="HttpException"/> handling middleware.
 /// </summary>
 /// <seealso cref="IMiddleware" />
-internal class HttpExceptionMiddleware : IMiddleware
+public class HttpExceptionMiddleware : IMiddleware
 {
     private readonly RequestDelegate next;
     private readonly HttpExceptionMiddlewareOptions options;

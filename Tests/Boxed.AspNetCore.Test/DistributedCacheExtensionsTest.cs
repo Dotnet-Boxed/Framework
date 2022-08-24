@@ -32,7 +32,7 @@ public sealed class DistributedCacheExtensionsTest : IDisposable
         {
             this.distributedCacheMock
                 .Setup(x => x.GetAsync("Key", cancellationTokenSource.Token))
-                .ReturnsAsync(Encoding.UTF8.GetBytes("{\"Value\":1}"));
+                .ReturnsAsync(Encoding.UTF8.GetBytes(/*lang=json,strict*/ "{\"Value\":1}"));
 
             var testClass = await this.distributedCacheMock.Object
                 .GetAsJsonAsync<TestClass>("Key", null, cancellationTokenSource.Token)
@@ -61,7 +61,7 @@ public sealed class DistributedCacheExtensionsTest : IDisposable
             this.distributedCacheMock
                 .Setup(x => x.SetAsync(
                     "Key",
-                    It.Is<byte[]>(y => y.SequenceEqual(Encoding.UTF8.GetBytes("{\"Value\":1}"))),
+                    It.Is<byte[]>(y => y.SequenceEqual(Encoding.UTF8.GetBytes(/*lang=json,strict*/ "{\"Value\":1}"))),
                     null,
                     cancellationTokenSource.Token))
                 .Returns(Task.CompletedTask);
@@ -74,7 +74,7 @@ public sealed class DistributedCacheExtensionsTest : IDisposable
 
     public void Dispose() => Mock.VerifyAll(this.distributedCacheMock);
 
-    internal class TestClass
+    internal sealed class TestClass
     {
         public int Value { get; set; }
     }

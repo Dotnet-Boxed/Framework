@@ -151,7 +151,7 @@ public class SubresourceIntegrityTagHelperTest
         Assert.Equal(expectedSri, htmlString.Value);
     }
 
-    internal class TestSubresourceIntegrityTagHelper : SubresourceIntegrityTagHelper
+    internal sealed class TestSubresourceIntegrityTagHelper : SubresourceIntegrityTagHelper
     {
         public TestSubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,

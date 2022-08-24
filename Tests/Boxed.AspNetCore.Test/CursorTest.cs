@@ -242,7 +242,7 @@ public class CursorTest
         Assert.Equal("MjAwMC0wMS0wMQ==", cursor);
     }
 
-    private class Item
+    private sealed class Item
     {
         public int Integer { get; set; }
     }

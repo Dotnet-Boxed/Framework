@@ -49,7 +49,7 @@ public class ServerTimingMiddlewareTest
         Assert.Equal("app;dur=0.0", header.Value.ToString());
     }
 
-    internal class ResponseTrailersFeature : IHttpResponseTrailersFeature
+    internal sealed class ResponseTrailersFeature : IHttpResponseTrailersFeature
     {
         public IHeaderDictionary Trailers { get; set; } = new HeaderDictionary();
     }

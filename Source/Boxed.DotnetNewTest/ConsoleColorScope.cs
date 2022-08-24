@@ -6,7 +6,7 @@ using System;
 /// Sets the console foreground and/or background colour for the specified scope.
 /// </summary>
 /// <seealso cref="IDisposable" />
-internal class ConsoleColorScope : IDisposable
+internal sealed class ConsoleColorScope : IDisposable
 {
     private readonly ConsoleColor backgroundColor;
     private readonly ConsoleColor foregroundColor;
