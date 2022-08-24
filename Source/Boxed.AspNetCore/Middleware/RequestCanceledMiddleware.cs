@@ -41,7 +41,7 @@ public class RequestCanceledMiddleware : IMiddleware
         catch (OperationCanceledException operationCanceledException)
         when (operationCanceledException.CancellationToken == context.RequestAborted)
         {
-            this.logger.RequestCancelled();
+            this.logger.RequestCanceled();
             context.Response.StatusCode = this.options.StatusCode;
         }
     }

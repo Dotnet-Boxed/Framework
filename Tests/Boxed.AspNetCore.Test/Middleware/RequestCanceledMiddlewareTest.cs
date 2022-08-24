@@ -1,0 +1,77 @@
+namespace Boxed.AspNetCore.Test.Middleware;
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Boxed.AspNetCore.Middleware;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Moq;
+using Xunit;
+
+public class RequestCanceledMiddlewareTest
+{
+    private readonly DefaultHttpContext context;
+    private RequestDelegate next;
+
+    public RequestCanceledMiddlewareTest()
+    {
+        this.context = new DefaultHttpContext();
+        this.next = x => Task.CompletedTask;
+    }
+
+    [Fact]
+    public void InvokeAsync_NullContext_ThrowsArgumentNullException() =>
+        Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(null!, this.next));
+
+    [Fact]
+    public void InvokeAsync_NullNext_ThrowsArgumentNullException() =>
+        Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(this.context, null!));
+
+    [Fact]
+    public async Task InvokeAsync_RequestNotCanceled_RunsNextMiddlewareAsync()
+    {
+        await new RequestCanceledMiddleware(
+            new RequestCanceledMiddlewareOptions(),
+            new Mock<ILogger<RequestCanceledMiddleware>>().Object)
+            .InvokeAsync(this.context, this.next)
+            .ConfigureAwait(false);
+
+        Assert.Equal(200, this.context.Response.StatusCode);
+    }
+
+    [Fact]
+    public async Task InvokeAsync_OperationCanceledExceptionThrownNotCanceled_RunsNextMiddlewareAsync()
+    {
+        using var cancellationTokenSource1 = new CancellationTokenSource();
+        using var cancellationTokenSource2 = new CancellationTokenSource();
+        cancellationTokenSource2.Cancel();
+        this.context.RequestAborted = cancellationTokenSource1.Token;
+        this.next = x => Task.FromException(new OperationCanceledException(cancellationTokenSource2.Token));
+
+        await Assert
+            .ThrowsAsync<OperationCanceledException>(() =>
+                new RequestCanceledMiddleware(
+                    new RequestCanceledMiddlewareOptions(),
+                    new Mock<ILogger<RequestCanceledMiddleware>>().Object)
+                    .InvokeAsync(this.context, this.next))
+            .ConfigureAwait(false);
+    }
+
+    [Fact]
+    public async Task InvokeAsync_RequestCanceled_Returns499ClientClosedRequestAsync()
+    {
+        using var cancellationTokenSource = new CancellationTokenSource();
+        cancellationTokenSource.Cancel();
+        this.context.RequestAborted = cancellationTokenSource.Token;
+        this.next = x => Task.FromCanceled(cancellationTokenSource.Token);
+
+        await new RequestCanceledMiddleware(
+            new RequestCanceledMiddlewareOptions(),
+            new Mock<ILogger<RequestCanceledMiddleware>>().Object)
+            .InvokeAsync(this.context, this.next)
+            .ConfigureAwait(false);
+
+        Assert.Equal(RequestCanceledMiddlewareOptions.ClientClosedRequest, this.context.Response.StatusCode);
+    }
+}

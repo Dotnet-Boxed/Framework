@@ -41,8 +41,8 @@ public static class ApplicationBuilderExtensions
     /// </summary>
     /// <param name="application">The application builder.</param>
     /// <returns>The same application builder.</returns>
-    public static IApplicationBuilder UseRequestCancelled(this IApplicationBuilder application) =>
-        UseRequestCancelled(application, null);
+    public static IApplicationBuilder UseRequestCanceled(this IApplicationBuilder application) =>
+        UseRequestCanceled(application, null);
 
     /// <summary>
     /// Handles <see cref="OperationCanceledException"/> caused by the HTTP request being aborted, then shortcuts and
@@ -52,7 +52,7 @@ public static class ApplicationBuilderExtensions
     /// <param name="application">The application builder.</param>
     /// <param name="configureOptions">The middleware options.</param>
     /// <returns>The same application builder.</returns>
-    public static IApplicationBuilder UseRequestCancelled(
+    public static IApplicationBuilder UseRequestCanceled(
         this IApplicationBuilder application,
         Action<RequestCanceledMiddlewareOptions>? configureOptions)
     {
