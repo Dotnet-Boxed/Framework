@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.Distributed;
+using Moq;
+using Xunit;
 
 public sealed class DistributedCacheExtensionsTest : IDisposable
 {
