@@ -11,26 +11,34 @@ using Microsoft.Extensions.Logging;
 /// The <see cref="HttpException"/> handling middleware.
 /// </summary>
 /// <seealso cref="IMiddleware" />
-public class HttpExceptionMiddleware : IMiddleware
+public class HttpExceptionMiddleware
 {
+    private readonly RequestDelegate next;
     private readonly HttpExceptionMiddlewareOptions options;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HttpExceptionMiddleware"/> class.
     /// </summary>
+    /// <param name="next">The next middleware.</param>
     /// <param name="options">The options.</param>
-    public HttpExceptionMiddleware(HttpExceptionMiddlewareOptions options) =>
+    public HttpExceptionMiddleware(RequestDelegate next, HttpExceptionMiddlewareOptions options)
+    {
+        this.next = next;
         this.options = options;
+    }
 
-    /// <inheritdoc/>
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    /// <summary>
+    /// Request handling method.
+    /// </summary>
+    /// <param name="context">The <see cref="HttpContext"/> for the current request.</param>
+    /// <returns>A <see cref="Task"/> that represents the execution of this middleware.</returns>
+    public async Task InvokeAsync(HttpContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
-        ArgumentNullException.ThrowIfNull(next);
 
         try
         {
-            await next.Invoke(context).ConfigureAwait(false);
+            await this.next.Invoke(context).ConfigureAwait(false);
         }
         catch (HttpException httpException)
         {
