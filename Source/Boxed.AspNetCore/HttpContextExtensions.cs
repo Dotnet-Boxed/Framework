@@ -68,7 +68,7 @@ public static class HttpContextExtensions
                     break;
                 default:
                     var exception = new NotImplementedException(
-                        FormattableString.Invariant($"Unknown {nameof(ResponseCacheLocation)}: {cacheProfile.Location}"));
+                        string.Create(CultureInfo.InvariantCulture, $"Unknown {nameof(ResponseCacheLocation)}: {cacheProfile.Location}"));
                     Debug.Fail(exception.ToString());
                     throw exception;
             }
