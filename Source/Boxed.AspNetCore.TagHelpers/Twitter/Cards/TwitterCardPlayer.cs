@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter;
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -93,40 +94,42 @@ public class TwitterCardPlayer : TwitterCard
 
         if (string.IsNullOrEmpty(this.SiteUsername))
         {
-            throw new ValidationException(FormattableString.Invariant(
+            throw new ValidationException(string.Create(
+                CultureInfo.InvariantCulture,
                 $"{nameof(this.SiteUsername)} cannot be null or empty."));
         }
 
         if (this.Image is null)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.Image)} cannot be null."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Image)} cannot be null."));
         }
 
         if (string.IsNullOrEmpty(this.Title))
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.Title)} cannot be null or empty."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Title)} cannot be null or empty."));
         }
 
         // TODO: Add Check for Image.Alt if this.Player.StreamUrl is provided
         if (this.Player is null)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.Player)} cannot be null."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Player)} cannot be null."));
         }
 
         if (!string.Equals(this.Player.PlayerUrl.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
         {
-            throw new ValidationException(FormattableString.Invariant(
+            throw new ValidationException(string.Create(
+                CultureInfo.InvariantCulture,
                 $"The {nameof(this.Player.PlayerUrl)} must be a HTTPS URL which does not generate active mixed content warnings in a web browser."));
         }
 
         if (this.Player.Width <= 0)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.Player.Width)} must be more than zero."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Player.Width)} must be more than zero."));
         }
 
         if (this.Player.Height <= 0)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.Player.Height)} must be more than zero."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Player.Height)} must be more than zero."));
         }
     }
 }

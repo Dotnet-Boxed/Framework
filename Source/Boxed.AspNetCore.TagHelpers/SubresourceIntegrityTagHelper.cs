@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -168,7 +169,7 @@ public abstract class SubresourceIntegrityTagHelper : TagHelper
         else
         {
             throw new InvalidOperationException(
-                FormattableString.Invariant($"Hash algorithm not recognized. Type<{type}>."));
+                string.Create(CultureInfo.InvariantCulture, $"Hash algorithm not recognized. Type<{type}>."));
         }
     }
 
@@ -203,7 +204,7 @@ public abstract class SubresourceIntegrityTagHelper : TagHelper
                 break;
             default:
                 throw new ArgumentException(
-                    FormattableString.Invariant($"Hash algorithm not recognized. HashAlgorithm<{hashAlgorithm}>."),
+                    string.Create(CultureInfo.InvariantCulture, $"Hash algorithm not recognized. HashAlgorithm<{hashAlgorithm}>."),
                     nameof(hashAlgorithm));
         }
     }

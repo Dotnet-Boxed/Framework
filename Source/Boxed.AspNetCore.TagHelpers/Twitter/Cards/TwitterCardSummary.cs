@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.Twitter;
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -97,17 +98,17 @@ public class TwitterCardSummary : TwitterCard
 
         if (string.IsNullOrEmpty(this.Title))
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.Title)} cannot be null or empty."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Title)} cannot be null or empty."));
         }
 
         if (string.IsNullOrEmpty(this.Description))
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.Description)} cannot be null or empty."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Description)} cannot be null or empty."));
         }
 
         if (string.IsNullOrEmpty(this.SiteId) && string.IsNullOrEmpty(this.SiteUsername))
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.SiteUsername)} cannot be null or empty and either twitter:site or twitter:site:id is required."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.SiteUsername)} cannot be null or empty and either twitter:site or twitter:site:id is required."));
         }
     }
 }

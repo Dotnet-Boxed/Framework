@@ -96,12 +96,12 @@ public class OpenGraphBusiness : OpenGraphMetadata
 
         if (this.ContactData is null)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.ContactData)} cannot be null."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.ContactData)} cannot be null."));
         }
 
         if (this.Location is null)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.Location)} cannot be null."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Location)} cannot be null."));
         }
     }
 }

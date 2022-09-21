@@ -2,6 +2,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -264,12 +265,12 @@ public class OpenGraphProductItem : OpenGraphMetadata
 
         if (this.Prices is null)
         {
-            throw new ArgumentNullException(FormattableString.Invariant($"{nameof(this.Prices)} cannot be null."));
+            throw new ArgumentNullException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Prices)} cannot be null."));
         }
 
         if (this.RetailerItemId is null)
         {
-            throw new ArgumentNullException(FormattableString.Invariant($"{nameof(this.RetailerItemId)} cannot be null."));
+            throw new ArgumentNullException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.RetailerItemId)} cannot be null."));
         }
     }
 }
