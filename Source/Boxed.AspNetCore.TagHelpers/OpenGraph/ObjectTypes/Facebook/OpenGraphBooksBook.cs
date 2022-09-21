@@ -3,6 +3,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -128,7 +129,7 @@ public class OpenGraphBooksBook : OpenGraphMetadata
 
         if (this.ISBN is null)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.ISBN)} cannot be null."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.ISBN)} cannot be null."));
         }
     }
 }

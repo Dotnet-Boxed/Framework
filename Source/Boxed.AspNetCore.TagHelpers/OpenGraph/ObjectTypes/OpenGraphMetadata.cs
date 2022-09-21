@@ -3,6 +3,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Http;
@@ -359,12 +360,12 @@ public abstract class OpenGraphMetadata : TagHelper
     {
         if (this.Title is null)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.Title)} cannot be null."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Title)} cannot be null."));
         }
 
         if (this.MainImage is null)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.MainImage)} cannot be null."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.MainImage)} cannot be null."));
         }
     }
 

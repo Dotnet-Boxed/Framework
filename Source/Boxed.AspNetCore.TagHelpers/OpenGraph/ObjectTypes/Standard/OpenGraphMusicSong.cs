@@ -3,6 +3,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -118,7 +119,7 @@ public class OpenGraphMusicSong : OpenGraphMetadata
 
         if (this.AlbumUrls is null)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.AlbumUrls)} cannot be null."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.AlbumUrls)} cannot be null."));
         }
     }
 }

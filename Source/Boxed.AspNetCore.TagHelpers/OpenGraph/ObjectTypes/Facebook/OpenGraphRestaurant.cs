@@ -3,6 +3,7 @@ namespace Boxed.AspNetCore.TagHelpers.OpenGraph;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -117,7 +118,7 @@ public class OpenGraphRestaurant : OpenGraphMetadata
 
         if (this.Location is null)
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.Location)} cannot be null."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.Location)} cannot be null."));
         }
     }
 }

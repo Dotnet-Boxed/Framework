@@ -1,7 +1,7 @@
 namespace Boxed.AspNetCore.TagHelpers.Twitter;
 
-using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -118,22 +118,22 @@ public class TwitterCardApp : TwitterCard
 
         if (string.IsNullOrEmpty(this.SiteUsername))
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.SiteUsername)} cannot be null or empty."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.SiteUsername)} cannot be null or empty."));
         }
 
         if (string.IsNullOrEmpty(this.IPhone))
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.IPhone)} cannot be null or empty."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.IPhone)} cannot be null or empty."));
         }
 
         if (string.IsNullOrEmpty(this.IPad))
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.IPad)} cannot be null or empty."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.IPad)} cannot be null or empty."));
         }
 
         if (string.IsNullOrEmpty(this.GooglePlay))
         {
-            throw new ValidationException(FormattableString.Invariant($"{nameof(this.GooglePlay)} cannot be null or empty."));
+            throw new ValidationException(string.Create(CultureInfo.InvariantCulture, $"{nameof(this.GooglePlay)} cannot be null or empty."));
         }
     }
 }
