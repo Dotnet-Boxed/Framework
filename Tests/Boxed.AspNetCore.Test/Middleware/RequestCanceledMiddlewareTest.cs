@@ -21,12 +21,11 @@ public class RequestCanceledMiddlewareTest
     }
 
     [Fact]
-    public void InvokeAsync_NullContext_ThrowsArgumentNullException() =>
-        Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(null!, this.next));
-
-    [Fact]
-    public void InvokeAsync_NullNext_ThrowsArgumentNullException() =>
-        Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(this.context, null!));
+    public async Task InvokeAsync_NullContext_ThrowsArgumentNullExceptionAsync() =>
+        await Assert.ThrowsAsync<ArgumentNullException>(() =>
+            new RequestCanceledMiddleware(this.next, new RequestCanceledMiddlewareOptions(), new Mock<ILogger<RequestCanceledMiddleware>>().Object)
+                .InvokeAsync(null!))
+                .ConfigureAwait(false);
 
     [Fact]
     public async Task InvokeAsync_RequestNotCanceled_RunsNextMiddlewareAsync()
