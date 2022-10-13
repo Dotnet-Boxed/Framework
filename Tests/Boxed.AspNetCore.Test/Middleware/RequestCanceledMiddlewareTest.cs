@@ -1,10 +1,13 @@
 namespace Boxed.AspNetCore.Test.Middleware;
 
 using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Boxed.AspNetCore.Middleware;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
@@ -82,7 +85,12 @@ public class RequestCanceledMiddlewareTest
     public async Task InvokeAsync_RequestCanceled_Returns499ClientClosedRequestAsync()
     {
         using var cancellationTokenSource = new CancellationTokenSource();
+        var activityFeature = new TestActivityFeature(new Activity("test"));
+
+        activityFeature.Activity.Start();
         cancellationTokenSource.Cancel();
+
+        this.context.Features.Set<IHttpActivityFeature>(activityFeature);
         this.context.RequestAborted = cancellationTokenSource.Token;
         this.next = x => Task.FromCanceled(cancellationTokenSource.Token);
 
@@ -90,9 +98,20 @@ public class RequestCanceledMiddlewareTest
             this.next,
             new RequestCanceledMiddlewareOptions(),
             new Mock<ILogger<RequestCanceledMiddleware>>().Object)
-            .InvokeAsync(this.context)
-            .ConfigureAwait(false);
+        .InvokeAsync(this.context)
+        .ConfigureAwait(false);
 
+        Assert.Single(Activity.Current!.Events);
+        Assert.Equal("Client cancelled the request.", Activity.Current!.Events.SingleOrDefault().Name);
         Assert.Equal(RequestCanceledMiddlewareOptions.ClientClosedRequest, this.context.Response.StatusCode);
+
+        activityFeature.Activity.Dispose();
+    }
+
+    private class TestActivityFeature : IHttpActivityFeature
+    {
+        public TestActivityFeature(Activity activity) => this.Activity = activity;
+
+        public Activity Activity { get; set; }
     }
 }
