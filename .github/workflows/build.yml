@@ -73,7 +73,7 @@ jobs:
         with:
           path: "./Artefacts"
       - name: "Publish Test Summary"
-        uses: test-summary/action@v1
+        uses: test-summary/action@v2
         with:
           paths: "./Artefacts/*/*.xml"
 
