@@ -26,9 +26,12 @@ public class RequestCanceledMiddlewareTest
     [Fact]
     public async Task InvokeAsync_NullContext_ThrowsArgumentNullExceptionAsync() =>
         await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            new RequestCanceledMiddleware(this.next, new RequestCanceledMiddlewareOptions(), new Mock<ILogger<RequestCanceledMiddleware>>().Object)
-                .InvokeAsync(null!))
-                .ConfigureAwait(false);
+            new RequestCanceledMiddleware(
+                this.next,
+                new RequestCanceledMiddlewareOptions(),
+                new Mock<ILogger<RequestCanceledMiddleware>>().Object)
+            .InvokeAsync(null!))
+            .ConfigureAwait(false);
 
     [Fact]
     public async Task InvokeAsync_RequestNotCanceled_RunsNextMiddlewareAsync()
@@ -37,8 +40,8 @@ public class RequestCanceledMiddlewareTest
             this.next,
             new RequestCanceledMiddlewareOptions(),
             new Mock<ILogger<RequestCanceledMiddleware>>().Object)
-            .InvokeAsync(this.context)
-            .ConfigureAwait(false);
+        .InvokeAsync(this.context)
+        .ConfigureAwait(false);
 
         Assert.Equal(200, this.context.Response.StatusCode);
     }
@@ -58,25 +61,25 @@ public class RequestCanceledMiddlewareTest
                     this.next,
                     new RequestCanceledMiddlewareOptions(),
                     new Mock<ILogger<RequestCanceledMiddleware>>().Object)
-                    .InvokeAsync(this.context))
+                .InvokeAsync(this.context))
             .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task InvokeAsync_TaskCanceledExceptionThrownNotCanceled_RunsNextMiddlewareAsync()
     {
-        // Arrange
         using var cancellationTokenSource1 = new CancellationTokenSource();
         using var cancellationTokenSource2 = new CancellationTokenSource();
-
         cancellationTokenSource2.Cancel();
-
         this.context.RequestAborted = cancellationTokenSource1.Token;
         this.next = x => Task.FromException(new TaskCanceledException(Task.FromCanceled(cancellationTokenSource2.Token)));
 
-        // Act & Assert
-        await Assert.ThrowsAsync<TaskCanceledException>(() =>
-            new RequestCanceledMiddleware(this.next, new RequestCanceledMiddlewareOptions(), new Mock<ILogger<RequestCanceledMiddleware>>().Object)
+        await Assert
+            .ThrowsAsync<TaskCanceledException>(() =>
+                new RequestCanceledMiddleware(
+                    this.next,
+                    new RequestCanceledMiddlewareOptions(),
+                    new Mock<ILogger<RequestCanceledMiddleware>>().Object)
                 .InvokeAsync(this.context))
             .ConfigureAwait(false);
     }
@@ -108,7 +111,7 @@ public class RequestCanceledMiddlewareTest
         activityFeature.Activity.Dispose();
     }
 
-    private class TestActivityFeature : IHttpActivityFeature
+    private sealed class TestActivityFeature : IHttpActivityFeature
     {
         public TestActivityFeature(Activity activity) => this.Activity = activity;
 
