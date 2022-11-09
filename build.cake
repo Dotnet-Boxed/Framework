@@ -51,9 +51,9 @@ Task("Test")
                     Configuration = configuration,
                     Loggers = new string[]
                     {
-                        $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
-                        $"junit;LogFileName={project.GetFilenameWithoutExtension()}.xml",
-                        $"html;LogFileName={project.GetFilenameWithoutExtension()}.html",
+                        $"trx;LogFilePrefix={project.GetFilenameWithoutExtension()}",
+                        $"junit;LogFilePrefix={project.GetFilenameWithoutExtension()}",
+                        $"html;LogFilePrefix={project.GetFilenameWithoutExtension()}",
                     },
                     NoBuild = true,
                     NoRestore = true,
