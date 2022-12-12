@@ -24,13 +24,21 @@ public class ServerTimingMiddleware : IMiddleware
         if (context.Response.SupportsTrailers())
         {
             context.Response.DeclareTrailer(ServerTimingHttpHeader);
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
+#if NET7_0_OR_GREATER
+            var startingTimestamp = Stopwatch.GetTimestamp();
+#else
+            var stopWatch = Stopwatch.StartNew();
+#endif
 
             await next(context).ConfigureAwait(false);
 
+#if NET7_0_OR_GREATER
+            var elapsedMilliseconds = Stopwatch.GetElapsedTime(startingTimestamp).TotalMilliseconds;
+#else
             stopWatch.Stop();
-            context.Response.AppendTrailer(ServerTimingHttpHeader, $"app;dur={stopWatch.ElapsedMilliseconds}.0");
+            var elapsedMilliseconds = stopWatch.ElapsedMilliseconds;
+#endif
+            context.Response.AppendTrailer(ServerTimingHttpHeader, $"app;dur={elapsedMilliseconds}.0");
         }
         else
         {
