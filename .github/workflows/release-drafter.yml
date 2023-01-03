@@ -20,19 +20,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Draft Boxed.AspNetCore Release"
-        uses: release-drafter/release-drafter@v5.21.1
+        uses: release-drafter/release-drafter@v5.22.0
         with:
           config-name: "release-drafter-Boxed.AspNetCore.yml"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "Draft Boxed.DotnetNewTest Release"
-        uses: release-drafter/release-drafter@v5.21.1
+        uses: release-drafter/release-drafter@v5.22.0
         with:
           config-name: "release-drafter-Boxed.DotnetNewTest.yml"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "Draft Boxed.Mapping Release"
-        uses: release-drafter/release-drafter@v5.21.1
+        uses: release-drafter/release-drafter@v5.22.0
         with:
           config-name: "release-drafter-Boxed.Mapping.yml"
         env:
