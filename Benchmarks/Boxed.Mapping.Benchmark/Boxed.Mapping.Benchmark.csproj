@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="BenchmarkDotNet" Version="0.13.2" />
     <!-- See https://github.com/Microsoft/dotnet/tree/master/releases/reference-assemblies -->
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.3" />
