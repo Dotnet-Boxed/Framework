@@ -374,12 +374,9 @@ public abstract class OpenGraphMetadata : TagHelper
         var services = httpContext.RequestServices;
         var actionContext = services
             .GetRequiredService<IActionContextAccessor>()
-            .ActionContext;
-        if (actionContext is null)
-        {
+            .ActionContext ??
             throw new InvalidOperationException(
                 "ActionContext is null. Attempted to retrieve the ActionContext outside of a request.");
-        }
 
         var urlHelper = services
             .GetRequiredService<IUrlHelperFactory>()

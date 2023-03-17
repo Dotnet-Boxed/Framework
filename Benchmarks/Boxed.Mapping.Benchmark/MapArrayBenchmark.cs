@@ -15,6 +15,7 @@ using Boxed.Mapping.Benchmark.Models;
 [HtmlExporter]
 [CsvMeasurementsExporter]
 [RPlotExporter]
+[SimpleJob(RuntimeMoniker.Net70)]
 [SimpleJob(RuntimeMoniker.Net60)]
 [SimpleJob(RuntimeMoniker.Net50)]
 [SimpleJob(RuntimeMoniker.NetCoreApp30)]
@@ -38,16 +39,16 @@ public class MapArrayBenchmark
         this.mapFrom = new MapFrom[100];
         for (var i = 0; i < this.mapFrom.Length; ++i)
         {
+#pragma warning disable CA5394 // Do not use insecure randomness
             this.mapFrom[i] = new MapFrom()
             {
-#pragma warning disable CA5394 // Do not use insecure randomness
                 BooleanFrom = this.random.NextDouble() > 0.5D,
                 DateTimeOffsetFrom = DateTimeOffset.UtcNow,
                 IntegerFrom = this.random.Next(),
                 LongFrom = this.random.Next(),
                 StringFrom = this.random.Next().ToString(CultureInfo.InvariantCulture),
-#pragma warning restore CA5394 // Do not use insecure randomness
             };
+#pragma warning restore CA5394 // Do not use insecure randomness
         }
     }
 

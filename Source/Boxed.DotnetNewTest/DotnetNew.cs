@@ -131,11 +131,8 @@ public static class DotnetNew
 
     private static string GetProjectFilePath(Assembly assembly, string fileName)
     {
-        var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
-        if (projectFilePath is null)
-        {
+        var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName)) ??
             throw new FileNotFoundException($"{fileName} not found.");
-        }
 
         return projectFilePath;
     }

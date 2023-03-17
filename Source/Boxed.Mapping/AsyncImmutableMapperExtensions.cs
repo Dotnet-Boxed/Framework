@@ -140,6 +140,7 @@ public static class AsyncImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         int count;
         if (sourceCount.HasValue)
@@ -157,6 +158,7 @@ public static class AsyncImmutableMapperExtensions
 #endif
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
 
@@ -372,6 +374,7 @@ public static class AsyncImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
@@ -386,6 +389,7 @@ public static class AsyncImmutableMapperExtensions
         var destination = new TDestination[count];
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
             ++i;
@@ -450,6 +454,7 @@ public static class AsyncImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
@@ -462,6 +467,7 @@ public static class AsyncImmutableMapperExtensions
 #endif
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
             ++i;
@@ -676,6 +682,7 @@ public static class AsyncImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
@@ -689,6 +696,7 @@ public static class AsyncImmutableMapperExtensions
         var destination = new Collection<TDestination>();
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
             ++i;
@@ -903,6 +911,7 @@ public static class AsyncImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
@@ -916,6 +925,7 @@ public static class AsyncImmutableMapperExtensions
         var destination = new HashSet<TDestination>();
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
             ++i;
@@ -1288,6 +1298,7 @@ public static class AsyncImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
@@ -1302,6 +1313,7 @@ public static class AsyncImmutableMapperExtensions
         var destination = new List<TDestination>(count);
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
             ++i;
@@ -1516,6 +1528,7 @@ public static class AsyncImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
@@ -1529,6 +1542,7 @@ public static class AsyncImmutableMapperExtensions
         var destination = new ObservableCollection<TDestination>();
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             tasks[i] = mapper.MapAsync(sourceItem, cancellationToken);
             ++i;

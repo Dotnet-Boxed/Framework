@@ -15,6 +15,7 @@ using Boxed.Mapping.Benchmark.Models;
 [HtmlExporter]
 [CsvMeasurementsExporter]
 [RPlotExporter]
+[SimpleJob(RuntimeMoniker.Net70)]
 [SimpleJob(RuntimeMoniker.Net60)]
 [SimpleJob(RuntimeMoniker.Net50)]
 [SimpleJob(RuntimeMoniker.NetCoreApp30)]
@@ -34,26 +35,27 @@ public class MapObjectBenchmark
 
     [GlobalSetup]
     public void GlobalSetup() =>
+#pragma warning disable CA5394 // Do not use insecure randomness
         this.mapFrom = new MapFrom()
         {
-#pragma warning disable CA5394 // Do not use insecure randomness
             BooleanFrom = this.random.NextDouble() > 0.5D,
             DateTimeOffsetFrom = DateTimeOffset.UtcNow,
             IntegerFrom = this.random.Next(),
             LongFrom = this.random.Next(),
             StringFrom = this.random.Next().ToString(CultureInfo.InvariantCulture),
-#pragma warning restore CA5394 // Do not use insecure randomness
         };
+#pragma warning restore CA5394 // Do not use insecure randomness
 
     [Benchmark(Baseline = true)]
-    public MapTo Baseline() => new()
-    {
-        BooleanTo = this.mapFrom.BooleanFrom,
-        DateTimeOffsetTo = this.mapFrom.DateTimeOffsetFrom,
-        IntegerTo = this.mapFrom.IntegerFrom,
-        LongTo = this.mapFrom.LongFrom,
-        StringTo = this.mapFrom.StringFrom,
-    };
+    public MapTo Baseline() =>
+        new()
+        {
+            BooleanTo = this.mapFrom.BooleanFrom,
+            DateTimeOffsetTo = this.mapFrom.DateTimeOffsetFrom,
+            IntegerTo = this.mapFrom.IntegerFrom,
+            LongTo = this.mapFrom.LongFrom,
+            StringTo = this.mapFrom.StringFrom,
+        };
 
     [Benchmark]
     public MapTo BoxedMapper() => this.boilerplateMapper.Map(this.mapFrom);

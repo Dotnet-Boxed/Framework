@@ -164,7 +164,7 @@ public static class MapperExtensions
 #pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source)
 #pragma warning restore CA1002 // Do not expose generic lists
-            where TDestination : new()
+        where TDestination : new()
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -314,6 +314,7 @@ public static class MapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
@@ -326,6 +327,7 @@ public static class MapperExtensions
 #endif
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = Factory<TDestination>.CreateInstance();
             mapper.Map(sourceItem, destinationItem);
@@ -401,7 +403,7 @@ public static class MapperExtensions
 #pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source)
 #pragma warning restore CA1002 // Do not expose generic lists
-            where TDestination : new()
+        where TDestination : new()
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -573,7 +575,7 @@ public static class MapperExtensions
 #pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source)
 #pragma warning restore CA1002 // Do not expose generic lists
-            where TDestination : new()
+        where TDestination : new()
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -741,7 +743,7 @@ public static class MapperExtensions
 #pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source)
 #pragma warning restore CA1002 // Do not expose generic lists
-            where TDestination : new() =>
+        where TDestination : new() =>
         ImmutableArray.Create(mapper.MapArray(source));
 
     /// <summary>
@@ -811,7 +813,7 @@ public static class MapperExtensions
 #pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source)
 #pragma warning restore CA1002 // Do not expose generic lists
-            where TDestination : new() =>
+        where TDestination : new() =>
         ImmutableList.Create(mapper.MapArray(source));
 
     /// <summary>
@@ -882,7 +884,7 @@ public static class MapperExtensions
         this IMapper<TSource, TDestination> mapper,
         List<TSource> source)
 #pragma warning restore CA1002 // Do not expose generic lists
-            where TDestination : new()
+        where TDestination : new()
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -927,7 +929,7 @@ public static class MapperExtensions
         this IMapper<TSource, TDestination> mapper,
         Collection<TSource> source)
 #pragma warning restore CA1002 // Do not expose generic lists
-            where TDestination : new()
+        where TDestination : new()
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -972,7 +974,7 @@ public static class MapperExtensions
         this IMapper<TSource, TDestination> mapper,
         TSource[] source)
 #pragma warning restore CA1002 // Do not expose generic lists
-            where TDestination : new()
+        where TDestination : new()
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -1017,7 +1019,7 @@ public static class MapperExtensions
         this IMapper<TSource, TDestination> mapper,
         IEnumerable<TSource> source)
 #pragma warning restore CA1002 // Do not expose generic lists
-            where TDestination : new()
+        where TDestination : new()
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -1034,6 +1036,7 @@ public static class MapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
@@ -1045,6 +1048,7 @@ public static class MapperExtensions
         var destination = new List<TDestination>(source.Count());
 #endif
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = Factory<TDestination>.CreateInstance();
             mapper.Map(sourceItem, destinationItem);
@@ -1070,7 +1074,7 @@ public static class MapperExtensions
 #pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source)
 #pragma warning restore CA1002 // Do not expose generic lists
-            where TDestination : new()
+        where TDestination : new()
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);

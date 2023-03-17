@@ -9,7 +9,6 @@ using BenchmarkDotNet.Jobs;
 using Boxed.Mapping.Benchmark.Mapping;
 using Boxed.Mapping.Benchmark.Models;
 
-#pragma warning disable CA1002 // Do not expose generic lists
 [KeepBenchmarkFiles]
 [MemoryDiagnoser]
 [MinColumn]
@@ -17,6 +16,7 @@ using Boxed.Mapping.Benchmark.Models;
 [HtmlExporter]
 [CsvMeasurementsExporter]
 [RPlotExporter]
+[SimpleJob(RuntimeMoniker.Net70)]
 [SimpleJob(RuntimeMoniker.Net60)]
 [SimpleJob(RuntimeMoniker.Net50)]
 [SimpleJob(RuntimeMoniker.NetCoreApp30)]
@@ -40,20 +40,21 @@ public class MapListBenchmark
         this.mapFrom = new List<MapFrom>();
         for (var i = 0; i < 100; ++i)
         {
+#pragma warning disable CA5394 // Do not use insecure randomness
             this.mapFrom.Add(
                 new MapFrom()
                 {
-#pragma warning disable CA5394 // Do not use insecure randomness
                     BooleanFrom = this.random.NextDouble() > 0.5D,
                     DateTimeOffsetFrom = DateTimeOffset.UtcNow,
                     IntegerFrom = this.random.Next(),
                     LongFrom = this.random.Next(),
                     StringFrom = this.random.Next().ToString(CultureInfo.InvariantCulture),
-#pragma warning restore CA5394 // Do not use insecure randomness
                 });
+#pragma warning restore CA5394 // Do not use insecure randomness
         }
     }
 
+#pragma warning disable CA1002 // Do not expose generic lists
     [Benchmark(Baseline = true)]
     public List<MapTo> Baseline()
     {
@@ -78,4 +79,5 @@ public class MapListBenchmark
 
     [Benchmark]
     public List<MapTo> Automapper() => this.automapper.Map<List<MapTo>>(this.mapFrom);
+#pragma warning restore CA1002 // Do not expose generic lists
 }

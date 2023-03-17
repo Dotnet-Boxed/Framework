@@ -297,6 +297,7 @@ public static class ImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
@@ -309,6 +310,7 @@ public static class ImmutableMapperExtensions
 #endif
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = mapper.Map(sourceItem);
             destination[i] = destinationItem;
@@ -709,7 +711,7 @@ public static class ImmutableMapperExtensions
 #pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source) =>
 #pragma warning restore CA1002 // Do not expose generic lists
-            ImmutableArray.Create(mapper.MapArray(source));
+        ImmutableArray.Create(mapper.MapArray(source));
 
     /// <summary>
     /// Maps the collection of <typeparamref name="TSource"/> into an immutable array of
@@ -775,7 +777,7 @@ public static class ImmutableMapperExtensions
 #pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source) =>
 #pragma warning restore CA1002 // Do not expose generic lists
-            ImmutableList.Create(mapper.MapArray(source));
+        ImmutableList.Create(mapper.MapArray(source));
 
     /// <summary>
     /// Maps the collection of <typeparamref name="TSource"/> into an immutable list of
@@ -987,6 +989,7 @@ public static class ImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
@@ -998,6 +1001,7 @@ public static class ImmutableMapperExtensions
         var destination = new List<TDestination>(source.Count());
 #endif
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = mapper.Map(sourceItem);
             destination.Add(destinationItem);

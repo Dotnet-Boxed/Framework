@@ -341,11 +341,8 @@ public static class ProjectExtensions
                 var assembly = assemblyResolver.Assembly;
                 var startupType = assembly
                     .DefinedTypes
-                    .FirstOrDefault(x => string.Equals(x.Name, startupTypeName, StringComparison.Ordinal));
-                if (startupType is null)
-                {
+                    .FirstOrDefault(x => string.Equals(x.Name, startupTypeName, StringComparison.Ordinal)) ??
                     throw new InvalidOperationException($"Startup type '{startupTypeName}' not found.");
-                }
 
                 var webHostBuilder = new WebHostBuilder()
                     .UseEnvironment(environmentName)
@@ -370,9 +367,9 @@ public static class ProjectExtensions
         TimeSpan? timeout,
         bool showShellWindow)
     {
-#pragma warning disable CA2000 // Dispose objects before losing scope. Object disposed below.
+#pragma warning disable CA2000 // Dispose objects before losing scope
         var cancellationTokenSource = new CancellationTokenSource();
-#pragma warning restore CA2000 // Dispose objects before losing scope. Object disposed below.
+#pragma warning restore CA2000 // Dispose objects before losing scope
         var noRestoreArgument = noRestore is null ? null : "--no-restore";
         var task = AssertStartAsync(
             directoryPath,

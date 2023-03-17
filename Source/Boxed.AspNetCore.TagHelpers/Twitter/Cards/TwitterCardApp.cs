@@ -52,9 +52,9 @@ public class TwitterCardApp : TwitterCard
     /// scheme name).
     /// </summary>
     [HtmlAttributeName(GooglePlayCustomUrlSchemeAttributeName)]
-#pragma warning disable CA1056 // Uri properties should not be strings
+#pragma warning disable CA1056 // URI-like properties should not be strings
     public string? GooglePlayCustomUrlScheme { get; set; }
-#pragma warning restore CA1056 // Uri properties should not be strings
+#pragma warning restore CA1056 // URI-like properties should not be strings
 
     /// <summary>
     /// Gets or sets numeric representation of your iPad app ID in the App Store (.i.e. "307234931").
@@ -66,9 +66,9 @@ public class TwitterCardApp : TwitterCard
     /// Gets or sets your iPad app’s custom URL scheme (you must include "://" after your scheme name).
     /// </summary>
     [HtmlAttributeName(IPadCustomUrlSchemeAttributeName)]
-#pragma warning disable CA1056 // Uri properties should not be strings
+#pragma warning disable CA1056 // URI-like properties should not be strings
     public string? IPadCustomUrlScheme { get; set; }
-#pragma warning restore CA1056 // Uri properties should not be strings
+#pragma warning restore CA1056 // URI-like properties should not be strings
 
     /// <summary>
     /// Gets or sets numeric representation of your iPhone app ID in the App Store (.i.e. “307234931”).
@@ -81,9 +81,9 @@ public class TwitterCardApp : TwitterCard
     /// scheme name).
     /// </summary>
     [HtmlAttributeName(IPhoneCustomUrlSchemeAttributeName)]
-#pragma warning disable CA1056 // Uri properties should not be strings
+#pragma warning disable CA1056 // URI-like properties should not be strings
     public string? IPhoneCustomUrlScheme { get; set; }
-#pragma warning restore CA1056 // Uri properties should not be strings
+#pragma warning restore CA1056 // URI-like properties should not be strings
 
     /// <summary>
     /// Gets the type of the Twitter card.
