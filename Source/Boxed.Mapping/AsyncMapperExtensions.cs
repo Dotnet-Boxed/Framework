@@ -142,6 +142,7 @@ public static class AsyncMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         int count;
         if (sourceCount.HasValue)
@@ -150,7 +151,6 @@ public static class AsyncMapperExtensions
         }
         else if (!source.TryGetNonEnumeratedCount(out count))
         {
-#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -356,10 +356,10 @@ public static class AsyncMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
-#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -431,10 +431,10 @@ public static class AsyncMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
-#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -639,10 +639,10 @@ public static class AsyncMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
-#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -844,10 +844,10 @@ public static class AsyncMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
-#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -1211,10 +1211,10 @@ public static class AsyncMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
-#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -1421,10 +1421,10 @@ public static class AsyncMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
-#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
