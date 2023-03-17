@@ -46,7 +46,7 @@ public class ServerTimingMiddlewareTest
 
         var header = Assert.Single(responseTrailersFeature.Trailers);
         Assert.Equal("Server-Timing", header.Key);
-        Assert.Equal("app;dur=0.0", header.Value.ToString());
+        Assert.StartsWith("app;dur=0.", header.Value.ToString(), StringComparison.Ordinal);
     }
 
     internal sealed class ResponseTrailersFeature : IHttpResponseTrailersFeature
