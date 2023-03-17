@@ -64,6 +64,7 @@ public static class Cursor
     {
         ArgumentNullException.ThrowIfNull(getCursorProperty);
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         if (enumerable is null || !enumerable.Any())
         {
             return (null, null);
@@ -71,6 +72,7 @@ public static class Cursor
 
         var firstCursor = ToCursor(getCursorProperty(enumerable.First()));
         var lastCursor = ToCursor(getCursorProperty(enumerable.Last()));
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 
         return (firstCursor, lastCursor);
     }
