@@ -150,6 +150,7 @@ public static class AsyncMapperExtensions
         }
         else if (!source.TryGetNonEnumeratedCount(out count))
         {
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -159,6 +160,7 @@ public static class AsyncMapperExtensions
 #endif
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = Factory<TDestination>.CreateInstance();
             destination[i] = destinationItem;
@@ -186,7 +188,9 @@ public static class AsyncMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<TDestination[]> MapArrayAsync<TSource, TDestination>(
         this IAsyncMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
+#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new()
     {
@@ -355,6 +359,7 @@ public static class AsyncMapperExtensions
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -366,6 +371,7 @@ public static class AsyncMapperExtensions
         var destination = new TDestination[count];
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = Factory<TDestination>.CreateInstance();
             destination[i] = destinationItem;
@@ -428,6 +434,7 @@ public static class AsyncMapperExtensions
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -437,6 +444,7 @@ public static class AsyncMapperExtensions
 #endif
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = Factory<TDestination>.CreateInstance();
             destination.Add(destinationItem);
@@ -463,7 +471,9 @@ public static class AsyncMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<Collection<TDestination>> MapCollectionAsync<TSource, TDestination>(
         this IAsyncMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
+#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new()
     {
@@ -632,6 +642,7 @@ public static class AsyncMapperExtensions
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -642,6 +653,7 @@ public static class AsyncMapperExtensions
         var destination = new Collection<TDestination>();
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = Factory<TDestination>.CreateInstance();
             destination.Insert(i, destinationItem);
@@ -667,7 +679,9 @@ public static class AsyncMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<HashSet<TDestination>> MapHashSetAsync<TSource, TDestination>(
         this IAsyncMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
+#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new()
     {
@@ -833,6 +847,7 @@ public static class AsyncMapperExtensions
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -843,6 +858,7 @@ public static class AsyncMapperExtensions
         var destination = new HashSet<TDestination>();
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = Factory<TDestination>.CreateInstance();
             destination.Add(destinationItem);
@@ -870,7 +886,9 @@ public static class AsyncMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<ImmutableArray<TDestination>> MapImmutableArrayAsync<TSource, TDestination>(
         this IAsyncMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
+#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new() =>
         ImmutableArray.Create(await mapper.MapArrayAsync(source, cancellationToken).ConfigureAwait(false));
@@ -946,7 +964,9 @@ public static class AsyncMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<ImmutableList<TDestination>> MapImmutableListAsync<TSource, TDestination>(
         this IAsyncMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
+#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new() =>
         ImmutableList.Create(await mapper.MapArrayAsync(source, cancellationToken).ConfigureAwait(false));
@@ -1023,7 +1043,9 @@ public static class AsyncMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<List<TDestination>> MapListAsync<TSource, TDestination>(
         this IAsyncMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
+#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new()
     {
@@ -1192,6 +1214,7 @@ public static class AsyncMapperExtensions
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -1203,6 +1226,7 @@ public static class AsyncMapperExtensions
         var destination = new List<TDestination>(count);
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = Factory<TDestination>.CreateInstance();
             destination.Insert(i, destinationItem);
@@ -1229,7 +1253,9 @@ public static class AsyncMapperExtensions
     /// <c>null</c>.</exception>
     public static async Task<ObservableCollection<TDestination>> MapObservableCollectionAsync<TSource, TDestination>(
         this IAsyncMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source,
+#pragma warning restore CA1002 // Do not expose generic lists
         CancellationToken cancellationToken = default)
         where TDestination : new()
     {
@@ -1398,6 +1424,7 @@ public static class AsyncMapperExtensions
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -1408,6 +1435,7 @@ public static class AsyncMapperExtensions
         var destination = new ObservableCollection<TDestination>();
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = Factory<TDestination>.CreateInstance();
             destination.Insert(i, destinationItem);

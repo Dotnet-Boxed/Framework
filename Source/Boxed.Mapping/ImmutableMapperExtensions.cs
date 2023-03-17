@@ -155,7 +155,9 @@ public static class ImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static TDestination[] MapArray<TSource, TDestination>(
         this IImmutableMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -298,6 +300,7 @@ public static class ImmutableMapperExtensions
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -307,6 +310,7 @@ public static class ImmutableMapperExtensions
 #endif
         var i = 0;
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = mapper.Map(sourceItem);
             destination[i] = destinationItem;
@@ -376,7 +380,9 @@ public static class ImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static Collection<TDestination> MapCollection<TSource, TDestination>(
         this IImmutableMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -539,7 +545,9 @@ public static class ImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static HashSet<TDestination> MapHashSet<TSource, TDestination>(
         this IImmutableMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -700,7 +708,10 @@ public static class ImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static ImmutableArray<TDestination> MapImmutableArray<TSource, TDestination>(
         this IImmutableMapper<TSource, TDestination> mapper,
-        List<TSource> source) => ImmutableArray.Create(mapper.MapArray(source));
+#pragma warning disable CA1002 // Do not expose generic lists
+        List<TSource> source) =>
+#pragma warning restore CA1002 // Do not expose generic lists
+        ImmutableArray.Create(mapper.MapArray(source));
 
     /// <summary>
     /// Maps the collection of <typeparamref name="TSource"/> into an immutable array of
@@ -763,7 +774,10 @@ public static class ImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static ImmutableList<TDestination> MapImmutableList<TSource, TDestination>(
         this IImmutableMapper<TSource, TDestination> mapper,
-        List<TSource> source) => ImmutableList.Create(mapper.MapArray(source));
+#pragma warning disable CA1002 // Do not expose generic lists
+        List<TSource> source) =>
+#pragma warning restore CA1002 // Do not expose generic lists
+        ImmutableList.Create(mapper.MapArray(source));
 
     /// <summary>
     /// Maps the collection of <typeparamref name="TSource"/> into an immutable list of
@@ -825,9 +839,11 @@ public static class ImmutableMapperExtensions
     /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
     /// <c>null</c>.</exception>
+#pragma warning disable CA1002 // Do not expose generic lists
     public static List<TDestination> MapList<TSource, TDestination>(
         this IImmutableMapper<TSource, TDestination> mapper,
         List<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -866,7 +882,9 @@ public static class ImmutableMapperExtensions
     /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
     /// <c>null</c>.</exception>
+#pragma warning disable CA1002 // Do not expose generic lists
     public static List<TDestination> MapList<TSource, TDestination>(
+#pragma warning restore CA1002 // Do not expose generic lists
         this IImmutableMapper<TSource, TDestination> mapper,
         Collection<TSource> source)
     {
@@ -907,7 +925,9 @@ public static class ImmutableMapperExtensions
     /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
     /// <c>null</c>.</exception>
+#pragma warning disable CA1002 // Do not expose generic lists
     public static List<TDestination> MapList<TSource, TDestination>(
+#pragma warning restore CA1002 // Do not expose generic lists
         this IImmutableMapper<TSource, TDestination> mapper,
         TSource[] source)
     {
@@ -948,7 +968,9 @@ public static class ImmutableMapperExtensions
     /// <returns>A list of <typeparamref name="TDestination"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="mapper"/> or <paramref name="source"/> is
     /// <c>null</c>.</exception>
+#pragma warning disable CA1002 // Do not expose generic lists
     public static List<TDestination> MapList<TSource, TDestination>(
+#pragma warning restore CA1002 // Do not expose generic lists
         this IImmutableMapper<TSource, TDestination> mapper,
         IEnumerable<TSource> source)
     {
@@ -970,6 +992,7 @@ public static class ImmutableMapperExtensions
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -978,6 +1001,7 @@ public static class ImmutableMapperExtensions
         var destination = new List<TDestination>(source.Count());
 #endif
         foreach (var sourceItem in source)
+#pragma warning restore CA1851 // Possible multiple enumerations of 'IEnumerable' collection
         {
             var destinationItem = mapper.Map(sourceItem);
             destination.Add(destinationItem);
@@ -999,7 +1023,9 @@ public static class ImmutableMapperExtensions
     /// <c>null</c>.</exception>
     public static ObservableCollection<TDestination> MapObservableCollection<TSource, TDestination>(
         this IImmutableMapper<TSource, TDestination> mapper,
+#pragma warning disable CA1002 // Do not expose generic lists
         List<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);

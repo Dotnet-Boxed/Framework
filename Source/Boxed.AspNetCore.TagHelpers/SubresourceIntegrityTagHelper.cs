@@ -61,12 +61,9 @@ public abstract class SubresourceIntegrityTagHelper : TagHelper
         this.webHostEnvironment = webHostEnvironment;
         this.htmlEncoder = htmlEncoder;
 
-        var actionContext = actionContextAccessor.ActionContext;
-        if (actionContext is null)
-        {
+        var actionContext = actionContextAccessor.ActionContext ??
             throw new InvalidOperationException(
                 "ActionContext is null. Attempted to retrieve the ActionContext outside of a request.");
-        }
 
         this.urlHelper = urlHelperFactory.GetUrlHelper(actionContext);
     }
@@ -92,7 +89,9 @@ public abstract class SubresourceIntegrityTagHelper : TagHelper
     /// <value>
     /// The name of the attribute containing the URL to the resource.
     /// </value>
+#pragma warning disable CA1056 // URI-like properties should not be strings
     protected abstract string UrlAttributeName { get; }
+#pragma warning restore CA1056 // URI-like properties should not be strings
 
     /// <summary>
     /// Asynchronously executes the <see cref="TagHelper" /> with the given context and output.
@@ -126,7 +125,9 @@ public abstract class SubresourceIntegrityTagHelper : TagHelper
     /// </summary>
     /// <param name="url">The URL to the resource.</param>
     /// <returns>A key value for the URL.</returns>
+#pragma warning disable CA1054 // URI-like parameters should not be strings
     protected virtual string GetSriKey(string url) => "SRI:" + url;
+#pragma warning restore CA1054 // URI-like parameters should not be strings
 
     /// <summary>
     /// Reads all bytes from the file with the specified path.
