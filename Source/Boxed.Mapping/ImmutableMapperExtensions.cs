@@ -297,10 +297,10 @@ public static class ImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
-#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
@@ -884,9 +884,9 @@ public static class ImmutableMapperExtensions
     /// <c>null</c>.</exception>
 #pragma warning disable CA1002 // Do not expose generic lists
     public static List<TDestination> MapList<TSource, TDestination>(
-#pragma warning restore CA1002 // Do not expose generic lists
         this IImmutableMapper<TSource, TDestination> mapper,
         Collection<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -927,9 +927,9 @@ public static class ImmutableMapperExtensions
     /// <c>null</c>.</exception>
 #pragma warning disable CA1002 // Do not expose generic lists
     public static List<TDestination> MapList<TSource, TDestination>(
-#pragma warning restore CA1002 // Do not expose generic lists
         this IImmutableMapper<TSource, TDestination> mapper,
         TSource[] source)
+#pragma warning restore CA1002 // Do not expose generic lists
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -970,9 +970,9 @@ public static class ImmutableMapperExtensions
     /// <c>null</c>.</exception>
 #pragma warning disable CA1002 // Do not expose generic lists
     public static List<TDestination> MapList<TSource, TDestination>(
-#pragma warning restore CA1002 // Do not expose generic lists
         this IImmutableMapper<TSource, TDestination> mapper,
         IEnumerable<TSource> source)
+#pragma warning restore CA1002 // Do not expose generic lists
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(mapper);
@@ -989,10 +989,10 @@ public static class ImmutableMapperExtensions
         }
 #endif
 
+#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
 #if NET6_0_OR_GREATER
         if (!source.TryGetNonEnumeratedCount(out var count))
         {
-#pragma warning disable CA1851 // Possible multiple enumerations of 'IEnumerable' collection
             count = source.Count();
         }
 
