@@ -19,11 +19,11 @@ public class ServerTimingMiddlewareTest
     }
 
     [Fact]
-    public void InvokeAsync_NullContext_ThrowsArgumentNullException() =>
+    public Task InvokeAsync_NullContext_ThrowsArgumentNullExceptionAsync() =>
         Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(null!, this.next));
 
     [Fact]
-    public void InvokeAsync_NullNext_ThrowsArgumentNullException() =>
+    public Task InvokeAsync_NullNext_ThrowsArgumentNullExceptionAsync() =>
         Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(this.context, null!));
 
     [Fact]
