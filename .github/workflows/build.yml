@@ -74,6 +74,7 @@ jobs:
           path: "./Artefacts"
       - name: "Publish Test Summary"
         uses: test-summary/action@v2
+        if: always()
         with:
           paths: "./Artefacts/*/*.xml"
 
