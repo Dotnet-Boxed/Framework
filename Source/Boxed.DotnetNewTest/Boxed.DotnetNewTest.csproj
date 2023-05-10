@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References (.NET 6)" Condition="'$(TargetFramework)' == 'net6.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.5" />
   </ItemGroup>
 
   <ItemGroup Label="Files">
