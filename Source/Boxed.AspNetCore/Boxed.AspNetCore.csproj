@@ -2,9 +2,6 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
-    <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
-    <MinVerTagPrefix>Boxed.AspNetCore.</MinVerTagPrefix>
-    <MinVerVerbosity>normal</MinVerVerbosity>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
@@ -12,6 +9,10 @@
     <Description>Provides ASP.NET Core middleware, MVC filters, extension methods and helper code for an ASP.NET Core project.</Description>
     <PackageTags>ASP.NET;ASP.NET Core;MVC;Boxed;Muhammad Rehan Saeed;Framework;Middleware;Filters</PackageTags>
     <PackageReadmeFile>Boxed.AspNetCore.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Versioning">
+    <MinVerTagPrefix>Boxed.AspNetCore.</MinVerTagPrefix>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">

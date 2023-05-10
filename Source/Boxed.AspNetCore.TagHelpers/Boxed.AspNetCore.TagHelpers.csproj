@@ -2,9 +2,6 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
-    <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
-    <MinVerTagPrefix>Boxed.AspNetCore.</MinVerTagPrefix>
-    <MinVerVerbosity>normal</MinVerVerbosity>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
@@ -12,6 +9,10 @@
     <Description>ASP.NET Core tag helpers for Subresource Integrity (SRI), Referrer meta tags, OpenGraph (Facebook) and Twitter social network meta tags.</Description>
     <PackageTags>ASP.NET;ASP.NET Core;MVC;Boxed;Muhammad Rehan Saeed;Framework;TagHelper;Tag Helper;HTML</PackageTags>
     <PackageReadmeFile>Boxed.AspNetCore.TagHelpers.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Versioning">
+    <MinVerTagPrefix>Boxed.AspNetCore.</MinVerTagPrefix>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
