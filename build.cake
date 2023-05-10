@@ -52,7 +52,7 @@ Task("Test")
                     Loggers = new string[]
                     {
                         $"trx;LogFilePrefix={project.GetFilenameWithoutExtension()}",
-                        $"junit;LogFilePrefix={project.GetFilenameWithoutExtension()}",
+                        $"junit;LogFileName={project.GetFilenameWithoutExtension()}_{{framework}}.xml",
                         $"html;LogFilePrefix={project.GetFilenameWithoutExtension()}",
                     },
                     NoBuild = true,
