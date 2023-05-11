@@ -51,8 +51,8 @@ public class ImmutableMapperTest
         var to = mapper.MapArray(
             new MapFrom[]
             {
-                    new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 },
+                new MapFrom() { Property = 1 },
+                new MapFrom() { Property = 2 },
             });
 
         Assert.IsType<MapTo[]>(to);
@@ -82,8 +82,8 @@ public class ImmutableMapperTest
         var to = mapper.MapCollection(
             new MapFrom[]
             {
-                    new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 },
+                new MapFrom() { Property = 1 },
+                new MapFrom() { Property = 2 },
             },
             new List<MapTo>());
 
@@ -112,8 +112,8 @@ public class ImmutableMapperTest
         var to = mapper.MapCollection(
             new MapFrom[]
             {
-                    new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 },
+                new MapFrom() { Property = 1 },
+                new MapFrom() { Property = 2 },
             });
 
         Assert.IsType<Collection<MapTo>>(to);
@@ -141,8 +141,8 @@ public class ImmutableMapperTest
         var to = mapper.MapHashSet(
             new MapFrom[]
             {
-                    new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 },
+                new MapFrom() { Property = 1 },
+                new MapFrom() { Property = 2 },
             });
 
         Assert.IsType<HashSet<MapTo>>(to);
@@ -170,8 +170,8 @@ public class ImmutableMapperTest
         var to = mapper.MapImmutableArray(
             new MapFrom[]
             {
-                    new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 },
+                new MapFrom() { Property = 1 },
+                new MapFrom() { Property = 2 },
             });
 
         Assert.IsType<ImmutableArray<MapTo>>(to);
@@ -200,8 +200,8 @@ public class ImmutableMapperTest
         var to = mapper.MapList(
             new MapFrom[]
             {
-                    new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 },
+                new MapFrom() { Property = 1 },
+                new MapFrom() { Property = 2 },
             });
 
         Assert.IsType<List<MapTo>>(to);
@@ -229,8 +229,8 @@ public class ImmutableMapperTest
         var to = mapper.MapObservableCollection(
             new MapFrom[]
             {
-                    new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 },
+                new MapFrom() { Property = 1 },
+                new MapFrom() { Property = 2 },
             });
 
         Assert.IsType<ObservableCollection<MapTo>>(to);
@@ -247,8 +247,8 @@ public class ImmutableMapperTest
         var source = new TestAsyncEnumerable<MapFrom>(
             new MapFrom[]
             {
-                    new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 },
+                new MapFrom() { Property = 1 },
+                new MapFrom() { Property = 2 },
             });
 
         var to = mapper.MapEnumerableAsync(source);

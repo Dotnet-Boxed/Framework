@@ -27,7 +27,7 @@ public class ServerTimingMiddlewareTest
         Assert.ThrowsAsync<ArgumentNullException>(() => new ServerTimingMiddleware().InvokeAsync(this.context, null!));
 
     [Fact]
-    public async Task InvokeAsync_DoesntSupportTrailingHeaders_DontAddServerTimingHttpHeaderAsync()
+    public async Task InvokeAsync_DoesNotSupportTrailingHeaders_DoNotAddServerTimingHttpHeaderAsync()
     {
         var responseTrailersFeature = this.context.Features.Get<IHttpResponseTrailersFeature>();
 

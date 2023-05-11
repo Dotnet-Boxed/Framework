@@ -13,13 +13,13 @@ public class CursorTest
             // If no-store is set, then location is ignored.
             yield return new object[]
             {
-                    null!,
-                    string.Empty,
+                null!,
+                string.Empty,
             };
             yield return new object[]
             {
-                    new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero),
-                    "MDEvMDEvMjAwMCAwMDowMDowMCArMDA6MDA=",
+                new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero),
+                "MDEvMDEvMjAwMCAwMDowMDowMCArMDA6MDA=",
             };
         }
     }

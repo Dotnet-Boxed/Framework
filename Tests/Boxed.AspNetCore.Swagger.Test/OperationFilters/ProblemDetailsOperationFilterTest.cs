@@ -92,8 +92,8 @@ public class ProblemDetailsOperationFilterTest
         {
             Content = new Dictionary<string, OpenApiMediaType>()
             {
-                    { "application/problem+json", new OpenApiMediaType() },
-                    { "application/problem+xml", new OpenApiMediaType() },
+                { "application/problem+json", new OpenApiMediaType() },
+                { "application/problem+xml", new OpenApiMediaType() },
             },
         };
 }
