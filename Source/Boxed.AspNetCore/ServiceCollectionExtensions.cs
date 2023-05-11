@@ -101,7 +101,7 @@ public static class ServiceCollectionExtensions
 
         return services
             .Configure<TOptions>(configuration)
-            .AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
+            .AddSingleton(static x => x.GetRequiredService<IOptions<TOptions>>().Value);
     }
 
     /// <summary>
@@ -123,7 +123,7 @@ public static class ServiceCollectionExtensions
 
         return services
             .Configure<TOptions>(configuration, configureBinder)
-            .AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
+            .AddSingleton(static x => x.GetRequiredService<IOptions<TOptions>>().Value);
     }
 
     /// <summary>
@@ -147,7 +147,7 @@ public static class ServiceCollectionExtensions
             .Bind(configuration)
             .ValidateDataAnnotations()
             .ValidateOnStart();
-        return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
+        return services.AddSingleton(static x => x.GetRequiredService<IOptions<TOptions>>().Value);
     }
 
     /// <summary>
@@ -173,7 +173,7 @@ public static class ServiceCollectionExtensions
             .Bind(configuration, configureBinder)
             .ValidateDataAnnotations()
             .ValidateOnStart();
-        return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
+        return services.AddSingleton(static x => x.GetRequiredService<IOptions<TOptions>>().Value);
     }
 
     /// <summary>
@@ -201,7 +201,7 @@ public static class ServiceCollectionExtensions
             .ValidateDataAnnotations()
             .Validate(validation)
             .ValidateOnStart();
-        return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
+        return services.AddSingleton(static x => x.GetRequiredService<IOptions<TOptions>>().Value);
     }
 
     /// <summary>
@@ -231,7 +231,7 @@ public static class ServiceCollectionExtensions
             .ValidateDataAnnotations()
             .Validate(validation)
             .ValidateOnStart();
-        return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
+        return services.AddSingleton(static x => x.GetRequiredService<IOptions<TOptions>>().Value);
     }
 
     /// <summary>
@@ -262,7 +262,7 @@ public static class ServiceCollectionExtensions
             .ValidateDataAnnotations()
             .Validate(validation, failureMessage)
             .ValidateOnStart();
-        return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
+        return services.AddSingleton(static x => x.GetRequiredService<IOptions<TOptions>>().Value);
     }
 
     /// <summary>
@@ -295,6 +295,6 @@ public static class ServiceCollectionExtensions
             .ValidateDataAnnotations()
             .Validate(validation, failureMessage)
             .ValidateOnStart();
-        return services.AddSingleton(x => x.GetRequiredService<IOptions<TOptions>>().Value);
+        return services.AddSingleton(static x => x.GetRequiredService<IOptions<TOptions>>().Value);
     }
 }

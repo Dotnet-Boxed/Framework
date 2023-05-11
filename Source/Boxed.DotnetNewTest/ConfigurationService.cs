@@ -23,8 +23,8 @@ public static class ConfigurationService
         // Don't want to overwork my SSD drive, so use the D drive where available.
         var drivePath = DriveInfo
             .GetDrives()
-            .Where(x => x.DriveType == DriveType.Fixed)
-            .OrderByDescending(x => string.Equals(x.Name, @"D:\", StringComparison.Ordinal))
+            .Where(static x => x.DriveType == DriveType.Fixed)
+            .OrderByDescending(static x => string.Equals(x.Name, @"D:\", StringComparison.Ordinal))
             .FirstOrDefault()
             ?.Name;
         if (drivePath is null)

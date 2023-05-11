@@ -64,7 +64,7 @@ internal sealed class AssemblyResolver : IDisposable
                 library.Name,
                 library.Version,
                 library.Hash,
-                library.RuntimeAssemblyGroups.SelectMany(g => g.AssetPaths),
+                library.RuntimeAssemblyGroups.SelectMany(static g => g.AssetPaths),
                 library.Dependencies,
                 library.Serviceable);
 
