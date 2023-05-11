@@ -146,7 +146,7 @@ public static class DotnetNew
             projectFilePath = directory
                 .Parent
                 .GetFiles(projectName, SearchOption.AllDirectories)
-                .FirstOrDefault(x => !IsInObjDirectory(x.Directory))
+                .FirstOrDefault(static x => !IsInObjDirectory(x.Directory))
                 ?.FullName;
             if (projectFilePath is not null)
             {

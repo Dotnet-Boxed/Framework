@@ -33,7 +33,7 @@ public class ClaimsOperationFilter : IOperationFilter
         var authorizationRequirements = filterDescriptors.GetPolicyRequirements();
         var claimTypes = authorizationRequirements
             .OfType<ClaimsAuthorizationRequirement>()
-            .Select(x => x.ClaimType)
+            .Select(static x => x.ClaimType)
             .ToList();
         if (claimTypes.Any())
         {
