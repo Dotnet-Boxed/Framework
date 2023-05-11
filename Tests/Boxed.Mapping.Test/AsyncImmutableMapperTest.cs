@@ -60,8 +60,8 @@ public class AsyncImmutableMapperTest : Disposable
             .MapArrayAsync(
                 new MapFrom[]
                 {
-                        new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 },
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 },
                 },
                 this.cancellationTokenSource.Token)
             .ConfigureAwait(false);
@@ -95,8 +95,8 @@ public class AsyncImmutableMapperTest : Disposable
             .MapCollectionAsync(
                 new MapFrom[]
                 {
-                        new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 },
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 },
                 },
                 new List<MapTo>(),
                 this.cancellationTokenSource.Token)
@@ -131,8 +131,8 @@ public class AsyncImmutableMapperTest : Disposable
             .MapCollectionAsync(
                 new MapFrom[]
                 {
-                        new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 },
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 },
                 },
                 this.cancellationTokenSource.Token)
             .ConfigureAwait(false);
@@ -166,8 +166,8 @@ public class AsyncImmutableMapperTest : Disposable
             .MapHashSetAsync(
                 new MapFrom[]
                 {
-                        new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 },
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 },
                 },
                 this.cancellationTokenSource.Token)
             .ConfigureAwait(false);
@@ -201,8 +201,8 @@ public class AsyncImmutableMapperTest : Disposable
             .MapImmutableArrayAsync(
                 new MapFrom[]
                 {
-                        new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 },
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 },
                 },
                 this.cancellationTokenSource.Token)
             .ConfigureAwait(false);
@@ -236,8 +236,8 @@ public class AsyncImmutableMapperTest : Disposable
             .MapImmutableListAsync(
                 new MapFrom[]
                 {
-                        new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 },
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 },
                 },
                 this.cancellationTokenSource.Token)
             .ConfigureAwait(false);
@@ -272,8 +272,8 @@ public class AsyncImmutableMapperTest : Disposable
             .MapListAsync(
                 new MapFrom[]
                 {
-                        new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 },
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 },
                 },
                 this.cancellationTokenSource.Token)
             .ConfigureAwait(false);
@@ -307,8 +307,8 @@ public class AsyncImmutableMapperTest : Disposable
             .MapObservableCollectionAsync(
                 new MapFrom[]
                 {
-                        new MapFrom() { Property = 1 },
-                        new MapFrom() { Property = 2 },
+                    new MapFrom() { Property = 1 },
+                    new MapFrom() { Property = 2 },
                 },
                 this.cancellationTokenSource.Token)
             .ConfigureAwait(false);
@@ -328,8 +328,8 @@ public class AsyncImmutableMapperTest : Disposable
         var source = new TestAsyncEnumerable<MapFrom>(
             new MapFrom[]
             {
-                    new MapFrom() { Property = 1 },
-                    new MapFrom() { Property = 2 },
+                new MapFrom() { Property = 1 },
+                new MapFrom() { Property = 2 },
             });
 
         var to = mapper.MapEnumerableAsync(source, this.cancellationTokenSource.Token);

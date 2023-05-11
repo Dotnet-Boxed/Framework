@@ -13,129 +13,129 @@ public class HttpContextExtensionsTest
         {
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 0,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = true,
-                        VaryByHeader = null,
-                    },
-                    "no-store",
+                new CacheProfile
+                {
+                    Duration = 0,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = true,
+                    VaryByHeader = null,
+                },
+                "no-store",
             };
 
             // If no-store is set, then location is ignored.
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 0,
-                        Location = ResponseCacheLocation.Client,
-                        NoStore = true,
-                        VaryByHeader = null,
-                    },
-                    "no-store",
+                new CacheProfile
+                {
+                    Duration = 0,
+                    Location = ResponseCacheLocation.Client,
+                    NoStore = true,
+                    VaryByHeader = null,
+                },
+                "no-store",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 0,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = true,
-                        VaryByHeader = null,
-                    },
-                    "no-store",
+                new CacheProfile
+                {
+                    Duration = 0,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = true,
+                    VaryByHeader = null,
+                },
+                "no-store",
             };
 
             // If no-store is set, then duration is ignored.
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 100,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = true,
-                        VaryByHeader = null,
-                    },
-                    "no-store",
+                new CacheProfile
+                {
+                    Duration = 100,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = true,
+                    VaryByHeader = null,
+                },
+                "no-store",
             };
 
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 10,
-                        Location = ResponseCacheLocation.Client,
-                        NoStore = false,
-                        VaryByHeader = null,
-                    },
-                    "private,max-age=10",
+                new CacheProfile
+                {
+                    Duration = 10,
+                    Location = ResponseCacheLocation.Client,
+                    NoStore = false,
+                    VaryByHeader = null,
+                },
+                "private,max-age=10",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 10,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = false,
-                        VaryByHeader = null,
-                    },
-                    "public,max-age=10",
+                new CacheProfile
+                {
+                    Duration = 10,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    VaryByHeader = null,
+                },
+                "public,max-age=10",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 10,
-                        Location = ResponseCacheLocation.None,
-                        NoStore = false,
-                        VaryByHeader = null,
-                    },
-                    "no-cache,max-age=10",
+                new CacheProfile
+                {
+                    Duration = 10,
+                    Location = ResponseCacheLocation.None,
+                    NoStore = false,
+                    VaryByHeader = null,
+                },
+                "no-cache,max-age=10",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 365,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = false,
-                        VaryByHeader = null,
-                    },
-                    "public,max-age=365",
+                new CacheProfile
+                {
+                    Duration = 365,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    VaryByHeader = null,
+                },
+                "public,max-age=365",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 20,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = false,
-                        VaryByHeader = null,
-                    },
-                    "public,max-age=20",
+                new CacheProfile
+                {
+                    Duration = 20,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    VaryByHeader = null,
+                },
+                "public,max-age=20",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 1400,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = false,
-                        VaryByHeader = null,
-                    },
-                    "public,max-age=1400",
+                new CacheProfile
+                {
+                    Duration = 1400,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    VaryByHeader = null,
+                },
+                "public,max-age=1400",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 1600,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = false,
-                        VaryByHeader = null,
-                    },
-                    "public,max-age=1600",
+                new CacheProfile
+                {
+                    Duration = 1600,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    VaryByHeader = null,
+                },
+                "public,max-age=1600",
             };
         }
     }
@@ -147,38 +147,38 @@ public class HttpContextExtensionsTest
             // If no-store is set, then location is ignored.
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 0,
-                        Location = ResponseCacheLocation.Client,
-                        NoStore = true,
-                        VaryByHeader = null,
-                    },
-                    "no-store",
+                new CacheProfile
+                {
+                    Duration = 0,
+                    Location = ResponseCacheLocation.Client,
+                    NoStore = true,
+                    VaryByHeader = null,
+                },
+                "no-store",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 0,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = true,
-                        VaryByHeader = null,
-                    },
-                    "no-store",
+                new CacheProfile
+                {
+                    Duration = 0,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = true,
+                    VaryByHeader = null,
+                },
+                "no-store",
             };
 
             // If no-store is set, then duration is ignored.
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 100,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = true,
-                        VaryByHeader = null,
-                    },
-                    "no-store",
+                new CacheProfile
+                {
+                    Duration = 100,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = true,
+                    VaryByHeader = null,
+                },
+                "no-store",
             };
         }
     }
@@ -189,87 +189,87 @@ public class HttpContextExtensionsTest
         {
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 10,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = false,
-                        VaryByHeader = "Accept",
-                    },
-                    "Accept",
-                    "public,max-age=10",
+                new CacheProfile
+                {
+                    Duration = 10,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    VaryByHeader = "Accept",
+                },
+                "Accept",
+                "public,max-age=10",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 0,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = true,
-                        VaryByHeader = "Accept",
-                    },
-                    "Accept",
-                    "no-store",
+                new CacheProfile
+                {
+                    Duration = 0,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = true,
+                    VaryByHeader = "Accept",
+                },
+                "Accept",
+                "no-store",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 10,
-                        Location = ResponseCacheLocation.Client,
-                        NoStore = false,
-                        VaryByHeader = "Accept",
-                    },
-                    "Accept",
-                    "private,max-age=10",
+                new CacheProfile
+                {
+                    Duration = 10,
+                    Location = ResponseCacheLocation.Client,
+                    NoStore = false,
+                    VaryByHeader = "Accept",
+                },
+                "Accept",
+                "private,max-age=10",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 10,
-                        Location = ResponseCacheLocation.Client,
-                        NoStore = false,
-                        VaryByHeader = "Test",
-                    },
-                    "Test",
-                    "private,max-age=10",
+                new CacheProfile
+                {
+                    Duration = 10,
+                    Location = ResponseCacheLocation.Client,
+                    NoStore = false,
+                    VaryByHeader = "Test",
+                },
+                "Test",
+                "private,max-age=10",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 365,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = false,
-                        VaryByHeader = "Test",
-                    },
-                    "Test",
-                    "public,max-age=365",
+                new CacheProfile
+                {
+                    Duration = 365,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    VaryByHeader = "Test",
+                },
+                "Test",
+                "public,max-age=365",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 1400,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = false,
-                        VaryByHeader = "Test",
-                    },
-                    "Test",
-                    "public,max-age=1400",
+                new CacheProfile
+                {
+                    Duration = 1400,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    VaryByHeader = "Test",
+                },
+                "Test",
+                "public,max-age=1400",
             };
             yield return new object[]
             {
-                    new CacheProfile
-                    {
-                        Duration = 1600,
-                        Location = ResponseCacheLocation.Any,
-                        NoStore = false,
-                        VaryByHeader = "Test",
-                    },
-                    "Test",
-                    "public,max-age=1600",
+                new CacheProfile
+                {
+                    Duration = 1600,
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    VaryByHeader = "Test",
+                },
+                "Test",
+                "public,max-age=1600",
             };
         }
     }
