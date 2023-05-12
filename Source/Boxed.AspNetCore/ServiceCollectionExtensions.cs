@@ -94,7 +94,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection ConfigureSingleton<TOptions>(
         this IServiceCollection services,
         IConfiguration configuration)
-        where TOptions : class, new()
+        where TOptions : class
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
@@ -116,7 +116,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration,
         Action<BinderOptions> configureBinder)
-        where TOptions : class, new()
+        where TOptions : class
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
@@ -137,7 +137,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection ConfigureAndValidateSingleton<TOptions>(
         this IServiceCollection services,
         IConfiguration configuration)
-        where TOptions : class, new()
+        where TOptions : class
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
@@ -163,7 +163,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration,
         Action<BinderOptions> configureBinder)
-        where TOptions : class, new()
+        where TOptions : class
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
@@ -189,7 +189,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration,
         Func<TOptions, bool> validation)
-        where TOptions : class, new()
+        where TOptions : class
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
@@ -219,7 +219,7 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration,
         Func<TOptions, bool> validation,
         Action<BinderOptions> configureBinder)
-        where TOptions : class, new()
+        where TOptions : class
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
@@ -249,7 +249,7 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration,
         Func<TOptions, bool> validation,
         string failureMessage)
-        where TOptions : class, new()
+        where TOptions : class
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
@@ -282,7 +282,7 @@ public static class ServiceCollectionExtensions
         Func<TOptions, bool> validation,
         string failureMessage,
         Action<BinderOptions> configureBinder)
-        where TOptions : class, new()
+        where TOptions : class
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
