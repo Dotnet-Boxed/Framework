@@ -19,4 +19,8 @@
     <None Include="..\..\Documentation\Boxed.Mapping.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Factory.Unity.cs" />
+  </ItemGroup>
+
 </Project>
