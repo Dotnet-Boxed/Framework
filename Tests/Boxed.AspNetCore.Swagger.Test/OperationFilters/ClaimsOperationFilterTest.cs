@@ -55,7 +55,7 @@ public class ClaimsOperationFilterTest
         this.operationFilter.Apply(this.operation, this.context);
 
         Assert.NotNull(this.operation.Security);
-        Assert.Equal(1, this.operation.Security.Count);
+        Assert.Single(this.operation.Security);
         Assert.Single(this.operation.Security.First());
         Assert.Equal("oauth2", this.operation.Security.First().First().Key.Reference.Id);
         Assert.Equal(new string[] { "Type" }, this.operation.Security.First().First().Value);
