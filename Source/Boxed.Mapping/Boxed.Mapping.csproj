@@ -11,6 +11,10 @@
     <PackageReadmeFile>Boxed.Mapping.md</PackageReadmeFile>
   </PropertyGroup>
 
+  <PropertyGroup Label="Versioning">
+    <MinVerTagPrefix>Boxed.Mapping.</MinVerTagPrefix>
+  </PropertyGroup>
+
   <ItemGroup Label="Files">
     <None Include="..\..\Documentation\Boxed.Mapping.md" Pack="true" PackagePath="\" />
   </ItemGroup>
