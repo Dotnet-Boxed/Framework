@@ -11,6 +11,10 @@
     <PackageReadmeFile>Boxed.DotnetNewTest.md</PackageReadmeFile>
   </PropertyGroup>
 
+  <PropertyGroup Label="Versioning">
+    <MinVerTagPrefix>Boxed.DotnetNewTest.</MinVerTagPrefix>
+  </PropertyGroup>
+
   <ItemGroup Label="Package References">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
