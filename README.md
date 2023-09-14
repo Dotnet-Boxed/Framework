@@ -40,3 +40,4 @@
 Please view the [contributing guide](/.github/CONTRIBUTING.md) for more information.
 
 - [VictorioBerra](https://github.com/VictorioBerra) - Helping to create the `Boxed.DotnetNewTest` NuGet package.
+test
