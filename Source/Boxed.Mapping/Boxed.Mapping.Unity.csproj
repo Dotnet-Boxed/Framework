@@ -2,17 +2,14 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>net7.0;net6.0;netstandard2.1;netstandard2.0;netstandard1.3</TargetFrameworks>
+    <RootNamespace>Boxed.Mapping</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
     <Product>Object Mapping Boxed</Product>
-    <Description>An object to object mapper that does not use reflection.</Description>
-    <PackageTags>Mapper;Object Mapper;Automapper;Boxed;Muhammad Rehan Saeed;Framework</PackageTags>
+    <Description>An object to object mapper that does not use reflection. This is a Unity-compatible version.</Description>
+    <PackageTags>Mapper;Object Mapper;Automapper;Boxed;Muhammad Rehan Saeed;Framework;Unity</PackageTags>
     <PackageReadmeFile>Boxed.Mapping.md</PackageReadmeFile>
-  </PropertyGroup>
-
-  <PropertyGroup Label="Versioning">
-    <MinVerTagPrefix>Boxed.Mapping.</MinVerTagPrefix>
   </PropertyGroup>
 
   <ItemGroup Label="Files">
@@ -20,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Factory.Unity.cs" />
+    <Compile Remove="Factory.cs" />
   </ItemGroup>
 
 </Project>
